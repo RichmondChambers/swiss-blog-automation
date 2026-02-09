@@ -85,7 +85,22 @@ headers = {
 
 payload = {
     "title": title,
-    "contentText": body,
+    "richContent": {
+        "nodes": [
+            {
+                "type": "PARAGRAPH",
+                "paragraphData": {},
+                "nodes": [
+                    {
+                        "type": "TEXT",
+                        "textData": {
+                            "text": body
+                        }
+                    }
+                ]
+            }
+        ]
+    },
     "status": "DRAFT",
 }
 
