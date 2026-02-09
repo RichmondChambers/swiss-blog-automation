@@ -23,7 +23,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install openai requests
+        run: pip install openai requests PyPDF2
 
       - name: Run blog generator
         run: python generate_and_publish.py
