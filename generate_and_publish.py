@@ -23,15 +23,13 @@ Structure:
 
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
+TOPICS_PATH = "topic.json" if os.path.exists("topic.json") else "topics.json"
+
 # Load topics
-with open("topics.json", "r") as f:
+with open(TOPICS_PATH, "r") as f:
     topics = json.load(f)
 
 topic = next(t for t in topics if t["status"] == "unused")
-topic["status"] = "used"
-
-with open("topics.json", "w") as f:
-    json.dump(topics, f, indent=2)
 
 response = client.chat.completions.create(
     model="gpt-4.1",
@@ -47,6 +45,11 @@ title, body = content.split("\n", 1)
 print("TITLE:", title)
 print(body)
 
+topic["status"] = "used"
+
+with open(TOPICS_PATH, "w") as f:
+    json.dump(topics, f, indent=2)
+
 import subprocess
 import os
 
@@ -55,7 +58,6 @@ subprocess.run(["git", "config", "user.email", "bot@richmondchambers.com"])
 
 repo = f"https://x-access-token:{os.environ['GITHUB_TOKEN']}@github.com/{os.environ['GITHUB_REPOSITORY']}.git"
 
-subprocess.run(["git", "add", "topics.json"])
+subprocess.run(["git", "add", TOPICS_PATH])
 subprocess.run(["git", "commit", "-m", "Mark topic as used"], check=False)
 subprocess.run(["git", "push", repo, "HEAD:main"])
-
