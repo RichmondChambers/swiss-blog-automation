@@ -48,9 +48,14 @@ print("TITLE:", title)
 print(body)
 
 import subprocess
+import os
 
 subprocess.run(["git", "config", "user.name", "blog-bot"])
 subprocess.run(["git", "config", "user.email", "bot@richmondchambers.com"])
+
+repo = f"https://x-access-token:{os.environ['GITHUB_TOKEN']}@github.com/{os.environ['GITHUB_REPOSITORY']}.git"
+
 subprocess.run(["git", "add", "topics.json"])
-subprocess.run(["git", "commit", "-m", "Mark topic as used"])
-subprocess.run(["git", "push"])
+subprocess.run(["git", "commit", "-m", "Mark topic as used"], check=False)
+subprocess.run(["git", "push", repo, "HEAD:main"])
+
