@@ -19,10 +19,29 @@ Writing requirements:
 - No sales language
 
 Structure:
-- Clear title
+- Clear blog title
 - Short introduction
 - 3–5 headed sections
 - Practical conclusion
+
+SEO requirements:
+- Generate an SEO meta title (max 60 characters)
+- Generate an SEO meta description (max 155 characters)
+- Meta text must be natural, accurate, and non-promotional
+
+Output format EXACTLY as follows:
+
+BLOG TITLE:
+<text>
+
+SEO META TITLE:
+<text>
+
+SEO META DESCRIPTION:
+<text>
+
+BLOG CONTENT:
+<full article>
 """
 
 # -----------------------
