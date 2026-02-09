@@ -31,7 +31,9 @@ with open(TOPICS_PATH, "r") as f:
     topics = json.load(f)
 
 try:
-    topic = next(t for t in topics if t["status"] == "unused")
+    topic_index, topic_entry = next(
+        (index, topic) for index, topic in enumerate(topics) if topic["status"] == "unused"
+    )
 except StopIteration as exc:
     raise RuntimeError("No unused topics available in topics.json.") from exc
 
@@ -39,7 +41,10 @@ response = client.chat.completions.create(
     model="gpt-4.1",
     messages=[
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": f"Topic: {topic['topic']}\nAngle: {topic['angle']}"}
+        {
+            "role": "user",
+            "content": f"Topic: {topic_entry['topic']}\nAngle: {topic_entry['angle']}",
+        }
     ]
 )
 
@@ -52,7 +57,9 @@ else:
 print("TITLE:", title)
 print(body)
 
-topic["status"] = "used"
+topics[topic_index]["status"] = "used"
+if title and title != topic_entry["topic"]:
+    topics[topic_index]["used_title"] = title
 
 with open(TOPICS_PATH, "w") as f:
     json.dump(topics, f, indent=2)
