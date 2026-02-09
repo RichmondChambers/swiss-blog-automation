@@ -60,13 +60,61 @@ TOPICS_PATH = os.path.join(SCRIPT_DIR, "topics.json")
 with open(TOPICS_PATH, "r", encoding="utf-8") as f:
     topics = json.load(f)
 
+unused_topics = [t for t in topics if t.get("status") == "unused"]
+remaining_count = len(unused_topics)
+
+# -----------------------
+# Handle topics exhausted
+# -----------------------
+
+if remaining_count == 0:
+    SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+    EMAIL_FROM = os.environ["EMAIL_FROM"]
+    EMAIL_TO = os.environ["EMAIL_TO"]
+
+    notification_payload = {
+        "personalizations": [
+            {
+                "to": [{"email": EMAIL_TO}],
+                "subject": "Blog automation: topics exhausted",
+            }
+        ],
+        "from": {"email": EMAIL_FROM},
+        "content": [
+            {
+                "type": "text/plain",
+                "value": (
+                    "All blog topics in topics.json have been used.\n\n"
+                    "No draft was generated on this run.\n\n"
+                    "Please add new topics with status \"unused\" "
+                    "and the automation will resume automatically."
+                ),
+            }
+        ],
+    }
+
+    response = requests.post(
+        "https://api.sendgrid.com/v3/mail/send",
+        headers={
+            "Authorization": f"Bearer {SENDGRID_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        json=notification_payload,
+    )
+
+    response.raise_for_status()
+    print("Topics exhausted notification sent.")
+    exit(0)
+
+# -----------------------
+# Select next unused topic
+# -----------------------
+
 for index, topic in enumerate(topics):
     if topic.get("status") == "unused":
         topic_index = index
         topic_entry = topic
         break
-else:
-    raise RuntimeError("No unused topics available in topics.json")
 
 # -----------------------
 # Generate blog post
@@ -113,7 +161,7 @@ with open(TOPICS_PATH, "w", encoding="utf-8") as f:
     json.dump(topics, f, indent=2, ensure_ascii=False)
 
 # -----------------------
-# Send email via SendGrid
+# Send draft email via SendGrid
 # -----------------------
 
 SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
@@ -131,7 +179,10 @@ email_payload = {
     "content": [
         {
             "type": "text/plain",
-            "value": f"""BLOG TITLE:
+            "value": f"""TOPIC BACKLOG:
+{remaining_count - 1} topics remaining
+
+BLOG TITLE:
 {title}
 
 SEO META TITLE:
