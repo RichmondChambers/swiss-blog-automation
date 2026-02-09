@@ -29,8 +29,9 @@ jobs:
         run: python generate_and_publish.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          WIX_API_KEY: ${{ secrets.WIX_API_KEY }}
-          WIX_SITE_ID: ${{ secrets.WIX_SITE_ID }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
 
       - name: Commit updated topics.json
         run: |
