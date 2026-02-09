@@ -46,3 +46,11 @@ title, body = content.split("\n", 1)
 
 print("TITLE:", title)
 print(body)
+
+import subprocess
+
+subprocess.run(["git", "config", "user.name", "blog-bot"])
+subprocess.run(["git", "config", "user.email", "bot@richmondchambers.com"])
+subprocess.run(["git", "add", "topics.json"])
+subprocess.run(["git", "commit", "-m", "Mark topic as used"])
+subprocess.run(["git", "push"])
