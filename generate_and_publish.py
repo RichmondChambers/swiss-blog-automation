@@ -85,10 +85,18 @@ response = client.chat.completions.create(
 
 content = response.choices[0].message.content.strip()
 
-if "\n" in content:
-    title, body = content.split("\n", 1)
-else:
-    title, body = content, ""
+def extract(section):
+    start = content.find(section)
+    if start == -1:
+        return ""
+    start += len(section)
+    end = content.find("\n\n", start)
+    return content[start:end].strip() if end != -1 else content[start:].strip()
+
+title = extract("BLOG TITLE:")
+meta_title = extract("SEO META TITLE:")
+meta_description = extract("SEO META DESCRIPTION:")
+body = extract("BLOG CONTENT:")
 
 print("TITLE:", title)
 print(body)
