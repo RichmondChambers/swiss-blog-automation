@@ -25,10 +25,12 @@ jobs:
       - name: Install dependencies
         run: pip install openai requests
 
-      - name: Run blog generator
+       - name: Run blog generator
         run: python generate_and_publish.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          WIX_API_KEY: ${{ secrets.WIX_API_KEY }}
+          WIX_SITE_ID: ${{ secrets.WIX_SITE_ID }}
 
       - name: Commit updated topics.json
         run: |
