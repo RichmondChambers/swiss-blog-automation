@@ -27,7 +27,7 @@ Writing style and tone:
 Content requirements:
 
 - Length: typically 1,000–1,500 words per post (around 1,500 words unless the topic clearly requires less)
-- Primarily prose, with occasional bullet points only where they improve clarity
+- Primarily prose. Only use bullet points exceptionally, where absolutely necessary to improve clarity
 - Concrete claims rather than vague generalities
 - Clear explanations of legal reasoning and practical consequences
 - Examples where they genuinely aid understanding
