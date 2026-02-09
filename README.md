@@ -1,0 +1,1 @@
+# swiss-blog-automation
