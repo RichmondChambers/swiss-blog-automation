@@ -1,5 +1,6 @@
 import json
 import os
+import requests
 from openai import OpenAI
 
 SYSTEM_PROMPT = """
@@ -22,7 +23,6 @@ Structure:
 
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
-# Always resolve topics.json relative to this file
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 TOPICS_PATH = os.path.join(SCRIPT_DIR, "topics.json")
 
@@ -65,7 +65,31 @@ print(body)
 topics[topic_index]["status"] = "used"
 topics[topic_index]["used_title"] = title
 
-# Write back to topics.json
 with open(TOPICS_PATH, "w", encoding="utf-8") as f:
     json.dump(topics, f, indent=2, ensure_ascii=False)
 
+# -----------------------
+# Create Wix draft post
+# -----------------------
+
+WIX_API_KEY = os.environ["WIX_API_KEY"]
+WIX_SITE_ID = os.environ["WIX_SITE_ID"]
+
+wix_url = "https://www.wixapis.com/blog/v3/draft-posts"
+
+headers = {
+    "Authorization": WIX_API_KEY,
+    "Content-Type": "application/json",
+    "wix-site-id": WIX_SITE_ID,
+}
+
+payload = {
+    "title": title,
+    "contentText": body,
+    "status": "DRAFT",
+}
+
+response = requests.post(wix_url, headers=headers, json=payload)
+response.raise_for_status()
+
+print("Wix draft created successfully.")
