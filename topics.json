@@ -1,62 +1,63 @@
 [
-{
-"topic": "Swiss Entrepreneur Residence Permit (Self-Employed) for Non-EU Nationals: Eligibility, Economic Interest Test, and Evidence Checklist",
-"angle": "Practitioner-focused breakdown of the quota-based entrepreneur route, the “interests of the economy as a whole” assessment, and the core documents authorities expect (business plan, funding, role necessity, job creation/innovation narrative). ",
-"status": "unused"
-},
-{
-"topic": "Swiss Entrepreneur Residence Permit for EU/EFTA Nationals: Proving Genuine Self-Employment vs Disguised Employment",
-"angle": "Explains how cantons assess viability and independence for AFMP self-employment registrations, including practical indicators like multiple clients, AVS self-employed recognition, and sustainable income rationale.",
-"status": "unused"
-},
-{
-"topic": "Swiss Intra-Company Transfer (ICT) Permit: Structuring Assignments, Prior Group Employment, and Swiss Salary Benchmarking",
-"angle": "Guidance-style overview for multinational employers on ICT evidence (group link, assignment rationale, senior/specialist profile), typical L vs B outcomes, and common refusal triggers (salary misalignment, weak specialist justification).",
-"status": "unused"
-},
-{
-"topic": "Switzerland 90-Day Notification Procedure for Posted Workers: 8-Day Rule, 90/90 Tracking, and Compliance File Essentials",
-"angle": "Operational compliance playbook for EU/EFTA and UK service providers: how days are counted, when a permit is needed, and what to keep ready for inspections (A1/CoC, wage proof, assignment letter, timesheets).",
-"status": "unused"
-},
-{
-"topic": "Swiss Cross-Border Commuter Permit (G Permit): EU/EFTA vs Non-EU Requirements and Weekly Return Compliance",
-"angle": "Compares AFMP frontier worker access with the stricter third-country pathway (border-zone residence history, labour market test, role seniority), plus compliance pitfalls that can lead to withdrawal.",
-"status": "unused"
-},
-{
-"topic": "Converting a Swiss G Permit to a Swiss B Permit: What Changes for EU/EFTA and Non-EU Frontier Workers",
-"angle": "Explains the legal shift from commuter status to resident status, including when the G permit lapses, employer-led authorisation needs for non-EU nationals, and practical sequencing for registration and documentation.",
-"status": "unused"
-},
-{
-"topic": "Swiss Retirement Residence Permit: Proving Financial Self-Sufficiency and the ‘No Gainful Activity’ Rule",
-"angle": "Clarifies how authorities assess long-term self-sufficiency, what “gainful activity” can include (e.g., consultancy/board roles), and how applicants can present sustainable finances without triggering compliance concerns.",
-"status": "unused"
-},
-{
-"topic": "Swiss Retirement Permit for Non-EU Nationals: Demonstrating ‘Particular Personal Ties’ to Switzerland with Credible Evidence",
-"angle": "A practitioner guide to building a persuasive ties dossier (history of stays, language/integration efforts, community links) and avoiding common evidential gaps in discretionary cantonal assessments.",
-"status": "unused"
-},
-{
-"topic": "Swiss Schengen Visa (Type C) for Switzerland: Document Strategy to Reduce Refusal Risk for Visitors and Business Travellers",
-"angle": "Shows how to present a coherent travel narrative (purpose, itinerary, funding, ties to residence country), common refusal themes, and how to correct inconsistencies before submission.",
-"status": "unused"
-},
-{
-"topic": "90/180-Day Rule in Switzerland and Schengen: How Frequent Travellers Should Track Days and Avoid Overstay Consequences",
-"angle": "Explains the rolling calculation method, frequent-travel risk patterns, and compliance planning for repeat trips across multiple Schengen states—written for corporate travellers and private clients.",
-"status": "unused"
-},
-{
-"topic": "Swiss Trainee (Stagiaire) Permits Under Bilateral Exchange Agreements: Eligibility Criteria, Employer Duties, and Non-Renewability",
-"angle": "Breaks down age/qualification criteria, training-purpose scrutiny, wage compliance expectations, and what happens at the 18-month cap, including lawful transition planning to standard work permits.",
-"status": "unused"
-},
-{
-"topic": "Swiss Apprenticeship Permits: What EU/EFTA Apprentices Can Expect vs Why Non-EU Apprenticeships Are Rarely Approved",
-"angle": "Compares the AFMP-based pathway (recognised apprenticeship contract, cantonal training office approval) with the practical barriers for third-country nationals (quotas, labour market test, local availability).",
-"status": "unused"
-}
+  {
+    "topic": "Swiss Entrepreneur Residence Permit (Self-Employed) for Non-EU Nationals: Eligibility, Economic Interest Test, and Evidence Checklist",
+    "angle": "Practitioner-focused breakdown of the quota-based entrepreneur route, the “interests of the economy as a whole” assessment, and the core documents authorities expect (business plan, funding, role necessity, job creation/innovation narrative). ",
+    "status": "used",
+    "used_title": "**The Swiss Entrepreneur Residence Permit (Self-Employed) for Non-EU Nationals: A Practitioner’s Guide to Eligibility, Economic Interest, and Document Requirements**"
+  },
+  {
+    "topic": "Swiss Entrepreneur Residence Permit for EU/EFTA Nationals: Proving Genuine Self-Employment vs Disguised Employment",
+    "angle": "Explains how cantons assess viability and independence for AFMP self-employment registrations, including practical indicators like multiple clients, AVS self-employed recognition, and sustainable income rationale.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Intra-Company Transfer (ICT) Permit: Structuring Assignments, Prior Group Employment, and Swiss Salary Benchmarking",
+    "angle": "Guidance-style overview for multinational employers on ICT evidence (group link, assignment rationale, senior/specialist profile), typical L vs B outcomes, and common refusal triggers (salary misalignment, weak specialist justification).",
+    "status": "unused"
+  },
+  {
+    "topic": "Switzerland 90-Day Notification Procedure for Posted Workers: 8-Day Rule, 90/90 Tracking, and Compliance File Essentials",
+    "angle": "Operational compliance playbook for EU/EFTA and UK service providers: how days are counted, when a permit is needed, and what to keep ready for inspections (A1/CoC, wage proof, assignment letter, timesheets).",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Cross-Border Commuter Permit (G Permit): EU/EFTA vs Non-EU Requirements and Weekly Return Compliance",
+    "angle": "Compares AFMP frontier worker access with the stricter third-country pathway (border-zone residence history, labour market test, role seniority), plus compliance pitfalls that can lead to withdrawal.",
+    "status": "unused"
+  },
+  {
+    "topic": "Converting a Swiss G Permit to a Swiss B Permit: What Changes for EU/EFTA and Non-EU Frontier Workers",
+    "angle": "Explains the legal shift from commuter status to resident status, including when the G permit lapses, employer-led authorisation needs for non-EU nationals, and practical sequencing for registration and documentation.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence Permit: Proving Financial Self-Sufficiency and the ‘No Gainful Activity’ Rule",
+    "angle": "Clarifies how authorities assess long-term self-sufficiency, what “gainful activity” can include (e.g., consultancy/board roles), and how applicants can present sustainable finances without triggering compliance concerns.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Permit for Non-EU Nationals: Demonstrating ‘Particular Personal Ties’ to Switzerland with Credible Evidence",
+    "angle": "A practitioner guide to building a persuasive ties dossier (history of stays, language/integration efforts, community links) and avoiding common evidential gaps in discretionary cantonal assessments.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa (Type C) for Switzerland: Document Strategy to Reduce Refusal Risk for Visitors and Business Travellers",
+    "angle": "Shows how to present a coherent travel narrative (purpose, itinerary, funding, ties to residence country), common refusal themes, and how to correct inconsistencies before submission.",
+    "status": "unused"
+  },
+  {
+    "topic": "90/180-Day Rule in Switzerland and Schengen: How Frequent Travellers Should Track Days and Avoid Overstay Consequences",
+    "angle": "Explains the rolling calculation method, frequent-travel risk patterns, and compliance planning for repeat trips across multiple Schengen states—written for corporate travellers and private clients.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Trainee (Stagiaire) Permits Under Bilateral Exchange Agreements: Eligibility Criteria, Employer Duties, and Non-Renewability",
+    "angle": "Breaks down age/qualification criteria, training-purpose scrutiny, wage compliance expectations, and what happens at the 18-month cap, including lawful transition planning to standard work permits.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Apprenticeship Permits: What EU/EFTA Apprentices Can Expect vs Why Non-EU Apprenticeships Are Rarely Approved",
+    "angle": "Compares the AFMP-based pathway (recognised apprenticeship contract, cantonal training office approval) with the practical barriers for third-country nationals (quotas, labour market test, local availability).",
+    "status": "unused"
+  }
 ]
