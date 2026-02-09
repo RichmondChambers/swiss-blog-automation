@@ -26,3 +26,5 @@ jobs:
       - run: python generate_and_publish.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
