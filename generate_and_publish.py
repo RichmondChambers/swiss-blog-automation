@@ -75,7 +75,7 @@ with open(TOPICS_PATH, "w", encoding="utf-8") as f:
 WIX_API_KEY = os.environ["WIX_API_KEY"]
 WIX_SITE_ID = os.environ["WIX_SITE_ID"]
 
-wix_url = "https://www.wixapis.com/blog/v3/draft-posts"
+wix_url = "https://www.wixapis.com/blog/v3/posts"
 
 headers = {
     "Authorization": WIX_API_KEY,
@@ -84,7 +84,7 @@ headers = {
 }
 
 payload = {
-    "draftPost": {
+    "post": {
         "title": title,
         "richContent": {
             "nodes": [
@@ -100,7 +100,8 @@ payload = {
                     ]
                 }
             ]
-        }
+        },
+        "publish": False
     }
 }
 
