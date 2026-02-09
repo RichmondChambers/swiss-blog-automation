@@ -64,7 +64,7 @@ unused_topics = [t for t in topics if t.get("status") == "unused"]
 remaining_count = len(unused_topics)
 
 # -----------------------
-# Handle topics exhausted
+# Topics exhausted handling
 # -----------------------
 
 if remaining_count == 0:
@@ -133,18 +133,27 @@ response = client.chat.completions.create(
 
 content = response.choices[0].message.content.strip()
 
-def extract(section):
+# -----------------------
+# Robust section extractor
+# -----------------------
+
+def extract(section, until_next=True):
     start = content.find(section)
     if start == -1:
         return ""
     start += len(section)
-    end = content.find("\n\n", start)
-    return content[start:end].strip() if end != -1 else content[start:].strip()
+
+    if until_next:
+        end = content.find("\n\n", start)
+        return content[start:end].strip() if end != -1 else content[start:].strip()
+    else:
+        # BLOG CONTENT: take everything to the end
+        return content[start:].strip()
 
 title = extract("BLOG TITLE:")
 meta_title = extract("SEO META TITLE:")[:60]
 meta_description = extract("SEO META DESCRIPTION:")[:155]
-body = extract("BLOG CONTENT:")
+body = extract("BLOG CONTENT:", until_next=False)
 
 print("TITLE:", title)
 print("SEO META TITLE:", meta_title)
