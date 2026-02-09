@@ -2,6 +2,7 @@ import json
 import os
 import requests
 from openai import OpenAI
+from PyPDF2 import PdfReader
 
 # -----------------------
 # GPT system prompt
@@ -49,6 +50,41 @@ BLOG CONTENT:
 # -----------------------
 
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+
+# -----------------------
+# Load authoritative PDF knowledge
+# -----------------------
+
+def load_pdf_knowledge(folder="knowledge", max_chars=12000):
+    texts = []
+
+    if not os.path.isdir(folder):
+        return ""
+
+    for filename in sorted(os.listdir(folder)):
+        if not filename.lower().endswith(".pdf"):
+            continue
+
+        path = os.path.join(folder, filename)
+        reader = PdfReader(path)
+
+        pdf_text = []
+        for page in reader.pages:
+            text = page.extract_text()
+            if text:
+                pdf_text.append(text)
+
+        combined = "\n".join(pdf_text)
+        combined = " ".join(combined.split())
+
+        if combined:
+            texts.append(f"[SOURCE: {filename}]\n{combined}")
+
+    full_text = "\n\n".join(texts)
+
+    return full_text[:max_chars]
+
+PDF_KNOWLEDGE = load_pdf_knowledge()
 
 # -----------------------
 # Load topics.json
@@ -123,7 +159,27 @@ for index, topic in enumerate(topics):
 response = client.chat.completions.create(
     model="gpt-4.1",
     messages=[
-        {"role": "system", "content": SYSTEM_PROMPT},
+        {
+            "role": "system",
+            "content": SYSTEM_PROMPT
+        },
+        {
+            "role": "system",
+            "content": f"""
+The following documents are authoritative reference material produced or endorsed by the organisation.
+Use them as your primary source of truth.
+
+If there is any tension between general knowledge and these documents:
+- Prefer these documents
+- Be conservative
+- Do not speculate beyond them
+
+If the documents are silent on a point, you may rely on general knowledge but should qualify uncertainty.
+
+AUTHORITATIVE MATERIAL:
+{PDF_KNOWLEDGE}
+"""
+        },
         {
             "role": "user",
             "content": f"Topic: {topic_entry['topic']}\nAngle: {topic_entry['angle']}",
@@ -147,7 +203,6 @@ def extract(section, until_next=True):
         end = content.find("\n\n", start)
         return content[start:end].strip() if end != -1 else content[start:].strip()
     else:
-        # BLOG CONTENT: take everything to the end
         return content[start:].strip()
 
 title = extract("BLOG TITLE:")
