@@ -84,24 +84,24 @@ headers = {
 }
 
 payload = {
-    "title": title,
-    "richContent": {
-        "nodes": [
-            {
-                "type": "PARAGRAPH",
-                "paragraphData": {},
-                "nodes": [
-                    {
-                        "type": "TEXT",
-                        "textData": {
-                            "text": body
+    "draftPost": {
+        "title": title,
+        "richContent": {
+            "nodes": [
+                {
+                    "type": "PARAGRAPH",
+                    "nodes": [
+                        {
+                            "type": "TEXT",
+                            "textData": {
+                                "text": body
+                            }
                         }
-                    }
-                ]
-            }
-        ]
-    },
-    "status": "DRAFT",
+                    ]
+                }
+            ]
+        }
+    }
 }
 
 response = requests.post(wix_url, headers=headers, json=payload)
