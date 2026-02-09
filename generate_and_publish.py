@@ -94,12 +94,13 @@ def extract(section):
     return content[start:end].strip() if end != -1 else content[start:].strip()
 
 title = extract("BLOG TITLE:")
-meta_title = extract("SEO META TITLE:")
-meta_description = extract("SEO META DESCRIPTION:")
+meta_title = extract("SEO META TITLE:")[:60]
+meta_description = extract("SEO META DESCRIPTION:")[:155]
 body = extract("BLOG CONTENT:")
 
 print("TITLE:", title)
-print(body)
+print("SEO META TITLE:", meta_title)
+print("SEO META DESCRIPTION:", meta_description)
 
 # -----------------------
 # Mark topic as used
@@ -130,7 +131,21 @@ email_payload = {
     "content": [
         {
             "type": "text/plain",
-            "value": f"{title}\n\n{body}",
+            "value": f"""BLOG TITLE:
+{title}
+
+SEO META TITLE:
+{meta_title}
+
+SEO META DESCRIPTION:
+{meta_description}
+
+---------------------------------
+
+BLOG CONTENT:
+
+{body}
+""",
         }
     ],
 }
