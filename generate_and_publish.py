@@ -44,6 +44,17 @@ Structure:
 - A concise introduction that frames the legal or practical problem being addressed, without fluff
 - At least five substantive sections, each with clear, descriptive headings that signal the legal or practical issue discussed
 - A practical conclusion that distils key takeaways and implications for readers
+- A final section with the sub-heading: Contact Our Immigration Lawyers In Switzerland
+
+Call to action requirement:
+
+Under the sub-heading “Contact Our Immigration Lawyers In Switzerland”, include a short, measured call to action
+
+The CTA must be relevant to the subject matter of the blog post and framed as an invitation to obtain tailored legal advice
+
+It must invite readers to contact Richmond Chambers Switzerland by telephone on +41 21 588 07 70 or by completing an enquiry form to arrange an initial consultation meeting
+
+The CTA must remain professional, factual, and restrained, avoiding promotional or sales-oriented language
 
 Output format:
 
