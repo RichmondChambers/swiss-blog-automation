@@ -1,0 +1,23 @@
+name: Blog Draft Generator
+
+on:
+  schedule:
+    - cron: "0 9 * * 1,4"
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install openai requests
+
+      - run: python generate_and_publish.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
