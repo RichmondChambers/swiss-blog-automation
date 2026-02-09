@@ -6,10 +6,25 @@
     "used_title": "Swiss Entrepreneur Residence Permit for Non-EU Nationals: Eligibility, Economic Interest Test, and Key Evidence Requirements"
   },
   {
+    "topic": "Swiss Family Reunification for Non-EU Spouses: Eligibility, Evidence Checklist, and Typical Timelines",
+    "angle": "Explain who can be sponsored, what “adequate housing” and “sufficient financial means” usually mean in practice, and how to assemble a decision-ready document pack to reduce delays.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Eligibility: Required Years of Residence, Integration Expectations, and Fast-Track Paths Explained",
+    "angle": "Explain the main time thresholds (standard vs accelerated where applicable), what “integration” usually involves (language, compliance, participation), and how to self-check readiness before applying.",
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Entrepreneur Residence Permit for EU/EFTA Nationals: Proving Genuine Self-Employment vs Disguised Employment",
     "angle": "Explains how cantons assess viability and independence for AFMP self-employment registrations, including practical indicators like multiple clients, AVS self-employed recognition, and sustainable income rationale.",
     "status": "unused",
     "used_title": "**Swiss Entrepreneur Residence Permit for EU/EFTA Nationals: Distinguishing Genuine Self-Employment from Disguised Employment**"
+  },
+  {
+    "topic": "Swiss Lump-Sum Taxation Explained: Who Qualifies, Who Doesn’t, and What “Living on Your Expenses” Really Means",
+    "angle": "Break down eligibility in plain language (non-working in Switzerland, residency status, nationality considerations), and explain the practical meaning of being taxed on living expenses rather than worldwide income.",
+    "status": "unused"
   },
   {
     "topic": "Swiss Intra-Company Transfer (ICT) Permit: Structuring Assignments, Prior Group Employment, and Swiss Salary Benchmarking",
@@ -18,10 +33,25 @@
     "used_title": "Swiss Intra-Company Transfer (ICT) Permit: Best Practice for Assignment Structuring and Compliance"
   },
   {
+    "topic": "EU/EFTA vs Non-EU Family Reunification in Switzerland: Key Differences That Change Your Strategy",
+    "angle": "Compare the two legal frameworks in plain language (who qualifies, age limits for children, dependent relatives, and how strict the requirements tend to be), with practical planning tips for mixed-nationality families.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Citizenship by Ordinary Naturalisation: Eligibility Timeline, Integration Requirements, and Common Misunderstandings",
+    "angle": "Explain the main residence-duration rules in plain language, what authorities typically mean by “successful integration,” and how to check your readiness before you apply.",
+    "status": "unused"
+  },
+  {
     "topic": "Switzerland 90-Day Notification Procedure for Posted Workers: 8-Day Rule, 90/90 Tracking, and Compliance File Essentials",
     "angle": "Operational compliance playbook for EU/EFTA and UK service providers: how days are counted, when a permit is needed, and what to keep ready for inspections (A1/CoC, wage proof, assignment letter, timesheets).",
     "status": "unused",
     "used_title": "Switzerland’s 90-Day Notification Rule for Posted Workers: Compliance Essentials for EU/EFTA and UK Providers"
+  },
+  {
+    "topic": "Upgrading from B to C Permit: A Practical Evidence Checklist (Language Proof, Employment History, and Clean Records)",
+    "angle": "Give applicants a document-by-document checklist, including common substitutes and how to present gaps (job changes, study periods, parental leave) without triggering delays.",
+    "status": "unused"
   },
   {
     "topic": "Swiss Cross-Border Commuter Permit (G Permit): EU/EFTA vs Non-EU Requirements and Weekly Return Compliance",
@@ -30,16 +60,46 @@
     "used_title": "Swiss Cross-Border Commuter Permit (G Permit): Comparing EU/EFTA and Non-EU Pathways"
   },
   {
+    "topic": "Lump-Sum Taxation Application Checklist: Documents, Budget Evidence, and How to Prepare for Canton Negotiations",
+    "angle": "Provide a step-by-step preparation guide focused on evidence (housing, lifestyle costs, family composition, assets), typical process stages, and how to avoid delays or inconsistent submissions.",
+    "status": "unused"
+  },
+  {
+    "topic": "Family Reunification for Children in Switzerland: Age Limits, Schooling Proof, and Shared-Custody Pitfalls",
+    "angle": "Focus on dependent children applications: required consent documents, custody/guardianship evidence, schooling plans, and how to avoid refusals where parents live in different countries.",
+    "status": "unused"
+  }, 
+  {
     "topic": "Converting a Swiss G Permit to a Swiss B Permit: What Changes for EU/EFTA and Non-EU Frontier Workers",
     "angle": "Explains the legal shift from commuter status to resident status, including when the G permit lapses, employer-led authorisation needs for non-EU nationals, and practical sequencing for registration and documentation.",
     "status": "unused",
     "used_title": "Converting a Swiss G Permit to a Swiss B Permit: Key Legal and Practical Considerations for Frontier Workers"
   },
   {
+    "topic": "Swiss Citizenship Language Proof: Accepted Certificates, Required Levels, and How to Avoid a Rejection for Wrong Evidence",
+    "angle": "Help applicants gather the right language documents the first time, understand level requirements, and plan realistic steps if they are not yet at the required standard.",
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Retirement Residence Permit: Proving Financial Self-Sufficiency and the ‘No Gainful Activity’ Rule",
     "angle": "Clarifies how authorities assess long-term self-sufficiency, what “gainful activity” can include (e.g., consultancy/board roles), and how applicants can present sustainable finances without triggering compliance concerns.",
     "status": "unused",
     "used_title": "Swiss Retirement Residence Permit: Financial Self-Sufficiency and Navigating the ‘No Gainful Activity’ Rule"
+  },
+  {
+    "topic": "Unmarried Partners and Swiss Family Reunification: How to Prove a Durable Relationship Without Overclaiming",
+    "angle": "Outline what evidence typically helps (cohabitation history, shared finances, children, travel/communications), what to avoid, and how to present a clear, credible relationship narrative.",
+    "status": "unused"
+  },
+  {
+    "topic": "C Permit and Long Absences from Switzerland: How Travel, Remote Work Abroad, and Relocation Affect Your Status",
+    "angle": "Clarify what types of absences create risk, how to plan extended time abroad, and what steps to take early (notifications, permits, supporting evidence) to avoid losing settlement status.",
+  "status": "unused"
+  },
+  {
+    "topic": "Choosing a Canton for Lump-Sum Taxation: Why Your Location Changes the Minimums, Process, and Risk of Reassessment",
+    "angle": "Explain how cantonal practice and minimum tax bases differ, what questions to ask before moving, and how to keep your file consistent if you relocate within Switzerland later.",
+    "status": "unused"
   },
   {
     "topic": "Swiss Retirement Permit for Non-EU Nationals: Demonstrating ‘Particular Personal Ties’ to Switzerland with Credible Evidence",
@@ -52,8 +112,33 @@
     "status": "unused"
   },
   {
+    "topic": "Criminal Records, Fines, and Debt in Swiss Citizenship Applications: What to Disclose and How to Show Rehabilitation",
+    "angle": "Cover how past issues can affect naturalisation, what documentation is typically needed (extracts, payment confirmations, explanations), and when it’s wise to seek tailored advice.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification Financial Requirements: What Counts as ‘Sufficient Means’ and Which Documents Work Best",
+    "angle": "Provide a practical evidence roadmap: payslips, employment contracts, bank statements, budgets, and how sponsors can show stability—plus common mistakes that trigger extra questions.",
+    "status": "unused"
+  },  
+  {
     "topic": "90/180-Day Rule in Switzerland and Schengen: How Frequent Travellers Should Track Days and Avoid Overstay Consequences",
     "angle": "Explains the rolling calculation method, frequent-travel risk patterns, and compliance planning for repeat trips across multiple Schengen states—written for corporate travellers and private clients.",
+    "status": "unused"
+  },
+  {
+    "topic": "Joining a Partner in Switzerland on an L Permit: When Family Reunification Is Possible (and When It Isn’t)",
+    "angle": "Clarify how short-term permits affect family planning, what authorities look at for stability and duration, and safer sequencing options for couples who must relocate on a tight timeline.",
+    "status": "unused"
+  },
+  {
+    "topic": "Can You Work Under Swiss Lump-Sum Taxation? Permitted Activities, Board Roles, and Common Compliance Traps",
+    "angle": "Clarify what is typically compatible or incompatible with lump-sum status (employment, self-employment, Swiss-source activity), and what to do if your plans change after arrival.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Citizenship Interviews and Commune Checks: What Gets Asked, What Documents to Bring, and How to Prepare Calmly",
+    "angle": "Demystify the interview process (local knowledge, daily life, work, language), offer a preparation checklist, and highlight avoidable mistakes like inconsistent answers or missing records.",
     "status": "unused"
   },
   {
@@ -62,8 +147,78 @@
     "status": "unused"
   },
   {
+    "topic": "Family Reunification After Divorce or Separation in Switzerland: Keeping Your Permit and Protecting the Children’s Status",
+    "angle": "Explain the main risk points after a relationship ends (renewals, residence continuity, childcare arrangements), what evidence helps, and when to get legal advice early.",
+    "status": "unused"
+  },
+  {
+    "topic": "After You Get the Swiss C Permit: Rights, Responsibilities, and Life Events That Can Still Put Your Status at Risk",
+    "angle": "Explain what improves with a C permit (stability, labor-market access) and what still matters (criminal issues, major welfare reliance, registration duties), with practical compliance tips for families.",
+    "status": "unused"
+  }
+  {
     "topic": "Swiss Apprenticeship Permits: What EU/EFTA Apprentices Can Expect vs Why Non-EU Apprenticeships Are Rarely Approved",
     "angle": "Compares the AFMP-based pathway (recognised apprenticeship contract, cantonal training office approval) with the practical barriers for third-country nationals (quotas, labour market test, local availability).",
     "status": "unused"
   }
-]
+  {
+    "topic": "Swiss L vs B vs C Permits Explained: Which Residence Permit Fits Your Situation (and What Changes at Renewal)?",
+    "angle": "A plain-language guide to the main Swiss permit types, who typically qualifies, what each permit lets you do, and what evidence to prepare for extensions and renewals.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification Refusals: The Most Common Reasons and How to Fix Them Before You Reapply or Appeal",
+    "angle": "Break down refusal patterns (insufficient evidence, finances, housing, credibility gaps) and provide a structured ‘remedy plan’ checklist for strengthening the next filing without making risky claims.",
+    "status": "unused"
+  },
+  {  
+    "topic": "Non-EU Swiss Work Permit Refusals: 7 Common Reasons (Labour Market Test, Salary Levels, Quotas) and How to Rebuild Your File",
+    "angle": "Helps applicants and sponsoring employers understand typical refusal triggers, what documents authorities expect, and practical steps to strengthen a re-application without misrepresentation.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Intra-Company Transfer (ICT) to Switzerland: What Your Employer Must Prove (and What You Should Gather Before Filing)",
+    "angle": "Breaks down the ICT-style transfer requirements, including corporate link evidence, role seniority/specialist profile, Swiss-standard salary, timelines, and common documentation gaps.",
+    "status": "unused"
+  },
+  {
+    "topic": "Switzerland’s 90-Day Work Notification for EU/UK Service Providers: How the 90 Working Days Are Counted (and Where Companies Slip Up)",
+    "angle": "Explains the notification procedure in practical terms, how to track days correctly, what records to keep for inspections, and when a full work permit becomes necessary.",
+    "status": "unused"
+  },
+   {
+    "topic": "Canton Practice Differences in Swiss Family Reunification: Why Zurich, Geneva, and Vaud May Ask for Different Evidence",
+    "angle": "Help applicants anticipate discretionary and procedural variation (document formats, translations, appointment timing, local expectations), with tips for building a flexible file that travels well across cantons.",
+    "status": "unused"
+  } 
+  {  
+    "topic": "Swiss Cross-Border Commuter (G Permit): The Weekly Return Rule, Proof of Residence, and When a G Permit Gets Withdrawn",
+    "angle": "A commuter-focused checklist of compliance points, what evidence authorities may request, and how to avoid ‘pseudo-residence’ problems—especially for non-EU nationals.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Entrepreneur Residence Permit for Non-EU Nationals: What ‘In the Interests of the Economy’ Really Means and How to Evidence It",
+    "angle": "A step-by-step evidence guide for business founders: business plan essentials, job creation/innovation proof, funding documents, and canton-specific considerations—without promising outcomes.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence Permit: Proving Financial Self-Sufficiency and ‘Personal Ties’ (Non-EU) Without Guesswork",
+    "angle": "Shows retirees what documents typically carry weight (income, assets, insurance, housing, ties to Switzerland), how renewals are assessed, and when alternative routes may be safer.",
+    "status": "unused"
+  },
+  {  
+    "topic": "Swiss Schengen Visa (Type C) Refused: How to Read the Refusal Code, Fix the Evidence, and Decide Between Appeal vs Reapplying",
+    "angle": "A practical roadmap for refused applicants: common refusal themes (purpose, funds, ties), what supporting documents to add, and how to avoid repeat inconsistencies.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Trainee (Stagiaire) Permit: Eligibility, Contract Requirements, and Why ‘Training Plan’ Quality Makes or Breaks Approval",
+    "angle": "For young professionals and Swiss hosts: explains eligibility, salary/conditions checks, required contract elements, and the most frequent compliance pitfalls.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Permit Appeals: Deadlines, Evidence Strategy, and How to Build a Persuasive Administrative Challenge After a Negative Decision",
+    "angle": "A non-technical overview of appeal pathways, what makes an appeal evidence-led, how to organise exhibits, and when to seek counsel early to avoid procedural mistakes.",
+    "status": "unused"
+  }
+  ]
