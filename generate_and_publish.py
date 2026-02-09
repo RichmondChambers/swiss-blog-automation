@@ -23,13 +23,17 @@ Structure:
 
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
-TOPICS_PATH = "topic.json" if os.path.exists("topic.json") else "topics.json"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+TOPICS_PATH = os.path.join(SCRIPT_DIR, "topics.json")
 
 # Load topics
 with open(TOPICS_PATH, "r") as f:
     topics = json.load(f)
 
-topic = next(t for t in topics if t["status"] == "unused")
+try:
+    topic = next(t for t in topics if t["status"] == "unused")
+except StopIteration as exc:
+    raise RuntimeError("No unused topics available in topics.json.") from exc
 
 response = client.chat.completions.create(
     model="gpt-4.1",
@@ -40,7 +44,10 @@ response = client.chat.completions.create(
 )
 
 content = response.choices[0].message.content.strip()
-title, body = content.split("\n", 1)
+if "\n" in content:
+    title, body = content.split("\n", 1)
+else:
+    title, body = content, ""
 
 print("TITLE:", title)
 print(body)
