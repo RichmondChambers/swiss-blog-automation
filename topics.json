@@ -61,10 +61,25 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Student Residence Permit: Proving ‘Genuine Study Purpose’ and Avoiding the Most Common Refusal Triggers",
+    "angle": "Applicant-friendly guidance on building a coherent study narrative, showing academic fit, and preparing supporting evidence that matches your plan and timeline.",
+    "status": "unused"
+  },
+  {
     "topic": "Family Reunification for Children in Switzerland: Age Limits, Schooling Proof, and Shared-Custody Pitfalls",
     "angle": "Focus on dependent children applications: required consent documents, custody/guardianship evidence, schooling plans, and how to avoid refusals where parents live in different countries.",
     "status": "unused"
   }, 
+  {
+    "topic": "Swiss Domestic Staff Permits: Who Qualifies as ‘Domestic Staff’ and What Duties Are Typically Accepted",
+    "angle": "Clarify eligibility in plain terms for households and staff, including role scope, evidence to gather (employment contract, household context), and how authorities assess credibility.",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Posted Worker Route (Secondment): When the 90-Day Notification Is Not Enough and You Need a Permit",
+    "angle": "Explain how to spot early that a posting will exceed the notification route and what to prepare (assignment plan, timelines, and avoiding last-minute project delays).",
+    "status": "unused"
+  },
   {
     "topic": "Converting a Swiss G Permit to a Swiss B Permit: What Changes for EU/EFTA and Non-EU Frontier Workers",
     "angle": "Explains the legal shift from commuter status to resident status, including when the G permit lapses, employer-led authorisation needs for non-EU nationals, and practical sequencing for registration and documentation.",
@@ -111,6 +126,11 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Posted Worker Compliance Checklist: Swiss-Standard Pay, Working Hours, and Allowances for Posted Employees",
+    "angle": "A practical employer guide to aligning pay and core working conditions with Swiss requirements, what evidence to keep on file, and how site inspections typically work.",
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Family Reunification Financial Requirements: What Counts as ‘Sufficient Means’ and Which Documents Work Best",
     "angle": "Provide a practical evidence roadmap: payslips, employment contracts, bank statements, budgets, and how sponsors can show stability—plus common mistakes that trigger extra questions.",
     "status": "unused"
@@ -131,6 +151,11 @@
     "status": "unused"
   },
   {
+    "topic": "Working While Studying in Switzerland: What Student Permit Holders Can and Cannot Do (and When You Need Separate Approval)",
+    "angle": "Explain the usual restrictions and approval steps in plain language, helping students avoid accidental breaches and plan part-time work legally.",
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Citizenship Interviews and Commune Checks: What Gets Asked, What Documents to Bring, and How to Prepare Calmly",
     "angle": "Demystify the interview process (local knowledge, daily life, work, language), offer a preparation checklist, and highlight avoidable mistakes like inconsistent answers or missing records.",
     "status": "unused"
@@ -146,15 +171,25 @@
     "status": "unused"
   },
   {
+    "topic": "Employing Domestic Staff in Switzerland: Minimum Employment Standards, Contracts, and the Documents You’ll Be Asked to Show",
+    "angle": "A step-by-step document and compliance guide for sponsoring households, with practical tips to avoid delays and reduce refusal risk.",
+    "status": "unused"
+  },
+  {
     "topic": "After You Get the Swiss C Permit: Rights, Responsibilities, and Life Events That Can Still Put Your Status at Risk",
     "angle": "Explain what improves with a C permit (stability, labor-market access) and what still matters (criminal issues, major welfare reliance, registration duties), with practical compliance tips for families.",
     "status": "unused"
-  }
+  },
   {
     "topic": "Swiss Apprenticeship Permits: What EU/EFTA Apprentices Can Expect vs Why Non-EU Apprenticeships Are Rarely Approved",
     "angle": "Compares the AFMP-based pathway (recognised apprenticeship contract, cantonal training office approval) with the practical barriers for third-country nationals (quotas, labour market test, local availability).",
     "status": "unused"
-  }
+  },
+  {
+    "topic": "Counting Days Correctly for Posted Workers in Switzerland: Working Days vs Calendar Days and Common Tracking Mistakes",
+    "angle": "Help employers and assignees avoid accidental overstay or permit breaches by explaining day counting logic, travel patterns, and internal tracking tips.",
+    "status": "unused"
+  },
   {
     "topic": "Swiss L vs B vs C Permits Explained: Which Residence Permit Fits Your Situation (and What Changes at Renewal)?",
     "angle": "A plain-language guide to the main Swiss permit types, who typically qualifies, what each permit lets you do, and what evidence to prepare for extensions and renewals.",
@@ -184,7 +219,7 @@
     "topic": "Canton Practice Differences in Swiss Family Reunification: Why Zurich, Geneva, and Vaud May Ask for Different Evidence",
     "angle": "Help applicants anticipate discretionary and procedural variation (document formats, translations, appointment timing, local expectations), with tips for building a flexible file that travels well across cantons.",
     "status": "unused"
-  } 
+  }, 
   {  
     "topic": "Swiss Cross-Border Commuter (G Permit): The Weekly Return Rule, Proof of Residence, and When a G Permit Gets Withdrawn",
     "angle": "A commuter-focused checklist of compliance points, what evidence authorities may request, and how to avoid ‘pseudo-residence’ problems—especially for non-EU nationals.",
@@ -213,6 +248,11 @@
   {
     "topic": "Swiss Permit Appeals: Deadlines, Evidence Strategy, and How to Build a Persuasive Administrative Challenge After a Negative Decision",
     "angle": "A non-technical overview of appeal pathways, what makes an appeal evidence-led, how to organise exhibits, and when to seek counsel early to avoid procedural mistakes.",
+    "status": "unused"
+  },
+  {
+    "topic": "Posted Worker Assignments in Regulated Sectors: When Switzerland Requires Notification From Day 1 and Why It Matters",
+    "angle": "Focus on sector-triggered rules and practical planning: how to identify if your project falls into a regulated category, what timelines to build in, and what documents inspectors may ask for.",
     "status": "unused"
   }
   ]
