@@ -8,7 +8,8 @@
   {
     "topic": "Swiss Family Reunification for Non-EU Spouses: Eligibility, Evidence Checklist, and Typical Timelines",
     "angle": "Explain who can be sponsored, what “adequate housing” and “sufficient financial means” usually mean in practice, and how to assemble a decision-ready document pack to reduce delays.",
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Family Reunification for Non-EU Spouses: Eligibility, Requirements, and Reducing Delays"
   },
   {
     "topic": "Swiss C Permit Eligibility: Required Years of Residence, Integration Expectations, and Fast-Track Paths Explained",
@@ -69,7 +70,7 @@
     "topic": "Family Reunification for Children in Switzerland: Age Limits, Schooling Proof, and Shared-Custody Pitfalls",
     "angle": "Focus on dependent children applications: required consent documents, custody/guardianship evidence, schooling plans, and how to avoid refusals where parents live in different countries.",
     "status": "unused"
-  }, 
+  },
   {
     "topic": "Swiss Domestic Staff Permits: Who Qualifies as ‘Domestic Staff’ and What Duties Are Typically Accepted",
     "angle": "Clarify eligibility in plain terms for households and staff, including role scope, evidence to gather (employment contract, household context), and how authorities assess credibility.",
@@ -103,7 +104,7 @@
   {
     "topic": "C Permit and Long Absences from Switzerland: How Travel, Remote Work Abroad, and Relocation Affect Your Status",
     "angle": "Clarify what types of absences create risk, how to plan extended time abroad, and what steps to take early (notifications, permits, supporting evidence) to avoid losing settlement status.",
-  "status": "unused"
+    "status": "unused"
   },
   {
     "topic": "Choosing a Canton for Lump-Sum Taxation: Why Your Location Changes the Minimums, Process, and Risk of Reassessment",
@@ -134,7 +135,7 @@
     "topic": "Swiss Family Reunification Financial Requirements: What Counts as ‘Sufficient Means’ and Which Documents Work Best",
     "angle": "Provide a practical evidence roadmap: payslips, employment contracts, bank statements, budgets, and how sponsors can show stability—plus common mistakes that trigger extra questions.",
     "status": "unused"
-  },  
+  },
   {
     "topic": "90/180-Day Rule in Switzerland and Schengen: How Frequent Travellers Should Track Days and Avoid Overstay Consequences",
     "angle": "Explains the rolling calculation method, frequent-travel risk patterns, and compliance planning for repeat trips across multiple Schengen states—written for corporate travellers and private clients.",
@@ -200,7 +201,7 @@
     "angle": "Break down refusal patterns (insufficient evidence, finances, housing, credibility gaps) and provide a structured ‘remedy plan’ checklist for strengthening the next filing without making risky claims.",
     "status": "unused"
   },
-  {  
+  {
     "topic": "Non-EU Swiss Work Permit Refusals: 7 Common Reasons (Labour Market Test, Salary Levels, Quotas) and How to Rebuild Your File",
     "angle": "Helps applicants and sponsoring employers understand typical refusal triggers, what documents authorities expect, and practical steps to strengthen a re-application without misrepresentation.",
     "status": "unused"
@@ -215,12 +216,12 @@
     "angle": "Explains the notification procedure in practical terms, how to track days correctly, what records to keep for inspections, and when a full work permit becomes necessary.",
     "status": "unused"
   },
-   {
+  {
     "topic": "Canton Practice Differences in Swiss Family Reunification: Why Zurich, Geneva, and Vaud May Ask for Different Evidence",
     "angle": "Help applicants anticipate discretionary and procedural variation (document formats, translations, appointment timing, local expectations), with tips for building a flexible file that travels well across cantons.",
     "status": "unused"
-  }, 
-  {  
+  },
+  {
     "topic": "Swiss Cross-Border Commuter (G Permit): The Weekly Return Rule, Proof of Residence, and When a G Permit Gets Withdrawn",
     "angle": "A commuter-focused checklist of compliance points, what evidence authorities may request, and how to avoid ‘pseudo-residence’ problems—especially for non-EU nationals.",
     "status": "unused"
@@ -235,7 +236,7 @@
     "angle": "Shows retirees what documents typically carry weight (income, assets, insurance, housing, ties to Switzerland), how renewals are assessed, and when alternative routes may be safer.",
     "status": "unused"
   },
-  {  
+  {
     "topic": "Swiss Schengen Visa (Type C) Refused: How to Read the Refusal Code, Fix the Evidence, and Decide Between Appeal vs Reapplying",
     "angle": "A practical roadmap for refused applicants: common refusal themes (purpose, funds, ties), what supporting documents to add, and how to avoid repeat inconsistencies.",
     "status": "unused"
@@ -255,4 +256,4 @@
     "angle": "Focus on sector-triggered rules and practical planning: how to identify if your project falls into a regulated category, what timelines to build in, and what documents inspectors may ask for.",
     "status": "unused"
   }
-  ]
+]
