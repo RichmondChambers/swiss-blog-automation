@@ -248,7 +248,7 @@ for index, topic in enumerate(topics):
 # -----------------------
 
 response = client.chat.completions.create(
-    model="gpt-4.1",
+    model="gpt-5.2",
     messages=[
         {
             "role": "system",
