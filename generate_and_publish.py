@@ -2,6 +2,7 @@ import argparse
 import importlib.util
 import json
 import os
+from datetime import datetime, timezone
 from urllib import error, request
 
 HAS_PYPDF2 = importlib.util.find_spec("PyPDF2") is not None
@@ -336,7 +337,7 @@ def try_sendgrid_email(payload: dict, sendgrid_api_key: str, context: str) -> bo
 # Load authoritative PDF knowledge
 # -----------------------
 
-def load_pdf_knowledge(folder="knowledge", max_chars=12000):
+def load_pdf_knowledge(folder="knowledge", max_chars=16000):
     texts = []
 
     if not HAS_PYPDF2:
@@ -411,6 +412,18 @@ def build_audience_brief(topic_entry: dict) -> str:
         ),
     }
 
+    audience_aliases = {
+        "general": "general_global",
+        "global": "general_global",
+        "general_international": "general_global",
+        "individuals_global": "global_individuals",
+        "businesses_global": "global_businesses",
+        "switzerland_individuals": "inside_switzerland_individuals",
+        "switzerland_businesses": "inside_switzerland_businesses",
+    }
+
+    audience = audience_aliases.get(audience, audience)
+
     if audience in audience_map:
         return audience_map[audience]
 
@@ -423,11 +436,15 @@ def build_audience_brief(topic_entry: dict) -> str:
             "business",
             "hiring",
             "hire",
-            "sponsor",
             "recruitment",
             "worker",
-            "transfer",
             "posted worker",
+            "posted workers",
+            "transfer",
+            "assignment",
+            "company",
+            "workforce",
+            "salary benchmarking",
         ]
     ):
         return audience_map["global_businesses"]
@@ -440,8 +457,9 @@ def build_audience_brief(topic_entry: dict) -> str:
             "appeal",
             "reconsideration",
             "remedy",
-            "next steps",
-            "rejection",
+            "negative decision",
+            "reapply",
+            "reapplying",
         ]
     ):
         return audience_map["refused_applicants"]
@@ -455,13 +473,29 @@ def build_audience_brief(topic_entry: dict) -> str:
             "citizenship",
             "l permit",
             "b permit",
-            "family reunification",
             "permit renewal",
+            "renewal",
+            "family reunification after divorce",
+            "after obtaining a swiss c permit",
         ]
     ):
         return audience_map["inside_switzerland_individuals"]
 
     return audience_map["general_global"]
+
+
+def normalize_audience_label(topic_entry: dict) -> str:
+    raw = (topic_entry.get("audience") or "").strip().lower()
+    aliases = {
+        "general": "general_global",
+        "global": "general_global",
+        "general_international": "general_global",
+        "individuals_global": "global_individuals",
+        "businesses_global": "global_businesses",
+        "switzerland_individuals": "inside_switzerland_individuals",
+        "switzerland_businesses": "inside_switzerland_businesses",
+    }
+    return aliases.get(raw, raw or "general_global")
 
 
 PDF_KNOWLEDGE = load_pdf_knowledge()
@@ -537,7 +571,7 @@ if topic_entry is None:
     raise RuntimeError("No unused topic found, even though remaining_count was greater than zero")
 
 audience_brief = build_audience_brief(topic_entry)
-audience_label = topic_entry.get("audience", "general_global")
+audience_label = normalize_audience_label(topic_entry)
 
 # -----------------------
 # Generate blog post
@@ -665,6 +699,18 @@ meta_description = extract("SEO META DESCRIPTION:")[:155]
 suggested_seo_keywords = extract("SUGGESTED SEO KEYWORDS:")
 body = extract("BLOG CONTENT:", until_next=False)
 
+if not title:
+    title = topic_entry.get("topic", "Untitled Swiss immigration blog draft")
+if not meta_title:
+    meta_title = title[:60]
+if not meta_description:
+    meta_description = f"Swiss immigration law guidance on {title}".strip()[:155]
+if not suggested_seo_keywords:
+    suggested_seo_keywords = (
+        "Swiss immigration lawyer; Swiss residence permit; move to Switzerland; "
+        "Swiss work permit; Swiss visa application; Swiss immigration law"
+    )
+
 print("TITLE:", title)
 print("AUDIENCE:", audience_label)
 print("DYNAMIC PAGE LINK:", dynamic_page_link)
@@ -726,6 +772,7 @@ else:
     if sent:
         topics[topic_index]["status"] = "used"
         topics[topic_index]["used_title"] = title
+        topics[topic_index]["used_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
         with open(TOPICS_PATH, "w", encoding="utf-8") as f:
             json.dump(topics, f, indent=2, ensure_ascii=False)
