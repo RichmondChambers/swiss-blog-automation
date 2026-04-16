@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import requests
 from openai import OpenAI
 from PyPDF2 import PdfReader
@@ -140,7 +141,58 @@ BLOG CONTENT:
 # OpenAI client
 # -----------------------
 
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "").strip()
+if not OPENAI_API_KEY:
+    raise RuntimeError("OPENAI_API_KEY is missing or empty")
+
+client = OpenAI(api_key=OPENAI_API_KEY)
+
+# -----------------------
+# Environment helpers
+# -----------------------
+
+def get_required_env(name):
+    value = os.environ.get(name, "").strip()
+    if not value:
+        raise RuntimeError(f"{name} is missing or empty")
+    return value
+
+def send_via_sendgrid(subject, message_body):
+    sendgrid_api_key = get_required_env("SENDGRID_API_KEY")
+    email_from = get_required_env("EMAIL_FROM")
+    email_to = get_required_env("EMAIL_TO")
+
+    payload = {
+        "personalizations": [
+            {
+                "to": [{"email": email_to}],
+                "subject": subject,
+            }
+        ],
+        "from": {"email": email_from},
+        "content": [
+            {
+                "type": "text/plain",
+                "value": message_body,
+            }
+        ],
+    }
+
+    response = requests.post(
+        "https://api.sendgrid.com/v3/mail/send",
+        headers={
+            "Authorization": f"Bearer {sendgrid_api_key}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+        timeout=30,
+    )
+
+    print("SendGrid status:", response.status_code)
+    print("SendGrid response:", response.text)
+
+    response.raise_for_status()
+    return response
 
 # -----------------------
 # Load authoritative PDF knowledge
@@ -172,7 +224,6 @@ def load_pdf_knowledge(folder="knowledge", max_chars=12000):
             texts.append(f"[SOURCE: {filename}]\n{combined}")
 
     full_text = "\n\n".join(texts)
-
     return full_text[:max_chars]
 
 PDF_KNOWLEDGE = load_pdf_knowledge()
@@ -195,53 +246,33 @@ remaining_count = len(unused_topics)
 # -----------------------
 
 if remaining_count == 0:
-    SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
-    EMAIL_FROM = os.environ["EMAIL_FROM"]
-    EMAIL_TO = os.environ["EMAIL_TO"]
-
-    notification_payload = {
-        "personalizations": [
-            {
-                "to": [{"email": EMAIL_TO}],
-                "subject": "Blog automation: topics exhausted",
-            }
-        ],
-        "from": {"email": EMAIL_FROM},
-        "content": [
-            {
-                "type": "text/plain",
-                "value": (
-                    "All blog topics in topics.json have been used.\n\n"
-                    "No draft was generated on this run.\n\n"
-                    "Please add new topics with status \"unused\" "
-                    "and the automation will resume automatically."
-                ),
-            }
-        ],
-    }
-
-    response = requests.post(
-        "https://api.sendgrid.com/v3/mail/send",
-        headers={
-            "Authorization": f"Bearer {SENDGRID_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json=notification_payload,
+    send_via_sendgrid(
+        subject="Blog automation: topics exhausted",
+        message_body=(
+            "All blog topics in topics.json have been used.\n\n"
+            "No draft was generated on this run.\n\n"
+            "Please add new topics with status \"unused\" "
+            "and the automation will resume automatically."
+        ),
     )
-
-    response.raise_for_status()
     print("Topics exhausted notification sent.")
-    exit(0)
+    sys.exit(0)
 
 # -----------------------
 # Select next unused topic
 # -----------------------
+
+topic_index = None
+topic_entry = None
 
 for index, topic in enumerate(topics):
     if topic.get("status") == "unused":
         topic_index = index
         topic_entry = topic
         break
+
+if topic_entry is None:
+    raise RuntimeError("No unused topic found, even though remaining_count was greater than zero")
 
 # -----------------------
 # Generate blog post
@@ -319,22 +350,7 @@ with open(TOPICS_PATH, "w", encoding="utf-8") as f:
 # Send draft email via SendGrid
 # -----------------------
 
-SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
-EMAIL_FROM = os.environ["EMAIL_FROM"]
-EMAIL_TO = os.environ["EMAIL_TO"]
-
-email_payload = {
-    "personalizations": [
-        {
-            "to": [{"email": EMAIL_TO}],
-            "subject": f"Blog draft: {title}",
-        }
-    ],
-    "from": {"email": EMAIL_FROM},
-    "content": [
-        {
-            "type": "text/plain",
-            "value": f"""TOPIC BACKLOG:
+email_body = f"""TOPIC BACKLOG:
 {remaining_count - 1} topics remaining
 
 BLOG TITLE:
@@ -351,20 +367,11 @@ SEO META DESCRIPTION:
 BLOG CONTENT:
 
 {body}
-""",
-        }
-    ],
-}
+"""
 
-response = requests.post(
-    "https://api.sendgrid.com/v3/mail/send",
-    headers={
-        "Authorization": f"Bearer {SENDGRID_API_KEY}",
-        "Content-Type": "application/json",
-    },
-    json=email_payload,
+send_via_sendgrid(
+    subject=f"Blog draft: {title}",
+    message_body=email_body,
 )
-
-response.raise_for_status()
 
 print("Draft email sent successfully via SendGrid.")
