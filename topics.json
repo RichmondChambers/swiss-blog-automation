@@ -1,276 +1,494 @@
 [
   {
-    "topic": "Swiss Entrepreneur Residence Permit (Self-Employed) for Non-EU Nationals: Eligibility, Economic Interest Test, and Evidence Checklist",
-    "angle": "Practitioner-focused breakdown of the quota-based entrepreneur route, the “interests of the economy as a whole” assessment, and the core documents authorities expect (business plan, funding, role necessity, job creation/innovation narrative). ",
-    "status": "used",
-    "used_title": "Swiss Entrepreneur Residence Permit for Non-EU Nationals: Eligibility, Economic Interest Test, and Key Evidence Requirements"
-  },
-  {
-    "topic": "Swiss Family Reunification for Non-EU Spouses: Eligibility, Evidence Checklist, and Typical Timelines",
-    "angle": "Explain who can be sponsored, what “adequate housing” and “sufficient financial means” usually mean in practice, and how to assemble a decision-ready document pack to reduce delays.",
-    "status": "used",
-    "used_title": "Swiss Family Reunification for Non-EU Spouses: Eligibility, Requirements, and Reducing Delays"
-  },
-  {
-    "topic": "Swiss C Permit Eligibility: Required Years of Residence, Integration Expectations, and Fast-Track Paths Explained",
-    "angle": "Explain the main time thresholds (standard vs accelerated where applicable), what “integration” usually involves (language, compliance, participation), and how to self-check readiness before applying.",
-    "status": "used",
-    "used_title": "Swiss C Permit Eligibility: Required Years of Residence, Integration Expectations, and Fast-Track Paths Explained"
-  },
-  {
-    "topic": "Swiss Entrepreneur Residence Permit for EU/EFTA Nationals: Proving Genuine Self-Employment vs Disguised Employment",
-    "angle": "Explains how cantons assess viability and independence for AFMP self-employment registrations, including practical indicators like multiple clients, AVS self-employed recognition, and sustainable income rationale.",
-    "status": "used",
-    "used_title": "Swiss Entrepreneur Residence Permits for EU/EFTA Nationals: Proving Genuine Self-Employment (and Avoiding “Disguised Employment”)"
-  },
-  {
-    "topic": "Swiss Lump-Sum Taxation Explained: Who Qualifies, Who Doesn’t, and What “Living on Your Expenses” Really Means",
-    "angle": "Break down eligibility in plain language (non-working in Switzerland, residency status, nationality considerations), and explain the practical meaning of being taxed on living expenses rather than worldwide income.",
-    "status": "used",
-    "used_title": "Swiss Lump-Sum Taxation Explained: Who Qualifies, Who Doesn’t, and What “Living on Your Expenses” Really Means"
-  },
-  {
-    "topic": "Swiss Intra-Company Transfer (ICT) Permit: Structuring Assignments, Prior Group Employment, and Swiss Salary Benchmarking",
-    "angle": "Guidance-style overview for multinational employers on ICT evidence (group link, assignment rationale, senior/specialist profile), typical L vs B outcomes, and common refusal triggers (salary misalignment, weak specialist justification).",
-    "status": "used",
-    "used_title": "Swiss Intra-Company Transfer (ICT) Permit: Structuring Assignments, Prior Group Employment and Swiss Salary Benchmarking"
-  },
-  {
-    "topic": "EU/EFTA vs Non-EU Family Reunification in Switzerland: Key Differences That Change Your Strategy",
-    "angle": "Compare the two legal frameworks in plain language (who qualifies, age limits for children, dependent relatives, and how strict the requirements tend to be), with practical planning tips for mixed-nationality families.",
-    "status": "used",
-    "used_title": "EU/EFTA vs Non-EU Family Reunification in Switzerland: Key Differences That Change Your Strategy"
-  },
-  {
-    "topic": "Swiss Citizenship by Ordinary Naturalisation: Eligibility Timeline, Integration Requirements, and Common Misunderstandings",
-    "angle": "Explain the main residence-duration rules in plain language, what authorities typically mean by “successful integration,” and how to check your readiness before you apply.",
-    "status": "used",
-    "used_title": "Swiss Citizenship by Ordinary Naturalisation: Eligibility Timeline, Integration Requirements, and Common Misunderstandings"
-  },
-  {
-    "topic": "Switzerland 90-Day Notification Procedure for Posted Workers: 8-Day Rule, 90/90 Tracking, and Compliance File Essentials",
-    "angle": "Operational compliance playbook for EU/EFTA and UK service providers: how days are counted, when a permit is needed, and what to keep ready for inspections (A1/CoC, wage proof, assignment letter, timesheets).",
-    "status": "used",
-    "used_title": "Switzerland’s 90-Day Notification Procedure for Posted Workers: the 8-Day Rule, 90/90 Tracking and Inspection-Ready Compliance Files"
-  },
-  {
-    "topic": "Upgrading from B to C Permit: A Practical Evidence Checklist (Language Proof, Employment History, and Clean Records)",
-    "angle": "Give applicants a document-by-document checklist, including common substitutes and how to present gaps (job changes, study periods, parental leave) without triggering delays.",
-    "status": "used",
-    "used_title": "Upgrading from a Swiss B Permit to a C Permit: Evidence, Language Proof and How to Explain Gaps"
-  },
-  {
-    "topic": "Swiss Cross-Border Commuter Permit (G Permit): EU/EFTA vs Non-EU Requirements and Weekly Return Compliance",
-    "angle": "Compares AFMP frontier worker access with the stricter third-country pathway (border-zone residence history, labour market test, role seniority), plus compliance pitfalls that can lead to withdrawal.",
-    "status": "used",
-    "used_title": "Swiss Cross-Border Commuter Permit (G Permit): EU/EFTA vs Non-EU Requirements and Weekly Return Compliance"
-  },
-  {
-    "topic": "Lump-Sum Taxation Application Checklist: Documents, Budget Evidence, and How to Prepare for Canton Negotiations",
-    "angle": "Provide a step-by-step preparation guide focused on evidence (housing, lifestyle costs, family composition, assets), typical process stages, and how to avoid delays or inconsistent submissions.",
-    "status": "used",
-    "used_title": "Lump-Sum Taxation in Switzerland: Evidence, Budgeting and Preparing for Cantonal Negotiations"
-  },
-  {
-    "topic": "Swiss Student Residence Permit: Proving ‘Genuine Study Purpose’ and Avoiding the Most Common Refusal Triggers",
-    "angle": "Applicant-friendly guidance on building a coherent study narrative, showing academic fit, and preparing supporting evidence that matches your plan and timeline.",
-    "status": "used",
-    "used_title": "Swiss Student Residence Permit: Proving a Genuine Study Purpose and Avoiding Common Refusal Triggers"
-  },
-  {
-    "topic": "Family Reunification for Children in Switzerland: Age Limits, Schooling Proof, and Shared-Custody Pitfalls",
-    "angle": "Focus on dependent children applications: required consent documents, custody/guardianship evidence, schooling plans, and how to avoid refusals where parents live in different countries.",
-    "status": "used",
-    "used_title": "Family Reunification for Children in Switzerland: Age Limits, Schooling Evidence and Shared-Custody Pitfalls"
-  },
-  {
-    "topic": "Swiss Domestic Staff Permits: Who Qualifies as ‘Domestic Staff’ and What Duties Are Typically Accepted",
-    "angle": "Clarify eligibility in plain terms for households and staff, including role scope, evidence to gather (employment contract, household context), and how authorities assess credibility.",
-    "status": "used",
-    "used_title": "Swiss Domestic Staff Permits: Who Qualifies as ‘Domestic Staff’ and What Duties Are Typically Accepted"
-  },
-  {
-    "topic": "Swiss Posted Worker Route (Secondment): When the 90-Day Notification Is Not Enough and You Need a Permit",
-    "angle": "Explain how to spot early that a posting will exceed the notification route and what to prepare (assignment plan, timelines, and avoiding last-minute project delays).",
-    "status": "used",
-    "used_title": "Swiss Posted Worker Route (Secondment): When the 90-Day Notification Is Not Enough and You Need a Permit"
-  },
-  {
-    "topic": "Converting a Swiss G Permit to a Swiss B Permit: What Changes for EU/EFTA and Non-EU Frontier Workers",
-    "angle": "Explains the legal shift from commuter status to resident status, including when the G permit lapses, employer-led authorisation needs for non-EU nationals, and practical sequencing for registration and documentation.",
-    "status": "used",
-    "used_title": "Converting a Swiss G Permit to a Swiss B Permit: What Changes for EU/EFTA and Non‑EU Frontier Workers"
-  },
-  {
-    "topic": "Swiss Citizenship Language Proof: Accepted Certificates, Required Levels, and How to Avoid a Rejection for Wrong Evidence",
-    "angle": "Help applicants gather the right language documents the first time, understand level requirements, and plan realistic steps if they are not yet at the required standard.",
-    "status": "used",
-    "used_title": "Swiss Citizenship Language Proof: Accepted Certificates, Required Levels, and How to Avoid a Rejection for Wrong Evidence"
-  },
-  {
-    "topic": "Swiss Retirement Residence Permit: Proving Financial Self-Sufficiency and the ‘No Gainful Activity’ Rule",
-    "angle": "Clarifies how authorities assess long-term self-sufficiency, what “gainful activity” can include (e.g., consultancy/board roles), and how applicants can present sustainable finances without triggering compliance concerns.",
-    "status": "used",
-    "used_title": "Swiss Retirement Residence Permits: Financial Self-Sufficiency and the ‘No Gainful Activity’ Rule Explained"
-  },
-  {
-    "topic": "Unmarried Partners and Swiss Family Reunification: How to Prove a Durable Relationship Without Overclaiming",
-    "angle": "Outline what evidence typically helps (cohabitation history, shared finances, children, travel/communications), what to avoid, and how to present a clear, credible relationship narrative.",
+    "topic": "Unmarried Partners and Swiss Family Reunification: Presenting a Credible Durable Relationship Case",
+    "angle": "Explains how unmarried partners can frame cohabitation history, shared commitments and future plans persuasively, without overstating the strength of the evidence or ignoring difficult facts.",
+    "audience": "general_global",
     "status": "unused"
   },
   {
-    "topic": "C Permit and Long Absences from Switzerland: How Travel, Remote Work Abroad, and Relocation Affect Your Status",
-    "angle": "Clarify what types of absences create risk, how to plan extended time abroad, and what steps to take early (notifications, permits, supporting evidence) to avoid losing settlement status.",
+    "topic": "C Permit and Long Absences from Switzerland: When Time Abroad Starts to Put Settlement Status at Risk",
+    "angle": "Looks at how extended travel, remote work abroad and partial relocation affect C permit holders, and what should be addressed early before an absence becomes a status problem.",
+    "audience": "inside_switzerland_individuals",
     "status": "unused"
   },
   {
-    "topic": "Choosing a Canton for Lump-Sum Taxation: Why Your Location Changes the Minimums, Process, and Risk of Reassessment",
-    "angle": "Explain how cantonal practice and minimum tax bases differ, what questions to ask before moving, and how to keep your file consistent if you relocate within Switzerland later.",
+    "topic": "Choosing a Canton for Lump-Sum Taxation: Why Location Changes the Process, Minimums and Risk Profile",
+    "angle": "Explains how cantonal practice affects lump-sum taxation planning, what prospective residents should assess before relocating, and why later moves between cantons need careful handling.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Retirement Permit for Non-EU Nationals: Demonstrating ‘Particular Personal Ties’ to Switzerland with Credible Evidence",
-    "angle": "A practitioner guide to building a persuasive ties dossier (history of stays, language/integration efforts, community links) and avoiding common evidential gaps in discretionary cantonal assessments.",
+    "topic": "Swiss Retirement Permit for Non-EU Nationals: Building a Credible Case on ‘Particular Personal Ties’ to Switzerland",
+    "angle": "Examines how non-EU applicants can present long-standing connections to Switzerland in a way that looks genuine, coherent and sustainable rather than merely tactical.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Schengen Visa (Type C) for Switzerland: Document Strategy to Reduce Refusal Risk for Visitors and Business Travellers",
-    "angle": "Shows how to present a coherent travel narrative (purpose, itinerary, funding, ties to residence country), common refusal themes, and how to correct inconsistencies before submission.",
+    "topic": "Swiss Schengen Visa for Switzerland: Reducing Refusal Risk Through a Coherent Travel and Evidence Strategy",
+    "angle": "Explains how visitors and business travellers can present purpose of travel, itinerary, funding and ties to their country of residence consistently to reduce avoidable refusals.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Criminal Records, Fines, and Debt in Swiss Citizenship Applications: What to Disclose and How to Show Rehabilitation",
-    "angle": "Cover how past issues can affect naturalisation, what documentation is typically needed (extracts, payment confirmations, explanations), and when it’s wise to seek tailored advice.",
+    "topic": "Criminal Records, Fines and Debt in Swiss Citizenship Cases: What Needs to Be Addressed Before Applying",
+    "angle": "Looks at how applicants should approach past financial or criminal issues in naturalisation cases, including disclosure, supporting evidence and the importance of demonstrating rehabilitation.",
+    "audience": "inside_switzerland_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Posted Worker Compliance Checklist: Swiss-Standard Pay, Working Hours, and Allowances for Posted Employees",
-    "angle": "A practical employer guide to aligning pay and core working conditions with Swiss requirements, what evidence to keep on file, and how site inspections typically work.",
+    "topic": "Posted Workers in Switzerland: Meeting Swiss Pay and Working Condition Rules in Practice",
+    "angle": "Sets out how employers can prepare for Swiss compliance expectations on salary, working hours and allowances when assigning staff to Switzerland, and what documentation should be inspection-ready.",
+    "audience": "inside_switzerland_businesses",
     "status": "unused"
   },
   {
-    "topic": "Swiss Family Reunification Financial Requirements: What Counts as ‘Sufficient Means’ and Which Documents Work Best",
-    "angle": "Provide a practical evidence roadmap: payslips, employment contracts, bank statements, budgets, and how sponsors can show stability—plus common mistakes that trigger extra questions.",
+    "topic": "Swiss Family Reunification Financial Requirements: Showing Real Financial Stability, Not Just Income on Paper",
+    "angle": "Explains how sponsors can present earnings, budgets, bank evidence and household circumstances in a way that demonstrates practical sustainability rather than a technically complete but unconvincing file.",
+    "audience": "general_global",
     "status": "unused"
   },
   {
-    "topic": "90/180-Day Rule in Switzerland and Schengen: How Frequent Travellers Should Track Days and Avoid Overstay Consequences",
-    "angle": "Explains the rolling calculation method, frequent-travel risk patterns, and compliance planning for repeat trips across multiple Schengen states—written for corporate travellers and private clients.",
+    "topic": "The 90/180-Day Rule in Switzerland and Schengen: A Practical Guide for Frequent Travellers",
+    "angle": "Explains how day counting works across Schengen travel, where frequent travellers and business visitors often go wrong, and how to track movement before overstay problems arise.",
+    "audience": "general_global",
     "status": "unused"
   },
   {
-    "topic": "Joining a Partner in Switzerland on an L Permit: When Family Reunification Is Possible (and When It Isn’t)",
-    "angle": "Clarify how short-term permits affect family planning, what authorities look at for stability and duration, and safer sequencing options for couples who must relocate on a tight timeline.",
+    "topic": "Joining a Partner in Switzerland on an L Permit: When Family Reunification Planning Becomes Difficult",
+    "angle": "Examines how short-term residence status affects family reunification options, what authorities look for in terms of stability and duration, and how couples can plan more safely.",
+    "audience": "general_global",
     "status": "unused"
   },
   {
-    "topic": "Can You Work Under Swiss Lump-Sum Taxation? Permitted Activities, Board Roles, and Common Compliance Traps",
-    "angle": "Clarify what is typically compatible or incompatible with lump-sum status (employment, self-employment, Swiss-source activity), and what to do if your plans change after arrival.",
+    "topic": "Can You Work Under Swiss Lump-Sum Taxation? Activity Restrictions, Board Roles and Compliance Risk",
+    "angle": "Looks at what kinds of activity are likely to create problems under lump-sum taxation, how plans can evolve after arrival, and when a change in structure needs to be addressed proactively.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Working While Studying in Switzerland: What Student Permit Holders Can and Cannot Do (and When You Need Separate Approval)",
-    "angle": "Explain the usual restrictions and approval steps in plain language, helping students avoid accidental breaches and plan part-time work legally.",
+    "topic": "Working While Studying in Switzerland: What Student Permit Holders Need to Check Before Taking Employment",
+    "angle": "Explains the practical restrictions on working during studies, when separate approval may be needed, and how students can avoid accidental breaches that affect later permit applications.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Citizenship Interviews and Commune Checks: What Gets Asked, What Documents to Bring, and How to Prepare Calmly",
-    "angle": "Demystify the interview process (local knowledge, daily life, work, language), offer a preparation checklist, and highlight avoidable mistakes like inconsistent answers or missing records.",
+    "topic": "Swiss Citizenship Interviews and Commune Checks: Preparing for the Practical Reality of the Process",
+    "angle": "Explains how local interviews and commune-level checks usually operate, what applicants are really being assessed on, and how to prepare calmly and consistently.",
+    "audience": "inside_switzerland_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Trainee (Stagiaire) Permits Under Bilateral Exchange Agreements: Eligibility Criteria, Employer Duties, and Non-Renewability",
-    "angle": "Breaks down age/qualification criteria, training-purpose scrutiny, wage compliance expectations, and what happens at the 18-month cap, including lawful transition planning to standard work permits.",
+    "topic": "Swiss Trainee Permits Under Exchange Agreements: When the Route Fits and When It Does Not",
+    "angle": "Examines the training-purpose logic behind stagiaire permits, the role of the training plan and contract terms, and why some applications fail because the arrangement looks like ordinary employment.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Family Reunification After Divorce or Separation in Switzerland: Keeping Your Permit and Protecting the Children’s Status",
-    "angle": "Explain the main risk points after a relationship ends (renewals, residence continuity, childcare arrangements), what evidence helps, and when to get legal advice early.",
+    "topic": "Family Reunification After Divorce or Separation in Switzerland: Protecting Residence Status and Family Stability",
+    "angle": "Looks at how separation affects permit renewals, children’s position and future residence planning, and why early evidence gathering can matter before a renewal problem develops.",
+    "audience": "inside_switzerland_individuals",
     "status": "unused"
   },
   {
-    "topic": "Employing Domestic Staff in Switzerland: Minimum Employment Standards, Contracts, and the Documents You’ll Be Asked to Show",
-    "angle": "A step-by-step document and compliance guide for sponsoring households, with practical tips to avoid delays and reduce refusal risk.",
+    "topic": "Employing Domestic Staff in Switzerland: What Households Need to Have in Place Before Applying",
+    "angle": "Explains how private households should think about contracts, minimum standards, role design and documentary preparation before sponsoring domestic staff in Switzerland.",
+    "audience": "inside_switzerland_businesses",
     "status": "unused"
   },
   {
-    "topic": "After You Get the Swiss C Permit: Rights, Responsibilities, and Life Events That Can Still Put Your Status at Risk",
-    "angle": "Explain what improves with a C permit (stability, labor-market access) and what still matters (criminal issues, major welfare reliance, registration duties), with practical compliance tips for families.",
+    "topic": "After Obtaining a Swiss C Permit: What Still Needs to Be Managed Carefully",
+    "angle": "Explains what a C permit changes in practice, but also which life events, absences and compliance issues can still create difficulty despite settlement-level status.",
+    "audience": "inside_switzerland_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Apprenticeship Permits: What EU/EFTA Apprentices Can Expect vs Why Non-EU Apprenticeships Are Rarely Approved",
-    "angle": "Compares the AFMP-based pathway (recognised apprenticeship contract, cantonal training office approval) with the practical barriers for third-country nationals (quotas, labour market test, local availability).",
+    "topic": "Swiss Apprenticeship Permits: Why the Position of EU/EFTA and Non-EU Applicants Differs So Sharply",
+    "angle": "Compares the practical accessibility of apprenticeship routes for EU/EFTA nationals with the much narrower position for non-EU nationals, and explains what that means for families and employers.",
+    "audience": "general_global",
     "status": "unused"
   },
   {
-    "topic": "Counting Days Correctly for Posted Workers in Switzerland: Working Days vs Calendar Days and Common Tracking Mistakes",
-    "angle": "Help employers and assignees avoid accidental overstay or permit breaches by explaining day counting logic, travel patterns, and internal tracking tips.",
+    "topic": "Counting Days Correctly for Posted Workers in Switzerland: Why Internal Tracking Often Fails",
+    "angle": "Explains how employers should think about working days, travel patterns and project planning so that posted worker assignments do not drift into non-compliance through poor record-keeping.",
+    "audience": "inside_switzerland_businesses",
     "status": "unused"
   },
   {
-    "topic": "Swiss L vs B vs C Permits Explained: Which Residence Permit Fits Your Situation (and What Changes at Renewal)?",
-    "angle": "A plain-language guide to the main Swiss permit types, who typically qualifies, what each permit lets you do, and what evidence to prepare for extensions and renewals.",
+    "topic": "Swiss L, B and C Permits Explained: How the Main Residence Categories Shape Long-Term Planning",
+    "angle": "Provides a scenario-led explanation of how the main Swiss permit categories differ in practice, and why the right strategy depends on nationality, work pattern and future residence goals.",
+    "audience": "general_global",
     "status": "unused"
   },
   {
-    "topic": "Swiss Family Reunification Refusals: The Most Common Reasons and How to Fix Them Before You Reapply or Appeal",
-    "angle": "Break down refusal patterns (insufficient evidence, finances, housing, credibility gaps) and provide a structured ‘remedy plan’ checklist for strengthening the next filing without making risky claims.",
+    "topic": "Swiss Family Reunification Refusals: Understanding the Weak Point Before Reapplying or Appealing",
+    "angle": "Examines the most common reasons family reunification cases fail, how to identify the true weakness in the file, and when a fresh application is better than an appeal.",
+    "audience": "refused_applicants",
     "status": "unused"
   },
   {
-    "topic": "Non-EU Swiss Work Permit Refusals: 7 Common Reasons (Labour Market Test, Salary Levels, Quotas) and How to Rebuild Your File",
-    "angle": "Helps applicants and sponsoring employers understand typical refusal triggers, what documents authorities expect, and practical steps to strengthen a re-application without misrepresentation.",
+    "topic": "Non-EU Swiss Work Permit Refusals: What Usually Goes Wrong and How a New Filing Should Be Rebuilt",
+    "angle": "Explains the refusal patterns seen in non-EU work permit cases, including labour market testing, salary and quota issues, and how employers can strengthen a refiled application.",
+    "audience": "refused_applicants",
     "status": "unused"
   },
   {
-    "topic": "Swiss Intra-Company Transfer (ICT) to Switzerland: What Your Employer Must Prove (and What You Should Gather Before Filing)",
-    "angle": "Breaks down the ICT-style transfer requirements, including corporate link evidence, role seniority/specialist profile, Swiss-standard salary, timelines, and common documentation gaps.",
+    "topic": "Swiss Intra-Company Transfers: What the Employer Must Show Before a Transfer to Switzerland Looks Convincing",
+    "angle": "Looks at the evidence needed to justify a transfer to Switzerland, including corporate links, role profile, Swiss salary alignment and the practical logic of the assignment.",
+    "audience": "global_businesses",
     "status": "unused"
   },
   {
-    "topic": "Switzerland’s 90-Day Work Notification for EU/UK Service Providers: How the 90 Working Days Are Counted (and Where Companies Slip Up)",
-    "angle": "Explains the notification procedure in practical terms, how to track days correctly, what records to keep for inspections, and when a full work permit becomes necessary.",
+    "topic": "Switzerland’s 90-Day Work Notification Route for EU and UK Service Providers: Where Companies Miscalculate",
+    "angle": "Explains how the notification route operates in practice, how the 90 working days are tracked and when employers realise too late that a permit is required instead.",
+    "audience": "global_businesses",
     "status": "unused"
   },
   {
-    "topic": "Canton Practice Differences in Swiss Family Reunification: Why Zurich, Geneva, and Vaud May Ask for Different Evidence",
-    "angle": "Help applicants anticipate discretionary and procedural variation (document formats, translations, appointment timing, local expectations), with tips for building a flexible file that travels well across cantons.",
+    "topic": "Cantonal Differences in Swiss Family Reunification: Why the Same Case Can Feel Different in Zurich, Geneva or Vaud",
+    "angle": "Explains how local documentary expectations, appointment practice and procedural style can differ by canton, and what families can do to prepare a file that remains robust across those differences.",
+    "audience": "general_global",
     "status": "unused"
   },
   {
-    "topic": "Swiss Cross-Border Commuter (G Permit): The Weekly Return Rule, Proof of Residence, and When a G Permit Gets Withdrawn",
-    "angle": "A commuter-focused checklist of compliance points, what evidence authorities may request, and how to avoid ‘pseudo-residence’ problems—especially for non-EU nationals.",
+    "topic": "Swiss G Permit Compliance: When Frontier Worker Status Starts to Look Like Residence in Switzerland",
+    "angle": "Examines the weekly return rule, proof of residence and the practical compliance issues that can lead to withdrawal of a G permit, especially in more fact-sensitive cases.",
+    "audience": "inside_switzerland_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Entrepreneur Residence Permit for Non-EU Nationals: What ‘In the Interests of the Economy’ Really Means and How to Evidence It",
-    "angle": "A step-by-step evidence guide for business founders: business plan essentials, job creation/innovation proof, funding documents, and canton-specific considerations—without promising outcomes.",
+    "topic": "Swiss Entrepreneur Residence for Non-EU Nationals: What ‘Economic Interest’ Looks Like in a Real Application",
+    "angle": "Explains how founders can present business plans, funding, role necessity and wider economic benefit in a way that addresses the real question authorities are asking.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Retirement Residence Permit: Proving Financial Self-Sufficiency and ‘Personal Ties’ (Non-EU) Without Guesswork",
-    "angle": "Shows retirees what documents typically carry weight (income, assets, insurance, housing, ties to Switzerland), how renewals are assessed, and when alternative routes may be safer.",
+    "topic": "Swiss Retirement Residence: Presenting Self-Sufficiency and Personal Ties Without Overreaching",
+    "angle": "Looks at how non-EU retirees can present finances, insurance, housing and links to Switzerland coherently, while staying realistic about what discretionary approval requires.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Schengen Visa (Type C) Refused: How to Read the Refusal Code, Fix the Evidence, and Decide Between Appeal vs Reapplying",
-    "angle": "A practical roadmap for refused applicants: common refusal themes (purpose, funds, ties), what supporting documents to add, and how to avoid repeat inconsistencies.",
+    "topic": "Swiss Schengen Visa Refusals: When to Appeal and When a Better Reapplication Is the Safer Route",
+    "angle": "Explains how refused applicants should read the reason for refusal, identify evidential gaps and decide whether an appeal or a cleaner new application makes more sense.",
+    "audience": "refused_applicants",
     "status": "unused"
   },
   {
-    "topic": "Swiss Trainee (Stagiaire) Permit: Eligibility, Contract Requirements, and Why ‘Training Plan’ Quality Makes or Breaks Approval",
-    "angle": "For young professionals and Swiss hosts: explains eligibility, salary/conditions checks, required contract elements, and the most frequent compliance pitfalls.",
+    "topic": "Swiss Trainee Permit Applications: Why the Training Plan Often Determines the Outcome",
+    "angle": "Examines how the quality and credibility of the training plan shapes stagiaire applications, and why a poorly defined role can turn a training application into a refusal risk.",
+    "audience": "global_individuals",
     "status": "unused"
   },
   {
-    "topic": "Swiss Permit Appeals: Deadlines, Evidence Strategy, and How to Build a Persuasive Administrative Challenge After a Negative Decision",
-    "angle": "A non-technical overview of appeal pathways, what makes an appeal evidence-led, how to organise exhibits, and when to seek counsel early to avoid procedural mistakes.",
+    "topic": "Appealing a Swiss Permit Refusal: Building an Administrative Challenge That Actually Addresses the Decision",
+    "angle": "Explains how permit appeals should be approached as evidence-led legal challenges, not simply emotional responses to a negative outcome, and what applicants should organise first.",
+    "audience": "refused_applicants",
     "status": "unused"
   },
   {
-    "topic": "Posted Worker Assignments in Regulated Sectors: When Switzerland Requires Notification From Day 1 and Why It Matters",
-    "angle": "Focus on sector-triggered rules and practical planning: how to identify if your project falls into a regulated category, what timelines to build in, and what documents inspectors may ask for.",
+    "topic": "Posted Worker Assignments in Regulated Sectors: When Notification Obligations Begin From Day One",
+    "angle": "Looks at how sector-specific rules affect planning for posted worker projects in Switzerland, and why regulated work can trigger obligations earlier than employers expect.",
+    "audience": "global_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Work Permit Applications for Non-EU Nationals: What Employers Need to Show Beyond a Job Offer",
+    "angle": "Explains how employers should approach labour market testing, suitability of the candidate, salary benchmarking and quota-sensitive filing strategy in non-EU work permit cases.",
+    "audience": "global_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Hiring EU/EFTA Nationals in Switzerland: What Is Simpler, What Is Not, and Where Employers Still Go Wrong",
+    "angle": "Looks at the practical differences between EU/EFTA and non-EU hiring into Switzerland, including registration, permit type, local process and avoidable administrative mistakes.",
+    "audience": "inside_switzerland_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Moving to Switzerland for Work: How to Choose the Right Permit Strategy From the Start",
+    "angle": "Provides a scenario-led guide for professionals considering a move to Switzerland, focusing on nationality, employer structure, permit type and long-term residence goals.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss B Permit Renewals: What Authorities Notice When a Straightforward Renewal Becomes Complicated",
+    "angle": "Explains the issues that can affect B permit renewals, including interruptions in work, changes in family circumstances, welfare dependence and compliance history.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "From L Permit to B Permit in Switzerland: When the Transition Is Smooth and When It Is Not",
+    "angle": "Looks at the practical and legal issues that shape progression from L to B status, especially where employment patterns, nationality or cantonal practice complicate the transition.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Applying for a Swiss C Permit on a Fast-Track Route: What Integration Really Needs to Look Like",
+    "angle": "Explains how faster routes to the C permit are assessed in practice, with particular attention to language, integration, financial stability and overall credibility.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Citizenship by Facilitated Naturalisation: When It Applies and What Evidence Makes the Difference",
+    "angle": "Explains who can benefit from facilitated naturalisation, how the route differs from ordinary naturalisation and what factors applicants should address carefully before filing.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Ordinary Naturalisation: Why Long Residence Alone Is Not Enough",
+    "angle": "Examines how residence, language, integration, tax compliance and local credibility work together in ordinary naturalisation cases.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Naturalisation After Marriage to a Swiss Citizen: When Family Life Helps and When It Does Not Solve Other Issues",
+    "angle": "Looks at how marriage-related routes to Swiss citizenship operate and why applicants still need to address residence, integration and credibility in a disciplined way.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification for Parents and Other Relatives: When Dependency Arguments Become Difficult",
+    "angle": "Explains why extended family reunification is often more complex than spouse and child cases, and what kind of dependency evidence needs especially careful treatment.",
+    "audience": "general_global",
+    "status": "unused"
+  },
+  {
+    "topic": "Applying for Swiss Family Reunification From Abroad: What to Prepare Before the File Reaches the Canton",
+    "angle": "Looks at how sponsors and family members outside Switzerland can coordinate housing, finances, civil status evidence and translations before filing begins.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification for Same-Sex Couples: Practical Issues in Documenting the Relationship and the Move",
+    "angle": "Explains how same-sex couples can prepare relationship evidence, civil status documents and future residence plans clearly in Switzerland-linked family reunification cases.",
+    "audience": "general_global",
+    "status": "unused"
+  },
+  {
+    "topic": "Children Approaching the Age Limit in Swiss Family Reunification Cases: Why Timing Can Change the Outcome",
+    "angle": "Examines how age thresholds affect child applications and why delay, family disagreement or incomplete documentation can turn a winnable case into a difficult one.",
+    "audience": "general_global",
+    "status": "unused"
+  },
+  {
+    "topic": "Bringing Key Employees to Switzerland Quickly: What Businesses Should Do Before There Is Commercial Pressure",
+    "angle": "Explains how workforce planning, salary alignment, role design and early evidence gathering can reduce delays when a business needs urgent deployment to Switzerland.",
+    "audience": "global_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Work Permit Quotas: What They Mean in Practice for Employers and Applicants",
+    "angle": "Looks at how quota pressure affects non-EU filings, timing, candidate selection and employer expectations across different cantonal contexts.",
+    "audience": "global_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Salary Benchmarking in Swiss Work Permit Cases: Why a Well-Paid Role Can Still Fail",
+    "angle": "Explains how Swiss salary expectations are assessed and why job title, local benchmarks and the overall structure of the role matter just as much as headline pay.",
+    "audience": "inside_switzerland_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Employer Sponsorship Strategy: When to File, When to Wait and When to Reframe the Role",
+    "angle": "Provides a strategic guide for employers deciding how to present a hire into Switzerland where timing, candidate profile and labour market evidence are all in play.",
+    "audience": "inside_switzerland_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Setting Up in Switzerland as a Founder: Work Permit Questions Entrepreneurs Should Resolve Early",
+    "angle": "Explains how founders should think about residence status, business substance, economic benefit and the difference between company formation and immigration permission.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Non-Gainful Residence in Switzerland: Which Applicants Are a Better Fit for the Route Than They First Assume",
+    "angle": "Looks at how financially independent applicants can assess whether a non-gainful route is realistic, and what facts most often complicate the analysis.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Residence Through Financial Independence: How to Present Lifestyle, Assets and Intentions Coherently",
+    "angle": "Explains how applicants should frame financial self-sufficiency, Swiss residence plans and future activities without creating avoidable credibility problems.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permits After Graduation: What Comes Next If You Want to Stay in Switzerland",
+    "angle": "Looks at how graduates should think about work options, permit transitions and timing if they hope to remain in Switzerland after study.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Changing Employers in Switzerland: When a Permit Holder Needs to Think About Immigration Consequences",
+    "angle": "Explains how job changes can affect permit holders differently depending on nationality, permit type and cantonal process.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Losing Your Job in Switzerland: What Happens to Your Permit and What Should Be Addressed First",
+    "angle": "Examines the permit implications of job loss, unemployment, onward residence options and the steps that should be taken before status becomes unstable.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Switching From a Student Route to a Work Route in Switzerland: Timing and Evidence Issues",
+    "angle": "Looks at when a transition from study to work in Switzerland is realistic and what employers and graduates need to get right procedurally.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Permit Refusals Based on Housing, Finances or Credibility: How to Identify the Real Problem",
+    "angle": "Explains how applicants should interpret the actual weakness in a refusal where several concerns appear at once, and how that shapes the next step.",
+    "audience": "refused_applicants",
+    "status": "unused"
+  },
+  {
+    "topic": "Appealing a Swiss Schengen Visa Refusal for Business Travel: When Commercial Urgency Meets Legal Reality",
+    "angle": "Examines how business travellers and employers should respond when a Swiss visa refusal disrupts commercial plans, and what can realistically be fixed quickly.",
+    "audience": "refused_applicants",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Permit Delays: When an Application Is Slow, What Can Usefully Be Done",
+    "angle": "Looks at how applicants and employers should respond to prolonged Swiss immigration processing, including when to follow up and how to avoid making matters worse.",
+    "audience": "general_global",
+    "status": "unused"
+  },
+  {
+    "topic": "Cross-Border Remote Work and Swiss Immigration Status: When Living in Switzerland Raises Permit Questions",
+    "angle": "Explains how cross-border remote working arrangements can affect residence status, work authorisation and future permit strategy in Switzerland.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Working Remotely From Switzerland for a Foreign Employer: Immigration Questions That Are Often Missed",
+    "angle": "Looks at the immigration side of cross-border remote work from Switzerland and why assumptions based purely on employment law or tax advice may be incomplete.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Short-Term Assignments for Non-EU Nationals: When a Brief Project Still Needs Careful Planning",
+    "angle": "Examines why short business assignments to Switzerland can still raise permit issues for non-EU nationals and how employers should plan ahead.",
+    "audience": "global_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Seconding Staff to Switzerland: Choosing Between Notification, Assignment Permit and Other Routes",
+    "angle": "Explains how employers should analyse the legal basis, duration and function of a Swiss assignment before deciding how to structure it.",
+    "audience": "global_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss G Permit Applications for Frontier Workers: What Daily Reality Needs to Match on Paper",
+    "angle": "Looks at how cross-border commuters should document residence abroad, work in Switzerland and compliance with the frontier worker framework.",
+    "audience": "general_global",
+    "status": "unused"
+  },
+  {
+    "topic": "Moving From Frontier Worker Status to Swiss Residence: Strategic Issues Before the Move Happens",
+    "angle": "Explains how a frontier worker should assess the immigration consequences of relocating into Switzerland and how timing can affect status continuity.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Permit Renewal After Family Breakdown in Switzerland: Why Early Preparation Matters",
+    "angle": "Examines how applicants should approach renewals after separation or divorce, especially where the original permit depended on family reunification.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Residence Rights After Domestic Change: Marriage, Birth of a Child or New Cohabitation",
+    "angle": "Looks at how major family events can affect Swiss immigration strategy and when a changed personal situation should prompt a review of residence planning.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Applying for a Swiss Permit With a Complex Immigration History: How Past Refusals and Status Changes Matter",
+    "angle": "Explains how prior refusals, old permits, overstays or status changes should be disclosed and addressed before a new Swiss filing is made.",
+    "audience": "refused_applicants",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation and Tax Compliance: Why Administrative Cleanliness Matters More Than Many Applicants Expect",
+    "angle": "Looks at how tax filings, arrears and overall administrative behaviour can influence the perception of integration and reliability in naturalisation cases.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Language Preparation for C Permit and Swiss Citizenship: Planning Early Rather Than Filing Hopefully",
+    "angle": "Explains how applicants should think about language evidence strategically, including accepted certificates, timing and the risks of applying too soon.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Bringing Family to Switzerland After a Work Move: What Needs to Be Sequenced Properly",
+    "angle": "Looks at how workers relocating to Switzerland should plan family reunification, housing, schooling and finances so that later applications are not rushed or underprepared.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Residence for Wealthy Individuals: Choosing Between Non-Gainful Residence and Lump-Sum Tax Planning",
+    "angle": "Compares two routes often considered by internationally mobile high-net-worth individuals and explains when each is, and is not, a realistic fit.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Starting a New Business in Switzerland as a Foreign National: Immigration and Commercial Planning Need to Align",
+    "angle": "Explains why company set-up, financing and immigration strategy must be developed together where a founder intends to live and work in Switzerland.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Hiring Senior Non-EU Talent Into Switzerland: What Makes a File Look Commercially Necessary and Legally Persuasive",
+    "angle": "Looks at how Swiss employers can present senior international hires as justified within the work permit framework without relying on generic assertions.",
+    "audience": "inside_switzerland_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Permit Applications and Inconsistent Documentation: Why Minor Discrepancies Can Have Major Effects",
+    "angle": "Explains how inconsistent employment, address, income or family information across a Swiss file can undermine credibility and delay or damage the application.",
+    "audience": "general_global",
+    "status": "unused"
+  },
+  {
+    "topic": "Business Visitors to Switzerland: When Meetings and Site Visits Stay Safe and When Work Permission Becomes Relevant",
+    "angle": "Examines the line between business travel and work activity in Switzerland, and why companies should define assignments more carefully than they often do.",
+    "audience": "global_businesses",
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Residence Planning for Families With School-Age Children: Immigration Decisions That Affect More Than the Main Applicant",
+    "angle": "Looks at how schooling, child age, family reunification timing and local stability interact in Swiss immigration planning for internationally mobile families.",
+    "audience": "global_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Renewing a Swiss Permit After Time on Welfare or Reduced Income: How to Present the File Responsibly",
+    "angle": "Explains how applicants should approach a renewal where finances have weakened, including what authorities may focus on and how evidence should be structured.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Cantonal Variation in Swiss Immigration Law: When the Legal Framework Is National but the Practical Experience Is Local",
+    "angle": "Explains how cantonal discretion and local process shape Swiss immigration outcomes, and why applicants should prepare for procedure as carefully as for legal eligibility.",
+    "audience": "general_global",
+    "status": "unused"
+  },
+  {
+    "topic": "Applying for Swiss Citizenship After Years Abroad: How Residence History and Current Ties Are Assessed",
+    "angle": "Looks at how applicants with interrupted residence or lengthy periods abroad should analyse whether a Swiss citizenship application is ready or premature.",
+    "audience": "inside_switzerland_individuals",
+    "status": "unused"
+  },
+  {
+    "topic": "Preparing a Strong Swiss Immigration File: Why Scenario, Evidence and Timing Matter More Than Volume of Documents",
+    "angle": "Provides a strategic overview of how applicants and employers can build Swiss immigration files that are coherent, relevant and easier for authorities to assess.",
+    "audience": "general_global",
+    "status": "unused"
+  },
+  {
+    "topic": "After a Swiss Permit Is Approved: Registration, Commencement of Work and the First Compliance Steps",
+    "angle": "Explains what should happen after approval, including local registration, work start timing and the common post-approval mistakes that create avoidable problems.",
+    "audience": "general_global",
     "status": "unused"
   }
 ]
