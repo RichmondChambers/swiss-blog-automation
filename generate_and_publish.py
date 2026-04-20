@@ -1,8 +1,14 @@
+from __future__ import annotations
+
 import argparse
 import importlib.util
 import json
 import os
+import re
+from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable
 from urllib import error, request
 
 HAS_PYPDF2 = importlib.util.find_spec("PyPDF2") is not None
@@ -10,14 +16,32 @@ HAS_PYPDF2 = importlib.util.find_spec("PyPDF2") is not None
 if HAS_PYPDF2:
     from PyPDF2 import PdfReader
 
-parser = argparse.ArgumentParser(description="Generate and email Swiss immigration blog drafts.")
+
+# ============================================================
+# CLI
+# ============================================================
+
+parser = argparse.ArgumentParser(
+    description="Generate Swiss immigration blog drafts with staged legal validation."
+)
+parser.add_argument("--dry-run", action="store_true", help="Skip network calls and topic writes.")
 parser.add_argument(
-    "--dry-run",
+    "--topic-index",
+    type=int,
+    default=None,
+    help="Use a specific topics.json index instead of the first unused topic.",
+)
+parser.add_argument(
+    "--allow-editorial-fallback",
     action="store_true",
-    help="Run end-to-end generation flow without network calls or writing topics.json.",
+    help="If no legal authorities are found, continue using internal legal notes only. Never uses website editorial as legal authority.",
 )
 args = parser.parse_args()
 
+
+# ============================================================
+# Environment and paths
+# ============================================================
 
 def require_env(name: str) -> str:
     value = os.environ.get(name)
@@ -26,200 +50,287 @@ def require_env(name: str) -> str:
     return value
 
 
-# -----------------------
-# Email configuration
-# -----------------------
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.4")
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 EMAIL_FROM = os.environ.get("EMAIL_FROM", "info@richmondchambers.com")
 EMAIL_TO = os.environ.get("EMAIL_TO", "paul.richmond@richmondchambers.com")
 REPLY_TO = os.environ.get("EMAIL_REPLY_TO", EMAIL_TO)
 
-# CTA identity for blog posts
 CTA_HEADING = "Contact Our Immigration Lawyers In Switzerland"
 CTA_NAME = "Richmond Chambers Switzerland"
 CTA_PHONE = "+41 21 588 07 70"
 
-
-# -----------------------
-# GPT system prompt
-# -----------------------
-
-SYSTEM_PROMPT = f"""
-You are a senior legal blog writer producing authoritative, legally accurate blog posts for Richmond Chambers Switzerland, an immigration law firm specialising exclusively in Swiss immigration law and Swiss immigration routes.
-
-Primary audience:
-
-The audience is broad and international. Readers include:
-- Individuals and families anywhere in the world considering relocation to Switzerland for work, study, business, family life, retirement, investment or visits
-- Businesses anywhere in the world considering hiring, transferring or posting workers to Switzerland
-- Individuals and businesses applying for Swiss work permits, residence permits, family reunification, Schengen visas, or non-gainful activity permits
-- Individuals who have already applied for Swiss permits or visas and need to understand refusals, next steps or strategic options
-- Individuals and businesses already in Switzerland seeking advice on Swiss immigration law, including permit renewals, upgrading from L to B permits, applying for C permits, fast-track C permit routes, ordinary naturalisation, facilitated naturalisation, family reunification, employer sponsorship and cross-border workforce issues
-
-Your role is to write in-depth, analytical blog posts aimed at educated, time-poor professionals seeking clear, reliable guidance on Swiss immigration options. The legal analysis must always be based on Swiss immigration law and administrative practice. However, the article should be framed for the most relevant audience segment for the topic.
-
-You must demonstrate strong subject-matter expertise in Swiss immigration law, including residence permits, work permits, family reunification, business immigration, Schengen visas, EU/EFTA nationals, non-EU nationals, non-gainful activity permits, transitions between permit types, C permit eligibility, fast-track C permit routes, Swiss citizenship and naturalisation, and related regulatory frameworks. All content must be legally accurate. You must not speculate, invent rules, or hallucinate legal positions. Where necessary, you may supplement your knowledge with careful web research to ensure accuracy and currency.
-
-Audience framing requirements:
-
-Write for the most relevant audience for the topic, not for a generic undifferentiated readership.
-Where relevant, address the different positions of:
-- individuals outside Switzerland considering relocation
-- individuals already in Switzerland
-- businesses outside Switzerland transferring or hiring staff into Switzerland
-- businesses already operating in Switzerland
-- EU/EFTA nationals
-- non-EU nationals
-- applicants, permit holders and refused applicants
-
-Do not assume the reader is already in Switzerland unless the topic clearly requires it.
-Do not assume that all Swiss immigration routes operate the same way for EU/EFTA nationals and non-EU nationals.
-Where relevant, explain the practical implications for applicants inside Switzerland, applicants outside Switzerland and employers engaging with cantonal and federal authorities.
-Where relevant, correct common misunderstandings, including confusion between residence rights, work authorisation, visa requirements, permit validity, cantonal discretion and routes to settlement or citizenship.
-
-Avoid the following:
-- opening with generic statements about "moving to Switzerland" or "navigating immigration rules"
-- writing as though all readers are in the same legal position
-- treating EU/EFTA nationals and non-EU nationals as though the rules are interchangeable
-- assuming that a permit refusal necessarily ends all options
-- generic conclusions that merely restate that legal advice may be needed
-
-Prefer:
-- concrete scenario-driven analysis
-- internationally relevant examples where useful
-- careful distinctions between visa, permit, residence status, work authorisation and nationality
-- practical explanation of how Swiss rules affect applicants, families and employers in real situations
-
-Before drafting, silently determine:
-1. which audience segment is most likely to read this post;
-2. what legal misconceptions that audience is likely to have;
-3. what practical Swiss immigration scenarios are most relevant.
-
-Do not output that planning note. Use it to improve the specificity of the article.
-
-Writing style and tone:
-
-UK English
-
-Authoritative, analytical, and calm
-
-Professional and non-promotional
-
-Clear, precise prose written in full paragraphs
-
-Discursive and explanatory rather than schematic
-
-No clichés
-
-No emojis
-
-No sales language
-
-No references to yourself as an AI
-
-Content requirements:
-
-Length: typically 1,000–1,500 words per post (around 1,500 words unless the topic clearly requires less)
-
-The blog post must be written predominantly in continuous prose
-
-Lists (including bullet points, numbered lists, or hyphenated lists) should be used sparingly and only where they genuinely improve clarity
-
-Maximum of two lists in total across the entire article
-
-Lists must never be used as a substitute for legal analysis, reasoning, or explanation
-
-The default mode of explanation should always be structured paragraphs, not itemised points
-
-Concrete legal claims rather than vague generalities
-
-Clear explanations of legal reasoning, statutory or regulatory context, and practical consequences
-
-Examples may be included where they genuinely aid understanding, but should be embedded in prose rather than presented as lists
-
-Avoid generic summaries, filler content, or checklist-style drafting
-
-Search optimisation:
-
-Optimise content for search engines using relevant keywords and keyword variations related to Swiss immigration law and Swiss immigration routes
-
-Keywords must be integrated naturally into prose, without keyword stuffing or forced repetition
-
-Also generate:
-- a DYNAMIC PAGE LINK heading with a blank line beneath it for a link to be pasted later
-- a SUGGESTED SEO KEYWORDS heading containing exactly 6 relevant SEO keyword phrases likely to perform well for the topic and audience
-
-Structure:
-
-A compelling, specific title that clearly reflects the legal subject matter
-
-A concise introduction that frames the legal or practical problem being addressed, without fluff
-
-At least five substantive sections, each developed through paragraphs of analysis rather than lists
-
-Section headings must be descriptive and signal the legal or practical issue being discussed, not merely label a list
-
-A practical conclusion that distils key legal takeaways and implications for readers, written in prose
-
-Mandatory final section:
-
-A final section with the exact sub-heading:
-{CTA_HEADING}
-
-Call to action requirement:
-
-Under the sub-heading “{CTA_HEADING}”, include a short, measured call to action written in restrained, professional prose.
-
-The call to action must:
-Be relevant to the subject matter of the blog post
-Be framed as an invitation to obtain tailored legal advice
-Invite readers to contact {CTA_NAME} by telephone on {CTA_PHONE} or by completing an enquiry form to arrange an initial consultation meeting
-Remain factual, neutral, and non-promotional
-
-Output format:
-
-Plain text only
-Headings clearly marked
-No markdown
-No citations or footnotes unless explicitly requested
-No meta-commentary about the writing process
-
-SEO requirements:
-Generate an SEO meta title (maximum 60 characters)
-Generate an SEO meta description (maximum 155 characters)
-Meta text must be natural, accurate, and non-promotional
-
-Output format EXACTLY as follows:
-
-BLOG TITLE:
-<text>
-
-DYNAMIC PAGE LINK:
-<leave blank beneath this heading>
-
-SEO META TITLE:
-<text>
-
-SEO META DESCRIPTION:
-<text>
-
-SUGGESTED SEO KEYWORDS:
-<keyword 1>; <keyword 2>; <keyword 3>; <keyword 4>; <keyword 5>; <keyword 6>
-
-BLOG CONTENT:
-<full article>
-"""
+SCRIPT_DIR = Path(__file__).resolve().parent
+TOPICS_PATH = SCRIPT_DIR / "topics.json"
+KNOWLEDGE_DIR = SCRIPT_DIR / "knowledge"
+LEGAL_AUTHORITIES_DIR = KNOWLEDGE_DIR / "legal_authorities"
+INTERNAL_NOTES_DIR = KNOWLEDGE_DIR / "internal_legal_notes"
+WEBSITE_EDITORIAL_DIR = KNOWLEDGE_DIR / "website_editorial"
+OUTPUT_DIR = SCRIPT_DIR / "generated_blog_runs"
 
 
-def post_json(url: str, payload: dict, headers: dict):
-    """
-    POST JSON and return (status_code, parsed_response).
+# ============================================================
+# Prompts
+# ============================================================
 
-    Notes:
-    - OpenAI returns JSON bodies.
-    - SendGrid /v3/mail/send commonly returns HTTP 202 with an empty body.
-      In that case we return {} instead of attempting json.loads("").
-    - If a non-JSON body is returned, we return {"raw_body": "..."}.
-    """
+CLASSIFIER_INSTRUCTIONS = """
+You are assisting a Swiss immigration law content workflow.
+Classify the requested article before drafting.
+Return strict JSON only.
+Do not write the article.
+""".strip()
+
+LEGAL_MEMO_INSTRUCTIONS = f"""
+You are preparing an internal legal analysis note for a Swiss immigration law article.
+
+Source hierarchy:
+1. legal_authority
+2. internal_legal_note
+3. website_editorial
+
+Rules:
+- Use legal_authority as the basis for legal propositions wherever available.
+- Use internal_legal_note only as a supporting interpretive source.
+- Do not treat website_editorial as legal authority.
+- If a source is missing for a point, say so explicitly.
+- Distinguish carefully between automatic rules, discretionary outcomes, procedural requirements and cantonal practice.
+- Identify exceptions, preservation mechanisms, qualifications and reader-category distinctions.
+- If EU/EFTA and non-EU treatment differs, state that.
+- If canton-specific handling matters, state that.
+
+Return strict JSON only.
+""".strip()
+
+VERIFIER_INSTRUCTIONS = """
+You are reviewing an internal legal memo for overstatement, omission and weak support.
+Return strict JSON only.
+You must identify:
+- unsupported claims
+- overbroad claims
+- missing exceptions or qualifications
+- points that rely on cantonal practice rather than black-letter law
+- places where the eventual article should distinguish reader categories
+- whether the memo is safe for article drafting
+""".strip()
+
+DRAFT_INSTRUCTIONS = f"""
+You are drafting a blog post for a Swiss immigration law firm.
+Draft only from the verified legal memo and editorial instructions supplied.
+Do not add new legal propositions not present in the verified memo.
+
+Writing requirements:
+- UK English
+- calm, authoritative, analytical
+- continuous prose as the default
+- avoid generic openings
+- vary sentence rhythm and section architecture naturally
+- no citations in the public article text
+- no markdown
+- no emojis
+- restrained, factual CTA
+- no bullet-heavy drafting
+
+Output strict JSON only.
+""".strip()
+
+SEO_INSTRUCTIONS = """
+You are generating SEO metadata for a Swiss immigration law article.
+Return strict JSON only.
+Requirements:
+- meta title max 60 characters
+- meta description max 155 characters
+- 6 keyword phrases
+- natural, non-promotional, legally accurate
+""".strip()
+
+
+# ============================================================
+# Schemas
+# ============================================================
+
+CLASSIFIER_SCHEMA = {
+    "name": "blog_classifier",
+    "schema": {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "primary_audience": {"type": "string"},
+            "article_type": {"type": "string"},
+            "search_intent": {"type": "string"},
+            "legal_complexity": {"type": "string", "enum": ["low", "medium", "high"]},
+            "key_issues": {
+                "type": "array",
+                "items": {"type": "string"},
+                "minItems": 3,
+                "maxItems": 10,
+            },
+            "distinctions_required": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "source_needs": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "style_profile": {"type": "string"},
+        },
+        "required": [
+            "primary_audience",
+            "article_type",
+            "search_intent",
+            "legal_complexity",
+            "key_issues",
+            "distinctions_required",
+            "source_needs",
+            "style_profile",
+        ],
+    },
+}
+
+LEGAL_MEMO_SCHEMA = {
+    "name": "legal_memo",
+    "schema": {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "article_positioning": {"type": "string"},
+            "issues": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "issue": {"type": "string"},
+                        "rule": {"type": "string"},
+                        "exceptions": {"type": "array", "items": {"type": "string"}},
+                        "procedure_points": {"type": "array", "items": {"type": "string"}},
+                        "cantonal_practice_points": {"type": "array", "items": {"type": "string"}},
+                        "reader_distinctions": {"type": "array", "items": {"type": "string"}},
+                        "practical_implications": {"type": "array", "items": {"type": "string"}},
+                        "support": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": False,
+                                "properties": {
+                                    "source_type": {"type": "string"},
+                                    "source_name": {"type": "string"},
+                                    "excerpt": {"type": "string"},
+                                },
+                                "required": ["source_type", "source_name", "excerpt"],
+                            },
+                        },
+                        "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
+                    },
+                    "required": [
+                        "issue",
+                        "rule",
+                        "exceptions",
+                        "procedure_points",
+                        "cantonal_practice_points",
+                        "reader_distinctions",
+                        "practical_implications",
+                        "support",
+                        "confidence",
+                    ],
+                },
+            },
+            "open_questions": {"type": "array", "items": {"type": "string"}},
+        },
+        "required": ["article_positioning", "issues", "open_questions"],
+    },
+}
+
+VERIFIER_SCHEMA = {
+    "name": "memo_review",
+    "schema": {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "publishable": {"type": "boolean"},
+            "unsupported_claims": {"type": "array", "items": {"type": "string"}},
+            "overbroad_claims": {"type": "array", "items": {"type": "string"}},
+            "missing_qualifications": {"type": "array", "items": {"type": "string"}},
+            "cantonal_sensitivity": {"type": "array", "items": {"type": "string"}},
+            "required_reader_distinctions": {"type": "array", "items": {"type": "string"}},
+            "revision_actions": {"type": "array", "items": {"type": "string"}},
+        },
+        "required": [
+            "publishable",
+            "unsupported_claims",
+            "overbroad_claims",
+            "missing_qualifications",
+            "cantonal_sensitivity",
+            "required_reader_distinctions",
+            "revision_actions",
+        ],
+    },
+}
+
+DRAFT_SCHEMA = {
+    "name": "blog_draft",
+    "schema": {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "blog_title": {"type": "string"},
+            "dynamic_page_link": {"type": "string"},
+            "blog_content": {"type": "string"},
+            "editorial_notes": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "style_profile_used": {"type": "string"},
+                    "overlap_risk": {"type": "string"},
+                    "internal_link_suggestions": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                    },
+                },
+                "required": ["style_profile_used", "overlap_risk", "internal_link_suggestions"],
+            },
+        },
+        "required": ["blog_title", "dynamic_page_link", "blog_content", "editorial_notes"],
+    },
+}
+
+SEO_SCHEMA = {
+    "name": "blog_seo",
+    "schema": {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "seo_meta_title": {"type": "string"},
+            "seo_meta_description": {"type": "string"},
+            "suggested_seo_keywords": {
+                "type": "array",
+                "items": {"type": "string"},
+                "minItems": 6,
+                "maxItems": 6,
+            },
+        },
+        "required": ["seo_meta_title", "seo_meta_description", "suggested_seo_keywords"],
+    },
+}
+
+
+# ============================================================
+# Models
+# ============================================================
+
+@dataclass
+class KnowledgeChunk:
+    source_name: str
+    source_kind: str
+    text: str
+
+
+# ============================================================
+# HTTP and OpenAI helpers
+# ============================================================
+
+def post_json(url: str, payload: dict, headers: dict[str, str]) -> tuple[int, dict[str, Any]]:
     data = json.dumps(payload).encode("utf-8")
     req = request.Request(url, data=data, headers=headers, method="POST")
 
@@ -227,15 +338,9 @@ def post_json(url: str, payload: dict, headers: dict):
         with request.urlopen(req) as response:
             raw = response.read()
             body = raw.decode("utf-8", errors="replace").strip()
-
             if not body:
                 return response.status, {}
-
-            try:
-                return response.status, json.loads(body)
-            except json.JSONDecodeError:
-                return response.status, {"raw_body": body}
-
+            return response.status, json.loads(body)
     except error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
         raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
@@ -243,540 +348,625 @@ def post_json(url: str, payload: dict, headers: dict):
         raise RuntimeError(f"Network error calling {url}: {exc.reason}") from exc
 
 
-def extract_chat_completion_text(response: dict) -> str:
-    try:
-        return response["choices"][0]["message"]["content"].strip()
-    except (KeyError, IndexError, AttributeError) as exc:
-        raise RuntimeError(f"Unexpected chat completions response shape: {response}") from exc
+def call_responses_api(
+    api_key: str,
+    *,
+    instructions: str,
+    input_text: str,
+    schema: dict[str, Any],
+    model: str,
+) -> dict[str, Any]:
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
 
+    payload = {
+        "model": model,
+        "input": input_text,
+        "instructions": instructions,
+        "text": {
+            "format": {
+                "type": "json_schema",
+                "name": schema["name"],
+                "schema": schema["schema"],
+                "strict": True,
+            }
+        },
+    }
 
-def extract_responses_text(response: dict) -> str:
+    _, response = post_json("https://api.openai.com/v1/responses", payload=payload, headers=headers)
+
     output_text = response.get("output_text")
     if isinstance(output_text, str) and output_text.strip():
-        return output_text.strip()
+        return json.loads(output_text)
 
-    output_blocks = response.get("output", [])
-    collected = []
-    for block in output_blocks:
-        for part in block.get("content", []):
-            text = part.get("text")
+    for item in response.get("output", []):
+        for content in item.get("content", []):
+            text = content.get("text")
             if isinstance(text, str) and text.strip():
-                collected.append(text.strip())
+                return json.loads(text)
 
-    if collected:
-        return "\n".join(collected).strip()
-
-    raise RuntimeError(f"Unexpected responses API response shape: {response}")
+    raise RuntimeError(f"Unexpected Responses API payload: {response}")
 
 
-def generate_blog_content(openai_api_key: str, payload: dict) -> str:
-    headers = {
-        "Authorization": f"Bearer {openai_api_key}",
-        "Content-Type": "application/json",
-    }
+# ============================================================
+# Knowledge loading
+# ============================================================
 
-    chat_error = None
-    try:
-        _, chat_response = post_json(
-            "https://api.openai.com/v1/chat/completions",
-            payload=payload,
-            headers=headers,
-        )
-        return extract_chat_completion_text(chat_response)
-    except RuntimeError as exc:
-        chat_error = exc
-        print(f"Warning: chat completions request failed, trying responses API fallback. Details: {exc}")
-
-    responses_payload = {
-        "model": payload["model"],
-        "input": payload["messages"],
-    }
-    try:
-        _, responses_response = post_json(
-            "https://api.openai.com/v1/responses",
-            payload=responses_payload,
-            headers=headers,
-        )
-        return extract_responses_text(responses_response)
-    except RuntimeError as responses_exc:
-        raise RuntimeError(
-            "OpenAI generation failed via both chat completions and responses API. "
-            f"chat_completions_error={chat_error}; responses_error={responses_exc}"
-        ) from responses_exc
-
-
-def try_sendgrid_email(payload: dict, sendgrid_api_key: str, context: str) -> bool:
-    """
-    Send an email via SendGrid and return True on success.
-
-    Returns False for transient/network/API failures so the caller can decide
-    whether to continue without crashing the whole run.
-    """
-    headers = {
-        "Authorization": f"Bearer {sendgrid_api_key}",
-        "Content-Type": "application/json",
-    }
-
-    try:
-        status, _ = post_json(
-            "https://api.sendgrid.com/v3/mail/send",
-            payload=payload,
-            headers=headers,
-        )
-        if status == 202:
-            return True
-
-        print(f"Warning: unexpected SendGrid status for {context}: HTTP {status}")
-        return False
-    except RuntimeError as exc:
-        print(f"Warning: SendGrid send failed for {context}: {exc}")
-        return False
-
-
-# -----------------------
-# Load authoritative PDF knowledge
-# -----------------------
-
-def load_pdf_knowledge(folder="knowledge", max_chars=16000):
-    texts = []
-
+def read_pdf_text(path: Path) -> str:
     if not HAS_PYPDF2:
-        print("Warning: PyPDF2 is not installed; continuing without PDF knowledge.")
         return ""
 
-    if not os.path.isdir(folder):
-        print(f"Warning: knowledge folder not found: {folder}")
-        return ""
-
-    for filename in sorted(os.listdir(folder)):
-        if not filename.lower().endswith(".pdf"):
-            continue
-
-        path = os.path.join(folder, filename)
-
+    reader = PdfReader(str(path))
+    pages: list[str] = []
+    for page_num, page in enumerate(reader.pages, start=1):
         try:
-            reader = PdfReader(path)
-        except Exception as exc:
-            print(f"Warning: could not read PDF '{filename}': {exc}")
+            text = page.extract_text() or ""
+        except Exception:
+            text = ""
+        text = re.sub(r"\s+", " ", text).strip()
+        if text:
+            pages.append(f"[page {page_num}] {text}")
+    return "\n".join(pages)
+
+
+def load_chunks_from_folder(folder: Path, source_kind: str) -> list[KnowledgeChunk]:
+    chunks: list[KnowledgeChunk] = []
+    if not folder.is_dir():
+        return chunks
+    for pdf_path in sorted(folder.glob("*.pdf")):
+        text = read_pdf_text(pdf_path)
+        if text:
+            chunks.append(KnowledgeChunk(source_name=pdf_path.name, source_kind=source_kind, text=text))
+    return chunks
+
+
+def legacy_load_knowledge_folder(folder: Path) -> list[KnowledgeChunk]:
+    """
+    Backward-compatible loader for the old flat knowledge/ folder.
+    Files are treated as website_editorial unless the filename strongly suggests otherwise.
+    """
+    chunks: list[KnowledgeChunk] = []
+    if not folder.is_dir():
+        return chunks
+
+    for pdf_path in sorted(folder.glob("*.pdf")):
+        lower = pdf_path.name.lower()
+        if any(token in lower for token in ["statute", "ordinance", "aig", "fnia", "sem", "directive"]):
+            source_kind = "legal_authority"
+        elif any(token in lower for token in ["memo", "note", "precedent", "internal"]):
+            source_kind = "internal_legal_note"
+        else:
+            source_kind = "website_editorial"
+
+        text = read_pdf_text(pdf_path)
+        if text:
+            chunks.append(KnowledgeChunk(source_name=pdf_path.name, source_kind=source_kind, text=text))
+    return chunks
+
+
+def load_knowledge() -> list[KnowledgeChunk]:
+    if LEGAL_AUTHORITIES_DIR.exists() or INTERNAL_NOTES_DIR.exists() or WEBSITE_EDITORIAL_DIR.exists():
+        chunks: list[KnowledgeChunk] = []
+        chunks.extend(load_chunks_from_folder(LEGAL_AUTHORITIES_DIR, "legal_authority"))
+        chunks.extend(load_chunks_from_folder(INTERNAL_NOTES_DIR, "internal_legal_note"))
+        chunks.extend(load_chunks_from_folder(WEBSITE_EDITORIAL_DIR, "website_editorial"))
+        return chunks
+
+    return legacy_load_knowledge_folder(KNOWLEDGE_DIR)
+
+
+def tokenize_queries(queries: Iterable[str]) -> list[str]:
+    tokens: list[str] = []
+    for query in queries:
+        for token in re.findall(r"[A-Za-z0-9/+-]+", query):
+            token = token.lower().strip()
+            if len(token) >= 3:
+                tokens.append(token)
+    return tokens
+
+
+def simple_retrieve(
+    chunks: list[KnowledgeChunk],
+    queries: Iterable[str],
+    *,
+    limit: int = 6,
+    allowed_source_kinds: set[str] | None = None,
+) -> list[KnowledgeChunk]:
+    query_terms = tokenize_queries(queries)
+    scored: list[tuple[int, KnowledgeChunk]] = []
+
+    for chunk in chunks:
+        if allowed_source_kinds and chunk.source_kind not in allowed_source_kinds:
             continue
+        haystack = chunk.text.lower()
+        score = sum(haystack.count(term) for term in query_terms)
+        if score == 0:
+            continue
+        if chunk.source_kind == "legal_authority":
+            score += 15
+        elif chunk.source_kind == "internal_legal_note":
+            score += 7
+        scored.append((score, chunk))
 
-        pdf_text = []
-        for page in reader.pages:
-            try:
-                text = page.extract_text()
-            except Exception:
-                text = None
-            if text:
-                pdf_text.append(text)
-
-        combined = "\n".join(pdf_text)
-        combined = " ".join(combined.split())
-
-        if combined:
-            texts.append(f"[SOURCE: {filename}]\n{combined}")
-
-    full_text = "\n\n".join(texts)
-    return full_text[:max_chars]
+    scored.sort(key=lambda item: item[0], reverse=True)
+    return [chunk for _, chunk in scored[:limit]]
 
 
-def build_audience_brief(topic_entry: dict) -> str:
-    audience = (topic_entry.get("audience") or "").strip().lower()
+def format_sources_for_prompt(chunks: list[KnowledgeChunk], max_chars_per_source: int = 6000) -> str:
+    parts: list[str] = []
+    for chunk in chunks:
+        parts.append(
+            f"SOURCE_KIND: {chunk.source_kind}\n"
+            f"SOURCE_NAME: {chunk.source_name}\n"
+            f"CONTENT:\n{chunk.text[:max_chars_per_source]}"
+        )
+    return "\n\n---\n\n".join(parts)
 
-    audience_map = {
-        "global_individuals": (
-            "Audience emphasis: Write primarily for individuals and families anywhere in the world "
-            "considering relocation to Switzerland for work, study, family life, retirement, non-gainful "
-            "activity, investment or visits."
-        ),
-        "global_businesses": (
-            "Audience emphasis: Write primarily for businesses anywhere in the world considering hiring, "
-            "transferring or posting workers to Switzerland, or establishing a Swiss workforce strategy."
-        ),
-        "inside_switzerland_individuals": (
-            "Audience emphasis: Write primarily for individuals already in Switzerland who need guidance on "
-            "permit renewals, permit upgrades, family reunification, settlement, C permit routes or "
-            "naturalisation."
-        ),
-        "inside_switzerland_businesses": (
-            "Audience emphasis: Write primarily for businesses already operating in Switzerland that need "
-            "advice on bringing workers into Switzerland, permit strategy, compliance and workforce planning."
-        ),
-        "refused_applicants": (
-            "Audience emphasis: Write primarily for individuals or businesses whose Swiss permit or visa "
-            "application has been refused and who need to understand reasons, remedies and next steps."
-        ),
-        "general_global": (
-            "Audience emphasis: Write for a broad international audience that may include individuals, families "
-            "and businesses both inside and outside Switzerland. Explain why the topic matters across different "
-            "Swiss immigration scenarios."
-        ),
+
+def select_legal_sources(all_chunks: list[KnowledgeChunk], queries: list[str]) -> list[KnowledgeChunk]:
+    primary = simple_retrieve(
+        all_chunks,
+        queries,
+        limit=8,
+        allowed_source_kinds={"legal_authority", "internal_legal_note"},
+    )
+
+    if primary:
+        legal_authorities = [c for c in primary if c.source_kind == "legal_authority"]
+        if legal_authorities or args.allow_editorial_fallback:
+            return primary
+
+    return []
+
+
+def select_website_context(all_chunks: list[KnowledgeChunk], queries: list[str]) -> list[KnowledgeChunk]:
+    return simple_retrieve(
+        all_chunks,
+        queries,
+        limit=3,
+        allowed_source_kinds={"website_editorial"},
+    )
+
+
+# ============================================================
+# Topic helpers
+# ============================================================
+
+def load_topics(path: Path) -> list[dict[str, Any]]:
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def pick_topic(topics: list[dict[str, Any]], topic_index: int | None) -> tuple[int, dict[str, Any], int]:
+    unused_indexes = [i for i, topic in enumerate(topics) if topic.get("status") == "unused"]
+    if not unused_indexes:
+        raise RuntimeError("No unused topics remain.")
+
+    if topic_index is not None:
+        if topic_index < 0 or topic_index >= len(topics):
+            raise RuntimeError(f"topic-index {topic_index} out of range")
+        selected = topics[topic_index]
+        if selected.get("status") != "unused":
+            raise RuntimeError(f"topic-index {topic_index} is not unused")
+        return topic_index, selected, len(unused_indexes)
+
+    idx = unused_indexes[0]
+    return idx, topics[idx], len(unused_indexes)
+
+
+def audience_brief(audience: str) -> str:
+    mapping = {
+        "global_individuals": "Write primarily for individuals and families outside Switzerland considering a Swiss move, permit or residence strategy.",
+        "global_businesses": "Write primarily for businesses outside Switzerland hiring, assigning, seconding or posting staff to Switzerland.",
+        "inside_switzerland_individuals": "Write primarily for individuals already in Switzerland dealing with residence continuity, renewals, upgrades, family life or citizenship.",
+        "inside_switzerland_businesses": "Write primarily for organisations already operating in Switzerland managing permits, sponsorship, compliance or workforce planning.",
+        "refused_applicants": "Write primarily for applicants or sponsors responding to a Swiss refusal or planning a stronger re-filing or appeal strategy.",
+        "general_global": "Write for a broad international audience while still identifying the reader position most affected by the topic.",
+    }
+    return mapping.get(audience or "general_global", mapping["general_global"])
+
+
+def derive_topic_metadata(topic_entry: dict[str, Any]) -> dict[str, str]:
+    topic = topic_entry.get("topic", "")
+    angle = topic_entry.get("angle", "")
+    audience = topic_entry.get("audience", "general_global")
+
+    default_article_type = "risk_analysis"
+    if any(term in (topic + " " + angle).lower() for term in ["why", "differs", "compare", "between"]):
+        default_article_type = "comparison_piece"
+    elif any(term in (topic + " " + angle).lower() for term in ["refusal", "appeal", "reapplying", "reapply"]):
+        default_article_type = "procedural_strategy"
+    elif any(term in (topic + " " + angle).lower() for term in ["what authorities notice", "what needs to be addressed", "go wrong"]):
+        default_article_type = "myth_correction"
+
+    return {
+        "audience": audience,
+        "article_type_hint": topic_entry.get("article_type", default_article_type),
+        "pillar": topic_entry.get("pillar", "unspecified"),
+        "subtopic": topic_entry.get("subtopic", "unspecified"),
+        "legal_complexity_hint": topic_entry.get("legal_complexity", "high"),
+        "overlap_group": topic_entry.get("overlap_group", "unspecified"),
     }
 
-    audience_aliases = {
-        "general": "general_global",
-        "global": "general_global",
-        "general_international": "general_global",
-        "individuals_global": "global_individuals",
-        "businesses_global": "global_businesses",
-        "switzerland_individuals": "inside_switzerland_individuals",
-        "switzerland_businesses": "inside_switzerland_businesses",
+
+# ============================================================
+# Prompt builders
+# ============================================================
+
+def build_classifier_input(topic_entry: dict[str, Any]) -> str:
+    payload = {
+        "topic": topic_entry.get("topic", ""),
+        "angle": topic_entry.get("angle", ""),
+        "audience": topic_entry.get("audience", "general_global"),
+        "topic_metadata": derive_topic_metadata(topic_entry),
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)
+
+
+def build_legal_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    legal_sources_text: str,
+) -> str:
+    payload = {
+        "topic": topic_entry.get("topic", ""),
+        "angle": topic_entry.get("angle", ""),
+        "audience": topic_entry.get("audience", "general_global"),
+        "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
+        "topic_metadata": derive_topic_metadata(topic_entry),
+        "classifier": classifier,
+        "legal_sources": legal_sources_text,
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)
+
+
+def build_verifier_input(topic_entry: dict[str, Any], classifier: dict[str, Any], memo: dict[str, Any]) -> str:
+    payload = {
+        "topic": topic_entry.get("topic", ""),
+        "angle": topic_entry.get("angle", ""),
+        "audience": topic_entry.get("audience", "general_global"),
+        "classifier": classifier,
+        "memo": memo,
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)
+
+
+def build_draft_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    verifier: dict[str, Any],
+    website_context: str,
+) -> str:
+    style_profiles = {
+        "risk_analysis": "Open with a practical legal risk or trap, then explain the governing rule and consequences.",
+        "myth_correction": "Open by correcting a legally inaccurate assumption readers often make, then unpack the true position.",
+        "procedural_strategy": "Open with a process or timing problem readers mishandle, then explain the law through that procedural lens.",
+        "comparison_piece": "Open by contrasting two routes or statuses readers wrongly treat as equivalent, then compare them carefully.",
+        "scenario_led": "Open with a realistic scenario and use it to structure the analysis.",
     }
 
-    audience = audience_aliases.get(audience, audience)
+    article_type = classifier.get("article_type", topic_entry.get("article_type", "risk_analysis"))
+    style_hint = style_profiles.get(article_type, style_profiles["risk_analysis"])
 
-    if audience in audience_map:
-        return audience_map[audience]
-
-    topic_text = f"{topic_entry.get('topic', '')} {topic_entry.get('angle', '')}".lower()
-
-    if any(
-        term in topic_text
-        for term in [
-            "employer",
-            "business",
-            "hiring",
-            "hire",
-            "recruitment",
-            "worker",
-            "posted worker",
-            "posted workers",
-            "transfer",
-            "assignment",
-            "company",
-            "workforce",
-            "salary benchmarking",
-        ]
-    ):
-        return audience_map["global_businesses"]
-
-    if any(
-        term in topic_text
-        for term in [
-            "refusal",
-            "refused",
-            "appeal",
-            "reconsideration",
-            "remedy",
-            "negative decision",
-            "reapply",
-            "reapplying",
-        ]
-    ):
-        return audience_map["refused_applicants"]
-
-    if any(
-        term in topic_text
-        for term in [
-            "c permit",
-            "naturalisation",
-            "naturalization",
-            "citizenship",
-            "l permit",
-            "b permit",
-            "permit renewal",
-            "renewal",
-            "family reunification after divorce",
-            "after obtaining a swiss c permit",
-        ]
-    ):
-        return audience_map["inside_switzerland_individuals"]
-
-    return audience_map["general_global"]
-
-
-def normalize_audience_label(topic_entry: dict) -> str:
-    raw = (topic_entry.get("audience") or "").strip().lower()
-    aliases = {
-        "general": "general_global",
-        "global": "general_global",
-        "general_international": "general_global",
-        "individuals_global": "global_individuals",
-        "businesses_global": "global_businesses",
-        "switzerland_individuals": "inside_switzerland_individuals",
-        "switzerland_businesses": "inside_switzerland_businesses",
+    payload = {
+        "topic": topic_entry.get("topic", ""),
+        "angle": topic_entry.get("angle", ""),
+        "audience": topic_entry.get("audience", "general_global"),
+        "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
+        "topic_metadata": derive_topic_metadata(topic_entry),
+        "classifier": classifier,
+        "verified_legal_memo": memo,
+        "verifier": verifier,
+        "editorial_constraints": {
+            "cta_heading": CTA_HEADING,
+            "cta_name": CTA_NAME,
+            "cta_phone": CTA_PHONE,
+            "style_hint": style_hint,
+            "website_context_use": "Use for continuity, overlap avoidance and internal linking only. Do not use as legal authority.",
+            "website_context": website_context[:8000],
+        },
     }
-    return aliases.get(raw, raw or "general_global")
+    return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
-PDF_KNOWLEDGE = load_pdf_knowledge()
+def build_seo_input(topic_entry: dict[str, Any], draft: dict[str, Any]) -> str:
+    payload = {
+        "topic": topic_entry.get("topic", ""),
+        "angle": topic_entry.get("angle", ""),
+        "audience": topic_entry.get("audience", "general_global"),
+        "blog_title": draft["blog_title"],
+        "blog_excerpt": draft["blog_content"][:3500],
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)
 
-# -----------------------
-# Load topics.json
-# -----------------------
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-TOPICS_PATH = os.path.join(SCRIPT_DIR, "topics.json")
+# ============================================================
+# Persistence and email helpers
+# ============================================================
 
-with open(TOPICS_PATH, "r", encoding="utf-8") as f:
-    topics = json.load(f)
+def ensure_output_dir() -> None:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-unused_topics = [t for t in topics if t.get("status") == "unused"]
-remaining_count = len(unused_topics)
 
-# -----------------------
-# Topics exhausted handling
-# -----------------------
+def write_run_artifact(filename: str, payload: dict[str, Any]) -> Path:
+    ensure_output_dir()
+    path = OUTPUT_DIR / filename
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, ensure_ascii=False)
+    return path
 
-if remaining_count == 0:
-    if args.dry_run:
-        print("Dry run complete: topics exhausted path reached; skipped SendGrid notification.")
-        raise SystemExit(0)
 
-    SENDGRID_API_KEY = require_env("SENDGRID_API_KEY")
+def send_email_via_sendgrid(subject: str, body: str) -> bool:
+    if not SENDGRID_API_KEY:
+        raise RuntimeError("Missing SENDGRID_API_KEY")
 
-    notification_payload = {
-        "personalizations": [
-            {"to": [{"email": EMAIL_TO}], "subject": "Blog automation: topics exhausted"}
-        ],
+    payload = {
+        "personalizations": [{"to": [{"email": EMAIL_TO}], "subject": subject}],
         "from": {"email": EMAIL_FROM},
         "reply_to": {"email": REPLY_TO},
-        "content": [
-            {
-                "type": "text/plain",
-                "value": (
-                    "All blog topics in topics.json have been used.\n\n"
-                    "No draft was generated on this run.\n\n"
-                    'Please add new topics with status "unused" '
-                    "and the automation will resume automatically."
-                ),
-            }
-        ],
+        "content": [{"type": "text/plain", "value": body}],
     }
-
-    sent = try_sendgrid_email(
-        notification_payload,
-        SENDGRID_API_KEY,
-        "topics exhausted notification",
-    )
-    if sent:
-        print("Topics exhausted notification sent.")
-    else:
-        print("Topics exhausted notification not sent (non-fatal).")
-    raise SystemExit(0)
-
-# -----------------------
-# Select next unused topic
-# -----------------------
-
-topic_index = None
-topic_entry = None
-
-for index, topic in enumerate(topics):
-    if topic.get("status") == "unused":
-        topic_index = index
-        topic_entry = topic
-        break
-
-if topic_entry is None:
-    raise RuntimeError("No unused topic found, even though remaining_count was greater than zero")
-
-audience_brief = build_audience_brief(topic_entry)
-audience_label = normalize_audience_label(topic_entry)
-
-# -----------------------
-# Generate blog post
-# -----------------------
-
-chat_payload = {
-    "model": os.environ.get("OPENAI_MODEL", "gpt-5.2"),
-    "messages": [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {
-            "role": "system",
-            "content": f"""
-The following documents are authoritative reference material produced or endorsed by the organisation.
-Use them as your primary source of truth.
-
-If there is any tension between general knowledge and these documents:
-- Prefer these documents
-- Be conservative
-- Do not speculate beyond them
-
-If the documents are silent on a point, you may rely on general knowledge but should qualify uncertainty.
-
-AUTHORITATIVE MATERIAL:
-{PDF_KNOWLEDGE}
-""".strip(),
-        },
-        {
-            "role": "system",
-            "content": f"""
-Audience-specific editorial instruction:
-
-{audience_brief}
-
-Frame the article for the most relevant audience for this topic.
-The legal content must remain focused on Swiss immigration law.
-Where relevant:
-- distinguish between applicants outside Switzerland and applicants already in Switzerland
-- distinguish between individuals and businesses
-- distinguish between EU/EFTA nationals and non-EU nationals where legally relevant
-- address practical issues involving cantonal procedure, permit strategy, visa requirements, refusals or transitions between permit categories
-- avoid generic international framing that ignores the practical Swiss context
-- ensure the final call to action refers to {CTA_NAME} and the telephone number {CTA_PHONE}
-- ensure the final section heading is exactly: {CTA_HEADING}
-- include a DYNAMIC PAGE LINK heading with a blank line beneath it
-- include SUGGESTED SEO KEYWORDS with exactly 6 keyword phrases
-""".strip(),
-        },
-        {
-            "role": "user",
-            "content": f"""
-Topic: {topic_entry['topic']}
-Angle: {topic_entry['angle']}
-Audience: {audience_label}
-
-Please write this blog post for the most relevant audience for this Swiss immigration topic.
-The legal analysis must remain focused on Swiss immigration law, but the framing, examples and practical implications should be relevant to the stated audience above where available.
-
-Do not write as though all readers are in the same legal position.
-Where relevant, distinguish:
-- applicants outside Switzerland and applicants already in Switzerland
-- individuals and businesses
-- EU/EFTA nationals and non-EU nationals
-- permit applications, visa applications and post-refusal options
-
-Ensure that the final call to action refers to {CTA_NAME} and the telephone number {CTA_PHONE}.
-Ensure that the final section heading is exactly: {CTA_HEADING}.
-Also provide:
-- DYNAMIC PAGE LINK with a blank line beneath it
-- SUGGESTED SEO KEYWORDS containing exactly 6 relevant keyword phrases separated by semicolons
-""".strip(),
-        },
-    ],
-}
-
-if args.dry_run:
-    content = f"""BLOG TITLE:
-Dry Run: {topic_entry['topic']}
-
-DYNAMIC PAGE LINK:
+    headers = {
+        "Authorization": f"Bearer {SENDGRID_API_KEY}",
+        "Content-Type": "application/json",
+    }
+    try:
+        status, _ = post_json("https://api.sendgrid.com/v3/mail/send", payload=payload, headers=headers)
+        return status == 202
+    except RuntimeError:
+        return False
 
 
-SEO META TITLE:
-Dry run meta title
+def render_success_email(
+    *,
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    verifier: dict[str, Any],
+    draft: dict[str, Any],
+    seo: dict[str, Any],
+    remaining_after_send: int,
+) -> str:
+    keywords = "; ".join(seo["suggested_seo_keywords"])
+    return f"""TOPIC BACKLOG:
+{remaining_after_send} topics remaining
 
-SEO META DESCRIPTION:
-Dry run description for verification only.
+TOPIC:
+{topic_entry.get('topic', '')}
 
-SUGGESTED SEO KEYWORDS:
-Swiss immigration lawyer; Swiss residence permit; move to Switzerland; Swiss work permit; Swiss visa application; Swiss immigration law
+ANGLE:
+{topic_entry.get('angle', '')}
 
-BLOG CONTENT:
-This is a dry run for topic: {topic_entry['topic']}.
-Angle: {topic_entry['angle']}
-Audience: {audience_label}
+AUDIENCE:
+{topic_entry.get('audience', 'general_global')}
 
-This draft is intentionally shortened for dry-run verification only. In live mode, the article will be framed for the most relevant audience segment and written as a Switzerland-focused immigration law article.
+CLASSIFIER:
+{json.dumps(classifier, ensure_ascii=False, indent=2)}
 
-{CTA_HEADING}
-For tailored legal advice, contact {CTA_NAME} by telephone on {CTA_PHONE} or by completing an enquiry form to arrange an initial consultation meeting.
-""".strip()
-else:
-    OPENAI_API_KEY = require_env("OPENAI_API_KEY")
-    content = generate_blog_content(OPENAI_API_KEY, chat_payload)
+LEGAL MEMO:
+{json.dumps(memo, ensure_ascii=False, indent=2)}
 
-# -----------------------
-# Robust section extractor
-# -----------------------
-
-def extract(section, until_next=True):
-    start = content.find(section)
-    if start == -1:
-        return ""
-    start += len(section)
-
-    if until_next:
-        end = content.find("\n\n", start)
-        return content[start:end].strip() if end != -1 else content[start:].strip()
-    return content[start:].strip()
-
-
-title = extract("BLOG TITLE:")
-dynamic_page_link = extract("DYNAMIC PAGE LINK:")
-meta_title = extract("SEO META TITLE:")[:60]
-meta_description = extract("SEO META DESCRIPTION:")[:155]
-suggested_seo_keywords = extract("SUGGESTED SEO KEYWORDS:")
-body = extract("BLOG CONTENT:", until_next=False)
-
-if not title:
-    title = topic_entry.get("topic", "Untitled Swiss immigration blog draft")
-if not meta_title:
-    meta_title = title[:60]
-if not meta_description:
-    meta_description = f"Swiss immigration law guidance on {title}".strip()[:155]
-if not suggested_seo_keywords:
-    suggested_seo_keywords = (
-        "Swiss immigration lawyer; Swiss residence permit; move to Switzerland; "
-        "Swiss work permit; Swiss visa application; Swiss immigration law"
-    )
-
-print("TITLE:", title)
-print("AUDIENCE:", audience_label)
-print("DYNAMIC PAGE LINK:", dynamic_page_link)
-print("SEO META TITLE:", meta_title)
-print("SEO META DESCRIPTION:", meta_description)
-print("SUGGESTED SEO KEYWORDS:", suggested_seo_keywords)
-
-# -----------------------
-# Send draft email via SendGrid
-# -----------------------
-
-SENDGRID_API_KEY = require_env("SENDGRID_API_KEY") if not args.dry_run else None
-
-email_payload = {
-    "personalizations": [
-        {"to": [{"email": EMAIL_TO}], "subject": f"Blog draft [{audience_label}]: {title}"}
-    ],
-    "from": {"email": EMAIL_FROM},
-    "reply_to": {"email": REPLY_TO},
-    "content": [
-        {
-            "type": "text/plain",
-            "value": f"""TOPIC BACKLOG:
-{remaining_count - 1} topics remaining
-
-AUDIENCE FOCUS:
-{audience_label}
+VERIFIER:
+{json.dumps(verifier, ensure_ascii=False, indent=2)}
 
 BLOG TITLE:
-{title}
+{draft['blog_title']}
 
 DYNAMIC PAGE LINK:
-{dynamic_page_link}
+{draft['dynamic_page_link']}
 
 SEO META TITLE:
-{meta_title}
+{seo['seo_meta_title']}
 
 SEO META DESCRIPTION:
-{meta_description}
+{seo['seo_meta_description']}
 
 SUGGESTED SEO KEYWORDS:
-{suggested_seo_keywords}
+{keywords}
+
+EDITORIAL NOTES:
+{json.dumps(draft['editorial_notes'], ensure_ascii=False, indent=2)}
 
 ---------------------------------
 
 BLOG CONTENT:
 
-{body}
-""",
-        }
-    ],
-}
+{draft['blog_content']}
+"""
 
-if args.dry_run:
-    print("Dry run complete: skipped SendGrid email and topics.json update.")
-else:
-    sent = try_sendgrid_email(email_payload, SENDGRID_API_KEY, f"draft '{title}'")
 
-    if sent:
-        topics[topic_index]["status"] = "used"
-        topics[topic_index]["used_title"] = title
-        topics[topic_index]["used_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+def render_review_email(
+    *,
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    verifier: dict[str, Any],
+    reason: str,
+) -> str:
+    return f"""REVIEW REQUIRED: BLOG DRAFT WITHHELD
 
-        with open(TOPICS_PATH, "w", encoding="utf-8") as f:
-            json.dump(topics, f, indent=2, ensure_ascii=False)
+TOPIC:
+{topic_entry.get('topic', '')}
 
-        print("Draft email sent successfully via SendGrid.")
-    else:
-        print("Draft generated, but email was not delivered (non-fatal). Topic remains unused.")
+ANGLE:
+{topic_entry.get('angle', '')}
+
+AUDIENCE:
+{topic_entry.get('audience', 'general_global')}
+
+WITHHOLD REASON:
+{reason}
+
+CLASSIFIER:
+{json.dumps(classifier, ensure_ascii=False, indent=2)}
+
+LEGAL MEMO:
+{json.dumps(memo, ensure_ascii=False, indent=2)}
+
+VERIFIER:
+{json.dumps(verifier, ensure_ascii=False, indent=2)}
+"""
+
+
+# ============================================================
+# Main workflow
+# ============================================================
+
+def main() -> None:
+    topics = load_topics(TOPICS_PATH)
+    topic_index, topic_entry, remaining_count = pick_topic(topics, args.topic_index)
+
+    if args.dry_run:
+        print(json.dumps({"selected_topic": topic_entry, "remaining_unused": remaining_count}, ensure_ascii=False, indent=2))
+        return
+
+    openai_api_key = require_env("OPENAI_API_KEY")
+    require_env("SENDGRID_API_KEY")
+
+    all_chunks = load_knowledge()
+
+    classifier = call_responses_api(
+        openai_api_key,
+        instructions=CLASSIFIER_INSTRUCTIONS,
+        input_text=build_classifier_input(topic_entry),
+        schema=CLASSIFIER_SCHEMA,
+        model=OPENAI_MODEL,
+    )
+
+    retrieval_queries = list(classifier.get("key_issues", [])) + [topic_entry.get("topic", ""), topic_entry.get("angle", "")]
+
+    legal_chunks = select_legal_sources(all_chunks, retrieval_queries)
+    if not legal_chunks:
+        reason = "No usable legal authority or internal legal note was retrieved for this topic."
+        review_email = render_review_email(
+            topic_entry=topic_entry,
+            classifier=classifier,
+            memo={"article_positioning": "", "issues": [], "open_questions": [reason]},
+            verifier={
+                "publishable": False,
+                "unsupported_claims": [reason],
+                "overbroad_claims": [],
+                "missing_qualifications": [],
+                "cantonal_sensitivity": [],
+                "required_reader_distinctions": [],
+                "revision_actions": ["Add primary legal source material for this topic before drafting."],
+            },
+            reason=reason,
+        )
+        sent = send_email_via_sendgrid(
+            subject=f"Review required: {topic_entry.get('topic', 'Swiss immigration blog topic')}",
+            body=review_email,
+        )
+        if not sent:
+            raise RuntimeError("No legal sources found and review email delivery failed.")
+        print("Review email sent because no legal sources were retrieved.")
+        return
+
+    legal_sources_text = format_sources_for_prompt(legal_chunks)
+    website_context_text = format_sources_for_prompt(select_website_context(all_chunks, retrieval_queries))
+
+    memo = call_responses_api(
+        openai_api_key,
+        instructions=LEGAL_MEMO_INSTRUCTIONS,
+        input_text=build_legal_input(topic_entry, classifier, legal_sources_text),
+        schema=LEGAL_MEMO_SCHEMA,
+        model=OPENAI_MODEL,
+    )
+
+    verifier = call_responses_api(
+        openai_api_key,
+        instructions=VERIFIER_INSTRUCTIONS,
+        input_text=build_verifier_input(topic_entry, classifier, memo),
+        schema=VERIFIER_SCHEMA,
+        model=OPENAI_MODEL,
+    )
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    slug = re.sub(r"[^a-z0-9]+", "-", topic_entry.get("topic", "untitled").lower()).strip("-")[:80]
+    write_run_artifact(
+        f"{timestamp}_{slug}_analysis.json",
+        {
+            "topic": topic_entry,
+            "classifier": classifier,
+            "memo": memo,
+            "verifier": verifier,
+        },
+    )
+
+    if not verifier["publishable"]:
+        review_email = render_review_email(
+            topic_entry=topic_entry,
+            classifier=classifier,
+            memo=memo,
+            verifier=verifier,
+            reason="Verifier blocked publication pending legal review.",
+        )
+        sent = send_email_via_sendgrid(
+            subject=f"Review required: {topic_entry.get('topic', 'Swiss immigration blog topic')}",
+            body=review_email,
+        )
+        if not sent:
+            raise RuntimeError("Verifier blocked publication and review email delivery failed.")
+        print("Review email sent because verifier blocked publication.")
+        return
+
+    draft = call_responses_api(
+        openai_api_key,
+        instructions=DRAFT_INSTRUCTIONS,
+        input_text=build_draft_input(topic_entry, classifier, memo, verifier, website_context_text),
+        schema=DRAFT_SCHEMA,
+        model=OPENAI_MODEL,
+    )
+
+    seo = call_responses_api(
+        openai_api_key,
+        instructions=SEO_INSTRUCTIONS,
+        input_text=build_seo_input(topic_entry, draft),
+        schema=SEO_SCHEMA,
+        model=OPENAI_MODEL,
+    )
+
+    write_run_artifact(
+        f"{timestamp}_{slug}_final.json",
+        {
+            "topic": topic_entry,
+            "classifier": classifier,
+            "memo": memo,
+            "verifier": verifier,
+            "draft": draft,
+            "seo": seo,
+        },
+    )
+
+    email_body = render_success_email(
+        topic_entry=topic_entry,
+        classifier=classifier,
+        memo=memo,
+        verifier=verifier,
+        draft=draft,
+        seo=seo,
+        remaining_after_send=remaining_count - 1,
+    )
+
+    sent = send_email_via_sendgrid(
+        subject=f"Blog draft [{topic_entry.get('audience', 'general_global')}]: {draft['blog_title']}",
+        body=email_body,
+    )
+    if not sent:
+        raise RuntimeError("Draft generated but SendGrid delivery failed.")
+
+    topics[topic_index]["status"] = "used"
+    topics[topic_index]["used_title"] = draft["blog_title"]
+    topics[topic_index]["used_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    with TOPICS_PATH.open("w", encoding="utf-8") as f:
+        json.dump(topics, f, indent=2, ensure_ascii=False)
+
+    print(f"Draft email sent successfully for: {draft['blog_title']}")
+
+
+if __name__ == "__main__":
+    main()
