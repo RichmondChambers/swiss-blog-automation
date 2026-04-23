@@ -447,6 +447,7 @@ def load_selected_legal_authority_chunks(pdf_paths: list[Path]) -> list[Knowledg
 
     return chunks
 
+
 def read_pdf_text(path: Path) -> str:
     if not HAS_PYPDF2:
         return ""
@@ -873,7 +874,13 @@ def main() -> None:
     topic_index, topic_entry, remaining_count = pick_topic(topics, args.topic_index)
 
     if args.dry_run:
-        print(json.dumps({"selected_topic": topic_entry, "remaining_unused": remaining_count}, ensure_ascii=False, indent=2))
+        print(
+            json.dumps(
+                {"selected_topic": topic_entry, "remaining_unused": remaining_count},
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
         return
 
     openai_api_key = require_env("OPENAI_API_KEY")
@@ -881,49 +888,49 @@ def main() -> None:
 
     authority_map = load_authority_pack_map(AUTHORITY_MAP_PATH)
 
-classifier = call_responses_api(
-    openai_api_key,
-    instructions=CLASSIFIER_INSTRUCTIONS,
-    input_text=build_classifier_input(topic_entry),
-    schema=CLASSIFIER_SCHEMA,
-    model=OPENAI_MODEL,
-)
-
-retrieval_queries = list(classifier.get("key_issues", [])) + [
-    topic_entry.get("topic", ""),
-    topic_entry.get("angle", ""),
-]
-
-selected_pack_paths = resolve_authority_pack_paths(topic_entry, authority_map)
-
-if not selected_pack_paths:
-    reason = (
-        f"No legal authority packs mapped for "
-        f"pillar={topic_entry.get('pillar')} subtopic={topic_entry.get('subtopic')}"
+    classifier = call_responses_api(
+        openai_api_key,
+        instructions=CLASSIFIER_INSTRUCTIONS,
+        input_text=build_classifier_input(topic_entry),
+        schema=CLASSIFIER_SCHEMA,
+        model=OPENAI_MODEL,
     )
-    review_email = render_review_email(
-        topic_entry=topic_entry,
-        classifier=classifier,
-        memo={"article_positioning": "", "issues": [], "open_questions": [reason]},
-        verifier={
-            "publishable": False,
-            "unsupported_claims": [reason],
-            "overbroad_claims": [],
-            "missing_qualifications": [],
-            "cantonal_sensitivity": [],
-            "required_reader_distinctions": [],
-            "revision_actions": ["Add authority-pack mapping before drafting this topic."],
-        },
-        reason=reason,
-    )
-    sent = send_email_via_sendgrid(
-        subject=f"Review required: {topic_entry.get('topic', 'Swiss immigration blog topic')}",
-        body=review_email,
-    )
-    if not sent:
-        raise RuntimeError("No authority-pack mapping found and review email delivery failed.")
-    print("Review email sent because no authority-pack mapping was found.")
-    return
+
+    retrieval_queries = list(classifier.get("key_issues", [])) + [
+        topic_entry.get("topic", ""),
+        topic_entry.get("angle", ""),
+    ]
+
+    selected_pack_paths = resolve_authority_pack_paths(topic_entry, authority_map)
+
+    if not selected_pack_paths:
+        reason = (
+            f"No legal authority packs mapped for "
+            f"pillar={topic_entry.get('pillar')} subtopic={topic_entry.get('subtopic')}"
+        )
+        review_email = render_review_email(
+            topic_entry=topic_entry,
+            classifier=classifier,
+            memo={"article_positioning": "", "issues": [], "open_questions": [reason]},
+            verifier={
+                "publishable": False,
+                "unsupported_claims": [reason],
+                "overbroad_claims": [],
+                "missing_qualifications": [],
+                "cantonal_sensitivity": [],
+                "required_reader_distinctions": [],
+                "revision_actions": ["Add authority-pack mapping before drafting this topic."],
+            },
+            reason=reason,
+        )
+        sent = send_email_via_sendgrid(
+            subject=f"Review required: {topic_entry.get('topic', 'Swiss immigration blog topic')}",
+            body=review_email,
+        )
+        if not sent:
+            raise RuntimeError("No authority-pack mapping found and review email delivery failed.")
+        print("Review email sent because no authority-pack mapping was found.")
+        return
 
     selected_legal_chunks = load_selected_legal_authority_chunks(selected_pack_paths)
     internal_note_chunks = load_chunks_from_folder(INTERNAL_NOTES_DIR, "internal_legal_note")
@@ -949,7 +956,9 @@ if not selected_pack_paths:
                 "missing_qualifications": [],
                 "cantonal_sensitivity": [],
                 "required_reader_distinctions": [],
-                "revision_actions": ["Check mapped legal authority packs and internal legal notes for readable content."],
+                "revision_actions": [
+                    "Check mapped legal authority packs and internal legal notes for readable content."
+                ],
             },
             reason=reason,
         )
