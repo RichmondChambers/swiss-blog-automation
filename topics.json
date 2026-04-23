@@ -59,4 +59,25 @@
 ],
 "status": "unused"
 }
+{
+"topic": "Time Abroad on a Swiss C Permit: The 6-Month Rule, “Freezing” Your Permit, and Common Traps for Frequent Travellers",
+"angle": "Clarify how absences can lead to automatic lapse, how advance authorisation to retain the C permit works, and how to document continued Swiss residence when life is international.",
+"audience": "inside_switzerland_individuals",
+"article_type": "procedural_strategy",
+"pillar": "settlement_and_c_permit",
+"subtopic": "c_permit_absences_and_retention",
+"route_type": "broad_issue",
+"legal_complexity": "medium",
+"overlap_group": "c_permit_residence_continuity",
+"style_profile": "procedural",
+"search_intent": "urgent_problem_solving",
+"scope_warning": "tax_adjacent",
+"notes_for_drafting": [
+"Avoid providing tax residency advice; flag tax implications as separate and fact-specific.",
+"Use clear examples of travel patterns that create risk without suggesting ‘reset’ tricks.",
+"Stress the importance of applying in advance for retention and keeping proof of Swiss centre of life.",
+"Note that cantonal practice and documentation requests can vary."
+],
+"status": "unused"
+},
 ]
