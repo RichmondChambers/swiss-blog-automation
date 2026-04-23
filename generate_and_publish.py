@@ -879,19 +879,63 @@ def main() -> None:
     openai_api_key = require_env("OPENAI_API_KEY")
     require_env("SENDGRID_API_KEY")
 
-    all_chunks = load_knowledge()
+    authority_map = load_authority_pack_map(AUTHORITY_MAP_PATH)
 
-    classifier = call_responses_api(
-        openai_api_key,
-        instructions=CLASSIFIER_INSTRUCTIONS,
-        input_text=build_classifier_input(topic_entry),
-        schema=CLASSIFIER_SCHEMA,
-        model=OPENAI_MODEL,
+classifier = call_responses_api(
+    openai_api_key,
+    instructions=CLASSIFIER_INSTRUCTIONS,
+    input_text=build_classifier_input(topic_entry),
+    schema=CLASSIFIER_SCHEMA,
+    model=OPENAI_MODEL,
+)
+
+retrieval_queries = list(classifier.get("key_issues", [])) + [
+    topic_entry.get("topic", ""),
+    topic_entry.get("angle", ""),
+]
+
+selected_pack_paths = resolve_authority_pack_paths(topic_entry, authority_map)
+
+if not selected_pack_paths:
+    reason = (
+        f"No legal authority packs mapped for "
+        f"pillar={topic_entry.get('pillar')} subtopic={topic_entry.get('subtopic')}"
+    )
+    review_email = render_review_email(
+        topic_entry=topic_entry,
+        classifier=classifier,
+        memo={"article_positioning": "", "issues": [], "open_questions": [reason]},
+        verifier={
+            "publishable": False,
+            "unsupported_claims": [reason],
+            "overbroad_claims": [],
+            "missing_qualifications": [],
+            "cantonal_sensitivity": [],
+            "required_reader_distinctions": [],
+            "revision_actions": ["Add authority-pack mapping before drafting this topic."],
+        },
+        reason=reason,
+    )
+    sent = send_email_via_sendgrid(
+        subject=f"Review required: {topic_entry.get('topic', 'Swiss immigration blog topic')}",
+        body=review_email,
+    )
+    if not sent:
+        raise RuntimeError("No authority-pack mapping found and review email delivery failed.")
+    print("Review email sent because no authority-pack mapping was found.")
+    return
+
+    selected_legal_chunks = load_selected_legal_authority_chunks(selected_pack_paths)
+    internal_note_chunks = load_chunks_from_folder(INTERNAL_NOTES_DIR, "internal_legal_note")
+    website_editorial_chunks = load_chunks_from_folder(WEBSITE_EDITORIAL_DIR, "website_editorial")
+
+    legal_chunks = simple_retrieve(
+        selected_legal_chunks + internal_note_chunks,
+        retrieval_queries,
+        limit=10,
+        allowed_source_kinds={"legal_authority", "internal_legal_note"},
     )
 
-    retrieval_queries = list(classifier.get("key_issues", [])) + [topic_entry.get("topic", ""), topic_entry.get("angle", "")]
-
-    legal_chunks = select_legal_sources(all_chunks, retrieval_queries)
     if not legal_chunks:
         reason = "No usable legal authority or internal legal note was retrieved for this topic."
         review_email = render_review_email(
@@ -905,7 +949,7 @@ def main() -> None:
                 "missing_qualifications": [],
                 "cantonal_sensitivity": [],
                 "required_reader_distinctions": [],
-                "revision_actions": ["Add primary legal source material for this topic before drafting."],
+                "revision_actions": ["Check mapped legal authority packs and internal legal notes for readable content."],
             },
             reason=reason,
         )
@@ -918,8 +962,15 @@ def main() -> None:
         print("Review email sent because no legal sources were retrieved.")
         return
 
+    website_context_chunks = simple_retrieve(
+        website_editorial_chunks,
+        retrieval_queries,
+        limit=3,
+        allowed_source_kinds={"website_editorial"},
+    )
+
     legal_sources_text = format_sources_for_prompt(legal_chunks)
-    website_context_text = format_sources_for_prompt(select_website_context(all_chunks, retrieval_queries))
+    website_context_text = format_sources_for_prompt(website_context_chunks)
 
     memo = call_responses_api(
         openai_api_key,
@@ -983,14 +1034,15 @@ def main() -> None:
     )
 
     write_run_artifact(
-        f"{timestamp}_{slug}_final.json",
+        f"{timestamp}_{slug}_analysis.json",
         {
             "topic": topic_entry,
             "classifier": classifier,
+            "selected_legal_authority_packs": [
+                str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
+            ],
             "memo": memo,
             "verifier": verifier,
-            "draft": draft,
-            "seo": seo,
         },
     )
 
