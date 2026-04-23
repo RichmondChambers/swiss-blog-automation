@@ -1,1 +1,79 @@
-
+{
+  "pillar_defaults": {
+    "settlement_and_c_permit": [
+      "settlement_and_c_permit/legal_authority_core_swiss_c_permit_framework_pack.pdf"
+    ]
+  },
+  "subtopic_overrides": {
+    "settlement_and_c_permit:ordinary_c_permit_eligibility": [
+      "settlement_and_c_permit/legal_authority_ordinary_c_permit_eligibility_pack.pdf"
+    ],
+    "settlement_and_c_permit:residence_counting_and_qualifying_years": [
+      "settlement_and_c_permit/legal_authority_ordinary_c_permit_eligibility_pack.pdf"
+    ],
+    "settlement_and_c_permit:fast_track_c_permit": [
+      "settlement_and_c_permit/legal_authority_fast_track_c_permit_routes_pack.pdf",
+      "settlement_and_c_permit/legal_authority_c_permit_integration_language_and_compliance_pack.pdf"
+    ],
+    "settlement_and_c_permit:fast_track_integration_and_evidence": [
+      "settlement_and_c_permit/legal_authority_fast_track_c_permit_routes_pack.pdf",
+      "settlement_and_c_permit/legal_authority_c_permit_integration_language_and_compliance_pack.pdf"
+    ],
+    "settlement_and_c_permit:language_requirements_and_evidence": [
+      "settlement_and_c_permit/legal_authority_c_permit_integration_language_and_compliance_pack.pdf"
+    ],
+    "settlement_and_c_permit:integration_and_compliance": [
+      "settlement_and_c_permit/legal_authority_c_permit_integration_language_and_compliance_pack.pdf"
+    ],
+    "settlement_and_c_permit:financial_self_sufficiency_and_debt_risk": [
+      "settlement_and_c_permit/legal_authority_c_permit_integration_language_and_compliance_pack.pdf"
+    ],
+    "settlement_and_c_permit:cantonal_practice_and_procedure": [
+      "settlement_and_c_permit/legal_authority_c_permit_cantonal_practice_and_procedure_pack.pdf"
+    ],
+    "settlement_and_c_permit:rights_stability_and_limits": [
+      "settlement_and_c_permit/legal_authority_c_permit_rights_stability_and_limits_pack.pdf"
+    ],
+    "settlement_and_c_permit:absence_lapse_and_preservation": [
+      "settlement_and_c_permit/legal_authority_c_permit_absence_lapse_and_preservation_pack.pdf",
+      "settlement_and_c_permit/legal_authority_c_permit_rights_stability_and_limits_pack.pdf"
+    ],
+    "settlement_and_c_permit:preservation_procedure_and_timing": [
+      "settlement_and_c_permit/legal_authority_c_permit_absence_lapse_and_preservation_pack.pdf",
+      "settlement_and_c_permit/legal_authority_c_permit_cantonal_practice_and_procedure_pack.pdf"
+    ],
+    "settlement_and_c_permit:centre_of_life_and_factual_residence": [
+      "settlement_and_c_permit/legal_authority_c_permit_absence_lapse_and_preservation_pack.pdf",
+      "settlement_and_c_permit/legal_authority_c_permit_rights_stability_and_limits_pack.pdf"
+    ],
+    "settlement_and_c_permit:post_grant_c_permit_risk_management": [
+      "settlement_and_c_permit/legal_authority_c_permit_rights_stability_and_limits_pack.pdf",
+      "settlement_and_c_permit/legal_authority_c_permit_absence_lapse_and_preservation_pack.pdf"
+    ],
+    "settlement_and_c_permit:family_settlement_planning": [
+      "settlement_and_c_permit/legal_authority_c_permit_family_life_planning_pack.pdf"
+    ],
+    "settlement_and_c_permit:c_permit_and_naturalisation": [
+      "settlement_and_c_permit/legal_authority_c_permit_naturalisation_planning_pack.pdf"
+    ],
+    "settlement_and_c_permit:downgrade_revocation_and_recovery": [
+      "settlement_and_c_permit/legal_authority_c_permit_rights_stability_and_limits_pack.pdf"
+    ],
+    "settlement_and_c_permit:l_b_c_permit_comparison": [
+      "settlement_and_c_permit/legal_authority_l_b_c_permit_long_term_planning_comparison_pack.pdf"
+    ]
+  },
+  "article_type_extras": {
+    "risk_analysis": [],
+    "comparison_piece": [],
+    "procedural_strategy": [],
+    "myth_correction": [],
+    "evidence_strategy": [],
+    "refusal_analysis": []
+  },
+  "legal_complexity_extras": {
+    "high": [],
+    "medium": [],
+    "low": []
+  }
+}
