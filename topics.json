@@ -39,7 +39,9 @@
       "Explain the difference between card renewal and the underlying status",
       "Avoid suggesting that brief return trips automatically preserve settlement"
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can You Lose a Swiss C Permit by Staying Abroad Too Long? Absence, Lapse, and Preservation Rules Explained",
+    "used_at_utc": "2026-04-23T18:27:48Z"
   },
   {
     "topic": "Swiss C Permit Refused After 10 Years? When the Real Problem Is Integration, Debt, or Timing",
