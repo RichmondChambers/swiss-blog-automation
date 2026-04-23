@@ -68,6 +68,7 @@ LEGAL_AUTHORITIES_DIR = KNOWLEDGE_DIR / "legal_authorities"
 INTERNAL_NOTES_DIR = KNOWLEDGE_DIR / "internal_legal_notes"
 WEBSITE_EDITORIAL_DIR = KNOWLEDGE_DIR / "website_editorial"
 OUTPUT_DIR = SCRIPT_DIR / "generated_blog_runs"
+AUTHORITY_MAP_PATH = SCRIPT_DIR / "authority_pack_map.json"
 
 
 # ============================================================
@@ -393,6 +394,58 @@ def call_responses_api(
 # ============================================================
 # Knowledge loading
 # ============================================================
+
+def load_authority_pack_map(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        raise RuntimeError(f"Authority pack map not found: {path}")
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def resolve_authority_pack_paths(topic_entry: dict[str, Any], authority_map: dict[str, Any]) -> list[Path]:
+    pillar = (topic_entry.get("pillar") or "").strip()
+    subtopic = (topic_entry.get("subtopic") or "").strip()
+    article_type = (topic_entry.get("article_type") or "").strip()
+    legal_complexity = (topic_entry.get("legal_complexity") or "").strip()
+
+    selected: list[str] = []
+
+    selected.extend(authority_map.get("pillar_defaults", {}).get(pillar, []))
+
+    subtopic_key = f"{pillar}:{subtopic}"
+    selected.extend(authority_map.get("subtopic_overrides", {}).get(subtopic_key, []))
+
+    selected.extend(authority_map.get("article_type_extras", {}).get(article_type, []))
+    selected.extend(authority_map.get("legal_complexity_extras", {}).get(legal_complexity, []))
+
+    deduped: list[str] = []
+    seen = set()
+    for item in selected:
+        if item not in seen:
+            seen.add(item)
+            deduped.append(item)
+
+    return [LEGAL_AUTHORITIES_DIR / rel_path for rel_path in deduped]
+
+
+def load_selected_legal_authority_chunks(pdf_paths: list[Path]) -> list[KnowledgeChunk]:
+    chunks: list[KnowledgeChunk] = []
+
+    for pdf_path in pdf_paths:
+        if not pdf_path.exists():
+            raise RuntimeError(f"Mapped legal authority pack not found: {pdf_path}")
+
+        text = read_pdf_text(pdf_path)
+        if text:
+            chunks.append(
+                KnowledgeChunk(
+                    source_name=str(pdf_path.relative_to(SCRIPT_DIR)),
+                    source_kind="legal_authority",
+                    text=text,
+                )
+            )
+
+    return chunks
 
 def read_pdf_text(path: Path) -> str:
     if not HAS_PYPDF2:
