@@ -1,83 +1,85 @@
 [
-{
-"topic": "Do Student Years Count Toward a Swiss C Permit? How Residence History Is Really Calculated",
-"angle": "Explains how student residence, L permits, mixed permit histories, and the final qualifying years affect Swiss C permit eligibility.",
-"audience": "inside_switzerland_individuals",
-"article_type": "evidence_strategy",
-"pillar": "settlement_and_c_permit",
-"subtopic": "residence_counting_and_qualifying_years",
-"route_type": "broad_issue",
-"legal_complexity": "high",
-"overlap_group": "c_permit_eligibility_and_counting",
-"style_profile": "procedural",
-"search_intent": "informational_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not imply that all years in Switzerland count in the same way",
-"Separate clearly the first qualifying years from the final residence period",
-"Use mixed-status examples to avoid oversimplifying residence counting"
-],
-"status": "unused"
-},
-{
-"topic": "Can You Lose a Swiss C Permit by Staying Abroad Too Long? Absence, Lapse, and Preservation Rules Explained",
-"angle": "Shows how long absences abroad can affect C permit validity, when advance preservation may help, and why repeated short returns may not solve the problem.",
-"audience": "inside_switzerland_individuals",
-"article_type": "risk_analysis",
-"pillar": "settlement_and_c_permit",
-"subtopic": "absence_lapse_and_preservation",
-"route_type": "broad_issue",
-"legal_complexity": "high",
-"overlap_group": "c_permit_absence_and_preservation",
-"style_profile": "risk_focused",
-"search_intent": "urgent_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not describe the C permit as unconditional permanent residence",
-"Explain the difference between card renewal and the underlying status",
-"Avoid suggesting that brief return trips automatically preserve settlement"
-],
-"status": "unused"
-},
-{
-"topic": "Swiss C Permit Refused After 10 Years? When the Real Problem Is Integration, Debt, or Timing",
-"angle": "Helps applicants understand why a canton may extend a B permit instead of granting settlement, and how language, debt, welfare risk, or poor timing may be the real issue.",
-"audience": "refused_applicants",
-"article_type": "refusal_analysis",
-"pillar": "settlement_and_c_permit",
-"subtopic": "integration_and_compliance",
-"route_type": "post_refusal",
-"legal_complexity": "high",
-"overlap_group": "c_permit_language_and_compliance",
-"style_profile": "risk_focused",
-"search_intent": "post_refusal_problem_solving",
-"scope_warning": "social_assistance_adjacent",
-"notes_for_drafting": [
-"Do not assume that 10 years of residence makes refusal unusual or irrational",
-"Distinguish timing problems from deeper integration or compliance concerns",
-"Show that refusal may reflect evidence weakness rather than a single legal bar"
-],
-"status": "unused"
-},
-{
-"topic": "Time Abroad on a Swiss C Permit: The 6-Month Rule, “Freezing” Your Permit, and Common Traps for Frequent Travellers",
-"angle": "Clarify how absences can lead to automatic lapse, how advance authorisation to retain the C permit works, and how to document continued Swiss residence when life is international.",
-"audience": "inside_switzerland_individuals",
-"article_type": "procedural_strategy",
-"pillar": "settlement_and_c_permit",
-"subtopic": "absence_lapse_and_preservation",
-"route_type": "broad_issue",
-"legal_complexity": "medium",
-"overlap_group": "c_permit_absence_and_preservation",
-"style_profile": "procedural",
-"search_intent": "urgent_problem_solving",
-"scope_warning": "tax_adjacent",
-"notes_for_drafting": [
-"Avoid providing tax residency advice; flag tax implications as separate and fact-specific.",
-"Use clear examples of travel patterns that create risk without suggesting ‘reset’ tricks.",
-"Stress the importance of applying in advance for retention and keeping proof of Swiss centre of life.",
-"Note that cantonal practice and documentation requests can vary."
-],
-"status": "unused"
-}
+  {
+    "topic": "Do Student Years Count Toward a Swiss C Permit? How Residence History Is Really Calculated",
+    "angle": "Explains how student residence, L permits, mixed permit histories, and the final qualifying years affect Swiss C permit eligibility.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "residence_counting_and_qualifying_years",
+    "route_type": "broad_issue",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_eligibility_and_counting",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply that all years in Switzerland count in the same way",
+      "Separate clearly the first qualifying years from the final residence period",
+      "Use mixed-status examples to avoid oversimplifying residence counting"
+    ],
+    "status": "used",
+    "used_title": "Do Student Years Count Toward a Swiss C Permit? How Residence History Is Really Calculated",
+    "used_at_utc": "2026-04-23T18:03:13Z"
+  },
+  {
+    "topic": "Can You Lose a Swiss C Permit by Staying Abroad Too Long? Absence, Lapse, and Preservation Rules Explained",
+    "angle": "Shows how long absences abroad can affect C permit validity, when advance preservation may help, and why repeated short returns may not solve the problem.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "absence_lapse_and_preservation",
+    "route_type": "broad_issue",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_absence_and_preservation",
+    "style_profile": "risk_focused",
+    "search_intent": "urgent_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not describe the C permit as unconditional permanent residence",
+      "Explain the difference between card renewal and the underlying status",
+      "Avoid suggesting that brief return trips automatically preserve settlement"
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Refused After 10 Years? When the Real Problem Is Integration, Debt, or Timing",
+    "angle": "Helps applicants understand why a canton may extend a B permit instead of granting settlement, and how language, debt, welfare risk, or poor timing may be the real issue.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "integration_and_compliance",
+    "route_type": "post_refusal",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_language_and_compliance",
+    "style_profile": "risk_focused",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "social_assistance_adjacent",
+    "notes_for_drafting": [
+      "Do not assume that 10 years of residence makes refusal unusual or irrational",
+      "Distinguish timing problems from deeper integration or compliance concerns",
+      "Show that refusal may reflect evidence weakness rather than a single legal bar"
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Time Abroad on a Swiss C Permit: The 6-Month Rule, “Freezing” Your Permit, and Common Traps for Frequent Travellers",
+    "angle": "Clarify how absences can lead to automatic lapse, how advance authorisation to retain the C permit works, and how to document continued Swiss residence when life is international.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "absence_lapse_and_preservation",
+    "route_type": "broad_issue",
+    "legal_complexity": "medium",
+    "overlap_group": "c_permit_absence_and_preservation",
+    "style_profile": "procedural",
+    "search_intent": "urgent_problem_solving",
+    "scope_warning": "tax_adjacent",
+    "notes_for_drafting": [
+      "Avoid providing tax residency advice; flag tax implications as separate and fact-specific.",
+      "Use clear examples of travel patterns that create risk without suggesting ‘reset’ tricks.",
+      "Stress the importance of applying in advance for retention and keeping proof of Swiss centre of life.",
+      "Note that cantonal practice and documentation requests can vary."
+    ],
+    "status": "unused"
+  }
 ]
