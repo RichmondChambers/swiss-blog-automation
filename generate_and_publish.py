@@ -70,6 +70,17 @@ WEBSITE_EDITORIAL_DIR = KNOWLEDGE_DIR / "website_editorial"
 OUTPUT_DIR = SCRIPT_DIR / "generated_blog_runs"
 AUTHORITY_MAP_PATH = SCRIPT_DIR / "authority_pack_map.json"
 
+FORBIDDEN_PUBLIC_PHRASES = [
+    "the memo",
+    "the verified memo",
+    "the materials support",
+    "the verified materials",
+    "for this specific issue, the verified materials say",
+    "any article on this topic",
+    "the drafting inputs",
+    "the source packs",
+]
+
 
 # ============================================================
 # Prompts
@@ -116,29 +127,44 @@ You must identify:
 """.strip()
 
 DRAFT_INSTRUCTIONS = f"""
-You are drafting a blog post for a Swiss immigration law firm.
+You are drafting a client-facing blog post for a Swiss immigration law firm.
 Draft only from the verified legal memo and editorial instructions supplied.
 Do not add new legal propositions not present in the verified memo.
 
 Writing requirements:
 - UK English
-- calm, authoritative, analytical
+- calm, authoritative, analytical, and natural
+- professional but clear and easy to understand
+- explain legal issues in practical language that a non-lawyer can follow
+- write as a human legal professional, not as an internal system
+- never refer to "the memo", "the verified memo", "the materials", "the verified materials", "any article on this topic", or any internal workflow
+- never mention source packs, drafting inputs, or internal validation
 - continuous prose as the default
 - avoid generic openings
 - vary sentence rhythm and section architecture naturally
 - use keyword-optimised sub-headings throughout
 - every sub-heading must be surrounded by a blank line above and below
-- format each sub-heading in bold using double asterisks, for example: **How Student Years Count Towards a Swiss C Permit**
+- format each sub-heading in bold using double asterisks only, for example: **How Student Residence Is Counted for a Swiss C Permit**
 - the first paragraph of the article must be fully bold using double asterisks
-- include a small number of short legal authority references throughout the article text
-- those legal authority references must be integrated naturally in prose, for example:
-  (Article 34(2) AIG)
-  (Article 34(5) AIG)
-  (SEM Directives)
+- immediately after the opening paragraph, include a second introductory paragraph explaining what the post will cover, who it is useful for, and what the reader will learn
+- do not include legal authorities in the first paragraph
+- do not include legal authorities in the second introductory paragraph
+- include a small number of short legal authority references throughout the rest of the article text
+- legal authority references must be legally accurate and should include article numbers wherever relevant
+- always use:
+  - LEI / AIG, never AIG on its own
+  - OASA / VZAE, never VZAE on its own
+- examples of acceptable authority references:
+  (Article 34(2) LEI / AIG)
+  (Article 34(5) LEI / AIG)
+  (Article 61(2) LEI / AIG; SEM Directives)
+  (Article 79 OASA / VZAE; SEM Directives)
 - do not use footnotes
 - do not use bullet points unless absolutely necessary
-- no markdown other than bold markers using double asterisks for the first paragraph and sub-headings
+- no markdown other than double asterisks for bold paragraph and bold sub-headings
 - no emojis
+- integrate relevant SEO keywords and keyword variations naturally throughout the article
+- the article must still read as though written by a human lawyer, not SEO copy
 - restrained, factual CTA
 - the final CTA heading must be exactly: {CTA_HEADING}
 - under DYNAMIC PAGE LINK, return an empty string only
@@ -475,10 +501,6 @@ def load_chunks_from_folder(folder: Path, source_kind: str) -> list[KnowledgeChu
 
 
 def legacy_load_knowledge_folder(folder: Path) -> list[KnowledgeChunk]:
-    """
-    Backward-compatible loader for the old flat knowledge/ folder.
-    Files are treated as website_editorial unless the filename strongly suggests otherwise.
-    """
     chunks: list[KnowledgeChunk] = []
     if not folder.is_dir():
         return chunks
@@ -555,31 +577,6 @@ def format_sources_for_prompt(chunks: list[KnowledgeChunk], max_chars_per_source
             f"CONTENT:\n{chunk.text[:max_chars_per_source]}"
         )
     return "\n\n---\n\n".join(parts)
-
-
-def select_legal_sources(all_chunks: list[KnowledgeChunk], queries: list[str]) -> list[KnowledgeChunk]:
-    primary = simple_retrieve(
-        all_chunks,
-        queries,
-        limit=8,
-        allowed_source_kinds={"legal_authority", "internal_legal_note"},
-    )
-
-    if primary:
-        legal_authorities = [c for c in primary if c.source_kind == "legal_authority"]
-        if legal_authorities or args.allow_editorial_fallback:
-            return primary
-
-    return []
-
-
-def select_website_context(all_chunks: list[KnowledgeChunk], queries: list[str]) -> list[KnowledgeChunk]:
-    return simple_retrieve(
-        all_chunks,
-        queries,
-        limit=3,
-        allowed_source_kinds={"website_editorial"},
-    )
 
 
 # ============================================================
@@ -721,9 +718,9 @@ def build_draft_input(
             "style_hint": style_hint,
             "dynamic_page_link_must_be_blank": True,
             "public_email_output_should_not_include_internal_analysis": True,
-            "citation_style": "Use short in-text legal references only, such as (Article 34(2) AIG), (Article 34(5) AIG), (SEM Directives).",
+            "citation_style": "Use short in-text legal references only, such as (Article 34(2) LEI / AIG), (Article 34(5) LEI / AIG), (Article 61(2) LEI / AIG; SEM Directives), (Article 79 OASA / VZAE; SEM Directives).",
             "subheading_style": "Use bold keyword-optimised sub-headings with a blank line above and below each one.",
-            "opening_style": "The first paragraph must be fully bold.",
+            "opening_style": "The first paragraph must be fully bold, followed immediately by a second introductory paragraph without legal citations explaining what the post will cover and who it is useful for.",
             "website_context_use": "Use for continuity, overlap avoidance and internal linking only. Do not use as legal authority.",
             "website_context": website_context[:8000],
         },
@@ -758,7 +755,16 @@ def write_run_artifact(filename: str, payload: dict[str, Any]) -> Path:
     return path
 
 
-def send_email_via_sendgrid(subject: str, body: str) -> bool:
+def escape_html(text: str) -> str:
+    return (
+        text.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
+
+
+def send_email_via_sendgrid(subject: str, body: str, *, is_html: bool = False) -> bool:
     if not SENDGRID_API_KEY:
         raise RuntimeError("Missing SENDGRID_API_KEY")
 
@@ -766,7 +772,10 @@ def send_email_via_sendgrid(subject: str, body: str) -> bool:
         "personalizations": [{"to": [{"email": EMAIL_TO}], "subject": subject}],
         "from": {"email": EMAIL_FROM},
         "reply_to": {"email": REPLY_TO},
-        "content": [{"type": "text/plain", "value": body}],
+        "content": [{
+            "type": "text/html" if is_html else "text/plain",
+            "value": body,
+        }],
     }
     headers = {
         "Authorization": f"Bearer {SENDGRID_API_KEY}",
@@ -779,15 +788,88 @@ def send_email_via_sendgrid(subject: str, body: str) -> bool:
         return False
 
 
+def replace_legal_abbreviation_style(text: str) -> str:
+    text = re.sub(r"(?<!LEI / )\bAIG\b", "LEI / AIG", text)
+    text = re.sub(r"(?<!OASA / )\bVZAE\b", "OASA / VZAE", text)
+    return text
+
+
+def remove_forbidden_public_phrases(text: str) -> str:
+    cleaned = text
+    for phrase in FORBIDDEN_PUBLIC_PHRASES:
+        cleaned = re.sub(re.escape(phrase), "this issue", cleaned, flags=re.IGNORECASE)
+    return cleaned
+
+
+def assert_opening_paragraph_rules(blog_content: str) -> None:
+    chunks = [chunk.strip() for chunk in re.split(r"\n\s*\n", blog_content.strip()) if chunk.strip()]
+    prose_paragraphs: list[str] = []
+
+    for chunk in chunks:
+        stripped = chunk.strip()
+        if stripped.startswith("**") and stripped.endswith("**"):
+            inner = stripped[2:-2].strip()
+            if len(inner.split()) <= 12 and not inner.endswith("."):
+                continue
+            prose_paragraphs.append(inner)
+        else:
+            prose_paragraphs.append(stripped)
+
+    if len(prose_paragraphs) < 2:
+        raise RuntimeError("Draft must contain at least two opening paragraphs before the main body.")
+
+    first_para = prose_paragraphs[0]
+    second_para = prose_paragraphs[1]
+
+    legal_pattern = r"(Article\s+\d|SEM Directives|LEI / AIG|OASA / VZAE)"
+    if re.search(legal_pattern, first_para):
+        raise RuntimeError("First paragraph contains legal authorities.")
+    if re.search(legal_pattern, second_para):
+        raise RuntimeError("Second introductory paragraph contains legal authorities.")
+
+
 def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
     cleaned = dict(draft)
     cleaned["dynamic_page_link"] = ""
 
     blog_content = cleaned.get("blog_content", "").strip()
-    blog_content = re.sub(r"\n{3,}", "\n\n", blog_content)
+    blog_content = replace_legal_abbreviation_style(blog_content)
+    blog_content = remove_forbidden_public_phrases(blog_content)
+    blog_content = re.sub(r"\n{3,}", "\n\n", blog_content).strip()
+
+    assert_opening_paragraph_rules(blog_content)
 
     cleaned["blog_content"] = blog_content
     return cleaned
+
+
+def inline_bold_to_html(text: str) -> str:
+    escaped = escape_html(text)
+    return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
+
+
+def blog_content_to_html(blog_title: str, blog_content: str) -> str:
+    chunks = [chunk.strip() for chunk in re.split(r"\n\s*\n", blog_content.strip()) if chunk.strip()]
+    html_parts: list[str] = []
+
+    html_parts.append(f"<h2>{escape_html(blog_title)}</h2>")
+
+    for chunk in chunks:
+        stripped = chunk.strip()
+
+        if stripped.startswith("**") and stripped.endswith("**"):
+            inner = stripped[2:-2].strip()
+
+            if len(inner.split()) <= 12 and not inner.endswith("."):
+                html_parts.append(f"<h3><strong>{escape_html(inner)}</strong></h3>")
+                continue
+
+            html_parts.append(f"<p><strong>{escape_html(inner)}</strong></p>")
+            continue
+
+        html_parts.append(f"<p>{inline_bold_to_html(stripped)}</p>")
+
+    return "\n".join(html_parts)
 
 
 def render_success_email(
@@ -798,35 +880,33 @@ def render_success_email(
     remaining_after_send: int,
 ) -> str:
     keywords = "; ".join(seo["suggested_seo_keywords"])
-    return f"""TOPIC BACKLOG:
-{remaining_after_send} topics remaining
+    blog_html = blog_content_to_html(draft["blog_title"], draft["blog_content"])
 
-TOPIC:
-{topic_entry.get('topic', '')}
+    return f"""<html>
+  <body style="font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #222;">
+    <p><strong>TOPIC BACKLOG:</strong><br>{remaining_after_send} topics remaining</p>
 
-ANGLE:
-{topic_entry.get('angle', '')}
+    <p><strong>TOPIC:</strong><br>{escape_html(topic_entry.get('topic', ''))}</p>
 
-BLOG TITLE:
-{draft['blog_title']}
+    <p><strong>ANGLE:</strong><br>{escape_html(topic_entry.get('angle', ''))}</p>
 
-DYNAMIC PAGE LINK:
+    <p><strong>BLOG TITLE:</strong><br>{escape_html(draft['blog_title'])}</p>
 
+    <p><strong>DYNAMIC PAGE LINK:</strong><br>&nbsp;</p>
 
-SEO META TITLE:
-{seo['seo_meta_title']}
+    <p><strong>SEO META TITLE:</strong><br>{escape_html(seo['seo_meta_title'])}</p>
 
-SEO META DESCRIPTION:
-{seo['seo_meta_description']}
+    <p><strong>SEO META DESCRIPTION:</strong><br>{escape_html(seo['seo_meta_description'])}</p>
 
-SUGGESTED SEO KEYWORDS:
-{keywords}
+    <p><strong>SUGGESTED SEO KEYWORDS:</strong><br>{escape_html(keywords)}</p>
 
----------------------------------
+    <hr>
 
-BLOG CONTENT:
+    <p><strong>BLOG CONTENT:</strong></p>
 
-{draft['blog_content']}
+    {blog_html}
+  </body>
+</html>
 """
 
 
@@ -1071,6 +1151,7 @@ def main() -> None:
     sent = send_email_via_sendgrid(
         subject=f"Blog draft: {draft['blog_title']}",
         body=email_body,
+        is_html=True,
     )
     if not sent:
         raise RuntimeError("Draft generated but SendGrid delivery failed.")
