@@ -65,10 +65,10 @@
 "audience": "inside_switzerland_individuals",
 "article_type": "procedural_strategy",
 "pillar": "settlement_and_c_permit",
-"subtopic": "c_permit_absences_and_retention",
+"subtopic": "absence_lapse_and_preservation",
 "route_type": "broad_issue",
 "legal_complexity": "medium",
-"overlap_group": "c_permit_residence_continuity",
+"overlap_group": "c_permit_absence_and_preservation",
 "style_profile": "procedural",
 "search_intent": "urgent_problem_solving",
 "scope_warning": "tax_adjacent",
@@ -79,5 +79,5 @@
 "Note that cantonal practice and documentation requests can vary."
 ],
 "status": "unused"
-},
+}
 ]
