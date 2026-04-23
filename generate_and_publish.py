@@ -126,11 +126,22 @@ Writing requirements:
 - continuous prose as the default
 - avoid generic openings
 - vary sentence rhythm and section architecture naturally
-- no citations in the public article text
-- no markdown
+- use keyword-optimised sub-headings throughout
+- every sub-heading must be surrounded by a blank line above and below
+- format each sub-heading in bold using double asterisks, for example: **How Student Years Count Towards a Swiss C Permit**
+- the first paragraph of the article must be fully bold using double asterisks
+- include a small number of short legal authority references throughout the article text
+- those legal authority references must be integrated naturally in prose, for example:
+  (Article 34(2) AIG)
+  (Article 34(5) AIG)
+  (SEM Directives)
+- do not use footnotes
+- do not use bullet points unless absolutely necessary
+- no markdown other than bold markers using double asterisks for the first paragraph and sub-headings
 - no emojis
 - restrained, factual CTA
-- no bullet-heavy drafting
+- the final CTA heading must be exactly: {CTA_HEADING}
+- under DYNAMIC PAGE LINK, return an empty string only
 
 Output strict JSON only.
 """.strip()
@@ -278,21 +289,8 @@ DRAFT_SCHEMA = {
             "blog_title": {"type": "string"},
             "dynamic_page_link": {"type": "string"},
             "blog_content": {"type": "string"},
-            "editorial_notes": {
-                "type": "object",
-                "additionalProperties": False,
-                "properties": {
-                    "style_profile_used": {"type": "string"},
-                    "overlap_risk": {"type": "string"},
-                    "internal_link_suggestions": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                    },
-                },
-                "required": ["style_profile_used", "overlap_risk", "internal_link_suggestions"],
-            },
         },
-        "required": ["blog_title", "dynamic_page_link", "blog_content", "editorial_notes"],
+        "required": ["blog_title", "dynamic_page_link", "blog_content"],
     },
 }
 
@@ -700,6 +698,8 @@ def build_draft_input(
         "procedural_strategy": "Open with a process or timing problem readers mishandle, then explain the law through that procedural lens.",
         "comparison_piece": "Open by contrasting two routes or statuses readers wrongly treat as equivalent, then compare them carefully.",
         "scenario_led": "Open with a realistic scenario and use it to structure the analysis.",
+        "evidence_strategy": "Open with the evidential or analytical mistake readers most commonly make, then explain how the legal framework should actually be applied.",
+        "refusal_analysis": "Open with the apparent refusal reason, then show what the real legal weakness often is.",
     }
 
     article_type = classifier.get("article_type", topic_entry.get("article_type", "risk_analysis"))
@@ -719,6 +719,11 @@ def build_draft_input(
             "cta_name": CTA_NAME,
             "cta_phone": CTA_PHONE,
             "style_hint": style_hint,
+            "dynamic_page_link_must_be_blank": True,
+            "public_email_output_should_not_include_internal_analysis": True,
+            "citation_style": "Use short in-text legal references only, such as (Article 34(2) AIG), (Article 34(5) AIG), (SEM Directives).",
+            "subheading_style": "Use bold keyword-optimised sub-headings with a blank line above and below each one.",
+            "opening_style": "The first paragraph must be fully bold.",
             "website_context_use": "Use for continuity, overlap avoidance and internal linking only. Do not use as legal authority.",
             "website_context": website_context[:8000],
         },
@@ -774,12 +779,20 @@ def send_email_via_sendgrid(subject: str, body: str) -> bool:
         return False
 
 
+def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
+    cleaned = dict(draft)
+    cleaned["dynamic_page_link"] = ""
+
+    blog_content = cleaned.get("blog_content", "").strip()
+    blog_content = re.sub(r"\n{3,}", "\n\n", blog_content)
+
+    cleaned["blog_content"] = blog_content
+    return cleaned
+
+
 def render_success_email(
     *,
     topic_entry: dict[str, Any],
-    classifier: dict[str, Any],
-    memo: dict[str, Any],
-    verifier: dict[str, Any],
     draft: dict[str, Any],
     seo: dict[str, Any],
     remaining_after_send: int,
@@ -794,23 +807,11 @@ TOPIC:
 ANGLE:
 {topic_entry.get('angle', '')}
 
-AUDIENCE:
-{topic_entry.get('audience', 'general_global')}
-
-CLASSIFIER:
-{json.dumps(classifier, ensure_ascii=False, indent=2)}
-
-LEGAL MEMO:
-{json.dumps(memo, ensure_ascii=False, indent=2)}
-
-VERIFIER:
-{json.dumps(verifier, ensure_ascii=False, indent=2)}
-
 BLOG TITLE:
 {draft['blog_title']}
 
 DYNAMIC PAGE LINK:
-{draft['dynamic_page_link']}
+
 
 SEO META TITLE:
 {seo['seo_meta_title']}
@@ -820,9 +821,6 @@ SEO META DESCRIPTION:
 
 SUGGESTED SEO KEYWORDS:
 {keywords}
-
-EDITORIAL NOTES:
-{json.dumps(draft['editorial_notes'], ensure_ascii=False, indent=2)}
 
 ---------------------------------
 
@@ -999,11 +997,15 @@ def main() -> None:
 
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     slug = re.sub(r"[^a-z0-9]+", "-", topic_entry.get("topic", "untitled").lower()).strip("-")[:80]
+
     write_run_artifact(
         f"{timestamp}_{slug}_analysis.json",
         {
             "topic": topic_entry,
             "classifier": classifier,
+            "selected_legal_authority_packs": [
+                str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
+            ],
             "memo": memo,
             "verifier": verifier,
         },
@@ -1034,6 +1036,8 @@ def main() -> None:
         model=OPENAI_MODEL,
     )
 
+    draft = normalise_draft_output(draft)
+
     seo = call_responses_api(
         openai_api_key,
         instructions=SEO_INSTRUCTIONS,
@@ -1043,7 +1047,7 @@ def main() -> None:
     )
 
     write_run_artifact(
-        f"{timestamp}_{slug}_analysis.json",
+        f"{timestamp}_{slug}_final.json",
         {
             "topic": topic_entry,
             "classifier": classifier,
@@ -1052,21 +1056,20 @@ def main() -> None:
             ],
             "memo": memo,
             "verifier": verifier,
+            "draft": draft,
+            "seo": seo,
         },
     )
 
     email_body = render_success_email(
         topic_entry=topic_entry,
-        classifier=classifier,
-        memo=memo,
-        verifier=verifier,
         draft=draft,
         seo=seo,
         remaining_after_send=remaining_count - 1,
     )
 
     sent = send_email_via_sendgrid(
-        subject=f"Blog draft [{topic_entry.get('audience', 'general_global')}]: {draft['blog_title']}",
+        subject=f"Blog draft: {draft['blog_title']}",
         body=email_body,
     )
     if not sent:
