@@ -34,7 +34,18 @@ parser.add_argument(
 parser.add_argument(
     "--allow-editorial-fallback",
     action="store_true",
-    help="If no legal authorities are found, continue using internal legal notes only. Never uses website editorial as legal authority.",
+    help=(
+        "If no legal authorities are found, continue using internal legal notes only. "
+        "Never uses website editorial as legal authority."
+    ),
+)
+parser.add_argument(
+    "--auto-mark-used-on-review-recommended",
+    action="store_true",
+    help=(
+        "If the final publication gate passes but recommends human review, still mark the topic as used. "
+        "Default is conservative: send the draft but leave the topic unused."
+    ),
 )
 args = parser.parse_args()
 
@@ -126,9 +137,17 @@ VAGUE_CATEGORY_PATTERNS = [
     r"\bsome cantons\b",
     r"\bcertain cantons\b",
     r"\bsome applicants\b",
+    r"\bcurrent guidance\b",
+    r"\bofficial guidance\b",
+    r"\bthe authorities\b",
+    r"\busually\b",
+    r"\bin most cases\b",
+    r"\bEU/EFTA nationals\b",
+    r"\bfamily members\b",
+    r"\bstrong integration\b",
 ]
 
-LEGAL_AUTHORITY_PATTERN = r"(Article\s+\d|SEM Directives|LEI / AIG|OASA / VZAE)"
+LEGAL_AUTHORITY_PATTERN = r"(Article\s+\d|Art\.\s*\d|SEM Directives|SEM guidance|SEM Weisungen|LEI / AIG|OASA / VZAE)"
 
 
 # ============================================================
@@ -140,6 +159,26 @@ You are assisting a Swiss immigration law content workflow.
 Classify the requested article before drafting.
 Return strict JSON only.
 Do not write the article.
+""".strip()
+
+SOURCE_AUDIT_INSTRUCTIONS = """
+You are auditing retrieved sources before a Swiss immigration law article is drafted.
+
+Return strict JSON only.
+
+Assess whether the retrieved material is genuinely relevant to the requested topic, not merely keyword-matched.
+
+Check whether the topic requires current official verification because it involves:
+- nationality lists
+- permit timing
+- fees
+- application forms
+- official process steps
+- recent legislative or guidance changes
+- discretionary or canton-sensitive practice
+
+Do not approve drafting if legal authority is too thin, irrelevant, stale, or mostly website editorial.
+Website editorial may help positioning, but must not be treated as legal authority.
 """.strip()
 
 LEGAL_MEMO_INSTRUCTIONS = """
@@ -155,33 +194,68 @@ Rules:
 - Use internal_legal_note only as a supporting interpretive source.
 - Do not treat website_editorial as legal authority.
 - If a source is missing for a point, say so explicitly.
-- Distinguish between settled legal framework, discretion, cantonal practice, procedure and evidential issues.
+- Distinguish between settled legal framework, entitlement, eligibility, facilitated access, discretion, guidance, policy, procedure, evidential issues and cantonal practice.
+- Do not describe guidance as law.
+- Do not describe discretionary routes as rights.
+- Do not describe cantonal practice as uniform Swiss law.
 - Identify exceptions, preservation mechanisms, qualifications and reader-category distinctions.
 - If EU/EFTA and non-EU treatment differs, state that.
-- If canton-specific handling matters, state that.
+- If nationality-specific routes, family categories, sponsor categories or canton-specific handling matter, state that precisely.
 - Identify practical decision points for a prospective client.
 - Identify evidence/documents that a lawyer would usually want to review.
-- Avoid unsupported certainty.
+- Identify common mistakes and refusal risks.
+- State which propositions are safe for public article use and which need cautious wording.
 
 Return strict JSON only.
 """.strip()
 
 VERIFIER_INSTRUCTIONS = """
-You are reviewing an internal legal memo for overstatement, omission and weak support.
+You are reviewing an internal legal memo for legal and editorial risk before a client-facing article is drafted.
+
 Return strict JSON only.
-You must identify:
-- unsupported claims
-- overbroad claims
-- missing exceptions or qualifications
-- points that rely on cantonal practice rather than black-letter law
-- places where the eventual article should distinguish reader categories
-- whether the memo is safe for article drafting
+
+Check expressly for:
+- confusion between "can apply" and "will be granted"
+- confusion between eligibility and entitlement
+- discretionary routes described as rights
+- guidance described as law
+- cantonal practice described as uniform Swiss law
+- unsupported nationality categories
+- unsupported permit timelines
+- unsupported fee or process claims
+- overbroad statements about EU/EFTA nationals
+- overbroad statements about marriage, family members, employment, income, property ownership or tax contribution
+- missing refusal grounds
+- missing evidence requirements
+- missing reader-category distinctions
+- duplication or cannibalisation risk against existing website editorial
+
+Treat high legal risk or any publication blocker as requiring human review.
+""".strip()
+
+OVERLAP_INSTRUCTIONS = """
+You are assessing whether a proposed Swiss immigration law blog post overlaps with existing firm content.
+
+Return strict JSON only.
+
+Use the website editorial material only for content differentiation, overlap avoidance and internal-link suggestions.
+Do not treat website editorial as legal authority.
+
+Identify:
+- similar existing articles or route pages
+- what the new article should do differently
+- what the draft must avoid repeating
+- internal link opportunities
+- whether cannibalisation risk is low, medium or high
+
+If cannibalisation risk is high, identify a distinct angle if one exists.
+If no distinct angle exists, state that clearly.
 """.strip()
 
 DRAFT_INSTRUCTIONS = f"""
 You are drafting a client-facing blog post for a Swiss immigration law firm.
-Draft only from the verified legal memo and editorial instructions supplied.
-Do not add new legal propositions not present in the verified memo.
+Draft only from the verified legal memo, source audit, overlap analysis and editorial instructions supplied.
+Do not add new legal propositions not present in the verified memo or supported legal sources.
 
 Core editorial target:
 - Write like a careful Swiss immigration practitioner advising a discerning prospective client.
@@ -198,6 +272,23 @@ Length and structure:
 - Avoid repetition. Each section must do distinct work.
 - Do not restate the same legal proposition in multiple sections.
 - If a point has already been made, develop it with consequence, evidence or next step rather than repeating it.
+
+Required article structure where appropriate:
+- stronger SEO-conscious title, without overclaiming
+- bold opening paragraph
+- second introductory paragraph
+- a short **Quick Answer**, **At a Glance** or **In Brief** section near the top
+- clear legal framework section
+- who qualifies or is affected
+- who may not qualify or where the misunderstanding lies
+- evidence/document requirements
+- common mistakes or refusal risks
+- practical examples or short scenarios where useful
+- concise checklist or ordered action framework
+- **What This Means in Practice**
+- **What To Do Next**
+- restrained CTA
+- short legal disclaimer before the CTA or near the end
 
 Writing requirements:
 - UK English.
@@ -218,15 +309,16 @@ Formatting requirements:
 - Immediately after the opening paragraph, include a second introductory paragraph explaining what the post will cover, who it is useful for, and what the reader will learn.
 - Do not include legal authorities in the first paragraph.
 - Do not include legal authorities in the second introductory paragraph.
-- Do not use footnotes.
-- Do not use bullet points unless they genuinely improve practical clarity.
-- No markdown other than double asterisks for bold paragraph and bold sub-headings.
+- Use compact bullet or numbered lists only where they improve clarity.
+- You may use simple markdown tables where a comparison is genuinely clearer as a table.
+- No emojis.
 
 Legal authority requirements:
 - Include a small number of short legal authority references throughout the body after the first two paragraphs.
 - Legal authority references must be legally accurate and should include article numbers wherever relevant.
 - Always use LEI / AIG, never AIG on its own.
 - Always use OASA / VZAE, never VZAE on its own.
+- Refer to named official sources where supported, such as SEM guidance, SEM Weisungen AIG, or specific articles supplied by the memo.
 
 Practicality requirements:
 - Include a concise section headed exactly: **What This Means in Practice**
@@ -242,14 +334,19 @@ Practicality requirements:
 - Do not invent facts, lists, nationality categories or canton-specific practice.
 
 Specificity and uncertainty:
-- Where the article refers to "some nationalities", "certain countries", "some cantons" or similar, either name the relevant category accurately from the legal memo or say that the point must be checked against current official guidance.
+- Where the article refers to "some nationalities", "certain countries", "some cantons" or similar, either name the relevant category accurately from the legal memo or say that the point must be checked against current official guidance from the named official body.
 - Distinguish clearly between settled legal framework, canton-specific practice, evidential issues and genuinely discretionary areas.
 - Use caution where needed, but avoid repeated hedging.
 
-SEO:
+Disclaimer:
+- Include a short disclaimer before the CTA or immediately before the end.
+- It must say in substance that the article summarises Swiss immigration law/guidance at the date of writing, individual facts/evidence/cantonal handling may affect the outcome, and it is not legal advice.
+
+SEO and differentiation:
 - Integrate relevant SEO keywords and keyword variations naturally.
+- Follow the distinct angle from the overlap analysis.
+- Avoid repeating existing firm content listed in the overlap analysis.
 - Do not let SEO phrasing dominate the article.
-- The post must still read as though written by a human lawyer.
 
 CTA:
 - The final CTA heading must be exactly: {CTA_HEADING}
@@ -272,7 +369,6 @@ Your task:
 - Fix every editorial validation issue supplied.
 - Hard maximum: {MAX_BLOG_WORDS} words. If the draft exceeds this, shorten it before doing anything else.
 - Prefer deleting repetition over adding explanation.
-- Reduce repetition by approximately 25 to 35 percent where possible.
 - Make each section do distinct work.
 - Make the article more practical, decision-oriented and useful to a prospective client.
 - Preserve required formatting.
@@ -280,13 +376,16 @@ Your task:
 - Keep legal references out of the first two paragraphs.
 - Keep a bold first paragraph.
 - Keep a second introductory paragraph explaining what the post covers and who it helps.
+- Ensure a near-top section headed **Quick Answer**, **At a Glance** or **In Brief**.
 - Ensure sections headed exactly:
   **What This Means in Practice**
   **What To Do Next**
+- Ensure a short disclaimer is present before the CTA or near the end.
 - Ensure the CTA is concrete, not generic.
 - Remove internal-sounding phrases such as "the memo", "the verified materials", "the materials support".
 - Avoid overclaiming in the title.
-- Replace vague category wording such as "some applicants", "some nationalities", "certain countries" or "some cantons" with either a named category supported by the memo or a clear reference to current official guidance.
+- Replace vague category wording with either a named category supported by the memo or a clear reference to named current official guidance.
+- Follow the distinct angle and internal-link strategy from the overlap analysis.
 
 Return strict JSON only using the blog_draft schema.
 """.strip()
@@ -294,10 +393,16 @@ Return strict JSON only using the blog_draft schema.
 SEO_INSTRUCTIONS = """
 You are generating SEO metadata for a Swiss immigration law article.
 Return strict JSON only.
+
 Requirements:
 - meta title max 60 characters
 - meta description max 155 characters
-- 6 keyword phrases
+- suggested slug
+- primary keyword
+- secondary keywords
+- internal link anchor suggestions
+- external authority link suggestions
+- FAQ questions where useful
 - natural, non-promotional, legally accurate
 - avoid melodramatic or absolute wording
 - avoid keyword stuffing
@@ -324,14 +429,31 @@ CLASSIFIER_SCHEMA = {
             "style_profile": {"type": "string"},
         },
         "required": [
-            "primary_audience",
-            "article_type",
-            "search_intent",
-            "legal_complexity",
-            "key_issues",
-            "distinctions_required",
-            "source_needs",
-            "style_profile",
+            "primary_audience", "article_type", "search_intent", "legal_complexity",
+            "key_issues", "distinctions_required", "source_needs", "style_profile",
+        ],
+    },
+}
+
+SOURCE_AUDIT_SCHEMA = {
+    "name": "source_audit",
+    "schema": {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "official_legal_sources_found": {"type": "array", "items": {"type": "string"}},
+            "internal_notes_found": {"type": "array", "items": {"type": "string"}},
+            "website_editorial_found": {"type": "array", "items": {"type": "string"}},
+            "source_gaps": {"type": "array", "items": {"type": "string"}},
+            "stale_or_uncertain_sources": {"type": "array", "items": {"type": "string"}},
+            "must_verify_before_publication": {"type": "array", "items": {"type": "string"}},
+            "recommended_source_references": {"type": "array", "items": {"type": "string"}},
+            "safe_to_draft": {"type": "boolean"},
+        },
+        "required": [
+            "official_legal_sources_found", "internal_notes_found", "website_editorial_found",
+            "source_gaps", "stale_or_uncertain_sources", "must_verify_before_publication",
+            "recommended_source_references", "safe_to_draft",
         ],
     },
 }
@@ -351,11 +473,33 @@ LEGAL_MEMO_SCHEMA = {
                     "properties": {
                         "issue": {"type": "string"},
                         "rule": {"type": "string"},
+                        "legal_basis": {"type": "string"},
+                        "authority_type": {
+                            "type": "string",
+                            "enum": [
+                                "statute", "ordinance", "official_guidance", "case_law",
+                                "cantonal_practice", "internal_note", "editorial_context", "mixed", "unclear",
+                            ],
+                        },
+                        "entitlement_or_discretion": {
+                            "type": "string",
+                            "enum": [
+                                "entitlement", "eligibility_only", "facilitated_access",
+                                "discretionary", "unclear",
+                            ],
+                        },
+                        "reader_category": {"type": "string"},
                         "exceptions": {"type": "array", "items": {"type": "string"}},
                         "procedure_points": {"type": "array", "items": {"type": "string"}},
                         "cantonal_practice_points": {"type": "array", "items": {"type": "string"}},
                         "reader_distinctions": {"type": "array", "items": {"type": "string"}},
+                        "evidence_needed": {"type": "array", "items": {"type": "string"}},
+                        "common_mistakes": {"type": "array", "items": {"type": "string"}},
+                        "client_decision_points": {"type": "array", "items": {"type": "string"}},
                         "practical_implications": {"type": "array", "items": {"type": "string"}},
+                        "source_reference_to_use_in_article": {"type": "string"},
+                        "safe_public_formulation": {"type": "string"},
+                        "cautious_public_formulation": {"type": "string"},
                         "support": {
                             "type": "array",
                             "items": {
@@ -372,15 +516,13 @@ LEGAL_MEMO_SCHEMA = {
                         "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
                     },
                     "required": [
-                        "issue",
-                        "rule",
-                        "exceptions",
-                        "procedure_points",
-                        "cantonal_practice_points",
-                        "reader_distinctions",
-                        "practical_implications",
-                        "support",
-                        "confidence",
+                        "issue", "rule", "legal_basis", "authority_type",
+                        "entitlement_or_discretion", "reader_category", "exceptions",
+                        "procedure_points", "cantonal_practice_points", "reader_distinctions",
+                        "evidence_needed", "common_mistakes", "client_decision_points",
+                        "practical_implications", "source_reference_to_use_in_article",
+                        "safe_public_formulation", "cautious_public_formulation",
+                        "support", "confidence",
                     ],
                 },
             },
@@ -397,6 +539,12 @@ VERIFIER_SCHEMA = {
         "additionalProperties": False,
         "properties": {
             "publishable": {"type": "boolean"},
+            "legal_risk_level": {"type": "string", "enum": ["low", "medium", "high"]},
+            "publication_blockers": {"type": "array", "items": {"type": "string"}},
+            "mandatory_revisions": {"type": "array", "items": {"type": "string"}},
+            "claims_requiring_exact_source_reference": {"type": "array", "items": {"type": "string"}},
+            "duplication_risk": {"type": "string", "enum": ["low", "medium", "high"]},
+            "recommended_positioning": {"type": "string"},
             "unsupported_claims": {"type": "array", "items": {"type": "string"}},
             "overbroad_claims": {"type": "array", "items": {"type": "string"}},
             "missing_qualifications": {"type": "array", "items": {"type": "string"}},
@@ -405,13 +553,32 @@ VERIFIER_SCHEMA = {
             "revision_actions": {"type": "array", "items": {"type": "string"}},
         },
         "required": [
-            "publishable",
-            "unsupported_claims",
-            "overbroad_claims",
-            "missing_qualifications",
-            "cantonal_sensitivity",
-            "required_reader_distinctions",
-            "revision_actions",
+            "publishable", "legal_risk_level", "publication_blockers", "mandatory_revisions",
+            "claims_requiring_exact_source_reference", "duplication_risk", "recommended_positioning",
+            "unsupported_claims", "overbroad_claims", "missing_qualifications",
+            "cantonal_sensitivity", "required_reader_distinctions", "revision_actions",
+        ],
+    },
+}
+
+OVERLAP_SCHEMA = {
+    "name": "overlap_analysis",
+    "schema": {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "similar_existing_articles": {"type": "array", "items": {"type": "string"}},
+            "overlap_summary": {"type": "string"},
+            "new_article_distinct_angle": {"type": "string"},
+            "internal_link_recommendations": {"type": "array", "items": {"type": "string"}},
+            "avoid_repeating": {"type": "array", "items": {"type": "string"}},
+            "recommended_title_angle": {"type": "string"},
+            "cannibalisation_risk": {"type": "string", "enum": ["low", "medium", "high"]},
+        },
+        "required": [
+            "similar_existing_articles", "overlap_summary", "new_article_distinct_angle",
+            "internal_link_recommendations", "avoid_repeating", "recommended_title_angle",
+            "cannibalisation_risk",
         ],
     },
 }
@@ -439,8 +606,19 @@ SEO_SCHEMA = {
             "seo_meta_title": {"type": "string"},
             "seo_meta_description": {"type": "string"},
             "suggested_seo_keywords": {"type": "array", "items": {"type": "string"}, "minItems": 6, "maxItems": 6},
+            "suggested_slug": {"type": "string"},
+            "primary_keyword": {"type": "string"},
+            "secondary_keywords": {"type": "array", "items": {"type": "string"}},
+            "internal_link_anchor_suggestions": {"type": "array", "items": {"type": "string"}},
+            "external_authority_link_suggestions": {"type": "array", "items": {"type": "string"}},
+            "faq_questions": {"type": "array", "items": {"type": "string"}},
         },
-        "required": ["seo_meta_title", "seo_meta_description", "suggested_seo_keywords"],
+        "required": [
+            "seo_meta_title", "seo_meta_description", "suggested_seo_keywords",
+            "suggested_slug", "primary_keyword", "secondary_keywords",
+            "internal_link_anchor_suggestions", "external_authority_link_suggestions",
+            "faq_questions",
+        ],
     },
 }
 
@@ -460,7 +638,25 @@ class KnowledgeChunk:
 class EditorialValidationResult:
     passed: bool
     issues: list[str]
+    warnings: list[str]
     repetition_score: float
+
+
+@dataclass
+class SEOValidationResult:
+    passed: bool
+    issues: list[str]
+    warnings: list[str]
+
+
+@dataclass
+class PublicationGateResult:
+    passed: bool
+    blockers: list[str]
+    warnings: list[str]
+    human_review_recommended: bool
+    final_word_count: int
+    revision_count: int
 
 
 # ============================================================
@@ -583,13 +779,7 @@ def load_selected_legal_authority_chunks(pdf_paths: list[Path]) -> list[Knowledg
 
         text = read_pdf_text(pdf_path)
         if text:
-            chunks.append(
-                KnowledgeChunk(
-                    source_name=str(pdf_path.relative_to(SCRIPT_DIR)),
-                    source_kind="legal_authority",
-                    text=text,
-                )
-            )
+            chunks.append(KnowledgeChunk(str(pdf_path.relative_to(SCRIPT_DIR)), "legal_authority", text))
 
     return chunks
 
@@ -601,7 +791,7 @@ def load_chunks_from_folder(folder: Path, source_kind: str) -> list[KnowledgeChu
     for pdf_path in sorted(folder.glob("*.pdf")):
         text = read_pdf_text(pdf_path)
         if text:
-            chunks.append(KnowledgeChunk(source_name=pdf_path.name, source_kind=source_kind, text=text))
+            chunks.append(KnowledgeChunk(pdf_path.name, source_kind, text))
     return chunks
 
 
@@ -651,6 +841,10 @@ def format_sources_for_prompt(chunks: list[KnowledgeChunk], max_chars_per_source
             f"CONTENT:\n{chunk.text[:max_chars_per_source]}"
         )
     return "\n\n---\n\n".join(parts)
+
+
+def source_names(chunks: list[KnowledgeChunk]) -> list[str]:
+    return [chunk.source_name for chunk in chunks]
 
 
 # ============================================================
@@ -719,37 +913,98 @@ def derive_topic_metadata(topic_entry: dict[str, Any]) -> dict[str, str]:
 # ============================================================
 
 def build_classifier_input(topic_entry: dict[str, Any]) -> str:
-    payload = {
-        "topic": topic_entry.get("topic", ""),
-        "angle": topic_entry.get("angle", ""),
-        "audience": topic_entry.get("audience", "general_global"),
-        "topic_metadata": derive_topic_metadata(topic_entry),
-    }
-    return json.dumps(payload, ensure_ascii=False, indent=2)
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "topic_metadata": derive_topic_metadata(topic_entry),
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
 
 
-def build_legal_input(topic_entry: dict[str, Any], classifier: dict[str, Any], legal_sources_text: str) -> str:
-    payload = {
-        "topic": topic_entry.get("topic", ""),
-        "angle": topic_entry.get("angle", ""),
-        "audience": topic_entry.get("audience", "general_global"),
-        "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
-        "topic_metadata": derive_topic_metadata(topic_entry),
-        "classifier": classifier,
-        "legal_sources": legal_sources_text,
-    }
-    return json.dumps(payload, ensure_ascii=False, indent=2)
+def build_source_audit_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    legal_chunks: list[KnowledgeChunk],
+    website_context_chunks: list[KnowledgeChunk],
+) -> str:
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "classifier": classifier,
+            "legal_sources": format_sources_for_prompt(legal_chunks, max_chars_per_source=2500),
+            "website_editorial_sources": format_sources_for_prompt(website_context_chunks, max_chars_per_source=1500),
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
 
 
-def build_verifier_input(topic_entry: dict[str, Any], classifier: dict[str, Any], memo: dict[str, Any]) -> str:
-    payload = {
-        "topic": topic_entry.get("topic", ""),
-        "angle": topic_entry.get("angle", ""),
-        "audience": topic_entry.get("audience", "general_global"),
-        "classifier": classifier,
-        "memo": memo,
-    }
-    return json.dumps(payload, ensure_ascii=False, indent=2)
+def build_overlap_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    website_context_text: str,
+) -> str:
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "classifier": classifier,
+            "website_editorial_context": website_context_text,
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
+
+
+def build_legal_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    source_audit: dict[str, Any],
+    legal_sources_text: str,
+) -> str:
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
+            "topic_metadata": derive_topic_metadata(topic_entry),
+            "classifier": classifier,
+            "source_audit": source_audit,
+            "legal_sources": legal_sources_text,
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
+
+
+def build_verifier_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    source_audit: dict[str, Any],
+    overlap: dict[str, Any],
+) -> str:
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "classifier": classifier,
+            "memo": memo,
+            "source_audit": source_audit,
+            "overlap_analysis": overlap,
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
 
 
 def build_draft_input(
@@ -757,33 +1012,45 @@ def build_draft_input(
     classifier: dict[str, Any],
     memo: dict[str, Any],
     verifier: dict[str, Any],
+    source_audit: dict[str, Any],
+    overlap: dict[str, Any],
     website_context: str,
 ) -> str:
-    payload = {
-        "topic": topic_entry.get("topic", ""),
-        "angle": topic_entry.get("angle", ""),
-        "audience": topic_entry.get("audience", "general_global"),
-        "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
-        "topic_metadata": derive_topic_metadata(topic_entry),
-        "classifier": classifier,
-        "verified_legal_memo": memo,
-        "verifier": verifier,
-        "editorial_constraints": {
-            "cta_heading": CTA_HEADING,
-            "cta_name": CTA_NAME,
-            "cta_phone": CTA_PHONE,
-            "dynamic_page_link_must_be_blank": True,
-            "hard_word_limit": MAX_BLOG_WORDS,
-            "target_word_range": TARGET_BLOG_WORDS,
-            "citation_style": "Use short in-text legal references only, using LEI / AIG and OASA / VZAE.",
-            "subheading_style": "Use bold keyword-optimised sub-headings with a blank line above and below each one.",
-            "opening_style": "The first paragraph must be fully bold, followed immediately by a second introductory paragraph without legal citations.",
-            "practical_sections_required": ["What This Means in Practice", "What To Do Next"],
-            "website_context_use": "Use for continuity, overlap avoidance and internal linking only. Do not use as legal authority.",
-            "website_context": website_context[:8000],
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
+            "topic_metadata": derive_topic_metadata(topic_entry),
+            "classifier": classifier,
+            "source_audit": source_audit,
+            "verified_legal_memo": memo,
+            "verifier": verifier,
+            "overlap_analysis": overlap,
+            "editorial_constraints": {
+                "cta_heading": CTA_HEADING,
+                "cta_name": CTA_NAME,
+                "cta_phone": CTA_PHONE,
+                "dynamic_page_link_must_be_blank": True,
+                "hard_word_limit": MAX_BLOG_WORDS,
+                "target_word_range": TARGET_BLOG_WORDS,
+                "citation_style": "Use short in-text legal references only, using LEI / AIG and OASA / VZAE.",
+                "subheading_style": "Use bold keyword-optimised sub-headings with a blank line above and below each one.",
+                "opening_style": "The first paragraph must be fully bold, followed immediately by a second introductory paragraph without legal citations.",
+                "practical_sections_required": ["What This Means in Practice", "What To Do Next"],
+                "quick_answer_required": True,
+                "disclaimer_required": True,
+                "distinct_angle": overlap.get("new_article_distinct_angle", ""),
+                "avoid_repeating": overlap.get("avoid_repeating", []),
+                "recommended_internal_links": overlap.get("internal_link_recommendations", []),
+                "website_context_use": "Use for continuity, overlap avoidance and internal linking only. Do not use as legal authority.",
+                "website_context": website_context[:8000],
+            },
         },
-    }
-    return json.dumps(payload, ensure_ascii=False, indent=2)
+        ensure_ascii=False,
+        indent=2,
+    )
 
 
 def build_revision_input(
@@ -792,40 +1059,59 @@ def build_revision_input(
     draft: dict[str, Any],
     memo: dict[str, Any],
     verifier: dict[str, Any],
+    source_audit: dict[str, Any],
+    overlap: dict[str, Any],
     validation: EditorialValidationResult,
 ) -> str:
-    payload = {
-        "topic": topic_entry.get("topic", ""),
-        "angle": topic_entry.get("angle", ""),
-        "audience": topic_entry.get("audience", "general_global"),
-        "topic_metadata": derive_topic_metadata(topic_entry),
-        "current_draft": draft,
-        "verified_legal_memo": memo,
-        "verifier": verifier,
-        "editorial_validation_issues": validation.issues,
-        "repetition_score": validation.repetition_score,
-        "hard_word_limit": MAX_BLOG_WORDS,
-        "required_fixes": [
-            f"Shorten to no more than {MAX_BLOG_WORDS} words.",
-            "Fix every validation issue listed.",
-            "Delete repetition rather than adding more explanation.",
-            "Preserve legal accuracy.",
-            "Preserve required sections and formatting.",
-            "Do not send a review note; produce a publishable final blog draft.",
-        ],
-    }
-    return json.dumps(payload, ensure_ascii=False, indent=2)
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "topic_metadata": derive_topic_metadata(topic_entry),
+            "current_draft": draft,
+            "verified_legal_memo": memo,
+            "verifier": verifier,
+            "source_audit": source_audit,
+            "overlap_analysis": overlap,
+            "editorial_validation_issues": validation.issues,
+            "editorial_validation_warnings": validation.warnings,
+            "repetition_score": validation.repetition_score,
+            "hard_word_limit": MAX_BLOG_WORDS,
+            "required_fixes": [
+                f"Shorten to no more than {MAX_BLOG_WORDS} words.",
+                "Fix every validation issue listed.",
+                "Delete repetition rather than adding more explanation.",
+                "Preserve legal accuracy.",
+                "Preserve required sections and formatting.",
+                "Preserve distinct angle from overlap analysis.",
+                "Do not produce a review note; produce a publishable final blog draft.",
+            ],
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
 
 
-def build_seo_input(topic_entry: dict[str, Any], draft: dict[str, Any]) -> str:
-    payload = {
-        "topic": topic_entry.get("topic", ""),
-        "angle": topic_entry.get("angle", ""),
-        "audience": topic_entry.get("audience", "general_global"),
-        "blog_title": draft["blog_title"],
-        "blog_excerpt": draft["blog_content"][:3500],
-    }
-    return json.dumps(payload, ensure_ascii=False, indent=2)
+def build_seo_input(
+    topic_entry: dict[str, Any],
+    draft: dict[str, Any],
+    overlap: dict[str, Any],
+    source_audit: dict[str, Any],
+) -> str:
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "blog_title": draft["blog_title"],
+            "blog_excerpt": draft["blog_content"][:3500],
+            "overlap_internal_link_recommendations": overlap.get("internal_link_recommendations", []),
+            "recommended_source_references": source_audit.get("recommended_source_references", []),
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
 
 
 # ============================================================
@@ -865,6 +1151,12 @@ def send_email_via_sendgrid(subject: str, body: str, *, is_html: bool = False) -
         return status == 202
     except RuntimeError:
         return False
+
+
+def list_to_html(items: list[str]) -> str:
+    if not items:
+        return "<em>None</em>"
+    return "<ul>" + "".join(f"<li>{escape_html(item)}</li>" for item in items) + "</ul>"
 
 
 # ============================================================
@@ -910,14 +1202,11 @@ def is_bold_heading(block: str) -> bool:
 def validate_title(title: str) -> list[str]:
     issues: list[str] = []
     lower = title.lower()
-
     for pattern in TITLE_OVERCLAIM_PATTERNS:
         if re.search(pattern, lower):
             issues.append(f"Title may overclaim or overstate certainty: pattern '{pattern}'.")
-
     if len(title) > 120:
         issues.append("Title is too long and should be tightened.")
-
     return issues
 
 
@@ -937,6 +1226,67 @@ def validate_opening_paragraph_rules(blog_content: str) -> list[str]:
         issues.append("First paragraph contains legal authorities.")
     if re.search(LEGAL_AUTHORITY_PATTERN, second):
         issues.append("Second introductory paragraph contains legal authorities.")
+    return issues
+
+
+def validate_quick_answer(blog_content: str) -> list[str]:
+    blocks = split_blocks(blog_content)
+    lower_blocks = [visible_text(block).lower() for block in blocks]
+    total = max(1, len(lower_blocks))
+    headings = ["quick answer", "at a glance", "in brief"]
+
+    for index, block in enumerate(lower_blocks):
+        if any(heading in block for heading in headings):
+            if index / total > 0.35:
+                return ["Quick Answer / At a Glance / In Brief appears too late in the article."]
+            nearby = " ".join(lower_blocks[index:index + 3])
+            if any(term in nearby for term in ["contact", "consultation", "lawyers"]) and not any(
+                term in nearby for term in ["can", "cannot", "depends", "must", "should", "law", "permit", "evidence"]
+            ):
+                return ["Quick-answer section appears promotional rather than legally useful."]
+            return []
+
+    return ["Missing required near-top section: Quick Answer, At a Glance or In Brief."]
+
+
+def validate_disclaimer(blog_content: str) -> list[str]:
+    lower = visible_text(blog_content).lower()
+    has_not_legal_advice = "not legal advice" in lower or "does not constitute legal advice" in lower
+    has_individual_facts = any(term in lower for term in ["individual facts", "case-specific", "personal circumstances", "evidence"])
+    has_law_guidance = any(term in lower for term in ["law", "guidance", "date of writing", "current position", "federal immigration"])
+
+    issues = []
+    if not has_not_legal_advice:
+        issues.append("Disclaimer must state that the article is not legal advice or equivalent.")
+    if not has_individual_facts:
+        issues.append("Disclaimer must refer to individual facts, evidence or case-specific assessment.")
+    if not has_law_guidance:
+        issues.append("Disclaimer must refer to law/guidance/current position.")
+    return issues
+
+
+def validate_source_anchoring(blog_content: str, source_audit: dict[str, Any]) -> list[str]:
+    issues: list[str] = []
+    official_sources = source_audit.get("official_legal_sources_found", [])
+    text = visible_text(blog_content)
+    lower = text.lower()
+
+    if official_sources and not re.search(LEGAL_AUTHORITY_PATTERN, text):
+        issues.append("Article lacks an official legal source or guidance reference in the body.")
+
+    paragraphs = [visible_text(block) for block in split_blocks(blog_content) if not is_bold_heading(block)]
+    referenced_paras = [p for p in paragraphs if re.search(LEGAL_AUTHORITY_PATTERN, p)]
+
+    if official_sources and len(referenced_paras) < 2:
+        issues.append("Legal references appear too sparse or clustered; add source anchoring in more than one body section.")
+
+    if re.search(r"\bAIG\b", text) and "LEI / AIG" not in text:
+        issues.append("Legal references use AIG without LEI / AIG formulation.")
+    if re.search(r"\bVZAE\b", text) and "OASA / VZAE" not in text:
+        issues.append("Legal references use VZAE without OASA / VZAE formulation.")
+
+    if lower.count("current guidance") > 1 and "sem" not in lower:
+        issues.append("Article repeatedly refers to current guidance without identifying the source body.")
 
     return issues
 
@@ -965,7 +1315,6 @@ def detect_repetition(blog_content: str) -> tuple[float, list[str]]:
         for block in split_blocks(blog_content)
         if not is_bold_heading(block) and len(visible_text(block).split()) >= 25
     ]
-
     if len(paragraphs) < 4:
         return 0.0, []
 
@@ -990,7 +1339,6 @@ def detect_repetition(blog_content: str) -> tuple[float, list[str]]:
 def validate_practical_sections(blog_content: str) -> list[str]:
     issues: list[str] = []
     lower = blog_content.lower()
-
     if "what this means in practice" not in lower:
         issues.append("Missing required section: What This Means in Practice.")
     if "what to do next" not in lower:
@@ -1002,18 +1350,33 @@ def validate_practical_sections(blog_content: str) -> list[str]:
     ]
     if sum(1 for marker in practical_markers if marker in lower) < 4:
         issues.append("Practical guidance appears too thin; add documents/evidence/decision framework.")
-
     return issues
+
+
+def nearby_specificity(text: str, start: int, window: int = 120) -> str:
+    return text[max(0, start - window): start + window].lower()
 
 
 def flag_vague_category_references(blog_content: str) -> list[str]:
     issues: list[str] = []
+    text = visible_text(blog_content)
+    lower = text.lower()
+
+    specificity_markers = [
+        "sem", "art.", "article", "lei / aig", "oasa / vzae", "spouse", "child",
+        "under 18", "canton", "official", "federal", "guidance", "weisungen",
+        "must be checked", "current official",
+    ]
+
     for pattern in VAGUE_CATEGORY_PATTERNS:
-        match = re.search(pattern, blog_content, flags=re.IGNORECASE)
-        if match:
-            issues.append(
-                f"Vague category reference found: '{match.group(0)}'. Name the category accurately or refer to current official guidance."
-            )
+        for match in re.finditer(pattern, lower, flags=re.IGNORECASE):
+            context = nearby_specificity(lower, match.start())
+            if not any(marker in context for marker in specificity_markers):
+                issues.append(
+                    f"Vague reference may need specificity: '{match.group(0)}'. "
+                    "Name the category, source or limitation where possible."
+                )
+                break
     return issues
 
 
@@ -1030,7 +1393,6 @@ def validate_cta(blog_content: str) -> list[str]:
     concrete_terms = ["review", "decision", "evidence", "route", "legal basis", "appeal", "reapplication", "timing", "options"]
     if cta_text and sum(1 for term in concrete_terms if term in cta_text) < 2:
         issues.append("CTA is too generic; it should explain what the firm would review or advise on.")
-
     return issues
 
 
@@ -1051,19 +1413,22 @@ def validate_generic_style(blog_content: str) -> list[str]:
         issues.append(f"Article exceeds hard maximum word count ({wc}/{MAX_BLOG_WORDS}).")
     if wc < 750:
         issues.append(f"Article may be too thin ({wc} words); ensure practical substance is adequate.")
-
     return issues
 
 
-def validate_editorial_quality(draft: dict[str, Any]) -> EditorialValidationResult:
+def validate_editorial_quality(draft: dict[str, Any], source_audit: dict[str, Any]) -> EditorialValidationResult:
     issues: list[str] = []
+    warnings: list[str] = []
     title = draft.get("blog_title", "")
     blog_content = draft.get("blog_content", "")
 
     issues.extend(validate_title(title))
     issues.extend(validate_opening_paragraph_rules(blog_content))
+    issues.extend(validate_quick_answer(blog_content))
     issues.extend(validate_practical_sections(blog_content))
-    issues.extend(flag_vague_category_references(blog_content))
+    issues.extend(validate_disclaimer(blog_content))
+    issues.extend(validate_source_anchoring(blog_content, source_audit))
+    warnings.extend(flag_vague_category_references(blog_content))
     issues.extend(validate_cta(blog_content))
     issues.extend(validate_generic_style(blog_content))
 
@@ -1072,7 +1437,34 @@ def validate_editorial_quality(draft: dict[str, Any]) -> EditorialValidationResu
     if repetition_score >= 0.08:
         issues.append(f"Repetition score too high: {repetition_score:.2f}. Compress repeated propositions.")
 
-    return EditorialValidationResult(passed=not issues, issues=issues, repetition_score=repetition_score)
+    return EditorialValidationResult(passed=not issues, issues=issues, warnings=warnings, repetition_score=repetition_score)
+
+
+def validate_seo(seo: dict[str, Any], draft: dict[str, Any]) -> SEOValidationResult:
+    issues: list[str] = []
+    warnings: list[str] = []
+
+    meta_title = seo.get("seo_meta_title", "")
+    meta_description = seo.get("seo_meta_description", "")
+    slug = seo.get("suggested_slug", "")
+    primary_keyword = seo.get("primary_keyword", "")
+    title = draft.get("blog_title", "")
+    body_start = visible_text(draft.get("blog_content", ""))[:600].lower()
+
+    if len(meta_title) > 60:
+        issues.append("SEO meta title exceeds 60 characters.")
+    if len(meta_description) > 155:
+        issues.append("SEO meta description exceeds 155 characters.")
+    if len(slug) > 80:
+        warnings.append("Suggested slug is long; consider shortening.")
+    if validate_title(meta_title):
+        issues.append("SEO meta title may overclaim.")
+    if primary_keyword and primary_keyword.lower() not in (title + " " + body_start).lower():
+        warnings.append("Primary keyword does not appear naturally in title or opening body.")
+    if re.search(r"\bguaranteed\b|\bultimate\b|\bsecret\b|\bmust-read\b", meta_title.lower()):
+        issues.append("SEO meta title contains melodramatic wording.")
+
+    return SEOValidationResult(passed=not issues, issues=issues, warnings=warnings)
 
 
 def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
@@ -1089,9 +1481,55 @@ def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
     return cleaned
 
 
+# ============================================================
+# HTML rendering
+# ============================================================
+
 def inline_bold_to_html(text: str) -> str:
     escaped = escape_html(text)
     return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
+
+
+def render_markdown_table(block: str) -> str | None:
+    lines = [line.strip() for line in block.splitlines() if line.strip()]
+    if len(lines) < 3 or not all(line.startswith("|") and line.endswith("|") for line in lines[:2]):
+        return None
+    if not re.match(r"^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$", lines[1]):
+        return None
+
+    def cells(line: str) -> list[str]:
+        return [cell.strip() for cell in line.strip("|").split("|")]
+
+    headers = cells(lines[0])
+    rows = [cells(line) for line in lines[2:]]
+
+    html = ["<table border='1' cellpadding='6' cellspacing='0'>"]
+    html.append("<thead><tr>" + "".join(f"<th>{inline_bold_to_html(h)}</th>" for h in headers) + "</tr></thead>")
+    html.append("<tbody>")
+    for row in rows:
+        html.append("<tr>" + "".join(f"<td>{inline_bold_to_html(cell)}</td>" for cell in row) + "</tr>")
+    html.append("</tbody></table>")
+    return "\n".join(html)
+
+
+def render_list_block(block: str) -> str | None:
+    lines = [line.rstrip() for line in block.splitlines() if line.strip()]
+    if not lines:
+        return None
+
+    unordered = all(re.match(r"^\s*[-*]\s+", line) for line in lines)
+    ordered = all(re.match(r"^\s*\d+\.\s+", line) for line in lines)
+
+    if not unordered and not ordered:
+        return None
+
+    tag = "ul" if unordered else "ol"
+    html = [f"<{tag}>"]
+    for line in lines:
+        item = re.sub(r"^\s*(?:[-*]|\d+\.)\s+", "", line).strip()
+        html.append(f"<li>{inline_bold_to_html(item)}</li>")
+    html.append(f"</{tag}>")
+    return "\n".join(html)
 
 
 def blog_content_to_html(blog_title: str, blog_content: str) -> str:
@@ -1100,6 +1538,16 @@ def blog_content_to_html(blog_title: str, blog_content: str) -> str:
 
     for block in blocks:
         stripped = block.strip()
+
+        table_html = render_markdown_table(stripped)
+        if table_html:
+            html_parts.append(table_html)
+            continue
+
+        list_html = render_list_block(stripped)
+        if list_html:
+            html_parts.append(list_html)
+            continue
 
         if is_bold_heading(stripped):
             inner = stripped[2:-2].strip()
@@ -1116,38 +1564,130 @@ def blog_content_to_html(blog_title: str, blog_content: str) -> str:
     return "\n".join(html_parts)
 
 
+# ============================================================
+# Final publication gate
+# ============================================================
+
+def build_publication_gate(
+    *,
+    source_audit: dict[str, Any],
+    verifier: dict[str, Any],
+    overlap: dict[str, Any],
+    editorial_validation: EditorialValidationResult,
+    seo_validation: SEOValidationResult,
+    draft: dict[str, Any],
+    revision_count: int,
+) -> PublicationGateResult:
+    blockers: list[str] = []
+    warnings: list[str] = []
+
+    if not source_audit.get("safe_to_draft", False):
+        blockers.append("Source audit is not safe to draft.")
+    if verifier.get("legal_risk_level") == "high":
+        blockers.append("Verifier assessed legal risk as high.")
+    if verifier.get("publication_blockers"):
+        blockers.extend([f"Verifier blocker: {item}" for item in verifier.get("publication_blockers", [])])
+    if overlap.get("cannibalisation_risk") == "high" and not overlap.get("new_article_distinct_angle"):
+        blockers.append("High cannibalisation risk and no distinct angle identified.")
+    if not editorial_validation.passed:
+        blockers.extend([f"Editorial issue: {item}" for item in editorial_validation.issues])
+    if not seo_validation.passed:
+        blockers.extend([f"SEO issue: {item}" for item in seo_validation.issues])
+
+    warnings.extend(source_audit.get("must_verify_before_publication", []))
+    warnings.extend(editorial_validation.warnings)
+    warnings.extend(seo_validation.warnings)
+
+    if overlap.get("cannibalisation_risk") == "medium":
+        warnings.append("Medium cannibalisation risk.")
+    if verifier.get("legal_risk_level") == "medium":
+        warnings.append("Verifier assessed legal risk as medium.")
+    if verifier.get("claims_requiring_exact_source_reference"):
+        warnings.extend(
+            [f"Exact source reference recommended: {claim}" for claim in verifier.get("claims_requiring_exact_source_reference", [])]
+        )
+
+    human_review_recommended = bool(warnings or verifier.get("legal_risk_level") == "medium")
+
+    return PublicationGateResult(
+        passed=not blockers,
+        blockers=blockers,
+        warnings=warnings,
+        human_review_recommended=human_review_recommended,
+        final_word_count=word_count(draft.get("blog_content", "")),
+        revision_count=revision_count,
+    )
+
+
+# ============================================================
+# Email rendering
+# ============================================================
+
 def render_success_email(
     *,
     topic_entry: dict[str, Any],
     draft: dict[str, Any],
     seo: dict[str, Any],
     remaining_after_send: int,
+    source_audit: dict[str, Any],
+    verifier: dict[str, Any],
+    overlap: dict[str, Any],
+    gate: PublicationGateResult,
+    selected_pack_paths: list[Path],
 ) -> str:
     keywords = "; ".join(seo["suggested_seo_keywords"])
     blog_html = blog_content_to_html(draft["blog_title"], draft["blog_content"])
+    review_label = "<p><strong>HUMAN REVIEW RECOMMENDED:</strong> Yes</p>" if gate.human_review_recommended else ""
 
     return f"""<html>
   <body style="font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #222;">
     <p><strong>TOPIC BACKLOG:</strong><br>{remaining_after_send} topics remaining</p>
+    {review_label}
 
     <p><strong>TOPIC:</strong><br>{escape_html(topic_entry.get('topic', ''))}</p>
-
     <p><strong>ANGLE:</strong><br>{escape_html(topic_entry.get('angle', ''))}</p>
-
     <p><strong>BLOG TITLE:</strong><br>{escape_html(draft['blog_title'])}</p>
-
     <p><strong>DYNAMIC PAGE LINK:</strong><br>&nbsp;</p>
 
     <p><strong>SEO META TITLE:</strong><br>{escape_html(seo['seo_meta_title'])}</p>
-
     <p><strong>SEO META DESCRIPTION:</strong><br>{escape_html(seo['seo_meta_description'])}</p>
-
+    <p><strong>SUGGESTED SLUG:</strong><br>{escape_html(seo.get('suggested_slug', ''))}</p>
+    <p><strong>PRIMARY KEYWORD:</strong><br>{escape_html(seo.get('primary_keyword', ''))}</p>
     <p><strong>SUGGESTED SEO KEYWORDS:</strong><br>{escape_html(keywords)}</p>
 
     <hr>
 
-    <p><strong>BLOG CONTENT:</strong></p>
+    <h3>Quality Control Summary</h3>
+    <p><strong>Final publication gate:</strong> {'Passed' if gate.passed else 'Failed'}</p>
+    <p><strong>Word count:</strong> {gate.final_word_count}</p>
+    <p><strong>Revision count:</strong> {gate.revision_count}</p>
 
+    <p><strong>Source audit summary:</strong></p>
+    {list_to_html(source_audit.get('recommended_source_references', []))}
+
+    <p><strong>Legal verifier summary:</strong><br>
+    Risk level: {escape_html(verifier.get('legal_risk_level', ''))}<br>
+    Recommended positioning: {escape_html(verifier.get('recommended_positioning', ''))}</p>
+
+    <p><strong>Overlap analysis:</strong><br>
+    Cannibalisation risk: {escape_html(overlap.get('cannibalisation_risk', ''))}<br>
+    Distinct angle: {escape_html(overlap.get('new_article_distinct_angle', ''))}</p>
+
+    <p><strong>Recommended internal links:</strong></p>
+    {list_to_html(overlap.get('internal_link_recommendations', []) + seo.get('internal_link_anchor_suggestions', []))}
+
+    <p><strong>External authority link suggestions:</strong></p>
+    {list_to_html(seo.get('external_authority_link_suggestions', []))}
+
+    <p><strong>Warnings requiring human verification:</strong></p>
+    {list_to_html(gate.warnings)}
+
+    <p><strong>Source list:</strong></p>
+    {list_to_html([str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths])}
+
+    <hr>
+
+    <p><strong>BLOG CONTENT:</strong></p>
     {blog_html}
   </body>
 </html>
@@ -1157,10 +1697,10 @@ def render_success_email(
 def render_review_email(
     *,
     topic_entry: dict[str, Any],
-    classifier: dict[str, Any],
-    memo: dict[str, Any],
-    verifier: dict[str, Any],
     reason: str,
+    artifact_path: Path | None = None,
+    blockers: list[str] | None = None,
+    warnings: list[str] | None = None,
 ) -> str:
     return f"""REVIEW REQUIRED: BLOG DRAFT WITHHELD
 
@@ -1170,21 +1710,32 @@ TOPIC:
 ANGLE:
 {topic_entry.get('angle', '')}
 
-AUDIENCE:
-{topic_entry.get('audience', 'general_global')}
-
 WITHHOLD REASON:
 {reason}
 
-CLASSIFIER:
-{json.dumps(classifier, ensure_ascii=False, indent=2)}
+BLOCKERS:
+{chr(10).join(f"- {item}" for item in blockers or [])}
 
-LEGAL MEMO:
-{json.dumps(memo, ensure_ascii=False, indent=2)}
+WARNINGS:
+{chr(10).join(f"- {item}" for item in warnings or [])}
 
-VERIFIER:
-{json.dumps(verifier, ensure_ascii=False, indent=2)}
+RUN ARTIFACT:
+{artifact_path or 'Not written'}
 """
+
+
+def send_review_required_email(topic_entry: dict[str, Any], reason: str, artifact_path: Path | None = None, blockers: list[str] | None = None, warnings: list[str] | None = None) -> None:
+    body = render_review_email(
+        topic_entry=topic_entry,
+        reason=reason,
+        artifact_path=artifact_path,
+        blockers=blockers,
+        warnings=warnings,
+    )
+    send_email_via_sendgrid(
+        subject=f"Review required: {topic_entry.get('topic', 'Swiss immigration blog topic')}",
+        body=body,
+    )
 
 
 # ============================================================
@@ -1196,192 +1747,285 @@ def main() -> None:
     topic_index, topic_entry, remaining_count = pick_topic(topics, args.topic_index)
 
     if args.dry_run:
-        print(json.dumps({"selected_topic": topic_entry, "remaining_unused": remaining_count}, ensure_ascii=False, indent=2))
+        authority_map = load_authority_pack_map(AUTHORITY_MAP_PATH)
+        selected_pack_paths = resolve_authority_pack_paths(topic_entry, authority_map)
+        print(json.dumps({
+            "selected_topic": topic_entry,
+            "remaining_unused": remaining_count,
+            "mapped_authority_packs": [str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths],
+            "expected_retrieval_queries": [
+                topic_entry.get("topic", ""),
+                topic_entry.get("angle", ""),
+                topic_entry.get("subtopic", ""),
+                topic_entry.get("pillar", ""),
+            ],
+        }, ensure_ascii=False, indent=2))
         return
 
     openai_api_key = require_env("OPENAI_API_KEY")
     require_env("SENDGRID_API_KEY")
 
-    authority_map = load_authority_pack_map(AUTHORITY_MAP_PATH)
-
-    classifier = call_responses_api(
-        openai_api_key,
-        instructions=CLASSIFIER_INSTRUCTIONS,
-        input_text=build_classifier_input(topic_entry),
-        schema=CLASSIFIER_SCHEMA,
-        model=OPENAI_MODEL,
-    )
-
-    retrieval_queries = list(classifier.get("key_issues", [])) + [
-        topic_entry.get("topic", ""),
-        topic_entry.get("angle", ""),
-    ]
-
-    selected_pack_paths = resolve_authority_pack_paths(topic_entry, authority_map)
-
-    if not selected_pack_paths:
-        raise RuntimeError(
-            f"No legal authority packs mapped for pillar={topic_entry.get('pillar')} "
-            f"subtopic={topic_entry.get('subtopic')}"
-        )
-
-    selected_legal_chunks = load_selected_legal_authority_chunks(selected_pack_paths)
-    internal_note_chunks = load_chunks_from_folder(INTERNAL_NOTES_DIR, "internal_legal_note")
-    website_editorial_chunks = load_chunks_from_folder(WEBSITE_EDITORIAL_DIR, "website_editorial")
-
-    legal_chunks = simple_retrieve(
-        selected_legal_chunks + internal_note_chunks,
-        retrieval_queries,
-        limit=10,
-        allowed_source_kinds={"legal_authority", "internal_legal_note"},
-    )
-
-    if not legal_chunks:
-        raise RuntimeError("No usable legal authority or internal legal note was retrieved for this topic.")
-
-    website_context_chunks = simple_retrieve(
-        website_editorial_chunks,
-        retrieval_queries,
-        limit=3,
-        allowed_source_kinds={"website_editorial"},
-    )
-
-    legal_sources_text = format_sources_for_prompt(legal_chunks)
-    website_context_text = format_sources_for_prompt(website_context_chunks)
-
-    memo = call_responses_api(
-        openai_api_key,
-        instructions=LEGAL_MEMO_INSTRUCTIONS,
-        input_text=build_legal_input(topic_entry, classifier, legal_sources_text),
-        schema=LEGAL_MEMO_SCHEMA,
-        model=OPENAI_MODEL,
-    )
-
-    verifier = call_responses_api(
-        openai_api_key,
-        instructions=VERIFIER_INSTRUCTIONS,
-        input_text=build_verifier_input(topic_entry, classifier, memo),
-        schema=VERIFIER_SCHEMA,
-        model=OPENAI_MODEL,
-    )
-
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     slug = re.sub(r"[^a-z0-9]+", "-", topic_entry.get("topic", "untitled").lower()).strip("-")[:80]
+    run_base = f"{timestamp}_{slug}"
 
-    write_run_artifact(
-        f"{timestamp}_{slug}_analysis.json",
-        {
-            "topic": topic_entry,
-            "classifier": classifier,
-            "selected_legal_authority_packs": [str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths],
-            "memo": memo,
-            "verifier": verifier,
-        },
-    )
+    partial_payload: dict[str, Any] = {"topic": topic_entry}
 
-    if not verifier["publishable"]:
-        review_email = render_review_email(
-            topic_entry=topic_entry,
-            classifier=classifier,
-            memo=memo,
-            verifier=verifier,
-            reason="Legal verifier blocked publication pending legal review.",
+    try:
+        authority_map = load_authority_pack_map(AUTHORITY_MAP_PATH)
+
+        classifier = call_responses_api(
+            openai_api_key,
+            instructions=CLASSIFIER_INSTRUCTIONS,
+            input_text=build_classifier_input(topic_entry),
+            schema=CLASSIFIER_SCHEMA,
+            model=OPENAI_MODEL,
         )
-        sent = send_email_via_sendgrid(
-            subject=f"Review required: {topic_entry.get('topic', 'Swiss immigration blog topic')}",
-            body=review_email,
+        partial_payload["classifier"] = classifier
+
+        retrieval_queries = list(classifier.get("key_issues", [])) + [
+            topic_entry.get("topic", ""),
+            topic_entry.get("angle", ""),
+        ]
+
+        selected_pack_paths = resolve_authority_pack_paths(topic_entry, authority_map)
+        partial_payload["selected_legal_authority_packs"] = [str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths]
+
+        if not selected_pack_paths:
+            raise RuntimeError(
+                f"No legal authority packs mapped for pillar={topic_entry.get('pillar')} "
+                f"subtopic={topic_entry.get('subtopic')}"
+            )
+
+        selected_legal_chunks = load_selected_legal_authority_chunks(selected_pack_paths)
+        internal_note_chunks = load_chunks_from_folder(INTERNAL_NOTES_DIR, "internal_legal_note")
+        website_editorial_chunks = load_chunks_from_folder(WEBSITE_EDITORIAL_DIR, "website_editorial")
+
+        legal_chunks = simple_retrieve(
+            selected_legal_chunks + internal_note_chunks,
+            retrieval_queries,
+            limit=10,
+            allowed_source_kinds={"legal_authority", "internal_legal_note"},
         )
-        if not sent:
-            raise RuntimeError("Legal verifier blocked publication and review email delivery failed.")
-        print("Review email sent because legal verifier blocked publication.")
-        return
 
-    draft = call_responses_api(
-        openai_api_key,
-        instructions=DRAFT_INSTRUCTIONS,
-        input_text=build_draft_input(topic_entry, classifier, memo, verifier, website_context_text),
-        schema=DRAFT_SCHEMA,
-        model=OPENAI_MODEL,
-    )
-    draft = normalise_draft_output(draft)
-    editorial_validation = validate_editorial_quality(draft)
+        if not legal_chunks:
+            raise RuntimeError("No usable legal authority or internal legal note was retrieved for this topic.")
 
-    revision_count = 0
-    while not editorial_validation.passed and revision_count < MAX_EDITORIAL_REVISIONS:
-        revision_count += 1
+        website_context_chunks = simple_retrieve(
+            website_editorial_chunks,
+            retrieval_queries,
+            limit=3,
+            allowed_source_kinds={"website_editorial"},
+        )
+
+        legal_sources_text = format_sources_for_prompt(legal_chunks)
+        website_context_text = format_sources_for_prompt(website_context_chunks)
+
+        source_audit = call_responses_api(
+            openai_api_key,
+            instructions=SOURCE_AUDIT_INSTRUCTIONS,
+            input_text=build_source_audit_input(topic_entry, classifier, legal_chunks, website_context_chunks),
+            schema=SOURCE_AUDIT_SCHEMA,
+            model=OPENAI_MODEL,
+        )
+        partial_payload["source_audit"] = source_audit
+
+        if not source_audit.get("safe_to_draft", False):
+            artifact_path = write_run_artifact(f"{run_base}_blocked_source_audit.json", partial_payload)
+            send_review_required_email(
+                topic_entry,
+                "Source audit blocked drafting.",
+                artifact_path=artifact_path,
+                blockers=source_audit.get("source_gaps", []) + source_audit.get("must_verify_before_publication", []),
+                warnings=source_audit.get("stale_or_uncertain_sources", []),
+            )
+            return
+
+        overlap = call_responses_api(
+            openai_api_key,
+            instructions=OVERLAP_INSTRUCTIONS,
+            input_text=build_overlap_input(topic_entry, classifier, website_context_text),
+            schema=OVERLAP_SCHEMA,
+            model=OPENAI_MODEL,
+        )
+        partial_payload["overlap_analysis"] = overlap
+
+        if overlap.get("cannibalisation_risk") == "high" and not overlap.get("new_article_distinct_angle"):
+            artifact_path = write_run_artifact(f"{run_base}_blocked_overlap.json", partial_payload)
+            send_review_required_email(
+                topic_entry,
+                "High cannibalisation risk and no distinct article angle identified.",
+                artifact_path=artifact_path,
+                blockers=["High cannibalisation risk and no distinct angle."],
+            )
+            return
+
+        memo = call_responses_api(
+            openai_api_key,
+            instructions=LEGAL_MEMO_INSTRUCTIONS,
+            input_text=build_legal_input(topic_entry, classifier, source_audit, legal_sources_text),
+            schema=LEGAL_MEMO_SCHEMA,
+            model=OPENAI_MODEL,
+        )
+        partial_payload["memo"] = memo
+
+        verifier = call_responses_api(
+            openai_api_key,
+            instructions=VERIFIER_INSTRUCTIONS,
+            input_text=build_verifier_input(topic_entry, classifier, memo, source_audit, overlap),
+            schema=VERIFIER_SCHEMA,
+            model=OPENAI_MODEL,
+        )
+        partial_payload["verifier"] = verifier
+
+        analysis_path = write_run_artifact(f"{run_base}_analysis.json", partial_payload)
+
+        if verifier.get("legal_risk_level") == "high" or verifier.get("publication_blockers"):
+            send_review_required_email(
+                topic_entry,
+                "Legal verifier blocked publication.",
+                artifact_path=analysis_path,
+                blockers=verifier.get("publication_blockers", []),
+                warnings=verifier.get("mandatory_revisions", []),
+            )
+            return
+
         draft = call_responses_api(
             openai_api_key,
-            instructions=EDITORIAL_REVISER_INSTRUCTIONS,
-            input_text=build_revision_input(
-                topic_entry=topic_entry,
-                draft=draft,
-                memo=memo,
-                verifier=verifier,
-                validation=editorial_validation,
-            ),
+            instructions=DRAFT_INSTRUCTIONS,
+            input_text=build_draft_input(topic_entry, classifier, memo, verifier, source_audit, overlap, website_context_text),
             schema=DRAFT_SCHEMA,
             model=OPENAI_MODEL,
         )
         draft = normalise_draft_output(draft)
-        editorial_validation = validate_editorial_quality(draft)
+        editorial_validation = validate_editorial_quality(draft, source_audit)
 
-    if not editorial_validation.passed:
-        raise RuntimeError(
-            "Editorial validation still failed after automatic revision passes:\n"
-            + "\n".join(f"- {issue}" for issue in editorial_validation.issues)
+        revision_count = 0
+        while not editorial_validation.passed and revision_count < MAX_EDITORIAL_REVISIONS:
+            revision_count += 1
+            draft = call_responses_api(
+                openai_api_key,
+                instructions=EDITORIAL_REVISER_INSTRUCTIONS,
+                input_text=build_revision_input(
+                    topic_entry=topic_entry,
+                    draft=draft,
+                    memo=memo,
+                    verifier=verifier,
+                    source_audit=source_audit,
+                    overlap=overlap,
+                    validation=editorial_validation,
+                ),
+                schema=DRAFT_SCHEMA,
+                model=OPENAI_MODEL,
+            )
+            draft = normalise_draft_output(draft)
+            editorial_validation = validate_editorial_quality(draft, source_audit)
+
+        seo = call_responses_api(
+            openai_api_key,
+            instructions=SEO_INSTRUCTIONS,
+            input_text=build_seo_input(topic_entry, draft, overlap, source_audit),
+            schema=SEO_SCHEMA,
+            model=OPENAI_MODEL,
+        )
+        seo_validation = validate_seo(seo, draft)
+
+        gate = build_publication_gate(
+            source_audit=source_audit,
+            verifier=verifier,
+            overlap=overlap,
+            editorial_validation=editorial_validation,
+            seo_validation=seo_validation,
+            draft=draft,
+            revision_count=revision_count,
         )
 
-    seo = call_responses_api(
-        openai_api_key,
-        instructions=SEO_INSTRUCTIONS,
-        input_text=build_seo_input(topic_entry, draft),
-        schema=SEO_SCHEMA,
-        model=OPENAI_MODEL,
-    )
-
-    write_run_artifact(
-        f"{timestamp}_{slug}_final.json",
-        {
-            "topic": topic_entry,
-            "classifier": classifier,
-            "selected_legal_authority_packs": [str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths],
-            "memo": memo,
-            "verifier": verifier,
+        final_payload = {
+            **partial_payload,
+            "draft": draft,
+            "seo": seo,
             "editorial_validation": {
                 "passed": editorial_validation.passed,
                 "issues": editorial_validation.issues,
+                "warnings": editorial_validation.warnings,
                 "repetition_score": editorial_validation.repetition_score,
-                "revision_count": revision_count,
-                "word_count": word_count(draft["blog_content"]),
             },
-            "draft": draft,
-            "seo": seo,
-        },
-    )
+            "seo_validation": {
+                "passed": seo_validation.passed,
+                "issues": seo_validation.issues,
+                "warnings": seo_validation.warnings,
+            },
+            "publication_gate": {
+                "passed": gate.passed,
+                "blockers": gate.blockers,
+                "warnings": gate.warnings,
+                "human_review_recommended": gate.human_review_recommended,
+                "final_word_count": gate.final_word_count,
+                "revision_count": gate.revision_count,
+            },
+        }
 
-    email_body = render_success_email(
-        topic_entry=topic_entry,
-        draft=draft,
-        seo=seo,
-        remaining_after_send=remaining_count - 1,
-    )
+        final_path = write_run_artifact(f"{run_base}_final.json", final_payload)
 
-    sent = send_email_via_sendgrid(
-        subject=f"Blog draft: {draft['blog_title']}",
-        body=email_body,
-        is_html=True,
-    )
-    if not sent:
-        raise RuntimeError("Draft generated but SendGrid delivery failed.")
+        if not gate.passed:
+            send_review_required_email(
+                topic_entry,
+                "Final publication gate failed.",
+                artifact_path=final_path,
+                blockers=gate.blockers,
+                warnings=gate.warnings,
+            )
+            return
 
-    topics[topic_index]["status"] = "used"
-    topics[topic_index]["used_title"] = draft["blog_title"]
-    topics[topic_index]["used_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        email_body = render_success_email(
+            topic_entry=topic_entry,
+            draft=draft,
+            seo=seo,
+            remaining_after_send=remaining_count - 1,
+            source_audit=source_audit,
+            verifier=verifier,
+            overlap=overlap,
+            gate=gate,
+            selected_pack_paths=selected_pack_paths,
+        )
 
-    with TOPICS_PATH.open("w", encoding="utf-8") as f:
-        json.dump(topics, f, indent=2, ensure_ascii=False)
+        subject_prefix = "Blog draft"
+        if gate.human_review_recommended:
+            subject_prefix = "Blog draft - human review recommended"
 
-    print(f"Draft email sent successfully for: {draft['blog_title']}")
+        sent = send_email_via_sendgrid(
+            subject=f"{subject_prefix}: {draft['blog_title']}",
+            body=email_body,
+            is_html=True,
+        )
+        if not sent:
+            raise RuntimeError("Draft generated but SendGrid delivery failed.")
+
+        should_mark_used = not gate.human_review_recommended or args.auto_mark_used_on_review_recommended
+        if should_mark_used:
+            topics[topic_index]["status"] = "used"
+            topics[topic_index]["used_title"] = draft["blog_title"]
+            topics[topic_index]["used_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+            with TOPICS_PATH.open("w", encoding="utf-8") as f:
+                json.dump(topics, f, indent=2, ensure_ascii=False)
+
+            print(f"Draft email sent successfully and topic marked used: {draft['blog_title']}")
+        else:
+            print(f"Draft email sent with human review recommended; topic remains unused: {draft['blog_title']}")
+
+    except Exception as exc:
+        partial_payload["error"] = str(exc)
+        artifact_path = write_run_artifact(f"{run_base}_error.json", partial_payload)
+        try:
+            send_review_required_email(
+                topic_entry,
+                f"Pipeline error: {exc}",
+                artifact_path=artifact_path,
+                blockers=[str(exc)],
+            )
+        finally:
+            raise
 
 
 if __name__ == "__main__":
