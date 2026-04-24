@@ -1,62 +1,64 @@
 [
-{
-"topic": "Swiss C Permit After 5 Years or 10 Years: Why Settlement Timelines Differ by Nationality",
-"angle": "Explains why some applicants can reach a Swiss C permit after 5 years while others usually wait 10 years, with practical focus on route selection, nationality-sensitive timelines, and common misunderstandings.",
-"audience": "global_individuals",
-"article_type": "comparison_piece",
-"pillar": "settlement_and_c_permit",
-"subtopic": "fast_track_c_permit",
-"route_type": "route_specific",
-"legal_complexity": "high",
-"overlap_group": "c_permit_fast_track_and_integration",
-"style_profile": "comparison_led",
-"search_intent": "comparative_research",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not collapse treaty-based, practice-based, and integration-based 5-year routes into one rule",
-"Avoid implying that 5-year eligibility means automatic approval",
-"Explain clearly that nationality can change the legal framework and evidence burden"
-],
-"status": "unused"
-},
-{
-"topic": "Do Student Years Count Toward a Swiss C Permit? How Residence Counting Really Works",
-"angle": "Clarifies how Swiss authorities assess residence history for C permit eligibility, with emphasis on student years, L permits, mixed permit histories, and timing mistakes before filing.",
-"audience": "inside_switzerland_individuals",
-"article_type": "evidence_strategy",
-"pillar": "settlement_and_c_permit",
-"subtopic": "residence_counting_and_qualifying_years",
-"route_type": "broad_issue",
-"legal_complexity": "high",
-"overlap_group": "c_permit_eligibility_and_counting",
-"style_profile": "procedural",
-"search_intent": "informational_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not suggest that all lawful years in Switzerland count in the same way",
-"Use mixed-status examples to avoid oversimplifying residence counting",
-"Separate first-five-year and final-five-year counting issues carefully"
-],
-"status": "unused"
-},
-{
-"topic": "Can You Lose a Swiss C Permit by Living Abroad Too Long?",
-"angle": "Explains lapse risk, advance preservation requests, repeated short returns, and centre-of-life problems for C permit holders spending extended periods outside Switzerland.",
-"audience": "inside_switzerland_individuals",
-"article_type": "risk_analysis",
-"pillar": "settlement_and_c_permit",
-"subtopic": "absence_lapse_and_preservation",
-"route_type": "broad_issue",
-"legal_complexity": "high",
-"overlap_group": "c_permit_absence_and_preservation",
-"style_profile": "risk_focused",
-"search_intent": "urgent_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not describe the C permit as unconditional permanent residence",
-"Distinguish card renewal from the underlying status clearly",
-"Avoid over-focusing on short trips; explain centre-of-life and advance preservation issues"
-],
-"status": "unused"
-}
+  {
+    "topic": "Swiss C Permit After 5 Years or 10 Years: Why Settlement Timelines Differ by Nationality",
+    "angle": "Explains why some applicants can reach a Swiss C permit after 5 years while others usually wait 10 years, with practical focus on route selection, nationality-sensitive timelines, and common misunderstandings.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "fast_track_c_permit",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_fast_track_and_integration",
+    "style_profile": "comparison_led",
+    "search_intent": "comparative_research",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not collapse treaty-based, practice-based, and integration-based 5-year routes into one rule",
+      "Avoid implying that 5-year eligibility means automatic approval",
+      "Explain clearly that nationality can change the legal framework and evidence burden"
+    ],
+    "status": "used",
+    "used_title": "Swiss C Permit After 5 Years or 10 Years: Why Settlement Timelines Differ by Nationality",
+    "used_at_utc": "2026-04-24T06:20:46Z"
+  },
+  {
+    "topic": "Do Student Years Count Toward a Swiss C Permit? How Residence Counting Really Works",
+    "angle": "Clarifies how Swiss authorities assess residence history for C permit eligibility, with emphasis on student years, L permits, mixed permit histories, and timing mistakes before filing.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "residence_counting_and_qualifying_years",
+    "route_type": "broad_issue",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_eligibility_and_counting",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not suggest that all lawful years in Switzerland count in the same way",
+      "Use mixed-status examples to avoid oversimplifying residence counting",
+      "Separate first-five-year and final-five-year counting issues carefully"
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Can You Lose a Swiss C Permit by Living Abroad Too Long?",
+    "angle": "Explains lapse risk, advance preservation requests, repeated short returns, and centre-of-life problems for C permit holders spending extended periods outside Switzerland.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "absence_lapse_and_preservation",
+    "route_type": "broad_issue",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_absence_and_preservation",
+    "style_profile": "risk_focused",
+    "search_intent": "urgent_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not describe the C permit as unconditional permanent residence",
+      "Distinguish card renewal from the underlying status clearly",
+      "Avoid over-focusing on short trips; explain centre-of-life and advance preservation issues"
+    ],
+    "status": "unused"
+  }
 ]
