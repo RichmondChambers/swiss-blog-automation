@@ -377,7 +377,11 @@ Swiss official-source terminology:
 - Do not overload the article with bilingual terminology. Use the English term alone where that is clearer and sufficient.
 
 Formatting requirements:
-- Use keyword-optimised sub-headings throughout.
+- Use SEO-aware sub-headings throughout, but keep them natural and readable.
+- Integrate relevant keywords into sub-headings only where they fit naturally.
+- Do not force exact-match keyword phrases into every sub-heading.
+- Avoid repetitive keyword stems across consecutive sub-headings.
+- Prioritise clear, user-helpful sub-headings over aggressive optimisation.
 - Every sub-heading must be surrounded by a blank line above and below.
 - Format each sub-heading in bold using double asterisks only, for example: **How Student Residence Is Counted for a Swiss C Permit**
 - The first paragraph of the article must be fully bold using double asterisks.
@@ -1006,7 +1010,11 @@ def build_draft_input(
                     "use 'SEM Directives' or first use 'SEM Directives on the Foreign Nationals and Integration Act "
                     "(Directives LEI / AIG; Weisungen AIG)'. Do not use only the French or only the German term."
                 ),
-                "subheading_style": "Use bold keyword-optimised sub-headings with a blank line above and below each one.",
+                "subheading_style": (
+                    "Use bold sub-headings with a blank line above and below each one. "
+                    "Sub-headings should be SEO-aware but natural: include relevant keywords only where they "
+                    "fit cleanly, avoid stuffing, and do not force exact-match keyword phrases into every heading."
+                ),
                 "opening_style": "The first paragraph must be fully bold, followed immediately by a second introductory paragraph without legal citations.",
                 "do_not_include_quick_answer": True,
                 "prefer_prose_over_bullets": True,
