@@ -17,7 +17,7 @@
       "Use mixed-status examples to avoid oversimplifying residence counting",
       "Separate first-five-year and final-five-year counting issues carefully"
     ],
-    "status": "used",
+    "status": "unused",
     "used_title": "Do Student Years Count Toward a Swiss C Permit? How Swiss Residence Counting Really Works",
     "used_at_utc": "2026-04-26T07:07:26Z"
   },
@@ -39,7 +39,7 @@
       "Distinguish card renewal from the underlying status clearly",
       "Avoid over-focusing on short trips; explain centre-of-life and advance preservation issues"
     ],
-    "status": "used",
+    "status": "unused",
     "used_title": "Can You Lose a Swiss C Permit by Living Abroad Too Long? Absence, Preservation and Centre of Life Risks",
     "used_at_utc": "2026-04-26T07:24:13Z"
   },
@@ -61,7 +61,7 @@
       "Avoid implying that five-year access means automatic approval",
       "Explain that nationality changes timeline but does not remove integration scrutiny"
     ],
-    "status": "used",
+    "status": "unused",
     "used_title": "Swiss C Permit After 5 Years or 10 Years: Why Settlement Timelines Differ by Nationality",
     "used_at_utc": "2026-04-26T07:54:40Z"
   },
@@ -83,7 +83,7 @@
       "Separate first-five-years counting issues from final-five-years durability issues",
       "Use examples of mixed residence histories without overgeneralising"
     ],
-    "status": "used",
+    "status": "unused",
     "used_title": "Do Student Years Count Toward a Swiss C Permit? How Swiss Residence Counting Really Works",
     "used_at_utc": "2026-04-26T08:28:52Z"
   },
@@ -105,7 +105,7 @@
       "Avoid treating the certificate as the whole integration analysis",
       "Flag that cantonal process and evidence expectations may vary"
     ],
-    "status": "used",
+    "status": "unused",
     "used_title": "Swiss C Permit Language Rules Explained: A2/A1, B1/A1 and When Stronger Proof Is Needed",
     "used_at_utc": "2026-04-26T08:49:05Z"
   },
@@ -127,7 +127,7 @@
       "Distinguish card-renewal formalities from lapse of the underlying status",
       "Explain preservation requests and centre-of-life issues without overstating certainty"
     ],
-    "status": "used",
+    "status": "unused",
     "used_title": "Can You Lose a Swiss C Permit by Spending Too Much Time Abroad?",
     "used_at_utc": "2026-04-26T12:25:31Z"
   },
@@ -149,7 +149,7 @@
       "Avoid blaming language alone where counting or compliance may be the real issue",
       "Reflect canton-level variation without suggesting arbitrary decision-making"
     ],
-    "status": "used",
+    "status": "unused",
     "used_title": "Why a Swiss C Permit Application Was Not Approved: Common Reasons a Canton Extends the B Permit Instead",
     "used_at_utc": "2026-04-26T12:47:57Z"
   }
