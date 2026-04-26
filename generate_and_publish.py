@@ -290,6 +290,9 @@ Rules:
 - Identify common mistakes and refusal risks.
 - State which propositions are safe for public article use and which need cautious wording.
 - Where documents or evidence are mentioned, make clear they are examples only and not an exhaustive checklist.
+- In public-facing formulations, use clear English by default.
+- If a non-English official or legal term is useful for precision, give both French and German where both are relevant. For example: "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)".
+- Do not use only the German term or only the French term where both terms are commonly relevant in Switzerland.
 
 Return strict JSON only.
 """.strip()
@@ -366,6 +369,13 @@ Terminology:
 - Always use LEI / AIG, never AIG on its own.
 - Always use OASA / VZAE, never VZAE on its own.
 
+Swiss official-source terminology:
+- Use clear English by default.
+- For SEM directives/instructions, prefer "SEM Directives" or, on the first technical reference where precision helps, "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)".
+- Do not use only "Weisungen AIG", only "SEM Weisungen", only "Directives LEI / AIG", or only another non-English term in the public blog content.
+- Where a non-English Swiss legal or official term is used and both French and German terms are commonly relevant, provide both French and German rather than only one language.
+- Do not overload the article with bilingual terminology. Use the English term alone where that is clearer and sufficient.
+
 Formatting requirements:
 - Use keyword-optimised sub-headings throughout.
 - Every sub-heading must be surrounded by a blank line above and below.
@@ -380,7 +390,7 @@ Formatting requirements:
 Legal authority requirements:
 - Include a small number of short legal authority references throughout the body after the first two paragraphs.
 - Legal authority references must be legally accurate and should include article numbers wherever relevant.
-- Refer to named official sources where appropriate, such as SEM guidance, SEM Weisungen AIG, or specific legislation.
+- Refer to named official sources where appropriate, such as SEM guidance, SEM Directives, the SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG), or specific legislation.
 - Do not write "the supplied guidance", "the supplied materials", "the guidance supplied", "the materials provided", "the legal sources supplied", or similar phrases in the blog content.
 - Do not invent nationality lists, canton-specific practice, forms, fees or procedural requirements.
 
@@ -990,6 +1000,12 @@ def build_draft_input(
                 "hard_word_limit": MAX_BLOG_WORDS,
                 "target_word_range": TARGET_BLOG_WORDS,
                 "citation_style": "Use short in-text legal references only, using LEI / AIG and OASA / VZAE.",
+                "official_source_language_style": (
+                    "Use clear English by default. If a non-English official term is useful for precision, "
+                    "provide both French and German where both are relevant. For SEM directives/instructions, "
+                    "use 'SEM Directives' or first use 'SEM Directives on the Foreign Nationals and Integration Act "
+                    "(Directives LEI / AIG; Weisungen AIG)'. Do not use only the French or only the German term."
+                ),
                 "subheading_style": "Use bold keyword-optimised sub-headings with a blank line above and below each one.",
                 "opening_style": "The first paragraph must be fully bold, followed immediately by a second introductory paragraph without legal citations.",
                 "do_not_include_quick_answer": True,
@@ -1141,6 +1157,41 @@ def replace_informal_c_permit_terms(text: str) -> str:
     text = re.sub(r"\bordinary C\b", "an ordinary C-permit", text, flags=re.IGNORECASE)
     text = re.sub(r"\bOrdinary C\b", "An ordinary C-permit", text)
     return text
+
+
+def replace_sem_directives_terms(text: str) -> str:
+    """
+    Normalise one-language references to SEM directives/instructions.
+
+    Default public style:
+    - "SEM Directives" for readability; or
+    - "SEM Directives on the Foreign Nationals and Integration Act
+      (Directives LEI / AIG; Weisungen AIG)" on a first technical reference where precision helps.
+    """
+    replacements = {
+        r"\bSEM Weisungen LEI / AIG\b": "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
+        r"\bSEM Weisungen AIG\b": "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
+        r"\bWeisungen AIG\b": "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
+        r"\bDirectives LEI / AIG\b": "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
+        r"\bSEM Weisungen\b": "SEM Directives",
+        r"\bWeisungen\b": "SEM Directives",
+    }
+
+    cleaned = text
+    for pattern, replacement in replacements.items():
+        cleaned = re.sub(pattern, replacement, cleaned, flags=re.IGNORECASE)
+
+    # Avoid accidental duplicated bilingual labels.
+    cleaned = re.sub(
+        r"SEM Directives on the Foreign Nationals and Integration Act "
+        r"\(Directives LEI / AIG; Weisungen AIG\)\s*"
+        r"\(Directives LEI / AIG; Weisungen AIG\)",
+        "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+
+    return cleaned
 
 
 def replace_ai_source_phrases(text: str) -> str:
@@ -1307,6 +1358,7 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
 
     blog_content = cleaned.get("blog_content", "").strip()
     blog_content = replace_legal_abbreviation_style(blog_content)
+    blog_content = replace_sem_directives_terms(blog_content)
     blog_content = remove_forbidden_public_phrases(blog_content)
     blog_content = replace_ai_source_phrases(blog_content)
     blog_content = remove_near_top_summary_section(blog_content)
@@ -1320,7 +1372,9 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
     cleaned["blog_title"] = replace_person_references(
         replace_informal_c_permit_terms(
             replace_ai_source_phrases(
-                replace_legal_abbreviation_style(cleaned.get("blog_title", "").strip())
+                replace_sem_directives_terms(
+                    replace_legal_abbreviation_style(cleaned.get("blog_title", "").strip())
+                )
             )
         )
     )
