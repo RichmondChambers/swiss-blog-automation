@@ -1161,38 +1161,68 @@ def replace_informal_c_permit_terms(text: str) -> str:
 
 def replace_sem_directives_terms(text: str) -> str:
     """
-    Normalise one-language references to SEM directives/instructions.
+    Normalise references to SEM directives/instructions.
 
-    Default public style:
-    - "SEM Directives" for readability; or
-    - "SEM Directives on the Foreign Nationals and Integration Act
-      (Directives LEI / AIG; Weisungen AIG)" on a first technical reference where precision helps.
+    Public style:
+    - Prefer "SEM Directives" for readability.
+    - Avoid stacked bilingual or repeated labels such as:
+      "SEM Directives on the Foreign Nationals and Integration Act
+      (Directives LEI / AIG; SEM Directives AIG); SEM Directives LEI / AIG)".
+    - Where the model has already produced a long technical reference, collapse it
+      to the readable public form unless the full technical label is genuinely
+      needed elsewhere.
     """
+    cleaned = text
+
+    # Collapse over-expanded or repeated SEM Directive labels first.
+    sem_directives_expanded_patterns = [
+        r"SEM Directives on the Foreign Nationals and Integration Act\s*"
+        r"\([^)]*(?:LEI\s*/\s*AIG|AIG|Weisungen)[^)]*\)"
+        r"(?:\s*(?:;|,|and)\s*"
+        r"(?:SEM\s+Directives(?:\s+(?:LEI\s*/\s*AIG|AIG))?|Directives\s+LEI\s*/\s*AIG|Weisungen\s+AIG))*",
+
+        r"SEM Directives on the Foreign Nationals and Integration Act\s*"
+        r"(?:\s*(?:;|,|and)\s*"
+        r"(?:SEM\s+Directives(?:\s+(?:LEI\s*/\s*AIG|AIG))?|Directives\s+LEI\s*/\s*AIG|Weisungen\s+AIG))+",
+
+        r"SEM Directives\s*\([^)]*(?:LEI\s*/\s*AIG|AIG|Weisungen)[^)]*\)"
+        r"(?:\s*(?:;|,|and)\s*"
+        r"(?:SEM\s+Directives(?:\s+(?:LEI\s*/\s*AIG|AIG))?|Directives\s+LEI\s*/\s*AIG|Weisungen\s+AIG))*",
+    ]
+
+    for pattern in sem_directives_expanded_patterns:
+        cleaned = re.sub(pattern, "SEM Directives", cleaned, flags=re.IGNORECASE)
+
     replacements = {
-        r"\bSEM Weisungen LEI / AIG\b": "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
-        r"\bSEM Weisungen AIG\b": "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
-        r"\bWeisungen AIG\b": "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
-        r"\bDirectives LEI / AIG\b": "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
+        r"\bSEM Weisungen LEI / AIG\b": "SEM Directives",
+        r"\bSEM Weisungen AIG\b": "SEM Directives",
+        r"\bWeisungen AIG\b": "SEM Directives",
+        r"\bDirectives LEI / AIG\b": "SEM Directives",
+        r"\bSEM Directives LEI / AIG\b": "SEM Directives",
+        r"\bSEM Directives AIG\b": "SEM Directives",
         r"\bSEM Weisungen\b": "SEM Directives",
         r"\bWeisungen\b": "SEM Directives",
     }
 
-    cleaned = text
     for pattern, replacement in replacements.items():
         cleaned = re.sub(pattern, replacement, cleaned, flags=re.IGNORECASE)
 
-    # Avoid accidental duplicated bilingual labels.
+    # Remove duplicate references that can be produced after normalisation.
     cleaned = re.sub(
-        r"SEM Directives on the Foreign Nationals and Integration Act "
-        r"\(Directives LEI / AIG; Weisungen AIG\)\s*"
-        r"\(Directives LEI / AIG; Weisungen AIG\)",
-        "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)",
+        r"\bSEM Directives\b(?:\s*(?:;|,|and)\s*\bSEM Directives\b)+",
+        "SEM Directives",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+
+    cleaned = re.sub(
+        r"\bSEM Directives\s*\(\s*SEM Directives\s*\)",
+        "SEM Directives",
         cleaned,
         flags=re.IGNORECASE,
     )
 
     return cleaned
-
 
 def replace_ai_source_phrases(text: str) -> str:
     replacements = {
