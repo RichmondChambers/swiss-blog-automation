@@ -111,8 +111,8 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "evidence considerations",
             "what this means in practice",
             "what to do next",
-            "disclaimer",
             "CTA",
+            "disclaimer",
         ],
     },
     {
@@ -130,8 +130,8 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "examples",
             "what this means in practice",
             "what to do next",
-            "disclaimer",
             "CTA",
+            "disclaimer",
         ],
     },
     {
@@ -149,8 +149,8 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "timing or strategy",
             "what this means in practice",
             "what to do next",
-            "disclaimer",
             "CTA",
+            "disclaimer",
         ],
     },
     {
@@ -168,8 +168,8 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "evidence considerations",
             "what this means in practice",
             "what to do next",
-            "disclaimer",
             "CTA",
+            "disclaimer",
         ],
     },
     {
@@ -187,8 +187,8 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "common mistakes",
             "what this means in practice",
             "what to do next",
-            "disclaimer",
             "CTA",
+            "disclaimer",
         ],
     },
 ]
@@ -237,7 +237,7 @@ Return strict JSON only.
 DRAFT_INSTRUCTIONS = f"""
 You are drafting a client-facing blog post for a Swiss immigration law firm.
 Draft only from the legal memo, legal sources and editorial instructions supplied.
-Do not add new legal propositions that are not supported by the memo or supplied legal sources.
+Do not add new legal propositions that are not supported by the memo or legal sources.
 
 Core editorial target:
 - Write like a careful Swiss immigration practitioner advising a discerning prospective client.
@@ -246,6 +246,7 @@ Core editorial target:
 - Be practical rather than merely descriptive.
 - Be authoritative without overclaiming.
 - Be conversion-aware without sounding like marketing copy.
+- The article must read as though it was written by a human Swiss immigration lawyer, not by AI.
 
 Length and structure:
 - Target approximately {TARGET_BLOG_WORDS} words.
@@ -258,9 +259,9 @@ Length and structure:
 - Do not use a standardised article template for every topic. Follow the article structure variant supplied in the input.
 
 Structure variety:
-- Use the supplied article_structure_variant to vary the shape, order and emphasis of the article.
+- Use the article_structure_variant to vary the shape, order and emphasis of the article.
 - The article should not always follow the same sequence of headings.
-- You may begin with a practical misconception, a legal framework, a decision point, a short anonymised scenario or a timing problem, depending on the supplied variant.
+- You may begin with a practical misconception, a legal framework, a decision point, a short anonymised scenario or a timing problem, depending on the variant.
 - Keep the required sections **What This Means in Practice** and **What To Do Next**, but vary the surrounding structure and headings.
 - Avoid making every article look or feel like a checklist-led explainer.
 
@@ -276,7 +277,7 @@ Required article elements:
 - **What This Means in Practice**
 - **What To Do Next**
 - restrained CTA
-- short legal disclaimer before the CTA or near the end
+- short italicised legal disclaimer at the very end, after the CTA
 
 Writing requirements:
 - UK English.
@@ -284,7 +285,8 @@ Writing requirements:
 - Professional but clear and easy to understand.
 - Explain legal issues in practical language that a non-lawyer can follow.
 - Write as a human legal professional, not as an internal system.
-- Never refer to "the memo", "the verified memo", "the materials", "the verified materials", "any article on this topic", source packs, drafting inputs or internal validation.
+- Never refer to "the memo", "the verified memo", "the materials", "the verified materials", "any article on this topic", "the supplied guidance", "the supplied legal sources", source packs, drafting inputs or internal validation.
+- Avoid phrasing that suggests the article was generated from supplied materials or AI prompts.
 - Avoid empty emphasis, filler and generic transition language.
 - Avoid formulaic phrases such as "that distinction matters", "the practical point is", and "it is important to note" unless genuinely necessary.
 - Prefer concrete framing over broad marketing abstractions.
@@ -292,6 +294,7 @@ Writing requirements:
 - Use bullet points or numbered lists only where they materially improve clarity and no prose alternative would work as well.
 - Avoid multiple bullet-point sections in the same article.
 - The **What To Do Next** section should usually be written in prose, not as a numbered list, unless the topic genuinely requires a sequence.
+- Avoid repeated references to "the person". Prefer "an applicant", "the applicant", "a foreign national", "a family member", "the sponsor", "the employer" or another precise category depending on context.
 
 Terminology:
 - Do not use the phrase "ordinary C".
@@ -314,21 +317,28 @@ Formatting requirements:
 Legal authority requirements:
 - Include a small number of short legal authority references throughout the body after the first two paragraphs.
 - Legal authority references must be legally accurate and should include article numbers wherever relevant.
-- Refer to named official sources where supported, such as SEM guidance, SEM Weisungen AIG, or specific articles supplied by the memo.
+- Refer to named official sources where appropriate, such as SEM guidance, SEM Weisungen AIG, or specific legislation.
+- Do not write "the supplied guidance", "the supplied materials", "the guidance supplied", "the materials provided", "the legal sources supplied", or similar phrases in the blog content.
 - Do not invent nationality lists, canton-specific practice, forms, fees or procedural requirements.
 
 Evidence and document caveats:
 - Whenever suggesting documents or evidence, state that the documents mentioned are examples only.
-- Make clear that the documents required in any individual case depend on the applicant's facts, route, canton, timing and procedural posture.
-- Make clear that Richmond Chambers Switzerland provides clients with a tailored checklist of required and recommended documents.
-- Make clear that documents must satisfy the strict content, format, translation, certification, date and submission requirements set by the competent migration authorities.
+- Make clear, where relevant, that the documents required in any individual case depend on the applicant's facts, route, canton, timing and procedural posture.
+- Vary the wording across posts. Do not use the same document caveat formula every time.
+- Suitable formulations include:
+  "These are examples only. The documents required in any individual case depend on the applicant’s facts, route, canton, timing and procedural posture."
+  "At Richmond Chambers Switzerland, we provide our clients with a tailored checklist of all required and recommended supporting documents based on the circumstances of their case. We then carefully review our clients’ supporting documents to ensure that they satisfy the strict requirements set by the migration authorities in terms of content, format, translation and certification."
+  "The precise evidence required will depend on the route, canton and procedural stage. Our Swiss immigration lawyers provide tailored document checklists and review supporting evidence against the requirements of the competent migration authority."
 - Do not present document examples as an exhaustive checklist.
 - Do not imply that producing the listed examples will necessarily be sufficient.
+- Do not repeat the document caveat in the CTA if it has already been explained in the body.
 
 Practicality requirements:
 - Include a concise section headed exactly: **What This Means in Practice**
 - Include a concise section headed exactly: **What To Do Next**
-- The "What To Do Next" section should help the reader identify the exact decision, risk or problem; check the route, permit category or legal basis; identify whether the weakness is legal, evidential, timing-related, procedural or discretionary; gather relevant evidence; and decide whether applying, waiting, reapplying, appealing or preserving status is more realistic.
+- The "What To Do Next" section should be framed, where natural, around what our Swiss immigration lawyers would do for the client.
+- Use varied wording such as "Our Swiss immigration lawyers will...", "Our Swiss immigration team would...", "Our immigration lawyers in Switzerland can...", or "At Richmond Chambers Switzerland, we would usually start by..."
+- The section should help the reader understand how lawyers would identify the exact decision, risk or problem; check the route, permit category or legal basis; identify whether the weakness is legal, evidential, timing-related, procedural or discretionary; review relevant evidence; and advise whether applying, waiting, reapplying, appealing or preserving status is more realistic.
 - Prefer explaining this in prose rather than as a list.
 - Where useful, include one or two brief anonymised scenarios or patterns.
 - Do not invent facts, lists, nationality categories or canton-specific practice.
@@ -338,22 +348,31 @@ Specificity and uncertainty:
 - Distinguish clearly between settled legal framework, canton-specific practice, evidential issues and genuinely discretionary areas.
 - Use caution where needed, but avoid repeated hedging.
 
+CTA:
+- The final CTA heading must be exactly: {CTA_HEADING}
+- The CTA must be concrete, personal and restrained.
+- It should explain what {CTA_NAME} and our specialist Swiss immigration lawyers would review or do.
+- Prefer personal formulations such as:
+  "At Richmond Chambers Switzerland, our specialist Swiss immigration lawyers would be pleased to review..."
+  "Our Swiss immigration team can review..."
+  "Our immigration lawyers in Switzerland can advise on..."
+- The CTA should not merely repeat the **What To Do Next** section.
+- Avoid repeating the document-checklist point if it has already been made in the body.
+- If document support has not been mentioned elsewhere, the CTA may include a concise value proposition about tailored document checklists, evidence review, strategy, timing, procedural options or risk reduction.
+- Vary the CTA value proposition across posts.
+- Invite readers to contact {CTA_NAME} by telephone on {CTA_PHONE} or by completing an enquiry form to arrange an initial consultation meeting.
+- Avoid generic sales language.
+
 Disclaimer:
-- Include a short disclaimer before the CTA or immediately before the end.
-- It must say in substance that the article summarises Swiss immigration law/guidance at the date of writing, individual facts/evidence/cantonal handling may affect the outcome, and it is not legal advice.
+- The disclaimer must appear at the very end of the blog content, after the CTA.
+- The disclaimer must be italicised using single asterisks.
+- It must say in substance that the article summarises Swiss immigration law/guidance at the date of writing, individual facts/evidence/cantonal handling/procedural posture may affect the outcome, and it is not legal advice.
+- Do not place the disclaimer before the CTA.
 
 SEO:
 - Integrate relevant SEO keywords and keyword variations naturally.
 - Avoid duplicating existing firm content where website editorial context indicates an overlapping article.
 - Do not let SEO phrasing dominate the article.
-
-CTA:
-- The final CTA heading must be exactly: {CTA_HEADING}
-- The CTA must be concrete and restrained.
-- It should explain what {CTA_NAME} would review or do, such as reviewing the permit history, decision, route, legal basis, evidence, timing and options.
-- If the CTA mentions documents or evidence, include the tailored-checklist and strict-authority-requirements caveats.
-- Invite readers to contact {CTA_NAME} by telephone on {CTA_PHONE} or by completing an enquiry form to arrange an initial consultation meeting.
-- Avoid generic sales language.
 
 Under DYNAMIC PAGE LINK, return an empty string only.
 
@@ -907,13 +926,15 @@ def build_draft_input(
                 "prefer_prose_over_bullets": True,
                 "avoid_multiple_bullet_sections": True,
                 "practical_sections_required": ["What This Means in Practice", "What To Do Next"],
-                "disclaimer_required": True,
                 "document_evidence_caveat_required": (
-                    "Whenever documents or evidence are suggested, say that they are examples only; "
-                    "that Richmond Chambers Switzerland provides clients with a tailored checklist of "
-                    "required and recommended documents; and that all documents must satisfy the strict "
-                    "content, format, translation, certification, date and submission requirements set "
-                    "by the competent migration authorities."
+                    "Whenever documents or evidence are suggested, say that they are examples only. "
+                    "Use varied wording across posts. Depending on context, explain that Richmond Chambers "
+                    "Switzerland provides clients with a tailored checklist of all required and recommended "
+                    "supporting documents based on the circumstances of their case, and carefully reviews "
+                    "supporting documents to ensure that they satisfy the strict requirements set by the "
+                    "migration authorities in terms of content, format, translation, certification, date "
+                    "and submission. Do not repeat this point in the CTA if it has already been made in "
+                    "the body."
                 ),
                 "terminology_preferences": {
                     "avoid": ["ordinary C"],
@@ -923,6 +944,28 @@ def build_draft_input(
                         "the ordinary route to a C permit",
                     ],
                 },
+                "cta_style": (
+                    "Use a personal, lawyer-led formulation. For example: 'At Richmond Chambers Switzerland, "
+                    "our specialist Swiss immigration lawyers would be pleased to review...' or 'Our Swiss "
+                    "immigration team can advise on...'. Avoid repeating document checklist wording if it "
+                    "already appears in the article body. Vary the CTA value proposition across posts."
+                ),
+                "what_to_do_next_style": (
+                    "Frame this section around what our Swiss immigration lawyers would do for the client, "
+                    "using varied formulations such as 'Our Swiss immigration lawyers will start by...', "
+                    "'Our Swiss immigration team would usually...', or 'Our immigration lawyers in Switzerland can...'."
+                ),
+                "avoid_person_wording": (
+                    "Avoid repeated references to 'the person'. Prefer 'the applicant', 'an applicant', "
+                    "'the sponsor', 'the employer', 'the family member' or another precise category."
+                ),
+                "disclaimer_position": (
+                    "The disclaimer must appear at the very end of the blog content, after the CTA, and must be italicised."
+                ),
+                "avoid_ai_source_language": (
+                    "Do not write 'the supplied guidance', 'the supplied materials', 'the legal materials supplied', "
+                    "'the source material', or any phrase suggesting that the article was produced from internal inputs."
+                ),
                 "structure_variety": {
                     "selected_variant": structure_variant["name"],
                     "description": structure_variant["description"],
@@ -1012,6 +1055,44 @@ def replace_informal_c_permit_terms(text: str) -> str:
     return text
 
 
+def replace_ai_source_phrases(text: str) -> str:
+    replacements = {
+        r"\bthe supplied guidance\b": "SEM guidance",
+        r"\bthe guidance supplied\b": "SEM guidance",
+        r"\bthe supplied legal sources\b": "the relevant legal framework",
+        r"\bthe supplied legal materials\b": "the relevant legal framework",
+        r"\bthe supplied materials\b": "the relevant legal framework",
+        r"\bthe source material\b": "the relevant legal framework",
+        r"\bthe source materials\b": "the relevant legal framework",
+        r"\bthe materials provided\b": "the relevant legal framework",
+        r"\blegal sources supplied\b": "the relevant legal framework",
+        r"\blegal materials supplied\b": "the relevant legal framework",
+    }
+
+    cleaned = text
+    for pattern, replacement in replacements.items():
+        cleaned = re.sub(pattern, replacement, cleaned, flags=re.IGNORECASE)
+
+    return cleaned
+
+
+def replace_person_references(text: str) -> str:
+    replacements = {
+        r"\bthe person’s\b": "the applicant’s",
+        r"\ba person’s\b": "an applicant’s",
+        r"\bthe person\b": "the applicant",
+        r"\ba person\b": "an applicant",
+        r"\bthat person\b": "that applicant",
+        r"\bthis person\b": "this applicant",
+    }
+
+    cleaned = text
+    for pattern, replacement in replacements.items():
+        cleaned = re.sub(pattern, replacement, cleaned, flags=re.IGNORECASE)
+
+    return cleaned
+
+
 def remove_forbidden_public_phrases(text: str) -> str:
     cleaned = text
     for phrase in FORBIDDEN_PUBLIC_PHRASES:
@@ -1061,6 +1142,53 @@ def remove_near_top_summary_section(blog_content: str) -> str:
     return "\n\n".join(cleaned_blocks)
 
 
+def is_disclaimer_block(block: str) -> bool:
+    text = re.sub(r"^\*|\*$", "", block.strip()).strip().lower()
+
+    disclaimer_markers = [
+        "not legal advice",
+        "does not constitute legal advice",
+        "individual facts",
+        "individual circumstances",
+        "case-specific",
+        "cantonal handling",
+        "procedural posture",
+        "date of writing",
+        "current position",
+    ]
+
+    return sum(1 for marker in disclaimer_markers if marker in text) >= 2
+
+
+def ensure_italic_disclaimer_at_end(blog_content: str) -> str:
+    blocks = split_blocks(blog_content)
+    if not blocks:
+        return blog_content
+
+    disclaimer_blocks: list[str] = []
+    non_disclaimer_blocks: list[str] = []
+
+    for block in blocks:
+        if is_disclaimer_block(block):
+            disclaimer_blocks.append(block)
+        else:
+            non_disclaimer_blocks.append(block)
+
+    if disclaimer_blocks:
+        disclaimer_text = re.sub(r"^\*|\*$", "", disclaimer_blocks[-1].strip()).strip()
+    else:
+        disclaimer_text = (
+            "This article summarises Swiss immigration law and guidance as at the date of writing. "
+            "Individual facts, evidence, cantonal handling and procedural posture can materially affect "
+            "the outcome. It is not legal advice."
+        )
+
+    disclaimer_text = disclaimer_text.rstrip(".") + "."
+    italic_disclaimer = f"*{disclaimer_text}*"
+
+    return "\n\n".join(non_disclaimer_blocks + [italic_disclaimer])
+
+
 def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
     cleaned = dict(draft)
     cleaned["dynamic_page_link"] = ""
@@ -1068,13 +1196,20 @@ def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
     blog_content = cleaned.get("blog_content", "").strip()
     blog_content = replace_legal_abbreviation_style(blog_content)
     blog_content = remove_forbidden_public_phrases(blog_content)
+    blog_content = replace_ai_source_phrases(blog_content)
     blog_content = remove_near_top_summary_section(blog_content)
     blog_content = replace_informal_c_permit_terms(blog_content)
+    blog_content = replace_person_references(blog_content)
+    blog_content = ensure_italic_disclaimer_at_end(blog_content)
     blog_content = re.sub(r"\n{3,}", "\n\n", blog_content).strip()
 
     cleaned["blog_content"] = blog_content
-    cleaned["blog_title"] = replace_informal_c_permit_terms(
-        replace_legal_abbreviation_style(cleaned.get("blog_title", "").strip())
+    cleaned["blog_title"] = replace_person_references(
+        replace_informal_c_permit_terms(
+            replace_ai_source_phrases(
+                replace_legal_abbreviation_style(cleaned.get("blog_title", "").strip())
+            )
+        )
     )
     return cleaned
 
@@ -1083,9 +1218,16 @@ def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
 # HTML rendering
 # ============================================================
 
-def inline_bold_to_html(text: str) -> str:
+def inline_markdown_to_html(text: str) -> str:
     escaped = escape_html(text)
-    return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
+
+    # Bold first.
+    escaped = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
+
+    # Then italics, avoiding bold markers.
+    escaped = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"<em>\1</em>", escaped)
+
+    return escaped
 
 
 def render_markdown_table(block: str) -> str | None:
@@ -1103,11 +1245,11 @@ def render_markdown_table(block: str) -> str | None:
     rows = [cells(line) for line in lines[2:]]
 
     html = ["<table border='1' cellpadding='6' cellspacing='0'>"]
-    html.append("<thead><tr>" + "".join(f"<th>{inline_bold_to_html(h)}</th>" for h in headers) + "</tr></thead>")
+    html.append("<thead><tr>" + "".join(f"<th>{inline_markdown_to_html(h)}</th>" for h in headers) + "</tr></thead>")
     html.append("<tbody>")
 
     for row in rows:
-        html.append("<tr>" + "".join(f"<td>{inline_bold_to_html(cell)}</td>" for cell in row) + "</tr>")
+        html.append("<tr>" + "".join(f"<td>{inline_markdown_to_html(cell)}</td>" for cell in row) + "</tr>")
 
     html.append("</tbody></table>")
     return "\n".join(html)
@@ -1129,7 +1271,7 @@ def render_list_block(block: str) -> str | None:
 
     for line in lines:
         item = re.sub(r"^\s*(?:[-*]|\d+\.)\s+", "", line).strip()
-        html.append(f"<li>{inline_bold_to_html(item)}</li>")
+        html.append(f"<li>{inline_markdown_to_html(item)}</li>")
 
     html.append(f"</{tag}>")
     return "\n".join(html)
@@ -1162,7 +1304,7 @@ def blog_content_to_html(blog_title: str, blog_content: str) -> str:
             html_parts.append(f"<p><strong>{escape_html(inner)}</strong></p>")
             continue
 
-        html_parts.append(f"<p>{inline_bold_to_html(stripped)}</p>")
+        html_parts.append(f"<p>{inline_markdown_to_html(stripped)}</p>")
 
     return "\n".join(html_parts)
 
