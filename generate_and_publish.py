@@ -109,17 +109,24 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "common misunderstanding",
             "practical consequences",
             "evidence considerations",
-            "what this means in practice",
-            "what to do next",
+            "applicant next steps with lawyer support",
             "CTA",
             "disclaimer",
         ],
+        "required_section_headings": [],
+        "optional_heading_examples": [
+            "How the Legal Framework Applies",
+            "Why Timing and Permit History Matter",
+            "How Applicants Should Approach the Issue",
+            "How Our Swiss Immigration Lawyers Can Help",
+        ],
+        "next_steps_style": "applicant_first_then_lawyer_support",
     },
     {
         "name": "problem_solution",
         "description": (
             "Start with the practical problem or misconception, then explain why it arises, "
-            "how the law approaches it and what the reader should do next."
+            "how the law approaches it and how applicants can respond."
         ),
         "preferred_flow": [
             "opening",
@@ -128,11 +135,18 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "legal framework",
             "risk areas",
             "examples",
-            "what this means in practice",
-            "what to do next",
+            "practical response",
             "CTA",
             "disclaimer",
         ],
+        "required_section_headings": [],
+        "optional_heading_examples": [
+            "Where Applicants Often Go Wrong",
+            "Why the Answer Depends on the Route",
+            "How to Approach the Problem",
+            "When Legal Advice Can Change the Strategy",
+        ],
+        "next_steps_style": "problem_response",
     },
     {
         "name": "client_scenarios",
@@ -147,17 +161,24 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "why outcomes differ",
             "evidence considerations",
             "timing or strategy",
-            "what this means in practice",
-            "what to do next",
+            "practical next steps",
             "CTA",
             "disclaimer",
         ],
+        "required_section_headings": [],
+        "optional_heading_examples": [
+            "Two Common Patterns",
+            "Why Similar Cases Can Produce Different Outcomes",
+            "Evidence and Timing Issues",
+            "Planning the Next Step",
+        ],
+        "next_steps_style": "scenario_based",
     },
     {
         "name": "myth_correction",
         "description": (
             "Start by correcting a common misconception, then explain the accurate legal position "
-            "and how clients should approach the issue."
+            "and how applicants should approach the issue."
         ),
         "preferred_flow": [
             "opening",
@@ -166,16 +187,23 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "exceptions or qualifications",
             "practical risks",
             "evidence considerations",
-            "what this means in practice",
-            "what to do next",
+            "applicant action points",
             "CTA",
             "disclaimer",
         ],
+        "required_section_headings": [],
+        "optional_heading_examples": [
+            "The Common Misunderstanding",
+            "The More Accurate Position",
+            "Why the Detail Matters",
+            "What Applicants Should Do Before Filing",
+        ],
+        "next_steps_style": "action_points_in_prose",
     },
     {
         "name": "decision_framework",
         "description": (
-            "Structure the article around the sequence of decisions a client needs to make, "
+            "Structure the article around the sequence of decisions an applicant needs to make, "
             "rather than around a fixed legal explainer format."
         ),
         "preferred_flow": [
@@ -185,11 +213,43 @@ ARTICLE_STRUCTURE_VARIANTS = [
             "legal framework",
             "evidence and timing",
             "common mistakes",
-            "what this means in practice",
-            "what to do next",
+            "next decision",
             "CTA",
             "disclaimer",
         ],
+        "required_section_headings": [],
+        "optional_heading_examples": [
+            "First, Identify the Route",
+            "Then Check the Timing",
+            "Then Review the Evidence",
+            "Deciding Whether to Apply Now",
+        ],
+        "next_steps_style": "decision_sequence",
+    },
+    {
+        "name": "practical_consequences",
+        "description": (
+            "Focus on the practical consequences of a rule, decision or mistake, then explain "
+            "how applicants can reduce risk before taking action."
+        ),
+        "preferred_flow": [
+            "opening",
+            "practical consequences",
+            "legal basis",
+            "risk reduction",
+            "evidence and procedure",
+            "when to seek advice",
+            "CTA",
+            "disclaimer",
+        ],
+        "required_section_headings": [],
+        "optional_heading_examples": [
+            "Why This Can Affect the Application",
+            "How the Authorities May Look at the Issue",
+            "Reducing the Risk Before You Apply",
+            "Where Legal Advice Helps",
+        ],
+        "next_steps_style": "risk_reduction",
     },
 ]
 
@@ -261,8 +321,13 @@ Length and structure:
 Structure variety:
 - Use the article_structure_variant to vary the shape, order and emphasis of the article.
 - The article should not always follow the same sequence of headings.
+- Do not automatically include sections headed **What This Means in Practice** or **What To Do Next**.
+- Only use those headings if they are genuinely the best headings for the specific article.
+- Prefer varied headings that suit the topic and authorial approach, such as **How Applicants Should Approach the Issue**, **Where Timing Problems Arise**, **Planning the Next Step**, **Reducing the Risk Before You Apply**, **When Legal Advice Can Change the Strategy**, or other natural topic-specific headings.
+- Each post should read as though it was written by a different human author, not as though it follows a single house template.
+- Vary paragraph rhythm, section order, heading style and use of examples.
 - You may begin with a practical misconception, a legal framework, a decision point, a short anonymised scenario or a timing problem, depending on the variant.
-- Keep the required sections **What This Means in Practice** and **What To Do Next**, but vary the surrounding structure and headings.
+- Do not rely on fixed practical headings. Use headings that fit the article’s topic, structure variant and natural flow.
 - Avoid making every article look or feel like a checklist-led explainer.
 
 Required article elements:
@@ -274,8 +339,7 @@ Required article elements:
 - explanation of common misunderstandings or risk areas where relevant
 - evidence or document discussion where relevant
 - practical examples or short anonymised scenarios where useful
-- **What This Means in Practice**
-- **What To Do Next**
+- a practical next-step or strategy section, but its heading should vary by article
 - restrained CTA
 - short italicised legal disclaimer at the very end, after the CTA
 
@@ -293,7 +357,6 @@ Writing requirements:
 - Prefer prose over bullet points.
 - Use bullet points or numbered lists only where they materially improve clarity and no prose alternative would work as well.
 - Avoid multiple bullet-point sections in the same article.
-- The **What To Do Next** section should usually be written in prose, not as a numbered list, unless the topic genuinely requires a sequence.
 - Avoid repeated references to "the person". Prefer "an applicant", "the applicant", "a foreign national", "a family member", "the sponsor", "the employer" or another precise category depending on context.
 
 Terminology:
@@ -333,13 +396,20 @@ Evidence and document caveats:
 - Do not imply that producing the listed examples will necessarily be sufficient.
 - Do not repeat the document caveat in the CTA if it has already been explained in the body.
 
-Practicality requirements:
-- Include a concise section headed exactly: **What This Means in Practice**
-- Include a concise section headed exactly: **What To Do Next**
-- The "What To Do Next" section should be framed, where natural, around what our Swiss immigration lawyers would do for the client.
-- Use varied wording such as "Our Swiss immigration lawyers will...", "Our Swiss immigration team would...", "Our immigration lawyers in Switzerland can...", or "At Richmond Chambers Switzerland, we would usually start by..."
-- The section should help the reader understand how lawyers would identify the exact decision, risk or problem; check the route, permit category or legal basis; identify whether the weakness is legal, evidential, timing-related, procedural or discretionary; review relevant evidence; and advise whether applying, waiting, reapplying, appealing or preserving status is more realistic.
-- Prefer explaining this in prose rather than as a list.
+Practicality and next-step requirements:
+- Include a practical section that helps applicants understand what they should do next, but vary the heading and structure.
+- Do not automatically call this section **What To Do Next**.
+- The practical next-step section should open from the applicant’s perspective.
+- Start by explaining what applicants should identify, check, reconstruct, preserve, gather, compare or decide.
+- Then explain how our Swiss immigration lawyers, Swiss immigration team or immigration lawyers in Switzerland can help refine the analysis, review the evidence and advise on strategy.
+- Avoid a section that only describes what our lawyers would do.
+- A good pattern is: first, what the applicant needs to think about; second, how legal advice adds value; third, what strategic choice may follow.
+- Use varied formulations across posts.
+- Suitable approaches include:
+  "Applicants should start by reconstructing their residence history before assuming that a particular route is available. Our Swiss immigration lawyers can then assess whether the issue is legal, evidential, timing-related or discretionary."
+  "Before filing, applicants should identify the exact weakness in the case. Our Swiss immigration team can review the legal basis, evidence and timing before advising whether to apply now, wait or take a different procedural step."
+  "If the issue is already live, the first step is to understand whether the problem is one of eligibility, evidence or timing. Our immigration lawyers in Switzerland can then advise on the realistic options."
+- Prefer prose over numbered steps unless a sequence is essential.
 - Where useful, include one or two brief anonymised scenarios or patterns.
 - Do not invent facts, lists, nationality categories or canton-specific practice.
 
@@ -356,7 +426,7 @@ CTA:
   "At Richmond Chambers Switzerland, our specialist Swiss immigration lawyers would be pleased to review..."
   "Our Swiss immigration team can review..."
   "Our immigration lawyers in Switzerland can advise on..."
-- The CTA should not merely repeat the **What To Do Next** section.
+- The CTA should not merely repeat the practical next-step section.
 - Avoid repeating the document-checklist point if it has already been made in the body.
 - If document support has not been mentioned elsewhere, the CTA may include a concise value proposition about tailored document checklists, evidence review, strategy, timing, procedural options or risk reduction.
 - Vary the CTA value proposition across posts.
@@ -925,7 +995,19 @@ def build_draft_input(
                 "do_not_include_quick_answer": True,
                 "prefer_prose_over_bullets": True,
                 "avoid_multiple_bullet_sections": True,
-                "practical_sections_required": ["What This Means in Practice", "What To Do Next"],
+                "fixed_practical_headings_required": False,
+                "avoid_default_headings": [
+                    "What This Means in Practice",
+                    "What To Do Next",
+                ],
+                "practical_section_guidance": (
+                    "Include a practical next-step or strategy section, but vary the heading according to the "
+                    "article_structure_variant and topic. The section should open from the applicant's perspective: "
+                    "what the applicant should identify, check, reconstruct, preserve, gather, compare or decide. "
+                    "Then explain how Richmond Chambers Switzerland, our Swiss immigration lawyers, our Swiss "
+                    "immigration team or our immigration lawyers in Switzerland can add value by reviewing the "
+                    "legal basis, evidence, timing, procedural posture and strategic options."
+                ),
                 "document_evidence_caveat_required": (
                     "Whenever documents or evidence are suggested, say that they are examples only. "
                     "Use varied wording across posts. Depending on context, explain that Richmond Chambers "
@@ -951,9 +1033,8 @@ def build_draft_input(
                     "already appears in the article body. Vary the CTA value proposition across posts."
                 ),
                 "what_to_do_next_style": (
-                    "Frame this section around what our Swiss immigration lawyers would do for the client, "
-                    "using varied formulations such as 'Our Swiss immigration lawyers will start by...', "
-                    "'Our Swiss immigration team would usually...', or 'Our immigration lawyers in Switzerland can...'."
+                    "Do not create a lawyer-only next-step section. Open from the applicant's perspective, then "
+                    "explain how our Swiss immigration lawyers can help. Vary the section heading and wording."
                 ),
                 "avoid_person_wording": (
                     "Avoid repeated references to 'the person'. Prefer 'the applicant', 'an applicant', "
@@ -965,6 +1046,13 @@ def build_draft_input(
                 "avoid_ai_source_language": (
                     "Do not write 'the supplied guidance', 'the supplied materials', 'the legal materials supplied', "
                     "'the source material', or any phrase suggesting that the article was produced from internal inputs."
+                ),
+                "optional_heading_examples": structure_variant.get("optional_heading_examples", []),
+                "next_steps_style": structure_variant.get("next_steps_style", ""),
+                "authorial_variation_required": (
+                    "Vary the structure, heading sequence, paragraph rhythm and practical framing so that posts do "
+                    "not all read as if they were written from the same template. The article should read as if "
+                    "written by an individual human author."
                 ),
                 "structure_variety": {
                     "selected_variant": structure_variant["name"],
@@ -1142,6 +1230,30 @@ def remove_near_top_summary_section(blog_content: str) -> str:
     return "\n\n".join(cleaned_blocks)
 
 
+def soften_repeated_practical_headings(blog_content: str, topic_entry: dict[str, Any]) -> str:
+    variant = select_article_structure_variant(topic_entry)
+    examples = variant.get("optional_heading_examples", [])
+
+    replacement_pairs = {
+        "What This Means in Practice": examples[1] if len(examples) > 1 else "What This Means for Applicants",
+        "What To Do Next": examples[-1] if examples else "Planning the Next Step",
+    }
+
+    cleaned = blog_content
+
+    for old_heading, new_heading in replacement_pairs.items():
+        if old_heading == new_heading:
+            continue
+        cleaned = re.sub(
+            rf"\*\*{re.escape(old_heading)}\*\*",
+            f"**{new_heading}**",
+            cleaned,
+            count=1,
+        )
+
+    return cleaned
+
+
 def is_disclaimer_block(block: str) -> bool:
     text = re.sub(r"^\*|\*$", "", block.strip()).strip().lower()
 
@@ -1189,7 +1301,7 @@ def ensure_italic_disclaimer_at_end(blog_content: str) -> str:
     return "\n\n".join(non_disclaimer_blocks + [italic_disclaimer])
 
 
-def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
+def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -> dict[str, Any]:
     cleaned = dict(draft)
     cleaned["dynamic_page_link"] = ""
 
@@ -1198,6 +1310,7 @@ def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
     blog_content = remove_forbidden_public_phrases(blog_content)
     blog_content = replace_ai_source_phrases(blog_content)
     blog_content = remove_near_top_summary_section(blog_content)
+    blog_content = soften_repeated_practical_headings(blog_content, topic_entry)
     blog_content = replace_informal_c_permit_terms(blog_content)
     blog_content = replace_person_references(blog_content)
     blog_content = ensure_italic_disclaimer_at_end(blog_content)
@@ -1475,7 +1588,7 @@ def main() -> None:
         schema=DRAFT_SCHEMA,
         model=OPENAI_MODEL,
     )
-    draft = normalise_draft_output(draft)
+    draft = normalise_draft_output(draft, topic_entry)
 
     seo = call_responses_api(
         openai_api_key,
