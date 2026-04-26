@@ -105,7 +105,9 @@
       "Avoid treating the certificate as the whole integration analysis",
       "Flag that cantonal process and evidence expectations may vary"
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss C Permit Language Rules Explained: A2/A1, B1/A1 and When Stronger Proof Is Needed",
+    "used_at_utc": "2026-04-26T08:49:05Z"
   },
   {
     "topic": "Can You Lose a Swiss C Permit by Spending Too Much Time Abroad?",
