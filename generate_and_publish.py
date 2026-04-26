@@ -95,6 +95,104 @@ FORBIDDEN_PUBLIC_PHRASES = [
     "the source material",
 ]
 
+ARTICLE_STRUCTURE_VARIANTS = [
+    {
+        "name": "legal_framework_first",
+        "description": (
+            "Start with the legal framework, then explain practical consequences, "
+            "timing issues, evidence considerations and next steps."
+        ),
+        "preferred_flow": [
+            "opening",
+            "legal framework",
+            "who is affected",
+            "common misunderstanding",
+            "practical consequences",
+            "evidence considerations",
+            "what this means in practice",
+            "what to do next",
+            "disclaimer",
+            "CTA",
+        ],
+    },
+    {
+        "name": "problem_solution",
+        "description": (
+            "Start with the practical problem or misconception, then explain why it arises, "
+            "how the law approaches it and what the reader should do next."
+        ),
+        "preferred_flow": [
+            "opening",
+            "practical problem",
+            "why the issue arises",
+            "legal framework",
+            "risk areas",
+            "examples",
+            "what this means in practice",
+            "what to do next",
+            "disclaimer",
+            "CTA",
+        ],
+    },
+    {
+        "name": "client_scenarios",
+        "description": (
+            "Use one or two short anonymised scenarios or patterns to explain the issue, "
+            "then draw out the legal and practical principles."
+        ),
+        "preferred_flow": [
+            "opening",
+            "scenario or pattern",
+            "legal framework",
+            "why outcomes differ",
+            "evidence considerations",
+            "timing or strategy",
+            "what this means in practice",
+            "what to do next",
+            "disclaimer",
+            "CTA",
+        ],
+    },
+    {
+        "name": "myth_correction",
+        "description": (
+            "Start by correcting a common misconception, then explain the accurate legal position "
+            "and how clients should approach the issue."
+        ),
+        "preferred_flow": [
+            "opening",
+            "common misconception",
+            "correct legal position",
+            "exceptions or qualifications",
+            "practical risks",
+            "evidence considerations",
+            "what this means in practice",
+            "what to do next",
+            "disclaimer",
+            "CTA",
+        ],
+    },
+    {
+        "name": "decision_framework",
+        "description": (
+            "Structure the article around the sequence of decisions a client needs to make, "
+            "rather than around a fixed legal explainer format."
+        ),
+        "preferred_flow": [
+            "opening",
+            "first decision point",
+            "second decision point",
+            "legal framework",
+            "evidence and timing",
+            "common mistakes",
+            "what this means in practice",
+            "what to do next",
+            "disclaimer",
+            "CTA",
+        ],
+    },
+]
+
 
 # ============================================================
 # Prompts
@@ -131,6 +229,7 @@ Rules:
 - Identify evidence/documents that a lawyer would usually want to review.
 - Identify common mistakes and refusal risks.
 - State which propositions are safe for public article use and which need cautious wording.
+- Where documents or evidence are mentioned, make clear they are examples only and not an exhaustive checklist.
 
 Return strict JSON only.
 """.strip()
@@ -155,19 +254,25 @@ Length and structure:
 - Avoid repetition. Each section must do distinct work.
 - Do not restate the same legal proposition in multiple sections.
 - If a point has already been made, develop it with consequence, evidence or next step rather than repeating it.
+- Do not include a section headed **Quick Answer**, **At a Glance** or **In Brief**.
+- Do not use a standardised article template for every topic. Follow the article structure variant supplied in the input.
 
-Required article structure where appropriate:
+Structure variety:
+- Use the supplied article_structure_variant to vary the shape, order and emphasis of the article.
+- The article should not always follow the same sequence of headings.
+- You may begin with a practical misconception, a legal framework, a decision point, a short anonymised scenario or a timing problem, depending on the supplied variant.
+- Keep the required sections **What This Means in Practice** and **What To Do Next**, but vary the surrounding structure and headings.
+- Avoid making every article look or feel like a checklist-led explainer.
+
+Required article elements:
 - strong SEO-conscious title, without overclaiming
 - bold opening paragraph
 - second introductory paragraph
-- a short **Quick Answer**, **At a Glance** or **In Brief** section near the top
-- clear legal framework section
-- who qualifies or is affected
-- who may not qualify or where the misunderstanding lies
-- evidence/document requirements
-- common mistakes or refusal risks
-- practical examples or short scenarios where useful
-- concise checklist or ordered action framework
+- clear legal framework where relevant
+- practical explanation of who is affected
+- explanation of common misunderstandings or risk areas where relevant
+- evidence or document discussion where relevant
+- practical examples or short anonymised scenarios where useful
 - **What This Means in Practice**
 - **What To Do Next**
 - restrained CTA
@@ -183,6 +288,17 @@ Writing requirements:
 - Avoid empty emphasis, filler and generic transition language.
 - Avoid formulaic phrases such as "that distinction matters", "the practical point is", and "it is important to note" unless genuinely necessary.
 - Prefer concrete framing over broad marketing abstractions.
+- Prefer prose over bullet points.
+- Use bullet points or numbered lists only where they materially improve clarity and no prose alternative would work as well.
+- Avoid multiple bullet-point sections in the same article.
+- The **What To Do Next** section should usually be written in prose, not as a numbered list, unless the topic genuinely requires a sequence.
+
+Terminology:
+- Do not use the phrase "ordinary C".
+- Prefer "an ordinary C-permit", "the ordinary C-permit route", or "the ordinary route to a C permit", depending on context.
+- Use "C permit" or "C-permit" consistently and naturally.
+- Always use LEI / AIG, never AIG on its own.
+- Always use OASA / VZAE, never VZAE on its own.
 
 Formatting requirements:
 - Use keyword-optimised sub-headings throughout.
@@ -192,29 +308,30 @@ Formatting requirements:
 - Immediately after the opening paragraph, include a second introductory paragraph explaining what the post will cover, who it is useful for, and what the reader will learn.
 - Do not include legal authorities in the first paragraph.
 - Do not include legal authorities in the second introductory paragraph.
-- Use compact bullet or numbered lists only where they improve clarity.
 - You may use simple markdown tables where a comparison is genuinely clearer as a table.
 - No emojis.
 
 Legal authority requirements:
 - Include a small number of short legal authority references throughout the body after the first two paragraphs.
 - Legal authority references must be legally accurate and should include article numbers wherever relevant.
-- Always use LEI / AIG, never AIG on its own.
-- Always use OASA / VZAE, never VZAE on its own.
 - Refer to named official sources where supported, such as SEM guidance, SEM Weisungen AIG, or specific articles supplied by the memo.
 - Do not invent nationality lists, canton-specific practice, forms, fees or procedural requirements.
+
+Evidence and document caveats:
+- Whenever suggesting documents or evidence, state that the documents mentioned are examples only.
+- Make clear that the documents required in any individual case depend on the applicant's facts, route, canton, timing and procedural posture.
+- Make clear that Richmond Chambers Switzerland provides clients with a tailored checklist of required and recommended documents.
+- Make clear that documents must satisfy the strict content, format, translation, certification, date and submission requirements set by the competent migration authorities.
+- Do not present document examples as an exhaustive checklist.
+- Do not imply that producing the listed examples will necessarily be sufficient.
 
 Practicality requirements:
 - Include a concise section headed exactly: **What This Means in Practice**
 - Include a concise section headed exactly: **What To Do Next**
-- The "What To Do Next" section must give an ordered framework in prose or a short numbered list, covering as relevant:
-  1. identify the exact decision, risk or problem;
-  2. check the route, permit category or legal basis;
-  3. identify the real weakness: legal, evidential, timing-related, procedural or discretionary;
-  4. gather the key documents/evidence;
-  5. decide whether appeal, reapplication, waiting, preserving status or another strategy is more realistic.
-- Where useful, include a short practical checklist or examples of document types a lawyer would want to review.
+- The "What To Do Next" section should help the reader identify the exact decision, risk or problem; check the route, permit category or legal basis; identify whether the weakness is legal, evidential, timing-related, procedural or discretionary; gather relevant evidence; and decide whether applying, waiting, reapplying, appealing or preserving status is more realistic.
+- Prefer explaining this in prose rather than as a list.
 - Where useful, include one or two brief anonymised scenarios or patterns.
+- Do not invent facts, lists, nationality categories or canton-specific practice.
 
 Specificity and uncertainty:
 - Where the article refers to "some nationalities", "certain countries", "some cantons" or similar, either name the relevant category accurately from the legal memo or say that the point must be checked against current official guidance from the named official body.
@@ -234,6 +351,7 @@ CTA:
 - The final CTA heading must be exactly: {CTA_HEADING}
 - The CTA must be concrete and restrained.
 - It should explain what {CTA_NAME} would review or do, such as reviewing the permit history, decision, route, legal basis, evidence, timing and options.
+- If the CTA mentions documents or evidence, include the tailored-checklist and strict-authority-requirements caveats.
 - Invite readers to contact {CTA_NAME} by telephone on {CTA_PHONE} or by completing an enquiry form to arrange an initial consultation meeting.
 - Avoid generic sales language.
 
@@ -255,6 +373,8 @@ Requirements:
 - natural, non-promotional, legally accurate
 - avoid melodramatic or absolute wording
 - avoid keyword stuffing
+- do not suggest clickbait phrasing
+- do not use identical keyword patterns across articles where more natural alternatives are available
 """.strip()
 
 
@@ -698,6 +818,20 @@ def derive_topic_metadata(topic_entry: dict[str, Any]) -> dict[str, str]:
     }
 
 
+def select_article_structure_variant(topic_entry: dict[str, Any]) -> dict[str, Any]:
+    basis = (
+        topic_entry.get("topic", "")
+        + "|"
+        + topic_entry.get("angle", "")
+        + "|"
+        + topic_entry.get("subtopic", "")
+        + "|"
+        + topic_entry.get("pillar", "")
+    )
+    index = sum(ord(char) for char in basis) % len(ARTICLE_STRUCTURE_VARIANTS)
+    return ARTICLE_STRUCTURE_VARIANTS[index]
+
+
 # ============================================================
 # Prompt builders
 # ============================================================
@@ -747,6 +881,8 @@ def build_draft_input(
     memo: dict[str, Any],
     website_context: str,
 ) -> str:
+    structure_variant = select_article_structure_variant(topic_entry)
+
     return json.dumps(
         {
             "topic": topic_entry.get("topic", ""),
@@ -754,6 +890,7 @@ def build_draft_input(
             "audience": topic_entry.get("audience", "general_global"),
             "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
             "topic_metadata": derive_topic_metadata(topic_entry),
+            "article_structure_variant": structure_variant,
             "classifier": classifier,
             "legal_memo": memo,
             "editorial_constraints": {
@@ -766,9 +903,31 @@ def build_draft_input(
                 "citation_style": "Use short in-text legal references only, using LEI / AIG and OASA / VZAE.",
                 "subheading_style": "Use bold keyword-optimised sub-headings with a blank line above and below each one.",
                 "opening_style": "The first paragraph must be fully bold, followed immediately by a second introductory paragraph without legal citations.",
+                "do_not_include_quick_answer": True,
+                "prefer_prose_over_bullets": True,
+                "avoid_multiple_bullet_sections": True,
                 "practical_sections_required": ["What This Means in Practice", "What To Do Next"],
-                "quick_answer_required": True,
                 "disclaimer_required": True,
+                "document_evidence_caveat_required": (
+                    "Whenever documents or evidence are suggested, say that they are examples only; "
+                    "that Richmond Chambers Switzerland provides clients with a tailored checklist of "
+                    "required and recommended documents; and that all documents must satisfy the strict "
+                    "content, format, translation, certification, date and submission requirements set "
+                    "by the competent migration authorities."
+                ),
+                "terminology_preferences": {
+                    "avoid": ["ordinary C"],
+                    "prefer": [
+                        "an ordinary C-permit",
+                        "the ordinary C-permit route",
+                        "the ordinary route to a C permit",
+                    ],
+                },
+                "structure_variety": {
+                    "selected_variant": structure_variant["name"],
+                    "description": structure_variant["description"],
+                    "preferred_flow": structure_variant["preferred_flow"],
+                },
                 "website_context_use": "Use for continuity and overlap avoidance only. Do not use as legal authority.",
                 "website_context": website_context[:8000],
             },
@@ -847,6 +1006,12 @@ def replace_legal_abbreviation_style(text: str) -> str:
     return text
 
 
+def replace_informal_c_permit_terms(text: str) -> str:
+    text = re.sub(r"\bordinary C\b", "an ordinary C-permit", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bOrdinary C\b", "An ordinary C-permit", text)
+    return text
+
+
 def remove_forbidden_public_phrases(text: str) -> str:
     cleaned = text
     for phrase in FORBIDDEN_PUBLIC_PHRASES:
@@ -865,6 +1030,37 @@ def is_bold_heading(block: str) -> bool:
     return len(inner.split()) <= 14 and not inner.endswith(".")
 
 
+def remove_near_top_summary_section(blog_content: str) -> str:
+    blocks = split_blocks(blog_content)
+    if not blocks:
+        return blog_content
+
+    summary_headings = {
+        "quick answer",
+        "at a glance",
+        "in brief",
+    }
+
+    cleaned_blocks: list[str] = []
+    skip_next = False
+
+    for block in blocks:
+        if skip_next:
+            skip_next = False
+            continue
+
+        heading_text = re.sub(r"^\*\*|\*\*$", "", block.strip()).strip().lower()
+        heading_text = heading_text.rstrip(":")
+
+        if heading_text in summary_headings:
+            skip_next = True
+            continue
+
+        cleaned_blocks.append(block)
+
+    return "\n\n".join(cleaned_blocks)
+
+
 def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
     cleaned = dict(draft)
     cleaned["dynamic_page_link"] = ""
@@ -872,10 +1068,14 @@ def normalise_draft_output(draft: dict[str, Any]) -> dict[str, Any]:
     blog_content = cleaned.get("blog_content", "").strip()
     blog_content = replace_legal_abbreviation_style(blog_content)
     blog_content = remove_forbidden_public_phrases(blog_content)
+    blog_content = remove_near_top_summary_section(blog_content)
+    blog_content = replace_informal_c_permit_terms(blog_content)
     blog_content = re.sub(r"\n{3,}", "\n\n", blog_content).strip()
 
     cleaned["blog_content"] = blog_content
-    cleaned["blog_title"] = replace_legal_abbreviation_style(cleaned.get("blog_title", "").strip())
+    cleaned["blog_title"] = replace_informal_c_permit_terms(
+        replace_legal_abbreviation_style(cleaned.get("blog_title", "").strip())
+    )
     return cleaned
 
 
@@ -1033,6 +1233,7 @@ def main() -> None:
                     "mapped_authority_packs": [
                         str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
                     ],
+                    "selected_article_structure_variant": select_article_structure_variant(topic_entry),
                     "expected_retrieval_queries": [
                         topic_entry.get("topic", ""),
                         topic_entry.get("angle", ""),
@@ -1120,6 +1321,7 @@ def main() -> None:
             "selected_legal_authority_packs": [
                 str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
             ],
+            "selected_article_structure_variant": select_article_structure_variant(topic_entry),
             "memo": memo,
         },
     )
@@ -1147,6 +1349,7 @@ def main() -> None:
         "selected_legal_authority_packs": [
             str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
         ],
+        "selected_article_structure_variant": select_article_structure_variant(topic_entry),
         "memo": memo,
         "draft": draft,
         "seo": seo,
