@@ -17,7 +17,9 @@
       "Use mixed-status examples to avoid oversimplifying residence counting",
       "Separate first-five-year and final-five-year counting issues carefully"
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Do Student Years Count Toward a Swiss C Permit? How Swiss Residence Counting Really Works",
+    "used_at_utc": "2026-04-26T07:07:26Z"
   },
   {
     "topic": "Can You Lose a Swiss C Permit by Living Abroad Too Long?",
@@ -39,104 +41,104 @@
     ],
     "status": "unused"
   },
-{
-"topic": "Swiss C Permit After 5 Years or 10 Years: Why Settlement Timelines Differ by Nationality",
-"angle": "Explains the practical reasons some applicants reach a Swiss C Permit after five years while others follow the standard ten-year route, with emphasis on nationality-sensitive rules and common misunderstandings.",
-"audience": "global_individuals",
-"article_type": "comparison_piece",
-"pillar": "settlement_and_c_permit",
-"subtopic": "fast_track_c_permit",
-"route_type": "route_specific",
-"legal_complexity": "high",
-"overlap_group": "c_permit_fast_track_and_integration",
-"style_profile": "comparison_led",
-"search_intent": "comparative_research",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not collapse treaty-based and practice-based five-year routes into one category",
-"Avoid implying that five-year access means automatic approval",
-"Explain that nationality changes timeline but does not remove integration scrutiny"
-],
-"status": "unused"
-},
-{
-"topic": "Do Student Years Count Toward a Swiss C Permit? How Residence Counting Really Works",
-"angle": "Clarifies how different periods of lawful stay may or may not count toward C Permit eligibility, especially for applicants with mixed histories involving study, L permits, and later work residence.",
-"audience": "inside_switzerland_individuals",
-"article_type": "myth_correction",
-"pillar": "settlement_and_c_permit",
-"subtopic": "residence_counting_and_qualifying_years",
-"route_type": "broad_issue",
-"legal_complexity": "high",
-"overlap_group": "c_permit_eligibility_and_counting",
-"style_profile": "myth_busting",
-"search_intent": "informational_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not suggest that all lawful stay counts in the same way",
-"Separate first-five-years counting issues from final-five-years durability issues",
-"Use examples of mixed residence histories without overgeneralising"
-],
-"status": "unused"
-},
-{
-"topic": "Swiss C Permit Language Rules Explained: A2/A1, B1/A1, and When Stronger Evidence Is Needed",
-"angle": "Shows how language expectations differ between ordinary and faster C Permit pathways, and what applicants should understand before relying on a certificate that may not be enough for their route.",
-"audience": "inside_switzerland_individuals",
-"article_type": "evidence_strategy",
-"pillar": "settlement_and_c_permit",
-"subtopic": "language_requirements_and_evidence",
-"route_type": "broad_issue",
-"legal_complexity": "medium",
-"overlap_group": "c_permit_language_and_compliance",
-"style_profile": "procedural",
-"search_intent": "informational_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not imply that one language threshold applies to every C Permit route",
-"Avoid treating the certificate as the whole integration analysis",
-"Flag that cantonal process and evidence expectations may vary"
-],
-"status": "unused"
-},
-{
-"topic": "Can You Lose a Swiss C Permit by Spending Too Much Time Abroad?",
-"angle": "Explains lapse risk, advance preservation requests, and the difference between holding a valid card and keeping the underlying settlement status when living outside Switzerland.",
-"audience": "inside_switzerland_individuals",
-"article_type": "risk_analysis",
-"pillar": "settlement_and_c_permit",
-"subtopic": "absence_lapse_and_preservation",
-"route_type": "broad_issue",
-"legal_complexity": "high",
-"overlap_group": "c_permit_absence_and_preservation",
-"style_profile": "risk_focused",
-"search_intent": "urgent_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not describe the C Permit as unconditional permanent residence",
-"Distinguish card-renewal formalities from lapse of the underlying status",
-"Explain preservation requests and centre-of-life issues without overstating certainty"
-],
-"status": "unused"
-},
-{
-"topic": "Why a Swiss C Permit Application Was Not Approved: Common Reasons the Canton Extends the B Permit Instead",
-"angle": "Analyses practical refusal and deferral patterns in C Permit cases, helping readers identify whether the real issue is counting, integration, language, finances, or canton-level procedure.",
-"audience": "refused_applicants",
-"article_type": "refusal_analysis",
-"pillar": "settlement_and_c_permit",
-"subtopic": "cantonal_practice_and_procedure",
-"route_type": "post_refusal",
-"legal_complexity": "high",
-"overlap_group": "c_permit_post_grant_stability",
-"style_profile": "risk_focused",
-"search_intent": "post_refusal_problem_solving",
-"scope_warning": "social_assistance_adjacent",
-"notes_for_drafting": [
-"Do not assume every negative outcome is a formal refusal rather than a B-permit continuation",
-"Avoid blaming language alone where counting or compliance may be the real issue",
-"Reflect canton-level variation without suggesting arbitrary decision-making"
-],
-"status": "unused"
-}
+  {
+    "topic": "Swiss C Permit After 5 Years or 10 Years: Why Settlement Timelines Differ by Nationality",
+    "angle": "Explains the practical reasons some applicants reach a Swiss C Permit after five years while others follow the standard ten-year route, with emphasis on nationality-sensitive rules and common misunderstandings.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "fast_track_c_permit",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_fast_track_and_integration",
+    "style_profile": "comparison_led",
+    "search_intent": "comparative_research",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not collapse treaty-based and practice-based five-year routes into one category",
+      "Avoid implying that five-year access means automatic approval",
+      "Explain that nationality changes timeline but does not remove integration scrutiny"
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Do Student Years Count Toward a Swiss C Permit? How Residence Counting Really Works",
+    "angle": "Clarifies how different periods of lawful stay may or may not count toward C Permit eligibility, especially for applicants with mixed histories involving study, L permits, and later work residence.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "myth_correction",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "residence_counting_and_qualifying_years",
+    "route_type": "broad_issue",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_eligibility_and_counting",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not suggest that all lawful stay counts in the same way",
+      "Separate first-five-years counting issues from final-five-years durability issues",
+      "Use examples of mixed residence histories without overgeneralising"
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Language Rules Explained: A2/A1, B1/A1, and When Stronger Evidence Is Needed",
+    "angle": "Shows how language expectations differ between ordinary and faster C Permit pathways, and what applicants should understand before relying on a certificate that may not be enough for their route.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "language_requirements_and_evidence",
+    "route_type": "broad_issue",
+    "legal_complexity": "medium",
+    "overlap_group": "c_permit_language_and_compliance",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply that one language threshold applies to every C Permit route",
+      "Avoid treating the certificate as the whole integration analysis",
+      "Flag that cantonal process and evidence expectations may vary"
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Can You Lose a Swiss C Permit by Spending Too Much Time Abroad?",
+    "angle": "Explains lapse risk, advance preservation requests, and the difference between holding a valid card and keeping the underlying settlement status when living outside Switzerland.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "absence_lapse_and_preservation",
+    "route_type": "broad_issue",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_absence_and_preservation",
+    "style_profile": "risk_focused",
+    "search_intent": "urgent_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not describe the C Permit as unconditional permanent residence",
+      "Distinguish card-renewal formalities from lapse of the underlying status",
+      "Explain preservation requests and centre-of-life issues without overstating certainty"
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Why a Swiss C Permit Application Was Not Approved: Common Reasons the Canton Extends the B Permit Instead",
+    "angle": "Analyses practical refusal and deferral patterns in C Permit cases, helping readers identify whether the real issue is counting, integration, language, finances, or canton-level procedure.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "cantonal_practice_and_procedure",
+    "route_type": "post_refusal",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_post_grant_stability",
+    "style_profile": "risk_focused",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "social_assistance_adjacent",
+    "notes_for_drafting": [
+      "Do not assume every negative outcome is a formal refusal rather than a B-permit continuation",
+      "Avoid blaming language alone where counting or compliance may be the real issue",
+      "Reflect canton-level variation without suggesting arbitrary decision-making"
+    ],
+    "status": "unused"
+  }
 ]
