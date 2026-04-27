@@ -351,6 +351,9 @@ Writing requirements:
 - Calm, authoritative, analytical and natural.
 - Professional but clear and easy to understand.
 - Explain legal issues in practical language that a non-lawyer can follow.
+- Every post must deliver concrete reader value, not just legal description.
+- Include practical guidance that a reader can act on, such as best-practice tips, practical case patterns, decision checks, or evidence-preparation advice tailored to the topic.
+- Include at least two concrete "reader-helpful" elements in each post (for example: a best-practice tip and a short anonymised scenario, or a practical decision framework and common pitfall-avoidance advice).
 - Write as a human legal professional, not as an internal system.
 - Never refer to "the memo", "the verified memo", "the materials", "the verified materials", "any article on this topic", "the supplied guidance", "the supplied legal sources", source packs, drafting inputs or internal validation.
 - Avoid phrasing that suggests the article was generated from supplied materials or AI prompts.
@@ -1032,6 +1035,11 @@ def build_draft_input(
                     "immigration team or our immigration lawyers in Switzerland can add value by reviewing the "
                     "legal basis, evidence, timing, procedural posture and strategic options."
                 ),
+                "reader_value_requirement": (
+                    "Every post must be concretely useful to readers. Include at least two practical reader-helpful "
+                    "elements in the article body, such as best-practice tips, practical case examples/patterns, "
+                    "pitfall-avoidance guidance, decision checks, timing strategy or evidence-preparation advice."
+                ),
                 "document_evidence_caveat_required": (
                     "Whenever documents or evidence are suggested, say that they are examples only. "
                     "Use varied wording across posts. Depending on context, explain that Richmond Chambers "
@@ -1390,6 +1398,61 @@ def ensure_italic_disclaimer_at_end(blog_content: str) -> str:
     return "\n\n".join(non_disclaimer_blocks + [italic_disclaimer])
 
 
+def ensure_reader_usefulness_content(blog_content: str) -> str:
+    blocks = split_blocks(blog_content)
+    if not blocks:
+        return blog_content
+
+    disclaimer_block = ""
+    if is_disclaimer_block(blocks[-1]):
+        disclaimer_block = blocks.pop()
+
+    body_text = "\n\n".join(blocks).lower()
+    guidance_markers = [
+        "best practice",
+        "in practice",
+        "for example",
+        "scenario",
+        "next step",
+        "before filing",
+        "common mistake",
+        "risk",
+        "evidence",
+        "timing",
+        "check whether",
+        "should start by",
+    ]
+    marker_count = sum(1 for marker in guidance_markers if marker in body_text)
+
+    has_practical_heading = any(
+        is_bold_heading(block)
+        and any(
+            term in re.sub(r"^\*\*|\*\*$", "", block).strip().lower()
+            for term in ["practice", "next step", "approach", "strategy", "avoid", "planning", "check"]
+        )
+        for block in blocks
+    )
+
+    if marker_count >= 2 and has_practical_heading:
+        return blog_content
+
+    fallback_heading = "**Practical Tips Before You Apply**"
+    fallback_paragraph = (
+        "As a practical starting point, applicants should identify the exact legal route being relied on, "
+        "reconstruct the key timeline and test whether any evidence gaps could undermine the application. "
+        "A helpful best-practice approach is to map each factual point to the relevant legal criterion before "
+        "filing, then stress-test likely weak points (for example, timing, continuity of residence, documentary "
+        "consistency or route-specific eligibility conditions). Our Swiss immigration lawyers can then refine the "
+        "strategy, prioritise risk-reduction steps and help decide whether to file now or after further preparation."
+    )
+
+    blocks.extend([fallback_heading, fallback_paragraph])
+    if disclaimer_block:
+        blocks.append(disclaimer_block)
+
+    return "\n\n".join(blocks)
+
+
 def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -> dict[str, Any]:
     cleaned = dict(draft)
     cleaned["dynamic_page_link"] = ""
@@ -1404,6 +1467,7 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
     blog_content = replace_informal_c_permit_terms(blog_content)
     blog_content = replace_person_references(blog_content)
     blog_content = ensure_italic_disclaimer_at_end(blog_content)
+    blog_content = ensure_reader_usefulness_content(blog_content)
     blog_content = re.sub(r"\n{3,}", "\n\n", blog_content).strip()
 
     cleaned["blog_content"] = blog_content
