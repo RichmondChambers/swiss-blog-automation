@@ -1,102 +1,104 @@
 [
-{
-"topic": "Swiss Family Reunification for Unmarried Partners: What Evidence Shows a Durable Relationship?",
-"angle": "Explains how unmarried partner cases differ from spouse cases and what practical evidence helps show a durable, marriage-like relationship.",
-"audience": "global_individuals",
-"article_type": "evidence_strategy",
-"pillar": "family_reunification",
-"subtopic": "unmarried_partner",
-"route_type": "route_specific",
-"legal_complexity": "high",
-"overlap_group": "family_reunification_partner_routes",
-"style_profile": "risk_focused",
-"search_intent": "informational_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not imply unmarried partner cases are equivalent to spouse routes.",
-"Explain that cohabitation helps but is not the only evidential factor.",
-"Avoid sounding as if one document type guarantees approval."
-],
-"status": "unused"
-},
-{
-"topic": "Swiss Child Reunification After Long Separation: How to Handle Custody, Consent, and Timing Problems",
-"angle": "Covers late or difficult child reunification cases where separation, custody arrangements, or consent issues create higher scrutiny.",
-"audience": "inside_switzerland_individuals",
-"article_type": "procedural_strategy",
-"pillar": "family_reunification",
-"subtopic": "child_reunification",
-"route_type": "route_specific",
-"legal_complexity": "high",
-"overlap_group": "family_reunification_child_timing",
-"style_profile": "procedural",
-"search_intent": "urgent_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not reduce the case to age limits alone.",
-"Separate custody evidence from relocation-consent evidence.",
-"Acknowledge that sponsor category can change the timing analysis."
-],
-"status": "unused"
-},
-{
-"topic": "Swiss Family Reunification Refused for Housing or Finances: What the Decision May Really Mean",
-"angle": "Analyses refusals that appear formal on the surface but may reflect deeper concerns about affordability, household formation, or sponsor stability.",
-"audience": "refused_applicants",
-"article_type": "refusal_analysis",
-"pillar": "family_reunification",
-"subtopic": "refusals_and_reapplications",
-"route_type": "post_refusal",
-"legal_complexity": "high",
-"overlap_group": "family_reunification_refusal_strategy",
-"style_profile": "case_led",
-"search_intent": "post_refusal_problem_solving",
-"scope_warning": "social_assistance_adjacent",
-"notes_for_drafting": [
-"Do not assume the stated refusal reason is the only real issue.",
-"Avoid suggesting that reapplication is always better than appeal.",
-"Show how housing and finances are assessed differently across routes."
-],
-"status": "unused"
-},
-{
-"topic": "Bringing an Elderly Parent to Switzerland: Why Adult Dependent Relative Cases Are So Hard",
-"angle": "Explains the high-threshold dependency test for adult relative cases and why emotional closeness alone is usually not enough.",
-"audience": "global_individuals",
-"article_type": "risk_analysis",
-"pillar": "family_reunification",
-"subtopic": "adult_dependent_relative",
-"route_type": "route_specific",
-"legal_complexity": "high",
-"overlap_group": "family_reunification_dependency_routes",
-"style_profile": "risk_focused",
-"search_intent": "informational_problem_solving",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not describe this as a standard parent route.",
-"Distinguish dependency evidence from ordinary family affection.",
-"Explain the difference between EU/EFTA ascendant logic and hardship-style cases."
-],
-"status": "unused"
-},
-{
-"topic": "Swiss Fiancé Visa or Family Reunification After Marriage? Choosing the Right Route to Marry in Switzerland",
-"angle": "Clarifies when the intended-marriage route is the right starting point and how it differs from applying after an existing marriage.",
-"audience": "global_individuals",
-"article_type": "comparison_piece",
-"pillar": "family_reunification",
-"subtopic": "fiance_intended_marriage",
-"route_type": "route_specific",
-"legal_complexity": "high",
-"overlap_group": "family_reunification_partner_routes",
-"style_profile": "comparison_led",
-"search_intent": "comparative_research",
-"scope_warning": "none",
-"notes_for_drafting": [
-"Do not present the fiancé route as a standalone long-term status.",
-"Keep civil-status procedure separate from immigration permission.",
-"Avoid oversimplifying tourist-visa marriage scenarios."
-],
-"status": "unused"
-}
+  {
+    "topic": "Swiss Family Reunification for Unmarried Partners: What Evidence Shows a Durable Relationship?",
+    "angle": "Explains how unmarried partner cases differ from spouse cases and what practical evidence helps show a durable, marriage-like relationship.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "unmarried_partner",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply unmarried partner cases are equivalent to spouse routes.",
+      "Explain that cohabitation helps but is not the only evidential factor.",
+      "Avoid sounding as if one document type guarantees approval."
+    ],
+    "status": "used",
+    "used_title": "Can an Unmarried Partner Join You in Switzerland?",
+    "used_at_utc": "2026-04-28T14:03:55Z"
+  },
+  {
+    "topic": "Swiss Child Reunification After Long Separation: How to Handle Custody, Consent, and Timing Problems",
+    "angle": "Covers late or difficult child reunification cases where separation, custody arrangements, or consent issues create higher scrutiny.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "child_reunification",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_child_timing",
+    "style_profile": "procedural",
+    "search_intent": "urgent_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not reduce the case to age limits alone.",
+      "Separate custody evidence from relocation-consent evidence.",
+      "Acknowledge that sponsor category can change the timing analysis."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification Refused for Housing or Finances: What the Decision May Really Mean",
+    "angle": "Analyses refusals that appear formal on the surface but may reflect deeper concerns about affordability, household formation, or sponsor stability.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "refusals_and_reapplications",
+    "route_type": "post_refusal",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_refusal_strategy",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "social_assistance_adjacent",
+    "notes_for_drafting": [
+      "Do not assume the stated refusal reason is the only real issue.",
+      "Avoid suggesting that reapplication is always better than appeal.",
+      "Show how housing and finances are assessed differently across routes."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Bringing an Elderly Parent to Switzerland: Why Adult Dependent Relative Cases Are So Hard",
+    "angle": "Explains the high-threshold dependency test for adult relative cases and why emotional closeness alone is usually not enough.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "adult_dependent_relative",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_dependency_routes",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not describe this as a standard parent route.",
+      "Distinguish dependency evidence from ordinary family affection.",
+      "Explain the difference between EU/EFTA ascendant logic and hardship-style cases."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Fiancé Visa or Family Reunification After Marriage? Choosing the Right Route to Marry in Switzerland",
+    "angle": "Clarifies when the intended-marriage route is the right starting point and how it differs from applying after an existing marriage.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "family_reunification",
+    "subtopic": "fiance_intended_marriage",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "comparison_led",
+    "search_intent": "comparative_research",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not present the fiancé route as a standalone long-term status.",
+      "Keep civil-status procedure separate from immigration permission.",
+      "Avoid oversimplifying tourist-visa marriage scenarios."
+    ],
+    "status": "unused"
+  }
 ]
