@@ -39,6 +39,11 @@ parser.add_argument(
         "for editorial context only. Website editorial is never treated as legal authority."
     ),
 )
+parser.add_argument(
+    "--allow-low-confidence-legal-memo",
+    action="store_true",
+    help="Allow drafting even if the legal memo contains low-confidence issues. Not recommended for production.",
+)
 args = parser.parse_args()
 
 
@@ -1410,6 +1415,127 @@ def is_disclaimer_block(block: str) -> bool:
     return sum(1 for marker in disclaimer_markers if marker in text) >= 2
 
 
+def detect_duplicate_practical_sections(blog_content: str) -> list[str]:
+    blocks = split_blocks(blog_content)
+    practical_heading_patterns = [
+        r"practical",
+        r"before you apply",
+        r"reducing the risk",
+        r"planning",
+        r"strategy",
+        r"evidence",
+        r"next step",
+    ]
+
+    practical_headings: list[str] = []
+    for block in blocks:
+        if not is_bold_heading(block):
+            continue
+        heading_text = re.sub(r"^\*\*|\*\*$", "", block).strip().lower()
+        if any(re.search(pattern, heading_text, flags=re.IGNORECASE) for pattern in practical_heading_patterns):
+            practical_headings.append(block)
+
+    if len(practical_headings) > 3:
+        return [
+            f"Too many practical/evidence/strategy sections ({len(practical_headings)}). "
+            "Maximum allowed is 3."
+        ]
+    return []
+
+
+def validate_public_draft(draft: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+
+    blog_title = (draft.get("blog_title") or "").strip()
+    blog_content = (draft.get("blog_content") or "").strip()
+    dynamic_page_link = draft.get("dynamic_page_link")
+
+    if not blog_title:
+        errors.append("blog_title must not be empty.")
+    if not blog_content:
+        errors.append("blog_content must not be empty.")
+    if dynamic_page_link != "":
+        errors.append("dynamic_page_link must be exactly an empty string.")
+
+    word_count = len(re.findall(r"\b[\w'-]+\b", blog_content))
+    if word_count > MAX_BLOG_WORDS:
+        errors.append(
+            f"blog_content exceeds MAX_BLOG_WORDS ({word_count} > {MAX_BLOG_WORDS})."
+        )
+
+    malformed_patterns = [
+        r"\bThe an\b",
+        r"\ban ordinary C-permit-Permit\b",
+        r"\bC-permit-Permit\b",
+        r"\bLEI\s*/\s*LEI\s*/\s*AIG\b",
+        r"\bOASA\s*/\s*OASA\s*/\s*VZAE\b",
+        r"\bSEM Directives Directives\b",
+        r"\bContact Our Immigration Lawyers In Switzerland\b[\s\S]*\bPractical Tips Before You Apply\b",
+    ]
+    for pattern in malformed_patterns:
+        if re.search(pattern, blog_content, flags=re.IGNORECASE):
+            errors.append(f"Malformed or undesirable output pattern found: {pattern}")
+
+    blocks = split_blocks(blog_content)
+    cta_block = f"**{CTA_HEADING}**"
+    cta_indexes = [idx for idx, block in enumerate(blocks) if block.strip() == cta_block]
+    if len(cta_indexes) != 1:
+        errors.append(f"Expected exactly one CTA heading '{cta_block}', found {len(cta_indexes)}.")
+    else:
+        cta_index = cta_indexes[0]
+        if cta_index == len(blocks) - 1:
+            errors.append("CTA heading must have body text after it.")
+        else:
+            cta_body_blocks = blocks[cta_index + 1 :]
+            if not any(not is_bold_heading(block) and not is_disclaimer_block(block) for block in cta_body_blocks):
+                errors.append("CTA heading must have body text after it.")
+
+            next_heading_after_cta = any(is_bold_heading(block) for block in cta_body_blocks)
+            if next_heading_after_cta:
+                errors.append("CTA must be the final substantive section before the disclaimer.")
+
+    if not blocks:
+        errors.append("blog_content must contain at least one content block.")
+    else:
+        final_block = blocks[-1].strip()
+        if not is_disclaimer_block(final_block):
+            errors.append("The final block must be a disclaimer.")
+
+        italic_single_asterisk = bool(
+            re.match(r"^\*(?!\*)([\s\S]+?)(?<!\*)\*$", final_block)
+        )
+        if not italic_single_asterisk:
+            errors.append("The final disclaimer must be italicised with single asterisks.")
+
+    errors.extend(detect_duplicate_practical_sections(blog_content))
+    return errors
+
+
+def validate_legal_memo(memo: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    issues = memo.get("issues")
+
+    if not isinstance(issues, list) or not issues:
+        errors.append("Legal memo must contain at least one issue.")
+        return errors
+
+    for index, issue in enumerate(issues, start=1):
+        confidence = issue.get("confidence")
+        if confidence == "low" and not args.allow_low_confidence_legal_memo:
+            errors.append(
+                f"Issue {index} has low confidence; rerun with --allow-low-confidence-legal-memo only if intentional."
+            )
+
+        support = issue.get("support")
+        if not isinstance(support, list) or not support:
+            errors.append(f"Issue {index} has empty support; each issue must include at least one support item.")
+
+        if issue.get("authority_type") == "unclear":
+            errors.append(f"Issue {index} has authority_type='unclear', which is not allowed.")
+
+    return errors
+
+
 def ensure_italic_disclaimer_at_end(blog_content: str) -> str:
     blocks = split_blocks(blog_content)
     if not blocks:
@@ -1766,6 +1892,9 @@ def main() -> None:
         schema=LEGAL_MEMO_SCHEMA,
         model=OPENAI_MODEL,
     )
+    memo_validation_errors = validate_legal_memo(memo)
+    if memo_validation_errors:
+        raise RuntimeError("Legal memo validation failed:\n- " + "\n- ".join(memo_validation_errors))
 
     write_run_artifact(
         f"{run_base}_analysis.json",
@@ -1788,6 +1917,9 @@ def main() -> None:
         model=OPENAI_MODEL,
     )
     draft = normalise_draft_output(draft, topic_entry)
+    draft_validation_errors = validate_public_draft(draft)
+    if draft_validation_errors:
+        raise RuntimeError("Public draft validation failed:\n- " + "\n- ".join(draft_validation_errors))
 
     seo = call_responses_api(
         openai_api_key,
