@@ -87,6 +87,7 @@ SUPPORTED_KNOWLEDGE_EXTENSIONS = {".md", ".txt", ".json", ".pdf"}
 
 MAX_BLOG_WORDS = 1500
 TARGET_BLOG_WORDS = "1,050 to 1,300"
+MAX_REPAIR_ATTEMPTS = 2
 
 FORBIDDEN_PUBLIC_PHRASES = [
     "the memo",
@@ -300,6 +301,8 @@ Rules:
 - In public-facing formulations, use clear English by default.
 - If a non-English official or legal term is useful for precision, give both French and German where both are relevant. For example: "SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG)".
 - Do not use only the German term or only the French term where both terms are commonly relevant in Switzerland.
+- Identify and flag any translation ambiguity where a legal proposition depends on translated legislation or translated official guidance.
+- For Article 34(5) LEI / AIG analysis, distinguish clearly between temporary education/training residence, the final five-year uninterrupted residence period, and the two-year post-study durable residence-permit condition.
 
 Return strict JSON only.
 """.strip()
@@ -441,9 +444,13 @@ Specificity and uncertainty:
 - Where the article refers to "some nationalities", "certain countries", "some cantons" or similar, either name the relevant category accurately from the legal memo or say that the point must be checked against current official guidance from the named official body.
 - Distinguish clearly between settled legal framework, canton-specific practice, evidential issues and genuinely discretionary areas.
 - Use caution where needed, but avoid repeated hedging.
+- Avoid stacking cautious verbs such as "may", "might", "can" and "often" where the legal memo supports a more direct proposition.
 
 CTA:
 - The final CTA heading must be exactly: {CTA_HEADING}
+- The CTA must be the final substantive section before the disclaimer.
+- Do not create a practical fallback section after the CTA.
+- Do not use the heading **Practical Tips Before You Apply**.
 - The CTA must be concrete, personal and restrained.
 - It should explain what {CTA_NAME} and our specialist Swiss immigration lawyers would review or do.
 - Prefer personal formulations such as:
@@ -471,6 +478,23 @@ SEO:
 Under DYNAMIC PAGE LINK, return an empty string only.
 
 Output strict JSON only.
+""".strip()
+
+REPAIR_INSTRUCTIONS = f"""
+You are repairing an existing Swiss immigration blog draft that failed public validation.
+
+Repair-only scope:
+- Preserve the legal substance from the supplied legal memo and draft.
+- Do not add new legal propositions, new facts, invented authority, invented procedures, invented nationality lists, invented canton-specific practice, invented fees or invented document requirements.
+- Fix malformed headings, duplicated sections, awkward generated phrasing, excessive repetition and structural defects.
+- Keep the CTA heading exactly: {CTA_HEADING}
+- Keep the CTA as the final substantive section before the italicised disclaimer.
+- Keep the article under {MAX_BLOG_WORDS} words.
+- If the draft is over the word limit, shorten materially by removing repetition, merging overlapping sections, cutting generic commentary and preserving only the strongest legal and practical points.
+- Do not preserve every paragraph if length/structure requires edits.
+- Keep the first paragraph bold and the final disclaimer italicised with single asterisks.
+- Use UK English.
+- Return strict JSON only using DRAFT_SCHEMA.
 """.strip()
 
 SEO_INSTRUCTIONS = """
@@ -580,6 +604,7 @@ LEGAL_MEMO_SCHEMA = {
                         "source_reference_to_use_in_article": {"type": "string"},
                         "safe_public_formulation": {"type": "string"},
                         "cautious_public_formulation": {"type": "string"},
+                        "translation_or_source_caution": {"type": "string"},
                         "support": {
                             "type": "array",
                             "items": {
@@ -613,6 +638,7 @@ LEGAL_MEMO_SCHEMA = {
                         "source_reference_to_use_in_article",
                         "safe_public_formulation",
                         "cautious_public_formulation",
+                        "translation_or_source_caution",
                         "support",
                         "confidence",
                     ],
@@ -1163,6 +1189,32 @@ def build_seo_input(topic_entry: dict[str, Any], draft: dict[str, Any]) -> str:
     )
 
 
+def build_repair_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    draft: dict[str, Any],
+    validation_errors: list[str],
+) -> str:
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "classifier": classifier,
+            "legal_memo": memo,
+            "draft_to_repair": draft,
+            "validation_errors": validation_errors,
+            "repair_guardrails": (
+                "Repair only. Do not add unsupported law, new facts, invented procedures, nationality lists, "
+                "canton-specific practice, fees or document requirements."
+            ),
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
+
+
 # ============================================================
 # Persistence and email helpers
 # ============================================================
@@ -1213,14 +1265,28 @@ def send_email_via_sendgrid(subject: str, body: str, *, is_html: bool = False) -
 # ============================================================
 
 def replace_legal_abbreviation_style(text: str) -> str:
+    text = re.sub(r"\bLEI\s*/\s*LEI\s*/\s*AIG\b", "LEI / AIG", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bOASA\s*/\s*OASA\s*/\s*VZAE\b", "OASA / VZAE", text, flags=re.IGNORECASE)
     text = re.sub(r"(?<!LEI / )\bAIG\b", "LEI / AIG", text)
     text = re.sub(r"(?<!OASA / )\bVZAE\b", "OASA / VZAE", text)
     return text
 
 
 def replace_informal_c_permit_terms(text: str) -> str:
-    text = re.sub(r"\bordinary C\b", "an ordinary C-permit", text, flags=re.IGNORECASE)
-    text = re.sub(r"\bOrdinary C\b", "An ordinary C-permit", text)
+    text = re.sub(
+        r"\bThe an ordinary C-permit-Permit Route\b",
+        "The Ordinary C-Permit Route",
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(r"\ban ordinary C-permit-Permit\b", "an ordinary C-permit", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bC-permit-Permit\b", "C-permit", text, flags=re.IGNORECASE)
+    text = re.sub(
+        r"\bordinary C\b(?!\s*(?:permit|route|application|case|rules|clock|timing)\b)",
+        "an ordinary C-permit",
+        text,
+        flags=re.IGNORECASE,
+    )
     return text
 
 
@@ -1415,6 +1481,19 @@ def is_disclaimer_block(block: str) -> bool:
     return sum(1 for marker in disclaimer_markers if marker in text) >= 2
 
 
+def insert_before_cta_or_disclaimer(blocks: list[str], new_blocks: list[str]) -> list[str]:
+    cta_block = f"**{CTA_HEADING}**"
+    for idx, block in enumerate(blocks):
+        if block.strip() == cta_block:
+            return blocks[:idx] + new_blocks + blocks[idx:]
+
+    for idx, block in enumerate(blocks):
+        if is_disclaimer_block(block):
+            return blocks[:idx] + new_blocks + blocks[idx:]
+
+    return blocks + new_blocks
+
+
 def detect_duplicate_practical_sections(blog_content: str) -> list[str]:
     blocks = split_blocks(blog_content)
     practical_heading_patterns = [
@@ -1536,6 +1615,41 @@ def validate_legal_memo(memo: dict[str, Any]) -> list[str]:
     return errors
 
 
+def repair_draft_if_needed(
+    *,
+    openai_api_key: str,
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    draft: dict[str, Any],
+) -> dict[str, Any]:
+    current = draft
+    errors = validate_public_draft(current)
+    if not errors:
+        return current
+
+    for _ in range(MAX_REPAIR_ATTEMPTS):
+        repaired = call_responses_api(
+            openai_api_key,
+            instructions=REPAIR_INSTRUCTIONS,
+            input_text=build_repair_input(
+                topic_entry=topic_entry,
+                classifier=classifier,
+                memo=memo,
+                draft=current,
+                validation_errors=errors,
+            ),
+            schema=DRAFT_SCHEMA,
+            model=OPENAI_MODEL,
+        )
+        current = normalise_draft_output(repaired, topic_entry)
+        errors = validate_public_draft(current)
+        if not errors:
+            return current
+
+    raise RuntimeError("Public draft validation failed after repair:\n- " + "\n- ".join(errors))
+
+
 def ensure_italic_disclaimer_at_end(blog_content: str) -> str:
     blocks = split_blocks(blog_content)
     if not blocks:
@@ -1603,18 +1717,14 @@ def ensure_reader_usefulness_content(blog_content: str) -> str:
     if marker_count >= 2 and has_practical_heading:
         return blog_content
 
-    fallback_heading = "**Practical Tips Before You Apply**"
+    fallback_heading = "**Planning the Filing Strategy**"
     fallback_paragraph = (
-        "As a practical starting point, applicants should identify the exact legal route being relied on, "
-        "reconstruct the key timeline and test whether any evidence gaps could undermine the application. "
-        "A helpful best-practice approach is to map each factual point to the relevant legal criterion before "
-        "filing, then stress-test likely weak points (for example, timing, continuity of residence, documentary "
-        "consistency or route-specific eligibility conditions). Our Swiss immigration lawyers can then refine the "
-        "strategy, prioritise risk-reduction steps and help decide whether to file now or after further preparation."
+        "Before filing, applicants should identify the route being relied on, reconstruct the permit chronology "
+        "and test whether any period creates a timing or evidence risk. The key issue is not only how long the "
+        "applicant has lived in Switzerland, but which periods count for the particular C-permit route."
     )
-
-    blocks.extend([fallback_heading, fallback_paragraph])
-    if disclaimer_block:
+    blocks = insert_before_cta_or_disclaimer(blocks, [fallback_heading, fallback_paragraph])
+    if disclaimer_block and not (blocks and is_disclaimer_block(blocks[-1])):
         blocks.append(disclaimer_block)
 
     return "\n\n".join(blocks)
@@ -1633,8 +1743,8 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
     blog_content = soften_repeated_practical_headings(blog_content, topic_entry)
     blog_content = replace_informal_c_permit_terms(blog_content)
     blog_content = replace_person_references(blog_content)
-    blog_content = ensure_italic_disclaimer_at_end(blog_content)
     blog_content = ensure_reader_usefulness_content(blog_content)
+    blog_content = ensure_italic_disclaimer_at_end(blog_content)
     blog_content = re.sub(r"\n{3,}", "\n\n", blog_content).strip()
 
     cleaned["blog_content"] = blog_content
@@ -1917,9 +2027,13 @@ def main() -> None:
         model=OPENAI_MODEL,
     )
     draft = normalise_draft_output(draft, topic_entry)
-    draft_validation_errors = validate_public_draft(draft)
-    if draft_validation_errors:
-        raise RuntimeError("Public draft validation failed:\n- " + "\n- ".join(draft_validation_errors))
+    draft = repair_draft_if_needed(
+        openai_api_key=openai_api_key,
+        topic_entry=topic_entry,
+        classifier=classifier,
+        memo=memo,
+        draft=draft,
+    )
 
     seo = call_responses_api(
         openai_api_key,
