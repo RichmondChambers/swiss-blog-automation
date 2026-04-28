@@ -1,156 +1,102 @@
 [
-  {
-    "topic": "Do Student Years Count Toward a Swiss C Permit? How Residence Counting Really Works",
-    "angle": "Clarifies how Swiss authorities assess residence history for C permit eligibility, with emphasis on student years, L permits, mixed permit histories, and timing mistakes before filing.",
-    "audience": "inside_switzerland_individuals",
-    "article_type": "evidence_strategy",
-    "pillar": "settlement_and_c_permit",
-    "subtopic": "residence_counting_and_qualifying_years",
-    "route_type": "broad_issue",
-    "legal_complexity": "high",
-    "overlap_group": "c_permit_eligibility_and_counting",
-    "style_profile": "procedural",
-    "search_intent": "informational_problem_solving",
-    "scope_warning": "none",
-    "notes_for_drafting": [
-      "Do not suggest that all lawful years in Switzerland count in the same way",
-      "Use mixed-status examples to avoid oversimplifying residence counting",
-      "Separate first-five-year and final-five-year counting issues carefully"
-    ],
-    "status": "used",
-    "used_title": "Do Student Years Count Toward a Swiss C Permit? How Residence Counting Really Works",
-    "used_at_utc": "2026-04-28T10:21:34Z"
-  },
-  {
-    "topic": "Can You Lose a Swiss C Permit by Living Abroad Too Long?",
-    "angle": "Explains lapse risk, advance preservation requests, repeated short returns, and centre-of-life problems for C permit holders spending extended periods outside Switzerland.",
-    "audience": "inside_switzerland_individuals",
-    "article_type": "risk_analysis",
-    "pillar": "settlement_and_c_permit",
-    "subtopic": "absence_lapse_and_preservation",
-    "route_type": "broad_issue",
-    "legal_complexity": "high",
-    "overlap_group": "c_permit_absence_and_preservation",
-    "style_profile": "risk_focused",
-    "search_intent": "urgent_problem_solving",
-    "scope_warning": "none",
-    "notes_for_drafting": [
-      "Do not describe the C permit as unconditional permanent residence",
-      "Distinguish card renewal from the underlying status clearly",
-      "Avoid over-focusing on short trips; explain centre-of-life and advance preservation issues"
-    ],
-    "status": "used",
-    "used_title": "Can You Lose a Swiss C Permit by Living Abroad Too Long? Absence, Preservation and Centre-of-Life Risks",
-    "used_at_utc": "2026-04-28T11:02:20Z"
-  },
-  {
-    "topic": "Swiss C Permit After 5 Years or 10 Years: Why Settlement Timelines Differ by Nationality",
-    "angle": "Explains the practical reasons some applicants reach a Swiss C Permit after five years while others follow the standard ten-year route, with emphasis on nationality-sensitive rules and common misunderstandings.",
-    "audience": "global_individuals",
-    "article_type": "comparison_piece",
-    "pillar": "settlement_and_c_permit",
-    "subtopic": "fast_track_c_permit",
-    "route_type": "route_specific",
-    "legal_complexity": "high",
-    "overlap_group": "c_permit_fast_track_and_integration",
-    "style_profile": "comparison_led",
-    "search_intent": "comparative_research",
-    "scope_warning": "none",
-    "notes_for_drafting": [
-      "Do not collapse treaty-based and practice-based five-year routes into one category",
-      "Avoid implying that five-year access means automatic approval",
-      "Explain that nationality changes timeline but does not remove integration scrutiny"
-    ],
-    "status": "used",
-    "used_title": "Swiss C Permit After Five or Ten Years by Nationality",
-    "used_at_utc": "2026-04-28T11:14:40Z"
-  },
-  {
-    "topic": "Do Student Years Count Toward a Swiss C Permit? How Residence Counting Really Works",
-    "angle": "Clarifies how different periods of lawful stay may or may not count toward C Permit eligibility, especially for applicants with mixed histories involving study, L permits, and later work residence.",
-    "audience": "inside_switzerland_individuals",
-    "article_type": "myth_correction",
-    "pillar": "settlement_and_c_permit",
-    "subtopic": "residence_counting_and_qualifying_years",
-    "route_type": "broad_issue",
-    "legal_complexity": "high",
-    "overlap_group": "c_permit_eligibility_and_counting",
-    "style_profile": "myth_busting",
-    "search_intent": "informational_problem_solving",
-    "scope_warning": "none",
-    "notes_for_drafting": [
-      "Do not suggest that all lawful stay counts in the same way",
-      "Separate first-five-years counting issues from final-five-years durability issues",
-      "Use examples of mixed residence histories without overgeneralising"
-    ],
-    "status": "used",
-    "used_title": "Do Student Years Count Towards a Swiss C Permit?",
-    "used_at_utc": "2026-04-28T11:48:38Z"
-  },
-  {
-    "topic": "Swiss C Permit Language Rules Explained: A2/A1, B1/A1, and When Stronger Evidence Is Needed",
-    "angle": "Shows how language expectations differ between ordinary and faster C Permit pathways, and what applicants should understand before relying on a certificate that may not be enough for their route.",
-    "audience": "inside_switzerland_individuals",
-    "article_type": "evidence_strategy",
-    "pillar": "settlement_and_c_permit",
-    "subtopic": "language_requirements_and_evidence",
-    "route_type": "broad_issue",
-    "legal_complexity": "medium",
-    "overlap_group": "c_permit_language_and_compliance",
-    "style_profile": "procedural",
-    "search_intent": "informational_problem_solving",
-    "scope_warning": "none",
-    "notes_for_drafting": [
-      "Do not imply that one language threshold applies to every C Permit route",
-      "Avoid treating the certificate as the whole integration analysis",
-      "Flag that cantonal process and evidence expectations may vary"
-    ],
-    "status": "used",
-    "used_title": "Is A2/A1 Enough for a Swiss C Permit?",
-    "used_at_utc": "2026-04-28T12:15:21Z"
-  },
-  {
-    "topic": "Can You Lose a Swiss C Permit by Spending Too Much Time Abroad?",
-    "angle": "Explains lapse risk, advance preservation requests, and the difference between holding a valid card and keeping the underlying settlement status when living outside Switzerland.",
-    "audience": "inside_switzerland_individuals",
-    "article_type": "risk_analysis",
-    "pillar": "settlement_and_c_permit",
-    "subtopic": "absence_lapse_and_preservation",
-    "route_type": "broad_issue",
-    "legal_complexity": "high",
-    "overlap_group": "c_permit_absence_and_preservation",
-    "style_profile": "risk_focused",
-    "search_intent": "urgent_problem_solving",
-    "scope_warning": "none",
-    "notes_for_drafting": [
-      "Do not describe the C Permit as unconditional permanent residence",
-      "Distinguish card-renewal formalities from lapse of the underlying status",
-      "Explain preservation requests and centre-of-life issues without overstating certainty"
-    ],
-    "status": "used",
-    "used_title": "Can a Swiss C Permit Lapse While Your Card Is Still Valid?",
-    "used_at_utc": "2026-04-28T12:38:55Z"
-  },
-  {
-    "topic": "Why a Swiss C Permit Application Was Not Approved: Common Reasons the Canton Extends the B Permit Instead",
-    "angle": "Analyses practical refusal and deferral patterns in C Permit cases, helping readers identify whether the real issue is counting, integration, language, finances, or canton-level procedure.",
-    "audience": "refused_applicants",
-    "article_type": "refusal_analysis",
-    "pillar": "settlement_and_c_permit",
-    "subtopic": "cantonal_practice_and_procedure",
-    "route_type": "post_refusal",
-    "legal_complexity": "high",
-    "overlap_group": "c_permit_post_grant_stability",
-    "style_profile": "risk_focused",
-    "search_intent": "post_refusal_problem_solving",
-    "scope_warning": "social_assistance_adjacent",
-    "notes_for_drafting": [
-      "Do not assume every negative outcome is a formal refusal rather than a B-permit continuation",
-      "Avoid blaming language alone where counting or compliance may be the real issue",
-      "Reflect canton-level variation without suggesting arbitrary decision-making"
-    ],
-    "status": "unused",
-    "used_title": "Why a Swiss C Permit Application Was Not Approved: Common Reasons a Canton Extends the B Permit Instead",
-    "used_at_utc": "2026-04-26T12:47:57Z"
-  }
+{
+"topic": "Swiss Family Reunification for Unmarried Partners: What Evidence Shows a Durable Relationship?",
+"angle": "Explains how unmarried partner cases differ from spouse cases and what practical evidence helps show a durable, marriage-like relationship.",
+"audience": "global_individuals",
+"article_type": "evidence_strategy",
+"pillar": "family_reunification",
+"subtopic": "unmarried_partner",
+"route_type": "route_specific",
+"legal_complexity": "high",
+"overlap_group": "family_reunification_partner_routes",
+"style_profile": "risk_focused",
+"search_intent": "informational_problem_solving",
+"scope_warning": "none",
+"notes_for_drafting": [
+"Do not imply unmarried partner cases are equivalent to spouse routes.",
+"Explain that cohabitation helps but is not the only evidential factor.",
+"Avoid sounding as if one document type guarantees approval."
+],
+"status": "unused"
+},
+{
+"topic": "Swiss Child Reunification After Long Separation: How to Handle Custody, Consent, and Timing Problems",
+"angle": "Covers late or difficult child reunification cases where separation, custody arrangements, or consent issues create higher scrutiny.",
+"audience": "inside_switzerland_individuals",
+"article_type": "procedural_strategy",
+"pillar": "family_reunification",
+"subtopic": "child_reunification",
+"route_type": "route_specific",
+"legal_complexity": "high",
+"overlap_group": "family_reunification_child_timing",
+"style_profile": "procedural",
+"search_intent": "urgent_problem_solving",
+"scope_warning": "none",
+"notes_for_drafting": [
+"Do not reduce the case to age limits alone.",
+"Separate custody evidence from relocation-consent evidence.",
+"Acknowledge that sponsor category can change the timing analysis."
+],
+"status": "unused"
+},
+{
+"topic": "Swiss Family Reunification Refused for Housing or Finances: What the Decision May Really Mean",
+"angle": "Analyses refusals that appear formal on the surface but may reflect deeper concerns about affordability, household formation, or sponsor stability.",
+"audience": "refused_applicants",
+"article_type": "refusal_analysis",
+"pillar": "family_reunification",
+"subtopic": "refusals_and_reapplications",
+"route_type": "post_refusal",
+"legal_complexity": "high",
+"overlap_group": "family_reunification_refusal_strategy",
+"style_profile": "case_led",
+"search_intent": "post_refusal_problem_solving",
+"scope_warning": "social_assistance_adjacent",
+"notes_for_drafting": [
+"Do not assume the stated refusal reason is the only real issue.",
+"Avoid suggesting that reapplication is always better than appeal.",
+"Show how housing and finances are assessed differently across routes."
+],
+"status": "unused"
+},
+{
+"topic": "Bringing an Elderly Parent to Switzerland: Why Adult Dependent Relative Cases Are So Hard",
+"angle": "Explains the high-threshold dependency test for adult relative cases and why emotional closeness alone is usually not enough.",
+"audience": "global_individuals",
+"article_type": "risk_analysis",
+"pillar": "family_reunification",
+"subtopic": "adult_dependent_relative",
+"route_type": "route_specific",
+"legal_complexity": "high",
+"overlap_group": "family_reunification_dependency_routes",
+"style_profile": "risk_focused",
+"search_intent": "informational_problem_solving",
+"scope_warning": "none",
+"notes_for_drafting": [
+"Do not describe this as a standard parent route.",
+"Distinguish dependency evidence from ordinary family affection.",
+"Explain the difference between EU/EFTA ascendant logic and hardship-style cases."
+],
+"status": "unused"
+},
+{
+"topic": "Swiss Fiancé Visa or Family Reunification After Marriage? Choosing the Right Route to Marry in Switzerland",
+"angle": "Clarifies when the intended-marriage route is the right starting point and how it differs from applying after an existing marriage.",
+"audience": "global_individuals",
+"article_type": "comparison_piece",
+"pillar": "family_reunification",
+"subtopic": "fiance_intended_marriage",
+"route_type": "route_specific",
+"legal_complexity": "high",
+"overlap_group": "family_reunification_partner_routes",
+"style_profile": "comparison_led",
+"search_intent": "comparative_research",
+"scope_warning": "none",
+"notes_for_drafting": [
+"Do not present the fiancé route as a standalone long-term status.",
+"Keep civil-status procedure separate from immigration permission.",
+"Avoid oversimplifying tourist-visa marriage scenarios."
+],
+"status": "unused"
+}
 ]
