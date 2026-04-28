@@ -2199,7 +2199,7 @@ def ensure_cta_requirements(blog_content: str) -> str:
     if not CMS_SUPPLIES_STANDARD_CTA and not has_consultation_sentence:
         cta_body_blocks.append(CTA_STANDARD_CONTACT_SENTENCE)
 
-    updated_blocks = blocks[:section_start] + cta_body_blocks + blocks[section_end:]
+    updated_blocks = blocks[:cta_index] + [cta_block] + cta_body_blocks + blocks[section_end:]
     return "\n\n".join(updated_blocks)
 
 
@@ -2222,6 +2222,9 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
     blog_content = ensure_cta_requirements(blog_content)
     blog_content = ensure_italic_disclaimer_at_end(blog_content)
     blog_content = enforce_max_blog_words(blog_content, MAX_BLOG_WORDS)
+    blog_content = remove_empty_headings(blog_content)
+    blog_content = ensure_cta_requirements(blog_content)
+    blog_content = ensure_italic_disclaimer_at_end(blog_content)
     blog_content = re.sub(r"\n{3,}", "\n\n", blog_content).strip()
 
     cleaned["blog_content"] = blog_content
