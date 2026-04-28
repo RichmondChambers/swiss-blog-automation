@@ -61,7 +61,9 @@
       "Avoid suggesting that reapplication is always better than appeal.",
       "Show how housing and finances are assessed differently across routes."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Housing or Finance Refusal in Swiss Family Reunification",
+    "used_at_utc": "2026-04-28T15:22:54Z"
   },
   {
     "topic": "Bringing an Elderly Parent to Switzerland: Why Adult Dependent Relative Cases Are So Hard",
