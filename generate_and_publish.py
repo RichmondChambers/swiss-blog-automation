@@ -846,8 +846,21 @@ def resolve_authority_pack_paths(topic_entry: dict[str, Any], authority_map: dic
     selected: list[str] = []
     selected.extend(authority_map.get("pillar_defaults", {}).get(pillar, []))
     selected.extend(authority_map.get("subtopic_overrides", {}).get(f"{pillar}:{subtopic}", []))
-    selected.extend(authority_map.get("article_type_extras", {}).get(article_type, []))
-    selected.extend(authority_map.get("legal_complexity_extras", {}).get(legal_complexity, []))
+    article_type_extras = (
+        authority_map
+        .get("article_type_extras", {})
+        .get(pillar, {})
+        .get(article_type, [])
+    )
+    selected.extend(article_type_extras)
+
+    legal_complexity_extras = (
+        authority_map
+        .get("legal_complexity_extras", {})
+        .get(pillar, {})
+        .get(legal_complexity, [])
+    )
+    selected.extend(legal_complexity_extras)
 
     deduped: list[str] = []
     seen = set()
