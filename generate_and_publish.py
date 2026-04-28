@@ -54,7 +54,7 @@ def require_env(name: str) -> str:
 
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.4")
+OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.5")
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 EMAIL_FROM = os.environ.get("EMAIL_FROM", "info@richmondchambers.com")
 EMAIL_TO = os.environ.get("EMAIL_TO", "paul.richmond@richmondchambers.com")
@@ -72,6 +72,8 @@ INTERNAL_NOTES_DIR = KNOWLEDGE_DIR / "internal_legal_notes"
 WEBSITE_EDITORIAL_DIR = KNOWLEDGE_DIR / "website_editorial"
 OUTPUT_DIR = SCRIPT_DIR / "generated_blog_runs"
 AUTHORITY_MAP_PATH = SCRIPT_DIR / "authority_pack_map.json"
+
+SUPPORTED_KNOWLEDGE_EXTENSIONS = {".md", ".txt", ".json", ".pdf"}
 
 
 # ============================================================
@@ -766,9 +768,13 @@ def resolve_authority_pack_paths(topic_entry: dict[str, Any], authority_map: dic
 
 def read_pdf_text(path: Path) -> str:
     if not HAS_PYPDF2:
-        return ""
+        raise RuntimeError(f"Cannot read PDF because PyPDF2 is not installed: {path}")
 
-    reader = PdfReader(str(path))
+    try:
+        reader = PdfReader(str(path))
+    except Exception as exc:
+        raise RuntimeError(f"Could not open PDF file: {path}") from exc
+
     pages: list[str] = []
     for page_num, page in enumerate(reader.pages, start=1):
         try:
@@ -778,19 +784,45 @@ def read_pdf_text(path: Path) -> str:
         text = re.sub(r"\s+", " ", text).strip()
         if text:
             pages.append(f"[page {page_num}] {text}")
+
     return "\n".join(pages)
 
 
-def load_selected_legal_authority_chunks(pdf_paths: list[Path]) -> list[KnowledgeChunk]:
+def read_text_file(path: Path) -> str:
+    try:
+        return path.read_text(encoding="utf-8").strip()
+    except UnicodeDecodeError:
+        return path.read_text(encoding="utf-8", errors="replace").strip()
+
+
+def read_knowledge_file(path: Path) -> str:
+    suffix = path.suffix.lower()
+
+    if suffix == ".pdf":
+        return read_pdf_text(path)
+
+    if suffix in {".md", ".txt", ".json"}:
+        return read_text_file(path)
+
+    raise RuntimeError(f"Unsupported knowledge file type: {path}")
+
+
+def load_selected_legal_authority_chunks(authority_paths: list[Path]) -> list[KnowledgeChunk]:
     chunks: list[KnowledgeChunk] = []
 
-    for pdf_path in pdf_paths:
-        if not pdf_path.exists():
-            raise RuntimeError(f"Mapped legal authority pack not found: {pdf_path}")
+    for authority_path in authority_paths:
+        if not authority_path.exists():
+            raise RuntimeError(f"Mapped legal authority pack not found: {authority_path}")
 
-        text = read_pdf_text(pdf_path)
+        text = read_knowledge_file(authority_path)
         if text:
-            chunks.append(KnowledgeChunk(str(pdf_path.relative_to(SCRIPT_DIR)), "legal_authority", text))
+            chunks.append(
+                KnowledgeChunk(
+                    str(authority_path.relative_to(SCRIPT_DIR)),
+                    "legal_authority",
+                    text,
+                )
+            )
 
     return chunks
 
@@ -800,10 +832,22 @@ def load_chunks_from_folder(folder: Path, source_kind: str) -> list[KnowledgeChu
     if not folder.is_dir():
         return chunks
 
-    for pdf_path in sorted(folder.glob("*.pdf")):
-        text = read_pdf_text(pdf_path)
+    for path in sorted(folder.rglob("*")):
+        if not path.is_file():
+            continue
+
+        if path.suffix.lower() not in SUPPORTED_KNOWLEDGE_EXTENSIONS:
+            continue
+
+        text = read_knowledge_file(path)
         if text:
-            chunks.append(KnowledgeChunk(pdf_path.name, source_kind, text))
+            chunks.append(
+                KnowledgeChunk(
+                    str(path.relative_to(SCRIPT_DIR)),
+                    source_kind,
+                    text,
+                )
+            )
 
     return chunks
 
@@ -1190,17 +1234,14 @@ def replace_sem_directives_terms(text: str) -> str:
     """
     cleaned = text
 
-    # Collapse over-expanded or repeated SEM Directive labels first.
     sem_directives_expanded_patterns = [
         r"SEM Directives on the Foreign Nationals and Integration Act\s*"
         r"\([^)]*(?:LEI\s*/\s*AIG|AIG|Weisungen)[^)]*\)"
         r"(?:\s*(?:;|,|and)\s*"
         r"(?:SEM\s+Directives(?:\s+(?:LEI\s*/\s*AIG|AIG))?|Directives\s+LEI\s*/\s*AIG|Weisungen\s+AIG))*",
-
         r"SEM Directives on the Foreign Nationals and Integration Act\s*"
         r"(?:\s*(?:;|,|and)\s*"
         r"(?:SEM\s+Directives(?:\s+(?:LEI\s*/\s*AIG|AIG))?|Directives\s+LEI\s*/\s*AIG|Weisungen\s+AIG))+",
-
         r"SEM Directives\s*\([^)]*(?:LEI\s*/\s*AIG|AIG|Weisungen)[^)]*\)"
         r"(?:\s*(?:;|,|and)\s*"
         r"(?:SEM\s+Directives(?:\s+(?:LEI\s*/\s*AIG|AIG))?|Directives\s+LEI\s*/\s*AIG|Weisungen\s+AIG))*",
@@ -1223,7 +1264,6 @@ def replace_sem_directives_terms(text: str) -> str:
     for pattern, replacement in replacements.items():
         cleaned = re.sub(pattern, replacement, cleaned, flags=re.IGNORECASE)
 
-    # Remove duplicate references that can be produced after normalisation.
     cleaned = re.sub(
         r"\bSEM Directives\b(?:\s*(?:;|,|and)\s*\bSEM Directives\b)+",
         "SEM Directives",
@@ -1239,6 +1279,7 @@ def replace_sem_directives_terms(text: str) -> str:
     )
 
     return cleaned
+
 
 def replace_ai_source_phrases(text: str) -> str:
     replacements = {
@@ -1490,10 +1531,7 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
 def inline_markdown_to_html(text: str) -> str:
     escaped = escape_html(text)
 
-    # Bold first.
     escaped = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
-
-    # Then italics, avoiding bold markers.
     escaped = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"<em>\1</em>", escaped)
 
     return escaped
@@ -1642,7 +1680,12 @@ def main() -> None:
                     "selected_topic": topic_entry,
                     "remaining_unused": remaining_count,
                     "mapped_authority_packs": [
-                        str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
+                        {
+                            "path": str(path.relative_to(SCRIPT_DIR)),
+                            "exists": path.exists(),
+                            "suffix": path.suffix,
+                        }
+                        for path in selected_pack_paths
                     ],
                     "selected_article_structure_variant": select_article_structure_variant(topic_entry),
                     "expected_retrieval_queries": [
