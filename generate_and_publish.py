@@ -68,6 +68,12 @@ REPLY_TO = os.environ.get("EMAIL_REPLY_TO", EMAIL_TO)
 CTA_HEADING = "Contact Our Immigration Lawyers In Switzerland"
 CTA_NAME = "Richmond Chambers Switzerland"
 CTA_PHONE = "+41 21 588 07 70"
+CMS_SUPPLIES_STANDARD_CTA = os.environ.get("CMS_SUPPLIES_STANDARD_CTA", "").strip().lower() in {
+    "1",
+    "true",
+    "yes",
+    "on",
+}
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 TOPICS_PATH = SCRIPT_DIR / "topics.json"
@@ -1459,6 +1465,41 @@ def count_words(text: str) -> int:
     return len(re.findall(r"\b[\w'-]+\b", text))
 
 
+def repair_sentence_start_capitalisation(text: str) -> str:
+    sentence_start_patterns = [
+        r"(?<=[.!?])(\s+)(an applicant\b)",
+        r"(?<=[.!?])(\s+)(the applicant\b)",
+        r"(?<=[.!?])(\s+)(an applicant['’]s\b)",
+        r"(?<=[.!?])(\s+)(the applicant['’]s\b)",
+    ]
+
+    repaired = text
+    for pattern in sentence_start_patterns:
+        repaired = re.sub(
+            pattern,
+            lambda match: f"{match.group(1)}{match.group(2)[0].upper()}{match.group(2)[1:]}",
+            repaired,
+            flags=re.IGNORECASE,
+        )
+    return repaired
+
+
+def find_sentence_start_capitalisation_artefacts(text: str) -> list[str]:
+    artefact_patterns = [
+        r"(?<=[.!?])\s+an applicant\b",
+        r"(?<=[.!?])\s+the applicant\b",
+        r"(?<=[.!?])\s+an applicant['’]s\b",
+        r"(?<=[.!?])\s+the applicant['’]s\b",
+    ]
+    matches: list[str] = []
+    for pattern in artefact_patterns:
+        for match in re.finditer(pattern, text, flags=re.IGNORECASE):
+            token = match.group(0).strip()
+            if token and token[0].islower():
+                matches.append(token)
+    return matches
+
+
 def is_bold_heading(block: str) -> bool:
     if not (block.startswith("**") and block.endswith("**")):
         return False
@@ -1655,6 +1696,12 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
     for pattern in malformed_patterns:
         if re.search(pattern, blog_content, flags=re.IGNORECASE):
             errors.append(f"Malformed or undesirable output pattern found: {pattern}")
+    capitalisation_artefacts = find_sentence_start_capitalisation_artefacts(blog_content)
+    if capitalisation_artefacts:
+        errors.append(
+            "Sentence-start capitalisation artefacts found after punctuation: "
+            + ", ".join(sorted(set(capitalisation_artefacts)))
+        )
 
     blocks = split_blocks(blog_content)
     cta_block = f"**{CTA_HEADING}**"
@@ -1669,6 +1716,29 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
             cta_body_blocks = blocks[cta_index + 1 :]
             if not any(not is_bold_heading(block) and not is_disclaimer_block(block) for block in cta_body_blocks):
                 errors.append("CTA heading must have body text after it.")
+            else:
+                cta_body_text = "\n\n".join(
+                    block for block in cta_body_blocks if not is_bold_heading(block) and not is_disclaimer_block(block)
+                )
+                cta_body_lower = cta_body_text.lower()
+                has_help_text = any(
+                    marker in cta_body_lower
+                    for marker in [
+                        "can help",
+                        "would review",
+                        "will review",
+                        "our immigration lawyers",
+                        "richmond chambers switzerland",
+                    ]
+                )
+                if not has_help_text:
+                    errors.append("CTA must include a substantive paragraph explaining how our lawyers can help.")
+                if not CMS_SUPPLIES_STANDARD_CTA:
+                    has_consultation_sentence = CTA_PHONE in cta_body_text and "enquiry form" in cta_body_lower
+                    if not has_consultation_sentence:
+                        errors.append(
+                            "CTA must include the standard consultation sentence with phone number and enquiry form wording."
+                        )
 
             next_heading_after_cta = any(is_bold_heading(block) for block in cta_body_blocks)
             if next_heading_after_cta:
@@ -1806,16 +1876,52 @@ def ensure_reader_usefulness_content(blog_content: str) -> str:
     ]
     marker_count = sum(1 for marker in guidance_markers if marker in body_text)
 
-    has_practical_heading = any(
-        is_bold_heading(block)
-        and any(
-            term in re.sub(r"^\*\*|\*\*$", "", block).strip().lower()
-            for term in ["practice", "next step", "approach", "strategy", "avoid", "planning", "check"]
-        )
-        for block in blocks
-    )
+    practical_signal_terms = [
+        "timeline",
+        "timing",
+        "evidence",
+        "filing strategy",
+        "strategy",
+        "preparation",
+        "next step",
+        "next steps",
+        "risk reduction",
+        "reduce risk",
+        "before you apply",
+        "before filing",
+    ]
 
-    if marker_count >= 2 and has_practical_heading:
+    def has_substantive_practical_section(content_blocks: list[str]) -> bool:
+        idx = 0
+        while idx < len(content_blocks):
+            block = content_blocks[idx]
+            if not is_bold_heading(block):
+                idx += 1
+                continue
+
+            heading_text = re.sub(r"^\*\*|\*\*$", "", block).strip().lower()
+            section_chunks: list[str] = []
+            look_ahead = idx + 1
+            while look_ahead < len(content_blocks) and not is_bold_heading(content_blocks[look_ahead]):
+                if not is_disclaimer_block(content_blocks[look_ahead]):
+                    section_chunks.append(content_blocks[look_ahead].strip())
+                look_ahead += 1
+
+            section_text = " ".join(section_chunks).strip().lower()
+            section_word_count = count_words(section_text)
+            signal_hits = sum(
+                1
+                for term in practical_signal_terms
+                if term in heading_text or term in section_text
+            )
+            if signal_hits >= 2 and section_word_count >= 35:
+                return True
+            idx = look_ahead
+        return False
+
+    has_existing_substantive_practical_section = has_substantive_practical_section(blocks)
+
+    if marker_count >= 2 and has_existing_substantive_practical_section:
         return blog_content
 
     fallback_heading = "**Planning the Filing Strategy**"
@@ -1869,6 +1975,67 @@ def enforce_max_blog_words(blog_content: str, max_words: int) -> str:
     return "\n\n".join(blocks)
 
 
+def ensure_cta_requirements(blog_content: str) -> str:
+    blocks = split_blocks(blog_content)
+    if not blocks:
+        return blog_content
+
+    cta_block = f"**{CTA_HEADING}**"
+    try:
+        cta_index = next(idx for idx, block in enumerate(blocks) if block.strip() == cta_block)
+    except StopIteration:
+        return blog_content
+
+    section_start = cta_index + 1
+    section_end = len(blocks)
+    for idx in range(section_start, len(blocks)):
+        if is_disclaimer_block(blocks[idx]) or is_bold_heading(blocks[idx]):
+            section_end = idx
+            break
+
+    cta_body_blocks = [block for block in blocks[section_start:section_end] if block.strip()]
+    cta_body_text = "\n\n".join(cta_body_blocks)
+    cta_body_lower = cta_body_text.lower()
+
+    lawyer_support_markers = [
+        "can help",
+        "would review",
+        "will review",
+        "our immigration lawyers",
+        "richmond chambers switzerland",
+        "prepare",
+        "strategy",
+        "evidence",
+        "filing",
+        "risk",
+    ]
+    has_substantive_help_paragraph = any(marker in cta_body_lower for marker in lawyer_support_markers) and any(
+        count_words(block) >= 20 for block in cta_body_blocks
+    )
+
+    consultation_sentence = (
+        f"To discuss your case, contact {CTA_NAME} by telephone on {CTA_PHONE} "
+        "or complete our enquiry form to arrange an initial consultation meeting."
+    )
+    has_consultation_sentence = CTA_PHONE in cta_body_text and "enquiry form" in cta_body_lower
+
+    if not has_substantive_help_paragraph:
+        cta_body_blocks.insert(
+            0,
+            (
+                f"Our specialist Swiss immigration lawyers at {CTA_NAME} can assess your immigration history, "
+                "identify timing and evidence risks, and advise on a filing strategy tailored to your route "
+                "and procedural position."
+            ),
+        )
+
+    if not CMS_SUPPLIES_STANDARD_CTA and not has_consultation_sentence:
+        cta_body_blocks.append(consultation_sentence)
+
+    updated_blocks = blocks[:section_start] + cta_body_blocks + blocks[section_end:]
+    return "\n\n".join(updated_blocks)
+
+
 def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -> dict[str, Any]:
     cleaned = dict(draft)
     cleaned["dynamic_page_link"] = ""
@@ -1882,7 +2049,9 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
     blog_content = soften_repeated_practical_headings(blog_content, topic_entry)
     blog_content = replace_informal_c_permit_terms(blog_content)
     blog_content = replace_person_references(blog_content)
+    blog_content = repair_sentence_start_capitalisation(blog_content)
     blog_content = ensure_reader_usefulness_content(blog_content)
+    blog_content = ensure_cta_requirements(blog_content)
     blog_content = ensure_italic_disclaimer_at_end(blog_content)
     blog_content = enforce_max_blog_words(blog_content, MAX_BLOG_WORDS)
     blog_content = re.sub(r"\n{3,}", "\n\n", blog_content).strip()
