@@ -2,6 +2,9 @@
   "pillar_defaults": {
     "settlement_and_c_permit": [
       "settlement_and_c_permit/core/legal_authority_core_swiss_c_permit_framework_pack.md"
+    ],
+    "family_reunification": [
+      "family_reunification/core/legal_authority_core_swiss_family_reunification_framework_pack.md"
     ]
   },
   "subtopic_overrides": {
@@ -62,6 +65,100 @@
     ],
     "settlement_and_c_permit:l_b_c_permit_comparison": [
       "settlement_and_c_permit/broad/legal_authority_l_b_c_permit_long_term_planning_comparison_pack.md"
+    ],
+
+    "family_reunification:legal_framework_and_categories": [
+      "family_reunification/broad/legal_authority_family_reunification_legal_framework_and_categories_pack.md"
+    ],
+    "family_reunification:sponsor_status_and_nationality_comparison": [
+      "family_reunification/broad/legal_authority_family_reunification_comparison_by_sponsor_status_and_nationality_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_legal_framework_and_categories_pack.md"
+    ],
+    "family_reunification:financial_requirements_and_sponsor_stability": [
+      "family_reunification/broad/Legal_authority_family_reunification_financial_requirements_and_sponsor_stability_pack.md"
+    ],
+    "family_reunification:housing_and_household_formation": [
+      "family_reunification/broad/legal_authority_family_reunification_housing_and_household_formation_pack.md"
+    ],
+    "family_reunification:relationship_and_dependency_evidence": [
+      "family_reunification/broad/legal_authority_family_reunification_relationship_and_dependency_evidence_pack.md"
+    ],
+    "family_reunification:timing_age_limits_and_filing_strategy": [
+      "family_reunification/broad/legal_authority_family_reunification_timing_age_limits_and_filing_strategy_pack.md"
+    ],
+    "family_reunification:procedure_from_abroad_and_d_visa_sequencing": [
+      "family_reunification/broad/legal_authority_family_reunification_from_abroad_and_procedural_sequencing_pack.md"
+    ],
+    "family_reunification:refusals_appeals_and_reapplication": [
+      "family_reunification/broad/legal_authority_family_reunification_refusals_appeals_and_reapplication_pack.md"
+    ],
+    "family_reunification:cantonal_practice_and_procedure": [
+      "family_reunification/broad/legal_authority_family_reunification_cantonal_practice_and_procedure_pack.md"
+    ],
+    "family_reunification:separation_divorce_and_family_breakdown": [
+      "family_reunification/broad/legal_authority_family_reunification_after_separation_divorce_or_breakdown_pack.md"
+    ],
+
+    "family_reunification:spouse_and_registered_partner": [
+      "family_reunification/route_specific/legal_authority_family_reunification_spouse_and_registered_partner_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_legal_framework_and_categories_pack.md"
+    ],
+    "family_reunification:child_reunification": [
+      "family_reunification/route_specific/legal_authority_family_reunification_child_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_timing_age_limits_and_filing_strategy_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_relationship_and_dependency_evidence_pack.md"
+    ],
+    "family_reunification:fiance_and_intended_marriage": [
+      "family_reunification/route_specific/legal_authority_family_reunification_fiance_and_intended_marriage_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_from_abroad_and_procedural_sequencing_pack.md"
+    ],
+    "family_reunification:unmarried_partner": [
+      "family_reunification/route_specific/legal_authority_family_reunification_unmarried_partner_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_relationship_and_dependency_evidence_pack.md"
+    ],
+    "family_reunification:adult_dependent_relative": [
+      "family_reunification/route_specific/legal_authority_family_reunification_adult_dependent_relative_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_relationship_and_dependency_evidence_pack.md"
+    ],
+
+    "family_reunification:same_sex_couple": [
+      "family_reunification/issue_specific/legal_authority_family_reunification_same_sex_couple_pack.md",
+      "family_reunification/route_specific/legal_authority_family_reunification_spouse_and_registered_partner_pack.md"
+    ],
+    "family_reunification:stepchild_and_blended_family": [
+      "family_reunification/issue_specific/legal_authority_family_reunification_stepchild_and_blended_family_pack.md",
+      "family_reunification/route_specific/legal_authority_family_reunification_child_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_relationship_and_dependency_evidence_pack.md"
+    ],
+    "family_reunification:l_permit_sponsor": [
+      "family_reunification/issue_specific/legal_authority_family_reunification_l_permit_sponsor_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_comparison_by_sponsor_status_and_nationality_pack.md"
+    ],
+    "family_reunification:children_approaching_age_limits": [
+      "family_reunification/issue_specific/legal_authority_family_reunification_children_approaching_age_limits_pack.md",
+      "family_reunification/route_specific/legal_authority_family_reunification_child_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_timing_age_limits_and_filing_strategy_pack.md"
+    ],
+    "family_reunification:late_child_reunification": [
+      "family_reunification/issue_specific/legal_authority_family_reunification_children_approaching_age_limits_pack.md",
+      "family_reunification/route_specific/legal_authority_family_reunification_child_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_timing_age_limits_and_filing_strategy_pack.md"
+    ],
+    "family_reunification:weak_civil_status_identity_or_dna_evidence": [
+      "family_reunification/broad/legal_authority_family_reunification_relationship_and_dependency_evidence_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_from_abroad_and_procedural_sequencing_pack.md"
+    ],
+    "family_reunification:sham_marriage_abuse_or_public_order_risk": [
+      "family_reunification/broad/legal_authority_family_reunification_refusals_appeals_and_reapplication_pack.md",
+      "family_reunification/route_specific/legal_authority_family_reunification_spouse_and_registered_partner_pack.md"
+    ],
+    "family_reunification:social_assistance_supplementary_benefits_or_income_risk": [
+      "family_reunification/broad/Legal_authority_family_reunification_financial_requirements_and_sponsor_stability_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_refusals_appeals_and_reapplication_pack.md"
+    ],
+    "family_reunification:inadequate_housing": [
+      "family_reunification/broad/legal_authority_family_reunification_housing_and_household_formation_pack.md",
+      "family_reunification/broad/legal_authority_family_reunification_refusals_appeals_and_reapplication_pack.md"
     ]
   },
   "article_type_extras": {
