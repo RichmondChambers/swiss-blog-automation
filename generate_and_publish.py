@@ -68,6 +68,10 @@ REPLY_TO = os.environ.get("EMAIL_REPLY_TO", EMAIL_TO)
 CTA_HEADING = "Contact Our Immigration Lawyers In Switzerland"
 CTA_NAME = "Richmond Chambers Switzerland"
 CTA_PHONE = "+41 21 588 07 70"
+CTA_STANDARD_CONTACT_SENTENCE = (
+    f"To arrange an initial consultation meeting, contact {CTA_NAME} by telephone on {CTA_PHONE} "
+    "or complete our enquiry form."
+)
 CMS_SUPPLIES_STANDARD_CTA = os.environ.get("CMS_SUPPLIES_STANDARD_CTA", "").strip().lower() in {
     "1",
     "true",
@@ -507,7 +511,8 @@ CTA:
 - Avoid repeating the document-checklist point if it has already been made in the body.
 - If document support has not been mentioned elsewhere, the CTA may include a concise value proposition about tailored document checklists, evidence review, strategy, timing, procedural options or risk reduction.
 - Vary the CTA value proposition across posts.
-- Invite readers to contact {CTA_NAME} by telephone on {CTA_PHONE} or by completing an enquiry form to arrange an initial consultation meeting.
+- The CTA must include one substantive lawyer-value paragraph tailored to the article topic (for example: review, assess, advise on strategy/evidence/timing/route/application).
+- The CTA must include this standard contact sentence (or a very close variant with the same meaning): "{CTA_STANDARD_CONTACT_SENTENCE}"
 - Avoid generic sales language.
 
 Disclaimer:
@@ -544,6 +549,9 @@ Repair-only scope:
 - Prefer practical title angles such as a question, decision point, contrast, risk or consequence where this fits the article.
 - Keep revised titles preferably under 75 characters and normally under 90 characters.
 - Keep the first paragraph bold and the final disclaimer italicised with single asterisks.
+- Fix duplicated legal abbreviation artefacts without changing legal substance (for example LEI / AIG / LEI -> LEI / AIG; OASA / VZAE / OASA -> OASA / VZAE).
+- If a heading is empty (followed immediately by another heading, the CTA, the disclaimer or end-of-article), either remove it or add a concise useful paragraph under it.
+- Ensure the CTA contains: (1) the exact CTA heading, (2) one substantive lawyer-value paragraph tailored to the topic, and (3) the standard contact sentence with +41 21 588 07 70, "enquiry form", and "initial consultation meeting".
 - Use UK English.
 - Return strict JSON only using DRAFT_SCHEMA.
 """.strip()
@@ -1325,12 +1333,58 @@ def send_email_via_sendgrid(subject: str, body: str, *, is_html: bool = False) -
 # ============================================================
 
 def replace_legal_abbreviation_style(text: str) -> str:
-    text = re.sub(r"\bLEI\s*/\s*LEI\s*/\s*AIG\b", "LEI / AIG", text, flags=re.IGNORECASE)
-    text = re.sub(r"\b(?:[O0]ASA\s*/\s*){2}VZAE\b", "OASA / VZAE", text, flags=re.IGNORECASE)
-    text = re.sub(r"\b[O0]ASA\s*/\s*VZAE\b", "OASA / VZAE", text, flags=re.IGNORECASE)
-    text = re.sub(r"(?<!LEI / )\bAIG\b", "LEI / AIG", text)
-    text = re.sub(r"(?<!OASA / )\bVZAE\b", "OASA / VZAE", text)
-    return text
+    def collapse_abbreviation_series(
+        content: str,
+        *,
+        canonical_pair: str,
+        tokens: tuple[str, str],
+    ) -> str:
+        a, b = tokens
+        series_pattern = rf"\b(?:{a}|{b})(?:\s*/\s*(?:{a}|{b})){{1,5}}\b"
+
+        def collapse_match(match: re.Match[str]) -> str:
+            parts = [part.strip().upper() for part in re.split(r"\s*/\s*", match.group(0).strip()) if part.strip()]
+            if not parts:
+                return canonical_pair
+            if all(part in {a, b} for part in parts):
+                return canonical_pair
+            return match.group(0)
+
+        collapsed = re.sub(series_pattern, collapse_match, content, flags=re.IGNORECASE)
+        collapsed = re.sub(
+            rf"\b{a}\s*/\s*{b}(?:\s*/\s*(?:{a}|{b}))+\b",
+            canonical_pair,
+            collapsed,
+            flags=re.IGNORECASE,
+        )
+        collapsed = re.sub(
+            rf"\b{b}\s*/\s*{a}(?:\s*/\s*(?:{a}|{b}))+\b",
+            canonical_pair,
+            collapsed,
+            flags=re.IGNORECASE,
+        )
+        collapsed = re.sub(
+            rf"\b{b}\s*/\s*{a}\b",
+            canonical_pair,
+            collapsed,
+            flags=re.IGNORECASE,
+        )
+        return collapsed
+
+    cleaned = text
+    cleaned = collapse_abbreviation_series(
+        cleaned,
+        canonical_pair="LEI / AIG",
+        tokens=("LEI", "AIG"),
+    )
+    cleaned = collapse_abbreviation_series(
+        cleaned,
+        canonical_pair="OASA / VZAE",
+        tokens=("OASA", "VZAE"),
+    )
+    cleaned = re.sub(r"(?<!LEI\s*/\s*)\bAIG\b(?!\s*/\s*LEI\b)", "LEI / AIG", cleaned)
+    cleaned = re.sub(r"(?<!OASA\s*/\s*)\bVZAE\b(?!\s*/\s*OASA\b)", "OASA / VZAE", cleaned)
+    return cleaned
 
 
 def replace_informal_c_permit_terms(text: str) -> str:
@@ -1663,6 +1717,33 @@ def validate_title_style(blog_title: str) -> list[str]:
     return errors
 
 
+def find_empty_heading_errors(blocks: list[str]) -> list[str]:
+    errors: list[str] = []
+    if not blocks:
+        return errors
+
+    cta_block = f"**{CTA_HEADING}**"
+    for idx, block in enumerate(blocks):
+        if not is_bold_heading(block):
+            continue
+        next_idx = idx + 1
+        if next_idx >= len(blocks):
+            errors.append(f"Empty heading detected at end of article: {block}")
+            continue
+
+        next_block = blocks[next_idx]
+        if (
+            is_bold_heading(next_block)
+            or next_block.strip() == cta_block
+            or is_disclaimer_block(next_block)
+        ):
+            errors.append(
+                "Empty heading detected (heading followed immediately by another heading, CTA or disclaimer): "
+                f"{block}"
+            )
+    return errors
+
+
 def validate_public_draft(draft: dict[str, Any]) -> list[str]:
     errors: list[str] = []
 
@@ -1690,7 +1771,17 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
         r"\ban ordinary C-permit-Permit\b",
         r"\bC-permit-Permit\b",
         r"\bLEI\s*/\s*LEI\s*/\s*AIG\b",
+        r"\b(?:LEI\s*/\s*AIG|AIG\s*/\s*LEI)\s*/\s*(?:LEI|AIG)\b",
+        r"\b(?:LEI|AIG)\s*/\s*(?:LEI\s*/\s*AIG|AIG\s*/\s*LEI)\b",
+        r"\bAIG\s*/\s*LEI\s*/\s*AIG\b",
+        r"\bLEI\s*/\s*AIG\s*/\s*AIG\b",
+        r"\bAIG\s*/\s*LEI\s*/\s*LEI\b",
         r"\bOASA\s*/\s*OASA\s*/\s*VZAE\b",
+        r"\b(?:OASA\s*/\s*VZAE|VZAE\s*/\s*OASA)\s*/\s*(?:OASA|VZAE)\b",
+        r"\b(?:OASA|VZAE)\s*/\s*(?:OASA\s*/\s*VZAE|VZAE\s*/\s*OASA)\b",
+        r"\bVZAE\s*/\s*OASA\s*/\s*VZAE\b",
+        r"\bOASA\s*/\s*VZAE\s*/\s*VZAE\b",
+        r"\bVZAE\s*/\s*OASA\s*/\s*OASA\b",
         r"\bSEM Directives Directives\b",
         r"\bContact Our Immigration Lawyers In Switzerland\b[\s\S]*\bPractical Tips Before You Apply\b",
     ]
@@ -1705,6 +1796,7 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
         )
 
     blocks = split_blocks(blog_content)
+    errors.extend(find_empty_heading_errors(blocks))
     cta_block = f"**{CTA_HEADING}**"
     cta_indexes = [idx for idx, block in enumerate(blocks) if block.strip() == cta_block]
     if len(cta_indexes) != 1:
@@ -1718,28 +1810,43 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
             if not any(not is_bold_heading(block) and not is_disclaimer_block(block) for block in cta_body_blocks):
                 errors.append("CTA heading must have body text after it.")
             else:
-                cta_body_text = "\n\n".join(
+                content_blocks = [
                     block for block in cta_body_blocks if not is_bold_heading(block) and not is_disclaimer_block(block)
-                )
+                ]
+                cta_body_text = "\n\n".join(content_blocks)
                 cta_body_lower = cta_body_text.lower()
-                has_help_text = any(
-                    marker in cta_body_lower
-                    for marker in [
-                        "can help",
-                        "would review",
-                        "will review",
-                        "our immigration lawyers",
-                        "richmond chambers switzerland",
-                    ]
-                )
-                if not has_help_text:
-                    errors.append("CTA must include a substantive paragraph explaining how our lawyers can help.")
-                if not CMS_SUPPLIES_STANDARD_CTA:
-                    has_consultation_sentence = CTA_PHONE in cta_body_text and "enquiry form" in cta_body_lower
-                    if not has_consultation_sentence:
-                        errors.append(
-                            "CTA must include the standard consultation sentence with phone number and enquiry form wording."
-                        )
+                contact_blocks = [
+                    idx
+                    for idx, block in enumerate(content_blocks)
+                    if CTA_PHONE in block and "enquiry form" in block.lower() and "initial consultation meeting" in block.lower()
+                ]
+                if not contact_blocks:
+                    errors.append(
+                        "CTA must include the standard contact sentence with phone number, enquiry form and initial consultation meeting wording."
+                    )
+                value_markers = [
+                    "review",
+                    "assess",
+                    "advise",
+                    "strategy",
+                    "evidence",
+                    "timing",
+                    "route",
+                    "application",
+                    "immigration lawyers",
+                    "swiss immigration lawyers",
+                ]
+                substantive_indexes = [
+                    idx
+                    for idx, block in enumerate(content_blocks)
+                    if count_words(block) >= 20 and any(marker in block.lower() for marker in value_markers)
+                ]
+                if not substantive_indexes:
+                    errors.append("CTA must include a substantive lawyer-value paragraph before the contact sentence.")
+                elif contact_blocks and min(contact_blocks) <= min(substantive_indexes):
+                    errors.append("CTA must place a substantive lawyer-value paragraph before the contact sentence.")
+                if contact_blocks and len(content_blocks) == 1:
+                    errors.append("CTA is too thin: it contains only a contact sentence and no substantive lawyer-value paragraph.")
 
             next_heading_after_cta = any(is_bold_heading(block) for block in cta_body_blocks)
             if next_heading_after_cta:
@@ -1999,26 +2106,28 @@ def ensure_cta_requirements(blog_content: str) -> str:
     cta_body_lower = cta_body_text.lower()
 
     lawyer_support_markers = [
-        "can help",
-        "would review",
-        "will review",
-        "our immigration lawyers",
-        "richmond chambers switzerland",
-        "prepare",
+        "review",
+        "assess",
+        "advise",
         "strategy",
         "evidence",
-        "filing",
-        "risk",
+        "timing",
+        "route",
+        "application",
+        "immigration lawyers",
+        "swiss immigration lawyers",
+        "richmond chambers switzerland",
     ]
-    has_substantive_help_paragraph = any(marker in cta_body_lower for marker in lawyer_support_markers) and any(
-        count_words(block) >= 20 for block in cta_body_blocks
+    has_substantive_help_paragraph = any(
+        count_words(block) >= 20 and any(marker in block.lower() for marker in lawyer_support_markers)
+        for block in cta_body_blocks
     )
 
-    consultation_sentence = (
-        f"To discuss your case, contact {CTA_NAME} by telephone on {CTA_PHONE} "
-        "or complete our enquiry form to arrange an initial consultation meeting."
+    has_consultation_sentence = (
+        CTA_PHONE in cta_body_text
+        and "enquiry form" in cta_body_lower
+        and "initial consultation meeting" in cta_body_lower
     )
-    has_consultation_sentence = CTA_PHONE in cta_body_text and "enquiry form" in cta_body_lower
 
     if not has_substantive_help_paragraph:
         cta_body_blocks.insert(
@@ -2031,7 +2140,7 @@ def ensure_cta_requirements(blog_content: str) -> str:
         )
 
     if not CMS_SUPPLIES_STANDARD_CTA and not has_consultation_sentence:
-        cta_body_blocks.append(consultation_sentence)
+        cta_body_blocks.append(CTA_STANDARD_CONTACT_SENTENCE)
 
     updated_blocks = blocks[:section_start] + cta_body_blocks + blocks[section_end:]
     return "\n\n".join(updated_blocks)
