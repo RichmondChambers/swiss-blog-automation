@@ -1382,8 +1382,22 @@ def replace_legal_abbreviation_style(text: str) -> str:
         canonical_pair="OASA / VZAE",
         tokens=("OASA", "VZAE"),
     )
-    cleaned = re.sub(r"(?<!LEI\s*/\s*)\bAIG\b(?!\s*/\s*LEI\b)", "LEI / AIG", cleaned)
-    cleaned = re.sub(r"(?<!OASA\s*/\s*)\bVZAE\b(?!\s*/\s*OASA\b)", "OASA / VZAE", cleaned)
+    def expand_single_token_to_pair(content: str, single: str, counterpart: str, canonical_pair: str) -> str:
+        token_pattern = re.compile(rf"\b{single}\b", flags=re.IGNORECASE)
+
+        def replace_match(match: re.Match[str]) -> str:
+            before = content[: match.start()]
+            after = content[match.end() :]
+            if re.search(rf"{counterpart}\s*/\s*$", before, flags=re.IGNORECASE):
+                return match.group(0)
+            if re.match(rf"^\s*/\s*{counterpart}\b", after, flags=re.IGNORECASE):
+                return match.group(0)
+            return canonical_pair
+
+        return token_pattern.sub(replace_match, content)
+
+    cleaned = expand_single_token_to_pair(cleaned, single="AIG", counterpart="LEI", canonical_pair="LEI / AIG")
+    cleaned = expand_single_token_to_pair(cleaned, single="VZAE", counterpart="OASA", canonical_pair="OASA / VZAE")
     return cleaned
 
 
