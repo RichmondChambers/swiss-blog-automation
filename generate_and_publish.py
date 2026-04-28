@@ -1455,6 +1455,10 @@ def split_blocks(text: str) -> list[str]:
     return [chunk.strip() for chunk in re.split(r"\n\s*\n", text.strip()) if chunk.strip()]
 
 
+def count_words(text: str) -> int:
+    return len(re.findall(r"\b[\w'-]+\b", text))
+
+
 def is_bold_heading(block: str) -> bool:
     if not (block.startswith("**") and block.endswith("**")):
         return False
@@ -1633,7 +1637,7 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
     if dynamic_page_link != "":
         errors.append("dynamic_page_link must be exactly an empty string.")
 
-    word_count = len(re.findall(r"\b[\w'-]+\b", blog_content))
+    word_count = count_words(blog_content)
     if word_count > MAX_BLOG_WORDS:
         errors.append(
             f"blog_content exceeds MAX_BLOG_WORDS ({word_count} > {MAX_BLOG_WORDS})."
@@ -1827,6 +1831,44 @@ def ensure_reader_usefulness_content(blog_content: str) -> str:
     return "\n\n".join(blocks)
 
 
+def enforce_max_blog_words(blog_content: str, max_words: int) -> str:
+    if count_words(blog_content) <= max_words:
+        return blog_content
+
+    blocks = split_blocks(blog_content)
+    if not blocks:
+        return blog_content
+
+    cta_block = f"**{CTA_HEADING}**"
+    cta_index = next((idx for idx, block in enumerate(blocks) if block.strip() == cta_block), None)
+
+    protected_indexes: set[int] = set()
+    if cta_index is not None:
+        protected_indexes.update(range(cta_index, len(blocks)))
+
+    if blocks and is_disclaimer_block(blocks[-1]):
+        protected_indexes.add(len(blocks) - 1)
+
+    def removable_indexes(prefer_body_only: bool) -> list[int]:
+        indexes: list[int] = []
+        for idx, block in enumerate(blocks):
+            if idx in protected_indexes:
+                continue
+            if prefer_body_only and is_bold_heading(block):
+                continue
+            indexes.append(idx)
+        return indexes
+
+    for prefer_body_only in (True, False):
+        while count_words("\n\n".join(blocks)) > max_words:
+            candidates = removable_indexes(prefer_body_only=prefer_body_only)
+            if not candidates:
+                break
+            del blocks[candidates[-1]]
+
+    return "\n\n".join(blocks)
+
+
 def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -> dict[str, Any]:
     cleaned = dict(draft)
     cleaned["dynamic_page_link"] = ""
@@ -1842,6 +1884,7 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
     blog_content = replace_person_references(blog_content)
     blog_content = ensure_reader_usefulness_content(blog_content)
     blog_content = ensure_italic_disclaimer_at_end(blog_content)
+    blog_content = enforce_max_blog_words(blog_content, MAX_BLOG_WORDS)
     blog_content = re.sub(r"\n{3,}", "\n\n", blog_content).strip()
 
     cleaned["blog_content"] = blog_content
