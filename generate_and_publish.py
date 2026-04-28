@@ -294,6 +294,7 @@ Rules:
 - If EU/EFTA and non-EU treatment differs, state that.
 - If nationality-specific routes, family categories, sponsor categories or canton-specific handling matter, state that precisely.
 - Identify practical decision points for a prospective client.
+- For each practical mechanism discussed (for example, a deadline, preservation route, lapse rule, discretionary request, exception, approval pathway or restoration route), identify the legal basis that should be cited near the public-facing explanation.
 - Identify evidence/documents that a lawyer would usually want to review.
 - Identify common mistakes and refusal risks.
 - State which propositions are safe for public article use and which need cautious wording.
@@ -374,6 +375,15 @@ Writing requirements:
 - Use bullet points or numbered lists only where they materially improve clarity and no prose alternative would work as well.
 - Avoid multiple bullet-point sections in the same article.
 - Avoid repeated references to "the person". Prefer "an applicant", "the applicant", "a foreign national", "a family member", "the sponsor", "the employer" or another precise category depending on context.
+- Where a route, preservation mechanism, exception, approval or benefit is discretionary or subject to authority assessment, avoid wording that implies automatic availability. Prefer formulations such as "Swiss law allows an applicant to request...", "the competent authority may...", or "a request may be made...", depending on the legal memo.
+- Where practical shorthand such as "centre of life", "genuine residence", "main home" or similar factual-residence language is used, make clear where relevant that this is a factual assessment, not a single-document test or guaranteed day-count formula.
+- Where a more precise client-friendly formulation is available, avoid unnecessarily absolute or punitive wording. For example, prefer "may need to establish a fresh basis for residence" over "will be treated as a new entrant" unless the legal memo clearly supports the stronger formulation.
+
+Title requirements:
+- Prefer concise, public-facing titles.
+- Avoid long title-plus-subtitle constructions using a colon, or a question followed by multiple explanatory phrases, unless genuinely necessary.
+- For question-led titles, do not usually add a subtitle after the question.
+- Keep the blog title preferably under 75 characters and normally under 90 characters.
 
 Terminology:
 - Do not use the phrase "ordinary C".
@@ -407,6 +417,8 @@ Formatting requirements:
 Legal authority requirements:
 - Include a small number of short legal authority references throughout the body after the first two paragraphs.
 - Legal authority references must be legally accurate and should include article numbers wherever relevant.
+- Where the article explains a specific legal mechanism, deadline, preservation route, lapse rule, discretionary request or exception, include the relevant article number close to the first substantive explanation of that mechanism where supported by the legal memo.
+- Do not place the only article-number citation for an operative mechanism in a neighbouring section if that mechanism is explained substantively later.
 - Refer to named official sources where appropriate, such as SEM guidance, SEM Directives, the SEM Directives on the Foreign Nationals and Integration Act (Directives LEI / AIG; Weisungen AIG), or specific legislation.
 - Do not write "the supplied guidance", "the supplied materials", "the guidance supplied", "the materials provided", "the legal sources supplied", or similar phrases in the blog content.
 - Do not invent nationality lists, canton-specific practice, forms, fees or procedural requirements.
@@ -439,6 +451,7 @@ Practicality and next-step requirements:
 - Prefer prose over numbered steps unless a sequence is essential.
 - Where useful, include one or two brief anonymised scenarios or patterns.
 - Do not invent facts, lists, nationality categories or canton-specific practice.
+- Where the topic concerns a preventable immigration risk before a step is taken (for example, departure, deregistration, filing, renewal, appeal deadline, employment change or sponsorship action), include the risk-reduction point before the final evidence/CTA section, not only at the end.
 
 Specificity and uncertainty:
 - Where the article refers to "some nationalities", "certain countries", "some cantons" or similar, either name the relevant category accurately from the legal memo or say that the point must be checked against current official guidance from the named official body.
@@ -487,6 +500,7 @@ Repair-only scope:
 - Preserve the legal substance from the supplied legal memo and draft.
 - Do not add new legal propositions, new facts, invented authority, invented procedures, invented nationality lists, invented canton-specific practice, invented fees or invented document requirements.
 - Fix malformed headings, duplicated sections, awkward generated phrasing, excessive repetition and structural defects.
+- Soften unnecessarily absolute consequences where the legal memo supports a more precise cautious formulation, while preserving the legal warning.
 - Keep the CTA heading exactly: {CTA_HEADING}
 - Keep the CTA as the final substantive section before the italicised disclaimer.
 - Keep the article under {MAX_BLOG_WORDS} words.
@@ -503,6 +517,7 @@ Return strict JSON only.
 
 Requirements:
 - meta title max 60 characters
+- meta title should usually be shorter and more search-led than the article title, and should not simply copy a long article title
 - meta description max 155 characters
 - suggested slug
 - primary keyword
@@ -1522,6 +1537,18 @@ def detect_duplicate_practical_sections(blog_content: str) -> list[str]:
     return []
 
 
+def validate_title_style(blog_title: str) -> list[str]:
+    errors: list[str] = []
+    title_length = len(blog_title)
+    if title_length > 95:
+        errors.append(f"blog_title is too long ({title_length} characters > 95).")
+    if ":" in blog_title and title_length > 75:
+        errors.append(
+            "blog_title uses a long title-plus-subtitle format (contains ':' and exceeds 75 characters)."
+        )
+    return errors
+
+
 def validate_public_draft(draft: dict[str, Any]) -> list[str]:
     errors: list[str] = []
 
@@ -1531,6 +1558,8 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
 
     if not blog_title:
         errors.append("blog_title must not be empty.")
+    else:
+        errors.extend(validate_title_style(blog_title))
     if not blog_content:
         errors.append("blog_content must not be empty.")
     if dynamic_page_link != "":
