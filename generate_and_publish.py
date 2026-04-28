@@ -335,6 +335,7 @@ Rules:
 - Do not use only the German term or only the French term where both terms are commonly relevant in Switzerland.
 - Identify and flag any translation ambiguity where a legal proposition depends on translated legislation or translated official guidance.
 - For Article 34(5) LEI / AIG analysis, distinguish clearly between temporary education/training residence, the final five-year uninterrupted residence period, and the two-year post-study durable residence-permit condition.
+- `authority_type` must never be `unclear`; choose the closest supported category from: statute, ordinance, official_guidance, case_law, cantonal_practice, internal_note, editorial_context, or mixed.
 
 Return strict JSON only.
 """.strip()
@@ -641,7 +642,6 @@ LEGAL_MEMO_SCHEMA = {
                                 "internal_note",
                                 "editorial_context",
                                 "mixed",
-                                "unclear",
                             ],
                         },
                         "entitlement_or_discretion": {
@@ -2475,14 +2475,22 @@ def main() -> None:
 
     website_context_text = format_sources_for_prompt(website_context_chunks)
 
-    memo = call_responses_api(
-        openai_api_key,
-        instructions=LEGAL_MEMO_INSTRUCTIONS,
-        input_text=build_legal_input(topic_entry, classifier, legal_sources_text, website_context_text),
-        schema=LEGAL_MEMO_SCHEMA,
-        model=OPENAI_MODEL,
-    )
-    memo_validation_errors = validate_legal_memo(memo)
+    memo: dict[str, Any] | None = None
+    memo_validation_errors: list[str] = []
+    for _ in range(MAX_REPAIR_ATTEMPTS + 1):
+        memo = call_responses_api(
+            openai_api_key,
+            instructions=LEGAL_MEMO_INSTRUCTIONS,
+            input_text=build_legal_input(topic_entry, classifier, legal_sources_text, website_context_text),
+            schema=LEGAL_MEMO_SCHEMA,
+            model=OPENAI_MODEL,
+        )
+        memo_validation_errors = validate_legal_memo(memo)
+        if not memo_validation_errors:
+            break
+
+    if memo is None:
+        raise RuntimeError("Legal memo generation failed: no memo returned.")
     if memo_validation_errors:
         raise RuntimeError("Legal memo validation failed:\n- " + "\n- ".join(memo_validation_errors))
 
