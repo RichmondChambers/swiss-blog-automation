@@ -1771,6 +1771,36 @@ def find_empty_heading_errors(blocks: list[str]) -> list[str]:
     return errors
 
 
+def remove_empty_headings(blog_content: str) -> str:
+    blocks = split_blocks(blog_content)
+    if not blocks:
+        return blog_content
+
+    cta_block = f"**{CTA_HEADING}**"
+    cleaned_blocks: list[str] = []
+
+    for idx, block in enumerate(blocks):
+        if not is_bold_heading(block):
+            cleaned_blocks.append(block)
+            continue
+
+        next_idx = idx + 1
+        if next_idx >= len(blocks):
+            continue
+
+        next_block = blocks[next_idx]
+        if (
+            is_bold_heading(next_block)
+            or next_block.strip() == cta_block
+            or is_disclaimer_block(next_block)
+        ):
+            continue
+
+        cleaned_blocks.append(block)
+
+    return "\n\n".join(cleaned_blocks)
+
+
 def validate_public_draft(draft: dict[str, Any]) -> list[str]:
     errors: list[str] = []
 
@@ -2188,6 +2218,7 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
     blog_content = replace_person_references(blog_content)
     blog_content = repair_sentence_start_capitalisation(blog_content)
     blog_content = ensure_reader_usefulness_content(blog_content)
+    blog_content = remove_empty_headings(blog_content)
     blog_content = ensure_cta_requirements(blog_content)
     blog_content = ensure_italic_disclaimer_at_end(blog_content)
     blog_content = enforce_max_blog_words(blog_content, MAX_BLOG_WORDS)
