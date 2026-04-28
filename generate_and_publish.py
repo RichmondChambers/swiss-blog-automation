@@ -1326,7 +1326,8 @@ def send_email_via_sendgrid(subject: str, body: str, *, is_html: bool = False) -
 
 def replace_legal_abbreviation_style(text: str) -> str:
     text = re.sub(r"\bLEI\s*/\s*LEI\s*/\s*AIG\b", "LEI / AIG", text, flags=re.IGNORECASE)
-    text = re.sub(r"\bOASA\s*/\s*OASA\s*/\s*VZAE\b", "OASA / VZAE", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:[O0]ASA\s*/\s*){2}VZAE\b", "OASA / VZAE", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b[O0]ASA\s*/\s*VZAE\b", "OASA / VZAE", text, flags=re.IGNORECASE)
     text = re.sub(r"(?<!LEI / )\bAIG\b", "LEI / AIG", text)
     text = re.sub(r"(?<!OASA / )\bVZAE\b", "OASA / VZAE", text)
     return text
