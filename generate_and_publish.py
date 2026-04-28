@@ -103,6 +103,27 @@ FORBIDDEN_PUBLIC_PHRASES = [
     "the source material",
 ]
 
+TITLE_LABEL_LIKE_PATTERNS = [
+    r"\brequirements?\b",
+    r"\brules?\b",
+    r"\boverview\b",
+    r"\bprocedure\b",
+    r"\bprocess\b",
+    r"\bguide\b",
+    r"\bchecklist\b",
+    r"\bcriteria\b",
+    r"\bsteps?\b",
+    r"\bby\s+[a-z][\w/-]*\b",
+]
+
+TITLE_SIGNAL_PATTERNS = [
+    r"\?",
+    r"\b(whether|should|can|must|qualify|eligible|eligibility|refusal|risk|risky|consequence|impact)\b",
+    r"\b(vs\.?|versus|rather than|or)\b",
+    r"\b(misconception|myth|mistake|trap|pitfall|timing|deadline|delay|too early|too late)\b",
+    r"\b(problem|issue|challenge|difference|compare|comparison|matters?)\b",
+]
+
 ARTICLE_STRUCTURE_VARIANTS = [
     {
         "name": "legal_framework_first",
@@ -380,7 +401,13 @@ Writing requirements:
 - Where a more precise client-friendly formulation is available, avoid unnecessarily absolute or punitive wording. For example, prefer "may need to establish a fresh basis for residence" over "will be treated as a new entrant" unless the legal memo clearly supports the stronger formulation.
 
 Title requirements:
-- Prefer concise, public-facing titles.
+- Write a polished public-facing title, not an internal topic label.
+- Make the title clear, client-facing, specific, legally accurate, restrained and SEO-conscious.
+- Avoid clickbait, melodramatic framing, generic legal labels and overbroad claims.
+- Avoid flat label patterns such as "[Permit Type] Requirements", "[Route] Rules", "[Topic] by [Factor]", "[Legal Category] Overview", "[Topic] Procedure", "[Topic] Process" or "[Topic] Guide".
+- Where appropriate, prefer a title that naturally introduces a practical question, decision point, client problem, risk, consequence, contrast, misconception or timing issue.
+- Question-led titles are often effective where the article addresses a common client misconception.
+- Colons are allowed where they add useful contrast or a practical question; avoid colon subtitles that just append generic keywords.
 - Avoid long title-plus-subtitle constructions using a colon, or a question followed by multiple explanatory phrases, unless genuinely necessary.
 - For question-led titles, do not usually add a subtitle after the question.
 - Keep the blog title preferably under 75 characters and normally under 90 characters.
@@ -506,6 +533,10 @@ Repair-only scope:
 - Keep the article under {MAX_BLOG_WORDS} words.
 - If the draft is over the word limit, shorten materially by removing repetition, merging overlapping sections, cutting generic commentary and preserving only the strongest legal and practical points.
 - Do not preserve every paragraph if length/structure requires edits.
+- When validation errors indicate the title is flat, label-like or overlong, rewrite the title as a clearer client-facing title that preserves the draft's legal scope.
+- Do not make the revised title clickbait, melodramatic, legally overbroad or narrower than the article.
+- Prefer practical title angles such as a question, decision point, contrast, risk or consequence where this fits the article.
+- Keep revised titles preferably under 75 characters and normally under 90 characters.
 - Keep the first paragraph bold and the final disclaimer italicised with single asterisks.
 - Use UK English.
 - Return strict JSON only using DRAFT_SCHEMA.
@@ -517,7 +548,9 @@ Return strict JSON only.
 
 Requirements:
 - meta title max 60 characters
-- meta title should usually be shorter and more search-led than the article title, and should not simply copy a long article title
+- meta title should be concise, search-led and legally accurate
+- the article title may be more reader-facing; the meta title may be shorter and more keyword-led
+- do not use a flat duplicate of the article title where a more natural search title is available
 - meta description max 155 characters
 - suggested slug
 - primary keyword
@@ -1109,6 +1142,12 @@ def build_draft_input(
                     "fit cleanly, avoid stuffing, and do not force exact-match keyword phrases into every heading."
                 ),
                 "opening_style": "The first paragraph must be fully bold, followed immediately by a second introductory paragraph without legal citations.",
+                "title_style_guidance": (
+                    "Generate a polished, public-facing blog title, not an internal topic label. "
+                    "The title should be clear, specific, restrained and legally accurate, and should "
+                    "ideally surface a practical question, decision point, contrast, risk, consequence, "
+                    "client problem, misconception or timing issue where appropriate."
+                ),
                 "do_not_include_quick_answer": True,
                 "prefer_prose_over_bullets": True,
                 "avoid_multiple_bullet_sections": True,
@@ -1539,12 +1578,41 @@ def detect_duplicate_practical_sections(blog_content: str) -> list[str]:
 
 def validate_title_style(blog_title: str) -> list[str]:
     errors: list[str] = []
-    title_length = len(blog_title)
+    normalized = re.sub(r"\s+", " ", blog_title).strip()
+    lowered = normalized.lower()
+    title_length = len(normalized)
+
     if title_length > 95:
         errors.append(f"blog_title is too long ({title_length} characters > 95).")
-    if ":" in blog_title and title_length > 75:
+    if ":" in normalized and title_length > 90:
         errors.append(
-            "blog_title uses a long title-plus-subtitle format (contains ':' and exceeds 75 characters)."
+            "blog_title uses an overlong title-plus-subtitle format (contains ':' and exceeds 90 characters)."
+        )
+
+    if re.search(r"^[^:]{1,40}:\s*(guide|overview|requirements?|rules?|process|procedure)\b", lowered):
+        errors.append("blog_title uses a colon subtitle that only appends a generic label.")
+
+    looks_label_like = any(
+        re.search(pattern, lowered, flags=re.IGNORECASE)
+        for pattern in TITLE_LABEL_LIKE_PATTERNS
+    )
+    if looks_label_like:
+        errors.append(
+            "blog_title appears flat or label-like; rewrite as a client-facing title with a practical angle."
+        )
+
+    has_practical_signal = any(
+        re.search(pattern, lowered, flags=re.IGNORECASE)
+        for pattern in TITLE_SIGNAL_PATTERNS
+    )
+    if not has_practical_signal:
+        errors.append(
+            "blog_title lacks a practical signal (question, decision point, risk, consequence, contrast or client problem)."
+        )
+
+    if re.search(r"\bby\s+[a-z][a-z\s/-]{2,40}$", lowered) and "?" not in normalized:
+        errors.append(
+            "blog_title ends in a flat 'by [factor]' construction without a client-facing question or contrast."
         )
     return errors
 
