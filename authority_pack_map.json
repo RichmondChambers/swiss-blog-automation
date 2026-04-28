@@ -66,7 +66,6 @@
     "settlement_and_c_permit:l_b_c_permit_comparison": [
       "settlement_and_c_permit/broad/legal_authority_l_b_c_permit_long_term_planning_comparison_pack.md"
     ],
-
     "family_reunification:legal_framework_and_categories": [
       "family_reunification/broad/legal_authority_family_reunification_legal_framework_and_categories_pack.md"
     ],
@@ -98,7 +97,6 @@
     "family_reunification:separation_divorce_and_family_breakdown": [
       "family_reunification/broad/legal_authority_family_reunification_after_separation_divorce_or_breakdown_pack.md"
     ],
-
     "family_reunification:spouse_and_registered_partner": [
       "family_reunification/route_specific/legal_authority_family_reunification_spouse_and_registered_partner_pack.md",
       "family_reunification/broad/legal_authority_family_reunification_legal_framework_and_categories_pack.md"
@@ -120,7 +118,6 @@
       "family_reunification/route_specific/legal_authority_family_reunification_adult_dependent_relative_pack.md",
       "family_reunification/broad/legal_authority_family_reunification_relationship_and_dependency_evidence_pack.md"
     ],
-
     "family_reunification:same_sex_couple": [
       "family_reunification/issue_specific/legal_authority_family_reunification_same_sex_couple_pack.md",
       "family_reunification/route_specific/legal_authority_family_reunification_spouse_and_registered_partner_pack.md"
@@ -162,31 +159,64 @@
     ]
   },
   "article_type_extras": {
-    "risk_analysis": [
-      "settlement_and_c_permit/broad/legal_authority_c_permit_rights_stability_and_limits_pack.md"
-    ],
-    "comparison_piece": [
-      "settlement_and_c_permit/broad/legal_authority_l_b_c_permit_long_term_planning_comparison_pack.md"
-    ],
-    "procedural_strategy": [
-      "settlement_and_c_permit/broad/legal_authority_c_permit_cantonal_practice_and_procedure_pack.md"
-    ],
-    "myth_correction": [
-      "settlement_and_c_permit/broad/legal_authority_c_permit_rights_stability_and_limits_pack.md"
-    ],
-    "evidence_strategy": [
-      "settlement_and_c_permit/broad/legal_authority_c_permit_integration_language_and_compliance_pack.md"
-    ],
-    "refusal_analysis": [
-      "settlement_and_c_permit/broad/legal_authority_c_permit_rights_stability_and_limits_pack.md",
-      "settlement_and_c_permit/broad/legal_authority_c_permit_integration_language_and_compliance_pack.md"
-    ]
+    "settlement_and_c_permit": {
+      "risk_analysis": [
+        "settlement_and_c_permit/broad/legal_authority_c_permit_rights_stability_and_limits_pack.md"
+      ],
+      "comparison_piece": [
+        "settlement_and_c_permit/broad/legal_authority_l_b_c_permit_long_term_planning_comparison_pack.md"
+      ],
+      "procedural_strategy": [
+        "settlement_and_c_permit/broad/legal_authority_c_permit_cantonal_practice_and_procedure_pack.md"
+      ],
+      "myth_correction": [
+        "settlement_and_c_permit/broad/legal_authority_c_permit_rights_stability_and_limits_pack.md"
+      ],
+      "evidence_strategy": [
+        "settlement_and_c_permit/broad/legal_authority_c_permit_integration_language_and_compliance_pack.md"
+      ],
+      "refusal_analysis": [
+        "settlement_and_c_permit/broad/legal_authority_c_permit_rights_stability_and_limits_pack.md",
+        "settlement_and_c_permit/broad/legal_authority_c_permit_integration_language_and_compliance_pack.md"
+      ]
+    },
+    "family_reunification": {
+      "risk_analysis": [
+        "family_reunification/broad/legal_authority_family_reunification_refusals_appeals_and_reapplication_pack.md",
+        "family_reunification/broad/legal_authority_family_reunification_cantonal_practice_and_procedure_pack.md"
+      ],
+      "comparison_piece": [
+        "family_reunification/broad/legal_authority_family_reunification_comparison_by_sponsor_status_and_nationality_pack.md"
+      ],
+      "procedural_strategy": [
+        "family_reunification/broad/legal_authority_family_reunification_from_abroad_and_procedural_sequencing_pack.md",
+        "family_reunification/broad/legal_authority_family_reunification_cantonal_practice_and_procedure_pack.md"
+      ],
+      "myth_correction": [
+        "family_reunification/broad/legal_authority_family_reunification_legal_framework_and_categories_pack.md"
+      ],
+      "evidence_strategy": [
+        "family_reunification/broad/legal_authority_family_reunification_relationship_and_dependency_evidence_pack.md"
+      ],
+      "refusal_analysis": [
+        "family_reunification/broad/legal_authority_family_reunification_refusals_appeals_and_reapplication_pack.md"
+      ]
+    }
   },
   "legal_complexity_extras": {
-    "high": [
-      "settlement_and_c_permit/core/legal_authority_core_swiss_c_permit_framework_pack.md"
-    ],
-    "medium": [],
-    "low": []
+    "settlement_and_c_permit": {
+      "high": [
+        "settlement_and_c_permit/core/legal_authority_core_swiss_c_permit_framework_pack.md"
+      ],
+      "medium": [],
+      "low": []
+    },
+    "family_reunification": {
+      "high": [
+        "family_reunification/core/legal_authority_core_swiss_family_reunification_framework_pack.md"
+      ],
+      "medium": [],
+      "low": []
+    }
   }
 }
