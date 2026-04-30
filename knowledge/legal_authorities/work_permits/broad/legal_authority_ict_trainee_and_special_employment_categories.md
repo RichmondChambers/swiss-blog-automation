@@ -1,13 +1,3 @@
-<style>
-.markdown-table-wrap { overflow-x: auto; margin: 1rem 0; }
-table.professional-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; line-height: 1.42; }
-table.professional-table th, table.professional-table td { border: 1px solid #d0d7de; padding: 10px 12px; vertical-align: top; }
-table.professional-table th { background: #f6f8fa; font-weight: 600; text-align: left; }
-table.professional-table tbody tr:nth-child(even) { background: #f6f8fa; }
-table.professional-table td p { margin: 0 0 0.4rem 0; }
-table.professional-table td p:last-child { margin-bottom: 0; }
-</style>
-
 # Swiss legal authority pack for ICT, trainee and special employment categories
 
 **Suggested filename:** `legal_authority_ict_trainee_and_special_employment_categories_pack.pdf`
