@@ -1,1 +1,129 @@
+Broad Swiss Settlement and C Permit Legal Authority Packs
 
+This folder contains broad thematic legal authority packs for the Swiss settlement permit and C permit blog automation workflow.
+
+Broad packs are used by `generate_and_publish.py` to ground legal analysis, drafting and validation for blog posts that concern recurring Swiss settlement permit and C permit issues across more than one nationality, applicant category, residence route or procedural context.
+
+## Current Broad Packs
+
+### legal_authority_c_permit_absence_lapse_and_preservation_pack.md
+
+This pack should cover C permit absence, lapse and preservation, including loss of settlement status after absence from Switzerland, statutory and administrative preservation options, notice and application timing, evidential issues, return planning, canton-specific practice and drafting cautions.
+
+### legal_authority_c_permit_cantonal_practice_and_procedure_pack.md
+
+This pack should cover cantonal practice and procedure for Swiss C permit applications, including competent authorities, filing steps, document requirements, timing, evidential expectations, local variations, decision-making practice, renewal or control processes where relevant, and drafting cautions.
+
+### legal_authority_c_permit_family_life_planning_pack.md
+
+This pack should cover C permit issues in family life planning, including family reunification, spouses, children, changes in family composition, separation or divorce risks, residence continuity, dependency and accommodation issues, interaction with naturalisation planning, and drafting cautions.
+
+### legal_authority_c_permit_integration_language_and_compliance_pack.md
+
+This pack should cover integration, language and compliance requirements for Swiss C permit matters, including language evidence, integration agreements or criteria, public-order compliance, tax and debt issues, social assistance, criminality, revocation or downgrading risk, evidential practice and drafting cautions.
+
+### legal_authority_c_permit_naturalisation_planning_pack.md
+
+This pack should cover the relationship between C permits and Swiss naturalisation planning, including the C permit requirement for ordinary naturalisation, timing strategy, residence counting, permit continuity, integration and language evidence, cantonal and communal procedure, and drafting cautions.
+
+### legal_authority_c_permit_rights_stability_and_limits_pack.md
+
+This pack should cover the rights, stability and limits of the Swiss C permit, including settlement status, labour-market access, mobility, family and residence consequences, renewal or control mechanics, revocation and downgrading risks, absence limits, public-order limits and drafting cautions.
+
+### legal_authority_fast_track_c_permit_routes_pack.md
+
+This pack should cover fast-track C permit routes, including early settlement for well-integrated applicants, nationality-specific routes, treaty or reciprocity-based practice where relevant, integration and language requirements, residence duration, discretionary elements, evidential expectations and drafting cautions.
+
+### legal_authority_l_b_c_permit_long_term_planning_comparison_pack.md
+
+This pack should compare L, B and C permits for long-term Swiss residence planning, including residence stability, labour-market position, renewal mechanics, family consequences, absence risks, route progression, C permit eligibility, naturalisation planning and drafting cautions.
+
+### legal_authority_ordinary_c_permit_eligibility_pack.md
+
+This pack should cover ordinary Swiss C permit eligibility, including residence duration, qualifying permits, nationality or treaty distinctions, integration requirements, language evidence, public-order and compliance issues, family categories, application procedure, evidential expectations and drafting cautions.
+
+## Purpose of the Broad Folder
+
+Use this folder for broad thematic packs that apply across several Swiss settlement permit or C permit routes.
+
+Broad packs should help the generator deal with recurring issues that arise in ordinary C permit eligibility, fast-track settlement, integration and language evidence, absence and preservation, family planning, cantonal procedure, long-term permit progression, rights and limits, and naturalisation planning.
+
+A broad pack should usually be narrower than the core Swiss immigration framework pack but wider than a route-specific or issue-specific pack.
+
+## Legal Framework to Cover
+
+Broad Swiss settlement and C permit packs may need to address the relationship between:
+
+The Foreign Nationals and Integration Act (FNIA / AIG / LEI); the Ordinance on Admission, Residence and Employment (OASA / VZAE / OASA); SEM directives and official federal immigration materials; cantonal migration authority practice; settlement permit eligibility; ordinary and early C permit routes; nationality-based or treaty-based settlement practice; residence duration and continuity; L, B and C permit progression; integration criteria; language requirements; public-order, compliance and good-character considerations; social assistance, tax, debt and criminality issues; family reunification and family-life consequences; absence, lapse and preservation of settlement status; revocation, downgrading and non-renewal risk; naturalisation planning; federal and cantonal competence; procedure, discretion and evidential assessment.
+
+## Recommended Structure for Broad Packs
+
+Each broad pack should, where possible, include:
+
+An executive legal summary; a structural overview of the theme or recurring issue; a table of legal propositions; primary legal texts; official guidance and administrative materials; key case law, where relevant; cantonal practice notes, where relevant; practical legal analysis; drafting cautions; source list; open questions or limitations.
+
+## Legal Proposition Categories
+
+Legal propositions should distinguish clearly between:
+
+Entitlement; eligibility only; discretion; facilitation; guidance; procedure; evidential practice; cantonal practice; treaty or nationality-specific practice; unresolved or practice-sensitive points.
+
+Do not describe guidance as law. Do not describe eligibility as an automatic right to a C permit unless the legal basis genuinely creates an enforceable entitlement. Do not describe discretionary or evaluative settlement decisions as automatic. Do not describe cantonal practice as uniform Swiss law.
+
+## Broad Analysis Points
+
+Broad Swiss settlement and C permit authority packs should preserve the distinctions that affect recurring cross-route issues, including:
+
+Type of current permit; nationality; residence history; length and continuity of residence; ordinary or early C permit basis; EU/EFTA or third-country status; treaty or reciprocity-based practice; family relationship; employment or self-employment position; integration record; language evidence; participation in economic life or education; tax, debt enforcement or social assistance issues; criminality, public-order or security concerns; absence from Switzerland; preservation applications; revocation or downgrading risk; canton of residence; local procedure and evidential expectations; interaction with future Swiss naturalisation; refusal, postponement, appeal and reapplication strategy.
+
+## Relationship with Other Folders
+
+Use `core/` for foundational framework points that explain the overall Swiss immigration, residence and permit system.
+
+Use the broad packs for recurring thematic issues that appear across several settlement or C permit routes, such as ordinary eligibility, fast-track settlement, integration and language evidence, family planning, absence and preservation, long-term L/B/C planning, rights and limits, cantonal practice, and naturalisation planning.
+
+Use `route_specific/` for packs focused on a specific settlement route or applicant category, such as ordinary C permit after ten years, early C permit after five years, C permit routes for particular nationalities, C permits for spouses of Swiss citizens or settled foreign nationals, or settlement after specific residence categories.
+
+Use `issue_specific/` for narrower risk issues or complex sub-categories, such as insufficient language evidence, integration concerns, social assistance, debt enforcement, criminality, long absences, lapse of C permit, preservation refusal, downgrading, revocation, canton-specific document gaps or procedural fairness issues.
+
+## Naming Convention
+
+Use clear, descriptive filenames beginning with:
+
+`legal_authority_c_permit_`
+
+or, where the pack compares multiple permit types:
+
+`legal_authority_l_b_c_permit_`
+
+Recommended examples include:
+
+`legal_authority_c_permit_absence_lapse_and_preservation_pack.md`
+`legal_authority_c_permit_cantonal_practice_and_procedure_pack.md`
+`legal_authority_c_permit_family_life_planning_pack.md`
+`legal_authority_c_permit_integration_language_and_compliance_pack.md`
+`legal_authority_c_permit_naturalisation_planning_pack.md`
+`legal_authority_c_permit_rights_stability_and_limits_pack.md`
+`legal_authority_fast_track_c_permit_routes_pack.md`
+`legal_authority_l_b_c_permit_long_term_planning_comparison_pack.md`
+`legal_authority_ordinary_c_permit_eligibility_pack.md`
+
+Use lowercase filenames, underscores rather than spaces, and the `.md` extension for Markdown authority packs.
+
+## Terminology
+
+Use both English and Swiss legal references where useful.
+
+Preferred public-facing terminology includes:
+
+Swiss settlement permit; C permit; settlement status; permanent residence; L permit; B permit; residence permit; short-stay permit; FNIA / AIG / LEI for the Foreign Nationals and Integration Act; OASA / VZAE / OASA for the Ordinance on Admission, Residence and Employment; SEM guidance; cantonal migration authority; ordinary C permit; early C permit; fast-track C permit; integration requirements; language requirements; residence duration; residence continuity; absence from Switzerland; C permit preservation; lapse of settlement permit; revocation; downgrading; family reunification; naturalisation planning.
+
+Avoid using only one language abbreviation where German, French and Italian references may be relevant in Swiss immigration practice.
+
+## Important Drafting Cautions
+
+Broad Swiss settlement and C permit packs should not flatten route-specific conditions.
+
+A thematic issue may apply differently depending on nationality, current permit type, residence history, canton, family status, employment status, integration record, language evidence, public-order issues, debt enforcement, social assistance history, absences, treaty practice, discretionary early-settlement rules and future naturalisation planning.
+
+Authority packs in this folder should help prevent public blog posts from overstating rights, treating eligibility as automatic settlement, implying that a C permit always follows after a fixed number of years, or describing cantonal practice as uniform Swiss law.
