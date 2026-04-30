@@ -1,88 +1,208 @@
-# Swiss Citizenship Legal Authorities
+# Swiss Citizenship Legal Authority Packs
 
-This folder contains legal authorities, guidance, case law, policy materials, and structured notes relevant to Swiss citizenship and naturalisation work.
+This folder contains legal authority packs for the Swiss citizenship and naturalisation blog automation workflow.
 
-## Scope
+The packs are used by `generate_and_publish.py` to ground legal analysis, drafting and validation for blog posts concerning Swiss citizenship and naturalisation, including ordinary naturalisation, facilitated naturalisation, residence counting, continuity, C permit requirements, integration, language evidence, cantonal and communal procedure, absences, interrupted residence, refusals, postponements and appeals.
 
-Use this folder for materials concerning:
+## Folder Structure
 
-- Swiss citizenship by naturalisation
-- Ordinary naturalisation
-- Facilitated naturalisation
-- Naturalisation by marriage to a Swiss citizen
-- C permit requirements for ordinary naturalisation
-- Residence counting and continuity
-- Absences and interrupted residence
-- Integration requirements
-- Language requirements and language evidence
-- Cantonal and communal procedure
-- Refusal, postponement, appeal and reapplication issues
-- Drafting cautions, legal propositions and content-control notes
+swiss_citizenship/
+  broad/
+  core/
+  issue_specific/
+  route_specific/
+  README.md
 
-## Folder structure
+## Folder Purposes
 
-`core/` — central authorities that are repeatedly relevant across Swiss citizenship and naturalisation matters.
+### core/
 
-`broad/` — high-level principles, general statutory frameworks, policy overviews, and cross-cutting issue packs.
+Use this folder for foundational authority packs that explain the overall Swiss citizenship and naturalisation framework.
 
-`route_specific/` — authorities relevant to a specific citizenship or naturalisation route, category, or applicant type.
+Core packs should cover cross-cutting legal architecture, including the relationship between:
 
-`issue_specific/` — authorities organised by discrete legal or factual issue.
+the Swiss Citizenship Act (SCA / BüG / LN);
+the Swiss Citizenship Ordinance (SCO / BüV / OLN);
+SEM guidance and official federal naturalisation materials;
+ordinary naturalisation;
+facilitated naturalisation;
+federal, cantonal and communal competence;
+residence requirements and residence counting;
+integration and language requirements;
+good character, public-order and compliance considerations;
+procedure, discretion and evidential assessment.
 
-## Current contents
+A core pack should be broad enough to support general Swiss citizenship and naturalisation topics across multiple routes and applicant categories.
 
-### `core/`
+### broad/
 
-- `legal_authority_core_swiss_citizenship_by_naturalisation_framework_pack.md` — core framework pack for Swiss citizenship by naturalisation, including the federal, cantonal and communal structure, ordinary naturalisation, facilitated naturalisation, reinstatement, residence, integration, language, local procedure, refusal and post-grant vulnerability.
+Use this folder for broad thematic packs that apply across several Swiss citizenship or naturalisation routes.
 
-### `broad/`
+Examples include:
 
-- `legal_authority_ordinary_swiss_naturalisation_eligibility.md` — ordinary naturalisation eligibility, including federal requirements, residence, integration, language, public order, financial compliance, cantonal residence and procedure.
-- `legal_authority_facilitated_swiss_naturalisation_by_marriage.md` — facilitated naturalisation by marriage, including spouse routes in Switzerland and abroad, marital union, close ties, language, evidence and nullity risk.
-- `legal_authority_swiss_naturalisation_c_permit_requirement.md` — relationship between C permit status and ordinary naturalisation readiness.
-- `legal_authority_swiss_naturalisation_residence_counting_and_continuity.md` — residence counting, qualifying statuses, interruptions, absences and continuity.
-- `legal_authority_swiss_naturalisation_after_absence_or_interrupted_residence.md` — naturalisation after absence abroad, interrupted residence, preserved permits, split living and return-to-Switzerland issues.
-- `legal_authority_swiss_naturalisation_integration_requirements.md` — integration criteria, public order, constitutional values, economic participation, family integration and local implementation.
-- `legal_authority_swiss_naturalisation_language_requirements_and_evidence.md` — federal language thresholds, recognised evidence, certificates, local language practice and special circumstances.
-- `legal_authority_swiss_naturalisation_cantonal_communal_procedure.md` — cantonal and communal procedure, filing routes, local residence, interviews, civic tests, fees, moving during the process and local variation.
-- `legal_authority_swiss_naturalisation_refusal_postponement_and_appeal.md` — refusal, suspension, postponement, appeal routes, procedural fairness, reapplication and annulment-related timing.
-- `legal_authority_swiss_naturalisation_drafting_cautions_and_proposition_bank.md` — reusable propositions, unsafe formulations, drafting controls and article templates for Swiss naturalisation content.
+ordinary Swiss naturalisation eligibility;
+facilitated Swiss naturalisation by marriage;
+Swiss naturalisation after absence or interrupted residence;
+C permit requirements for naturalisation;
+cantonal and communal naturalisation procedure;
+integration requirements;
+language requirements and evidence;
+residence counting and continuity;
+refusal, postponement and appeal;
+drafting cautions and legal proposition banks.
 
-## Inclusion criteria
+Broad packs should help the generator deal with recurring issues that arise across more than one naturalisation route or applicant category.
 
-Add a document here only if it is directly relevant to Swiss citizenship, Swiss nationality, or naturalisation work. Where a source is relevant to multiple areas, place it in the most specific applicable folder and cross-reference it elsewhere if needed.
+### route_specific/
 
-Use the following approach:
+Use this folder for packs focused on a specific citizenship or naturalisation route, applicant category or procedural pathway.
 
-- Place foundational, repeatedly used frameworks in `core/`.
-- Place broad cross-cutting legal or policy packs in `broad/`.
-- Place materials focused on a particular route, such as facilitated naturalisation by marriage, in `route_specific/` if the folder is being expanded.
-- Place materials focused on a discrete issue, such as language evidence, residence continuity, refusal, or nullity, in `issue_specific/` if the folder is being expanded.
+Examples include:
 
-## File naming
+ordinary naturalisation;
+facilitated naturalisation by marriage to a Swiss citizen;
+facilitated naturalisation for children of Swiss citizens;
+facilitated naturalisation for third-generation foreign nationals;
+re-naturalisation;
+naturalisation for registered partners or spouses in complex residence histories;
+naturalisation following long-term residence and C permit acquisition.
 
-Use clear, descriptive filenames in lowercase snake case.
+Route-specific packs should identify the legal basis, route, applicant category, eligibility conditions, residence requirements, integration requirements, procedure, evidence, risks and drafting cautions for the specific route.
 
-Recommended pattern:
+### issue_specific/
 
-`legal_authority_[scope]_[topic].md`
+Use this folder for packs focused on narrower risk issues or complex sub-categories within Swiss citizenship and naturalisation work.
 
-Examples:
+Examples include:
 
-- `legal_authority_core_swiss_citizenship_by_naturalisation_framework_pack.md`
-- `legal_authority_ordinary_swiss_naturalisation_eligibility.md`
-- `legal_authority_swiss_naturalisation_language_requirements_and_evidence.md`
-- `legal_authority_swiss_naturalisation_refusal_postponement_and_appeal.md`
+interrupted residence;
+extended absences from Switzerland;
+insufficient residence continuity;
+absence of a C permit where one is required;
+language evidence problems;
+integration concerns;
+social assistance or debt enforcement issues;
+criminality, public-order or compliance concerns;
+cantonal or communal objections;
+postponement rather than refusal;
+appeal prospects and procedural fairness;
+family members applying at different times.
 
-## Drafting notes
+Issue-specific packs should be used where a topic needs deeper treatment than the general route or broad thematic pack provides.
 
-When using these materials for advice notes, public-facing content, internal knowledge-base entries or automated drafting, distinguish carefully between:
+## Naming Convention
 
-- ordinary naturalisation, facilitated naturalisation and reinstatement;
-- federal law, SEM guidance, cantonal law and communal practice;
-- formal eligibility, application readiness and likelihood of approval;
-- black-letter rules, administrative guidance and local practice;
-- pre-grant refusal risk and post-grant nullity or deprivation risk.
+Use clear, descriptive filenames beginning with:
 
-Do not present Swiss naturalisation as automatic once a person has lived in Switzerland for a set period or holds a C permit. The materials in this folder repeatedly distinguish threshold eligibility from the multi-level assessment required for a final grant of Swiss citizenship.
+legal_authority_swiss_naturalisation_
 
+Recommended examples include:
+
+legal_authority_swiss_naturalisation_core_framework_pack.md
+legal_authority_ordinary_swiss_naturalisation_eligibility.md
+legal_authority_facilitated_swiss_naturalisation_by_marriage.md
+legal_authority_swiss_naturalisation_residence_counting_and_continuity.md
+legal_authority_swiss_naturalisation_c_permit_requirement.md
+legal_authority_swiss_naturalisation_integration_requirements.md
+legal_authority_swiss_naturalisation_language_requirements_and_evidence.md
+legal_authority_swiss_naturalisation_cantonal_communal_procedure.md
+legal_authority_swiss_naturalisation_after_absence_or_interrupted_residence.md
+legal_authority_swiss_naturalisation_refusal_postponement_and_appeal.md
+legal_authority_swiss_naturalisation_drafting_cautions_and_proposition_bank.md
+
+Use lowercase filenames, underscores rather than spaces, and the `.md` extension for Markdown authority packs.
+
+## Source Hierarchy
+
+When drafting or maintaining authority packs, apply the following source hierarchy:
+
+Federal legislation, ordinances and treaties;
+SEM guidance, SEM instructions, official SEM factsheets and official federal naturalisation materials;
+Federal Supreme Court authority and other relevant case law;
+Official cantonal and communal naturalisation authority guidance;
+Internal legal analysis and drafting cautions;
+Existing website editorial content, for positioning only.
+
+Website editorial content must not be treated as legal authority.
+
+## Drafting Standards for Authority Packs
+
+Each authority pack should, where possible, include:
+
+an executive legal summary;
+a structural overview of the relevant route, issue or framework;
+a table of legal propositions;
+primary legal texts;
+official guidance and administrative materials;
+cantonal and communal practice notes where relevant;
+practical legal analysis;
+drafting cautions;
+source list;
+open questions or limitations.
+
+Legal propositions should distinguish clearly between:
+
+entitlement;
+eligibility only;
+discretion;
+facilitation;
+guidance;
+procedure;
+evidential practice;
+cantonal practice;
+communal practice;
+unresolved or practice-sensitive points.
+
+Do not describe guidance as law. Do not describe eligibility as an automatic right to Swiss citizenship. Do not describe discretionary or evaluative naturalisation decisions as entitlements. Do not describe cantonal or communal practice as uniform Swiss law.
+
+## Terminology
+
+Use both English and Swiss legal references where useful.
+
+Preferred public-facing terminology includes:
+
+Swiss citizenship;
+Swiss naturalisation;
+ordinary naturalisation;
+facilitated naturalisation;
+SCA / BüG / LN for the Swiss Citizenship Act;
+SCO / BüV / OLN for the Swiss Citizenship Ordinance;
+SEM guidance for official federal naturalisation guidance;
+C permit / settlement permit;
+residence counting;
+residence continuity;
+integration requirements;
+language requirements;
+cantonal and communal procedure.
+
+Avoid using only one language abbreviation where German, French and Italian references may be relevant in Swiss citizenship practice.
+
+## Important Drafting Cautions
+
+Swiss citizenship and naturalisation should not be treated as a single uniform route.
+
+The analysis usually depends on:
+
+type of naturalisation route;
+nationality and residence history;
+ordinary or facilitated naturalisation basis;
+length and continuity of residence;
+whether residence abroad or interrupted residence affects eligibility;
+C permit status, where required;
+marriage, family relationship or descent from a Swiss citizen, where relevant;
+integration record;
+language evidence;
+participation in economic life or education;
+social assistance, debt enforcement or tax compliance issues;
+criminality, public-order or security concerns;
+federal, cantonal and communal decision-making roles;
+local procedure and evidential expectations;
+whether the issue concerns refusal, postponement, appeal or reapplication.
+
+Authority packs should preserve these distinctions so that public blog posts do not overstate rights, flatten route-specific conditions or imply that citizenship follows automatically after a fixed number of years.
+
+## GitHub Folder Tracking
+
+Empty folders are tracked using `.gitkeep` files.
+
+Once a folder contains at least one real authority pack, the `.gitkeep` file in that folder may be removed.
