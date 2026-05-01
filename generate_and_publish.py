@@ -299,7 +299,19 @@ ARTICLE_STRUCTURE_VARIANTS = [
 
 CLASSIFIER_INSTRUCTIONS = """
 You are assisting a Swiss immigration law content workflow.
+
 Classify the requested article before drafting.
+
+Your classification should help determine the best reader flow, not just the legal topic.
+
+Choose the recommended structure variant based on the reader's likely problem:
+- legal_framework_first: use where the legal framework must be understood before the practical issue.
+- problem_solution: use where the article addresses a practical difficulty or preventable problem.
+- client_scenarios: use where similar facts can lead to different outcomes.
+- myth_correction: use where the topic corrects a common misconception or overclaim.
+- decision_framework: use where the reader must work through several decisions in sequence.
+- practical_consequences: use where the main value is explaining the consequences of a rule, decision or mistake.
+
 Return strict JSON only.
 Do not write the article.
 """.strip()
@@ -340,6 +352,28 @@ Rules:
 Return strict JSON only.
 """.strip()
 
+READER_JOURNEY_INSTRUCTIONS = """
+You are planning the reader flow for a client-facing Swiss immigration law blog post.
+
+Do not draft the article.
+
+Your task is to convert the legal memo into a clear reader journey.
+
+Priorities:
+- Start from the reader's practical question, misconception, risk or decision.
+- Decide what the reader needs to understand first, second and third.
+- Avoid legal-memo ordering unless it is genuinely the clearest reader order.
+- Identify which legal distinctions must appear early.
+- Identify which points should be stated once only to avoid repetition.
+- Recommend section purposes, not just headings.
+- Ensure the article moves from reader question to legal distinction to practical consequence to evidence or timing to next step.
+- Preserve legal accuracy and caution.
+- Do not add unsupported legal propositions.
+- Do not invent facts, authorities, procedures, canton-specific practices, forms, fees or document requirements.
+
+Return strict JSON only.
+""".strip()
+
 DRAFT_INSTRUCTIONS = f"""
 You are drafting a client-facing blog post for a Swiss immigration law firm.
 Draft only from the legal memo, legal sources and editorial instructions supplied.
@@ -364,13 +398,27 @@ Length and structure:
 - Do not include a section headed **Quick Answer**, **At a Glance** or **In Brief**.
 - Do not use a standardised article template for every topic. Follow the article structure variant supplied in the input.
 
+Reader-flow discipline:
+- Follow the supplied reader_journey_plan unless doing so would create legal inaccuracy.
+- Do not organise the article as a list of legal topics merely because the legal memo is organised that way.
+- The first substantive section after the two introductory paragraphs should answer the reader's central practical question.
+- Where the title is question-led, answer the question directly before moving into detailed legal framework.
+- Explain the main practical distinction before introducing secondary qualifications.
+- Each section must answer a distinct reader question.
+- Do not include a section unless its purpose is clear from the reader_journey_plan.
+- If two sections make the same core point, merge them.
+- Prefer the order: reader concern, legal distinction, practical consequence, evidence or timing, strategic next step.
+- For misconception-led articles, state the misconception once, correct it clearly, and then develop consequences rather than repeating the correction.
+- Headings should form a readable outline of the argument. A reader should be able to scan the headings and understand the progression of the article.
+- Avoid headings that merely label legal categories where a practical heading would better explain why the section matters.
+
 Structure variety:
 - Use the article_structure_variant to vary the shape, order and emphasis of the article.
 - The article should not always follow the same sequence of headings.
 - Do not automatically include sections headed **What This Means in Practice** or **What To Do Next**.
 - Only use those headings if they are genuinely the best headings for the specific article.
 - Prefer varied headings that suit the topic and authorial approach, such as **How Applicants Should Approach the Issue**, **Where Timing Problems Arise**, **Planning the Next Step**, **Reducing the Risk Before You Apply**, **When Legal Advice Can Change the Strategy**, or other natural topic-specific headings.
-- Each post should read as though it was written by a different human author, not as though it follows a single house template.
+- Maintain a consistent Richmond Chambers Switzerland house style, but vary the article architecture according to the reader's problem.
 - Vary paragraph rhythm, section order, heading style and use of examples.
 - You may begin with a practical misconception, a legal framework, a decision point, a short anonymised scenario or a timing problem, depending on the variant.
 - Do not rely on fixed practical headings. Use headings that fit the article’s topic, structure variant and natural flow.
@@ -557,6 +605,25 @@ Repair-only scope:
 - Return strict JSON only using DRAFT_SCHEMA.
 """.strip()
 
+FLOW_REPAIR_INSTRUCTIONS = f"""
+You are improving the reader flow of a Swiss immigration blog draft.
+
+Repair scope:
+- Preserve the legal substance from the supplied legal memo and draft.
+- Do not add unsupported law, new facts, invented procedures, invented nationality lists, invented canton-specific practice, fees or document requirements.
+- Reorder, merge and rewrite sections so the article follows the supplied reader_journey_plan.
+- The first substantive section after the two introductory paragraphs must answer the reader's core practical question.
+- Each section must do distinct work.
+- Remove repetition rather than paraphrasing the same point.
+- Move background legal framework after the reader has been given the practical orientation, unless the reader_journey_plan says otherwise.
+- Use headings that make the article easy to scan.
+- Preserve the exact CTA heading: {CTA_HEADING}
+- Keep the CTA as the final substantive section before the italicised disclaimer.
+- Keep the article under {MAX_BLOG_WORDS} words.
+- Use UK English.
+- Return strict JSON only using DRAFT_SCHEMA.
+""".strip()
+
 SEO_INSTRUCTIONS = """
 You are generating SEO metadata for a Swiss immigration law article.
 Return strict JSON only.
@@ -601,6 +668,28 @@ CLASSIFIER_SCHEMA = {
             "distinctions_required": {"type": "array", "items": {"type": "string"}},
             "source_needs": {"type": "array", "items": {"type": "string"}},
             "style_profile": {"type": "string"},
+            "recommended_structure_variant": {
+                "type": "string",
+                "enum": [
+                    "legal_framework_first",
+                    "problem_solution",
+                    "client_scenarios",
+                    "myth_correction",
+                    "decision_framework",
+                    "practical_consequences",
+                ],
+            },
+            "reader_flow_priority": {
+                "type": "string",
+                "enum": [
+                    "answer_misconception_first",
+                    "route_comparison_first",
+                    "timeline_first",
+                    "risk_first",
+                    "eligibility_first",
+                    "authority_discretion_first",
+                ],
+            },
         },
         "required": [
             "primary_audience",
@@ -611,6 +700,79 @@ CLASSIFIER_SCHEMA = {
             "distinctions_required",
             "source_needs",
             "style_profile",
+            "recommended_structure_variant",
+            "reader_flow_priority",
+        ],
+    },
+}
+
+READER_JOURNEY_SCHEMA = {
+    "name": "reader_journey_plan",
+    "schema": {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "reader_core_question": {"type": "string"},
+            "reader_context": {"type": "string"},
+            "one_sentence_answer": {"type": "string"},
+            "primary_misconception_or_risk": {"type": "string"},
+            "recommended_opening_angle": {"type": "string"},
+            "recommended_section_sequence": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "section_purpose": {"type": "string"},
+                        "suggested_heading": {"type": "string"},
+                        "reader_question_answered": {"type": "string"},
+                        "legal_points_to_cover": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                        "practical_points_to_cover": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                        "avoid_repetition_of": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                    },
+                    "required": [
+                        "section_purpose",
+                        "suggested_heading",
+                        "reader_question_answered",
+                        "legal_points_to_cover",
+                        "practical_points_to_cover",
+                        "avoid_repetition_of",
+                    ],
+                },
+                "minItems": 5,
+                "maxItems": 10,
+            },
+            "best_reader_helpful_elements": {
+                "type": "array",
+                "items": {"type": "string"},
+                "minItems": 2,
+                "maxItems": 4,
+            },
+            "points_to_state_once_only": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "section_order_rationale": {"type": "string"},
+        },
+        "required": [
+            "reader_core_question",
+            "reader_context",
+            "one_sentence_answer",
+            "primary_misconception_or_risk",
+            "recommended_opening_angle",
+            "recommended_section_sequence",
+            "best_reader_helpful_elements",
+            "points_to_state_once_only",
+            "section_order_rationale",
         ],
     },
 }
@@ -1084,7 +1246,16 @@ def derive_topic_metadata(topic_entry: dict[str, Any]) -> dict[str, str]:
     }
 
 
-def select_article_structure_variant(topic_entry: dict[str, Any]) -> dict[str, Any]:
+def select_article_structure_variant(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    if classifier:
+        recommended = classifier.get("recommended_structure_variant")
+        for variant in ARTICLE_STRUCTURE_VARIANTS:
+            if variant["name"] == recommended:
+                return variant
+
     basis = (
         topic_entry.get("topic", "")
         + "|"
@@ -1141,13 +1312,40 @@ def build_legal_input(
     )
 
 
-def build_draft_input(
+def build_reader_journey_input(
     topic_entry: dict[str, Any],
     classifier: dict[str, Any],
     memo: dict[str, Any],
     website_context: str,
 ) -> str:
-    structure_variant = select_article_structure_variant(topic_entry)
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
+            "topic_metadata": derive_topic_metadata(topic_entry),
+            "classifier": classifier,
+            "legal_memo": memo,
+            "website_editorial_context": (
+                "Use only for continuity, overlap awareness and tone. "
+                "Do not treat website editorial as legal authority.\n\n"
+                f"{website_context[:8000]}"
+            ),
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
+
+
+def build_draft_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    reader_journey: dict[str, Any],
+    website_context: str,
+) -> str:
+    structure_variant = select_article_structure_variant(topic_entry, classifier)
 
     return json.dumps(
         {
@@ -1157,6 +1355,7 @@ def build_draft_input(
             "audience_brief": audience_brief(topic_entry.get("audience", "general_global")),
             "topic_metadata": derive_topic_metadata(topic_entry),
             "article_structure_variant": structure_variant,
+            "reader_journey_plan": reader_journey,
             "classifier": classifier,
             "legal_memo": memo,
             "editorial_constraints": {
@@ -1305,6 +1504,33 @@ def build_repair_input(
         indent=2,
     )
 
+
+def build_flow_repair_input(
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    reader_journey: dict[str, Any],
+    draft: dict[str, Any],
+    flow_errors: list[str],
+) -> str:
+    return json.dumps(
+        {
+            "topic": topic_entry.get("topic", ""),
+            "angle": topic_entry.get("angle", ""),
+            "audience": topic_entry.get("audience", "general_global"),
+            "classifier": classifier,
+            "legal_memo": memo,
+            "reader_journey_plan": reader_journey,
+            "draft_to_repair": draft,
+            "flow_errors": flow_errors,
+            "repair_guardrails": (
+                "Repair reader flow only. Do not add unsupported legal propositions, new facts, "
+                "invented procedures, nationality lists, canton-specific practice, fees or document requirements."
+            ),
+        },
+        ensure_ascii=False,
+        indent=2,
+    )
 
 # ============================================================
 # Persistence and email helpers
@@ -1638,8 +1864,12 @@ def remove_near_top_summary_section(blog_content: str) -> str:
     return "\n\n".join(cleaned_blocks)
 
 
-def soften_repeated_practical_headings(blog_content: str, topic_entry: dict[str, Any]) -> str:
-    variant = select_article_structure_variant(topic_entry)
+def soften_repeated_practical_headings(
+    blog_content: str,
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any] | None = None,
+) -> str:
+    variant = select_article_structure_variant(topic_entry, classifier)
     examples = variant.get("optional_heading_examples", [])
 
     replacement_pairs = {
@@ -1969,6 +2199,108 @@ def validate_legal_memo(memo: dict[str, Any]) -> list[str]:
     return errors
 
 
+def validate_reader_flow(draft: dict[str, Any], reader_journey: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+
+    blog_title = (draft.get("blog_title") or "").strip()
+    blog_content = (draft.get("blog_content") or "").strip()
+    blocks = split_blocks(blog_content)
+
+    if not blocks:
+        return ["Cannot validate reader flow because blog_content is empty."]
+
+    early_text = " ".join(blocks[:5]).lower()
+
+    one_sentence_answer = (reader_journey.get("one_sentence_answer") or "").lower()
+    core_question = (reader_journey.get("reader_core_question") or "").lower()
+    misconception_or_risk = (reader_journey.get("primary_misconception_or_risk") or "").lower()
+
+    early_terms = tokenize_queries([
+        one_sentence_answer,
+        core_question,
+        misconception_or_risk,
+    ])
+
+    early_hits = sum(early_text.count(term) for term in early_terms)
+
+    if early_hits < 2:
+        errors.append(
+            "The draft does not appear to answer the reader's core question or misconception early enough."
+        )
+
+    if "?" in blog_title:
+        answer_markers = [
+            "does not",
+            "not automatically",
+            "not a right",
+            "not a residence permit",
+            "separate",
+            "depends",
+            "must still",
+            "the answer is",
+        ]
+        if not any(marker in early_text for marker in answer_markers):
+            errors.append(
+                "Question-led title is not answered directly in the opening section."
+            )
+
+    headings = [
+        re.sub(r"^\*\*|\*\*$", "", block).strip().lower()
+        for block in blocks
+        if is_bold_heading(block)
+    ]
+
+    repeated_heading_stems = [
+        "practical",
+        "evidence",
+        "timing",
+        "next step",
+        "what this means",
+    ]
+
+    for stem in repeated_heading_stems:
+        count = sum(1 for heading in headings if stem in heading)
+        if count > 2:
+            errors.append(
+                f"Too many headings appear to cover the same theme: '{stem}'."
+            )
+
+    return errors
+
+
+def flow_repair_draft_if_needed(
+    *,
+    openai_api_key: str,
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any],
+    memo: dict[str, Any],
+    reader_journey: dict[str, Any],
+    draft: dict[str, Any],
+) -> dict[str, Any]:
+    current = draft
+    errors = validate_reader_flow(current, reader_journey)
+
+    if not errors:
+        return current
+
+    repaired = call_responses_api(
+        openai_api_key,
+        instructions=FLOW_REPAIR_INSTRUCTIONS,
+        input_text=build_flow_repair_input(
+            topic_entry=topic_entry,
+            classifier=classifier,
+            memo=memo,
+            reader_journey=reader_journey,
+            draft=current,
+            flow_errors=errors,
+        ),
+        schema=DRAFT_SCHEMA,
+        model=OPENAI_MODEL,
+    )
+
+    return normalise_draft_output(repaired, topic_entry, classifier)
+
+
 def repair_draft_if_needed(
     *,
     openai_api_key: str,
@@ -1996,7 +2328,7 @@ def repair_draft_if_needed(
             schema=DRAFT_SCHEMA,
             model=OPENAI_MODEL,
         )
-        current = normalise_draft_output(repaired, topic_entry)
+        current = normalise_draft_output(repaired, topic_entry, classifier)
         errors = validate_public_draft(current)
         if not errors:
             return current
@@ -2033,7 +2365,86 @@ def ensure_italic_disclaimer_at_end(blog_content: str) -> str:
     return "\n\n".join(non_disclaimer_blocks + [italic_disclaimer])
 
 
-def ensure_reader_usefulness_content(blog_content: str) -> str:
+def infer_flow_archetype(topic_entry: dict[str, Any], classifier: dict[str, Any] | None = None) -> str:
+    classifier = classifier or {}
+
+    text = " ".join(
+        [
+            topic_entry.get("topic", ""),
+            topic_entry.get("angle", ""),
+            topic_entry.get("subtopic", ""),
+            topic_entry.get("pillar", ""),
+            " ".join(classifier.get("key_issues", [])),
+            " ".join(classifier.get("distinctions_required", [])),
+            classifier.get("reader_flow_priority", ""),
+        ]
+    ).lower()
+
+    if any(term in text for term in ["myth", "misconception", "guarantee", "automatic", "secure", "golden visa"]):
+        return "misconception_first"
+
+    if any(term in text for term in ["eu/efta", "non-eu", "third-country", "nationality", "afmp", "fza"]):
+        return "category_comparison"
+
+    if any(term in text for term in ["deadline", "timing", "renewal", "lapse", "departure", "absence", "too late"]):
+        return "timeline_risk"
+
+    if any(term in text for term in ["refusal", "refused", "appeal", "reapply", "re-filing"]):
+        return "refusal_response"
+
+    if any(term in text for term in ["canton", "cantonal", "sem approval", "discretion", "derogation"]):
+        return "authority_discretion"
+
+    return "general_decision_framework"
+
+
+PRACTICAL_FALLBACKS = {
+    "misconception_first": (
+        "**Checking the Assumption Before You Apply**",
+        "Applicants should first identify whether the point they are relying on is a legal entitlement, "
+        "an eligibility condition, a cantonal practice or a discretionary argument. The application strategy "
+        "should then be built around the correct category, rather than around an assumption that the authority "
+        "is bound to accept the case."
+    ),
+    "category_comparison": (
+        "**Identifying the Correct Applicant Category**",
+        "Applicants should start by identifying the route that applies to their nationality, family position, "
+        "sponsor, employer or residence history. Similar facts can lead to different outcomes where Swiss law "
+        "treats EU/EFTA nationals, third-country nationals, family members, workers or economically inactive "
+        "applicants differently."
+    ),
+    "timeline_risk": (
+        "**Reconstructing the Timeline Before Filing**",
+        "Applicants should reconstruct the relevant dates before assuming that a route remains available. "
+        "In many Swiss immigration cases, residence history, absences, filing dates, renewal timing or appeal "
+        "deadlines can affect the available options."
+    ),
+    "refusal_response": (
+        "**Understanding the Weakness Before Re-Filing**",
+        "Where a case has already been refused or questioned, applicants should identify whether the problem was "
+        "legal, evidential, procedural or timing-related before filing again. A stronger application usually starts "
+        "with understanding why the previous approach did not satisfy the competent authority."
+    ),
+    "authority_discretion": (
+        "**Preparing for Authority Discretion**",
+        "Where the route depends on authority discretion or approval, applicants should avoid presenting the case "
+        "as automatic. The file should explain why the legal basis is available, why the facts justify the request "
+        "and how the evidence supports the applicant's position."
+    ),
+    "general_decision_framework": (
+        "**Planning the Filing Strategy**",
+        "Before taking the next procedural step, applicants should identify the exact route being relied on, "
+        "the legal or evidential issue that may affect the case, and whether timing, documents, residence history "
+        "or authority discretion create a practical risk."
+    ),
+}
+
+
+def ensure_reader_usefulness_content(
+    blog_content: str,
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any] | None = None,
+) -> str:
     blocks = split_blocks(blog_content)
     if not blocks:
         return blog_content
@@ -2107,12 +2518,10 @@ def ensure_reader_usefulness_content(blog_content: str) -> str:
     if marker_count >= 2 and has_existing_substantive_practical_section:
         return blog_content
 
-    fallback_heading = "**Planning the Filing Strategy**"
-    fallback_paragraph = (
-        "Before taking the next procedural step, applicants should identify the exact route being relied on, "
-        "the legal or evidential issue that may affect the case, and whether timing, documents, residence history "
-        "or authority discretion create a practical risk. The right strategy depends on the applicant’s facts, "
-        "the applicable legal basis and the stage the case has reached."
+    archetype = infer_flow_archetype(topic_entry, classifier)
+    fallback_heading, fallback_paragraph = PRACTICAL_FALLBACKS.get(
+        archetype,
+        PRACTICAL_FALLBACKS["general_decision_framework"],
     )
     blocks = insert_before_cta_or_disclaimer(blocks, [fallback_heading, fallback_paragraph])
     if disclaimer_block and not (blocks and is_disclaimer_block(blocks[-1])):
@@ -2222,7 +2631,11 @@ def ensure_cta_requirements(blog_content: str) -> str:
     return "\n\n".join(updated_blocks)
 
 
-def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -> dict[str, Any]:
+def normalise_draft_output(
+    draft: dict[str, Any],
+    topic_entry: dict[str, Any],
+    classifier: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     cleaned = dict(draft)
     cleaned["dynamic_page_link"] = ""
 
@@ -2232,11 +2645,11 @@ def normalise_draft_output(draft: dict[str, Any], topic_entry: dict[str, Any]) -
     blog_content = remove_forbidden_public_phrases(blog_content)
     blog_content = replace_ai_source_phrases(blog_content)
     blog_content = remove_near_top_summary_section(blog_content)
-    blog_content = soften_repeated_practical_headings(blog_content, topic_entry)
+    blog_content = soften_repeated_practical_headings(blog_content, topic_entry, classifier)
     blog_content = replace_informal_c_permit_terms(blog_content)
     blog_content = replace_person_references(blog_content)
     blog_content = repair_sentence_start_capitalisation(blog_content)
-    blog_content = ensure_reader_usefulness_content(blog_content)
+    blog_content = ensure_reader_usefulness_content(blog_content, topic_entry, classifier)
     blog_content = remove_empty_headings(blog_content)
     blog_content = ensure_cta_requirements(blog_content)
     blog_content = ensure_italic_disclaimer_at_end(blog_content)
@@ -2515,6 +2928,19 @@ def main() -> None:
     if memo_validation_errors:
         raise RuntimeError("Legal memo validation failed:\n- " + "\n- ".join(memo_validation_errors))
 
+    reader_journey = call_responses_api(
+        openai_api_key,
+        instructions=READER_JOURNEY_INSTRUCTIONS,
+        input_text=build_reader_journey_input(
+            topic_entry=topic_entry,
+            classifier=classifier,
+            memo=memo,
+            website_context=website_context_text,
+        ),
+        schema=READER_JOURNEY_SCHEMA,
+        model=OPENAI_MODEL,
+    )
+
     write_run_artifact(
         f"{run_base}_analysis.json",
         {
@@ -2523,19 +2949,34 @@ def main() -> None:
             "selected_legal_authority_packs": [
                 str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
             ],
-            "selected_article_structure_variant": select_article_structure_variant(topic_entry),
+            "selected_article_structure_variant": select_article_structure_variant(topic_entry, classifier),
             "memo": memo,
+            "reader_journey": reader_journey,
         },
     )
 
     draft = call_responses_api(
         openai_api_key,
         instructions=DRAFT_INSTRUCTIONS,
-        input_text=build_draft_input(topic_entry, classifier, memo, website_context_text),
+        input_text=build_draft_input(
+            topic_entry,
+            classifier,
+            memo,
+            reader_journey,
+            website_context_text,
+        ),
         schema=DRAFT_SCHEMA,
         model=OPENAI_MODEL,
     )
-    draft = normalise_draft_output(draft, topic_entry)
+    draft = normalise_draft_output(draft, topic_entry, classifier)
+    draft = flow_repair_draft_if_needed(
+        openai_api_key=openai_api_key,
+        topic_entry=topic_entry,
+        classifier=classifier,
+        memo=memo,
+        reader_journey=reader_journey,
+        draft=draft,
+    )
     draft = repair_draft_if_needed(
         openai_api_key=openai_api_key,
         topic_entry=topic_entry,
@@ -2558,8 +2999,9 @@ def main() -> None:
         "selected_legal_authority_packs": [
             str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
         ],
-        "selected_article_structure_variant": select_article_structure_variant(topic_entry),
+        "selected_article_structure_variant": select_article_structure_variant(topic_entry, classifier),
         "memo": memo,
+        "reader_journey": reader_journey,
         "draft": draft,
         "seo": seo,
     }
