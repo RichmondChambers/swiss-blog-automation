@@ -1,12 +1,27 @@
 {
   "pillar_defaults": {
-    "settlement_and_c_permit": [
-      "settlement_and_c_permit/core/legal_authority_core_swiss_c_permit_framework_pack.md"
-    ],
-    "family_reunification": [
-      "family_reunification/core/legal_authority_core_swiss_family_reunification_framework_pack.md"
-    ]
-  },
+  "settlement_and_c_permit": [
+    "settlement_and_c_permit/core/legal_authority_core_swiss_c_permit_framework_pack.md"
+  ],
+  "family_reunification": [
+    "family_reunification/core/legal_authority_core_swiss_family_reunification_framework_pack.md"
+  ],
+  "lump_sum_taxation": [
+    "lump_sum_taxation/core/legal_authority_core_swiss_lump_sum_taxation_residence_framework.md"
+  ],
+  "retirement_permit": [
+    "retirement_permit/core/legal_authority_core_swiss_retirement_residence_framework.md"
+  ],
+  "schengen_visa": [
+    "schengen_visa/core/legal_authority_core_swiss_schengen_visa_type_c_framework.md"
+  ],
+  "swiss_citizenship": [
+    "swiss_citizenship/core/legal_authority_core_swiss_citizenship_by_naturalisation_framework.md"
+  ],
+  "work_permits": [
+    "work_permits/core/legal_authority_core_swiss_work_permits_and_employer_sponsorship_framework.md"
+  ]
+},
   "subtopic_overrides": {
     "settlement_and_c_permit:ordinary_c_permit_eligibility": [
       "settlement_and_c_permit/broad/legal_authority_ordinary_c_permit_eligibility_pack.md"
