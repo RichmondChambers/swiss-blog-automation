@@ -352,6 +352,115 @@
     ],
     "swiss_citizenship:drafting_cautions_and_proposition_bank": [
       "swiss_citizenship/broad/legal_authority_swiss_naturalisation_drafting_cautions_and_proposition_bank.md"
+    ],
+    "work_permits:legal_framework_and_employer_sponsorship": [
+      "work_permits/broad/legal_authority_work_permits_legal_framework_and_employer_sponsorship.md"
+    ],
+    "work_permits:eu_efta_hiring_into_switzerland": [
+      "work_permits/broad/legal_authority_eu_efta_hiring_into_switzerland.md"
+    ],
+    "work_permits:non_eu_work_permits_admission_criteria_and_employer_burden": [
+      "work_permits/broad/legal_authority_non_eu_work_permits_admission_criteria_and_employer_burden.md",
+      "work_permits/broad/legal_authority_work_permits_legal_framework_and_employer_sponsorship.md"
+    ],
+    "work_permits:salary_local_conditions_and_labour_market_compliance": [
+      "work_permits/broad/legal_authority_salary_local_conditions_and_labour_market_compliance.md"
+    ],
+    "work_permits:quotas_timing_and_filing_strategy": [
+      "work_permits/broad/legal_authority_work_permit_quotas_timing_and_filing_strategy.md",
+      "work_permits/broad/legal_authority_non_eu_work_permits_admission_criteria_and_employer_burden.md"
+    ],
+    "work_permits:short_term_assignments_notifications_and_cross_border_service": [
+      "work_permits/broad/legal_authority_short_term_assignments_notifications_and_cross_border_service.md"
+    ],
+    "work_permits:ict_trainee_and_special_employment_categories": [
+      "work_permits/broad/legal_authority_ict_trainee_and_special_employment_categories.md"
+    ],
+    "work_permits:employment_changes_renewals_and_permit_continuity": [
+      "work_permits/broad/legal_authority_employment_changes_renewals_and_permit_continuity.md"
+    ],
+    "work_permits:cantonal_practice_and_procedure": [
+      "work_permits/broad/legal_authority_work_permit_cantonal_practice_and_procedure.md"
+    ],
+    "work_permits:refusals_refilings_and_appeals": [
+      "work_permits/broad/legal_authority_work_permit_refusals_refilings_and_appeals.md",
+      "work_permits/broad/legal_authority_work_permit_cantonal_practice_and_procedure.md"
+    ],
+    "work_permits:non_eu_local_hire_work_permit": [
+      "work_permits/route_specific/legal_authority_non_eu_local_hire_work_permit.md",
+      "work_permits/broad/legal_authority_non_eu_work_permits_admission_criteria_and_employer_burden.md"
+    ],
+    "work_permits:senior_and_specialist_hires": [
+      "work_permits/route_specific/legal_authority_senior_and_specialist_hires.md",
+      "work_permits/broad/legal_authority_salary_local_conditions_and_labour_market_compliance.md"
+    ],
+    "work_permits:intra_company_transfer": [
+      "work_permits/route_specific/legal_authority_intra_company_transfer.md",
+      "work_permits/broad/legal_authority_ict_trainee_and_special_employment_categories.md"
+    ],
+    "work_permits:short_term_assignment_and_project_based_work": [
+      "work_permits/route_specific/legal_authority_short_term_assignment_and_project_based_work.md",
+      "work_permits/broad/legal_authority_short_term_assignments_notifications_and_cross_border_service.md"
+    ],
+    "work_permits:posted_worker_and_notification_route": [
+      "work_permits/route_specific/legal_authority_posted_worker_and_notification_route.md",
+      "work_permits/broad/legal_authority_short_term_assignments_notifications_and_cross_border_service.md"
+    ],
+    "work_permits:frontier_worker_g_permit": [
+      "work_permits/route_specific/legal_authority_frontier_worker_g_permit.md"
+    ],
+    "work_permits:trainee_and_stagiaire": [
+      "work_permits/route_specific/legal_authority_trainee_and_stagiaire.md",
+      "work_permits/broad/legal_authority_ict_trainee_and_special_employment_categories.md"
+    ],
+    "work_permits:graduate_switch_from_study_to_work": [
+      "work_permits/route_specific/legal_authority_graduate_switch_from_study_to_work.md"
+    ],
+    "work_permits:remote_work_and_foreign_employer_fact_patterns": [
+      "work_permits/route_specific/legal_authority_remote_work_and_foreign_employer_fact_patterns.md"
+    ],
+    "work_permits:founder_and_entrepreneur_work_authorisation": [
+      "work_permits/route_specific/legal_authority_founder_and_entrepreneur_work_authorisation.md",
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_and_business_founder_framework.md"
+    ],
+    "work_permits:entrepreneur_and_business_founder_framework": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_and_business_founder_framework.md",
+      "work_permits/route_specific/legal_authority_founder_and_entrepreneur_work_authorisation.md"
+    ],
+    "work_permits:entrepreneur_business_plan_and_evidence": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_business_plan_and_evidence.md",
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_economic_interest_and_business_substance.md"
+    ],
+    "work_permits:entrepreneur_cantonal_procedure_and_discretion": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_cantonal_procedure_and_discretion.md",
+      "work_permits/broad/legal_authority_work_permit_cantonal_practice_and_procedure.md"
+    ],
+    "work_permits:entrepreneur_company_formation_vs_work_authorisation": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_company_formation_vs_work_authorisation.md"
+    ],
+    "work_permits:entrepreneur_economic_interest_and_business_substance": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_economic_interest_and_business_substance.md"
+    ],
+    "work_permits:entrepreneur_family_residence_and_settlement_planning": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_family_residence_and_settlement_planning.md"
+    ],
+    "work_permits:entrepreneur_founder_role_salary_and_employment_structure": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_founder_role_salary_and_employment_structure.md",
+      "work_permits/broad/legal_authority_salary_local_conditions_and_labour_market_compliance.md"
+    ],
+    "work_permits:entrepreneur_investment_funding_and_financial_viability": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_investment_funding_and_financial_viability.md"
+    ],
+    "work_permits:entrepreneur_job_creation_and_labour_market_benefit": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_job_creation_and_labour_market_benefit.md"
+    ],
+    "work_permits:entrepreneur_refusals_and_refiling_strategy": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_refusals_and_refiling_strategy.md",
+      "work_permits/broad/legal_authority_work_permit_refusals_refilings_and_appeals.md"
+    ],
+    "work_permits:entrepreneur_renewals_business_performance_and_continuity": [
+      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_renewals_business_performance_and_continuity.md",
+      "work_permits/broad/legal_authority_employment_changes_renewals_and_permit_continuity.md"
     ]
   },
   "article_type_extras": {
@@ -498,6 +607,32 @@
         "swiss_citizenship/broad/legal_authority_swiss_naturalisation_refusal_postponement_and_appeal.md",
         "swiss_citizenship/broad/legal_authority_swiss_naturalisation_cantonal_communal_procedure.md"
       ]
+    },
+    "work_permits": {
+      "risk_analysis": [
+        "work_permits/broad/legal_authority_work_permit_refusals_refilings_and_appeals.md",
+        "work_permits/broad/legal_authority_employment_changes_renewals_and_permit_continuity.md"
+      ],
+      "comparison_piece": [
+        "work_permits/broad/legal_authority_eu_efta_hiring_into_switzerland.md",
+        "work_permits/broad/legal_authority_non_eu_work_permits_admission_criteria_and_employer_burden.md"
+      ],
+      "procedural_strategy": [
+        "work_permits/broad/legal_authority_work_permit_cantonal_practice_and_procedure.md",
+        "work_permits/broad/legal_authority_work_permit_quotas_timing_and_filing_strategy.md"
+      ],
+      "myth_correction": [
+        "work_permits/broad/legal_authority_work_permits_legal_framework_and_employer_sponsorship.md",
+        "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_company_formation_vs_work_authorisation.md"
+      ],
+      "evidence_strategy": [
+        "work_permits/broad/legal_authority_non_eu_work_permits_admission_criteria_and_employer_burden.md",
+        "work_permits/broad/legal_authority_salary_local_conditions_and_labour_market_compliance.md"
+      ],
+      "refusal_analysis": [
+        "work_permits/broad/legal_authority_work_permit_refusals_refilings_and_appeals.md",
+        "work_permits/broad/legal_authority_work_permit_cantonal_practice_and_procedure.md"
+      ]
     }
   },
   "legal_complexity_extras": {
@@ -556,6 +691,17 @@
       ],
       "medium": [
         "swiss_citizenship/broad/legal_authority_swiss_naturalisation_integration_requirements.md"
+      ],
+      "low": []
+    },
+    "work_permits": {
+      "high": [
+        "work_permits/core/legal_authority_core_swiss_work_permits_and_employer_sponsorship_framework.md",
+        "work_permits/broad/legal_authority_non_eu_work_permits_admission_criteria_and_employer_burden.md",
+        "work_permits/broad/legal_authority_work_permit_cantonal_practice_and_procedure.md"
+      ],
+      "medium": [
+        "work_permits/broad/legal_authority_work_permits_legal_framework_and_employer_sponsorship.md"
       ],
       "low": []
     }
