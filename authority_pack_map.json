@@ -217,6 +217,52 @@
     "lump_sum_taxation:comparison_with_other_hnwi_residence_routes": [
       "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_comparison_with_other_hnwi_residence_routes.md",
       "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_legal_framework_and_route_architecture.md"
+    ],
+    "retirement_permit:legal_framework_and_route_architecture": [
+      "retirement_permit/broad/legal_authority_retirement_residence_legal_framework_and_route_architecture.md"
+    ],
+    "retirement_permit:eu_efta_retirees": [
+      "retirement_permit/broad/legal_authority_retirement_residence_eu_efta_retirees.md"
+    ],
+    "retirement_permit:non_eu_efta_retirees": [
+      "retirement_permit/broad/legal_authority_retirement_residence_non_eu_efta_retirees.md"
+    ],
+    "retirement_permit:financial_self_sufficiency_and_public_funds_risk": [
+      "retirement_permit/broad/legal_authority_retirement_residence_financial_self_sufficiency_and_public_funds_risk.md"
+    ],
+    "retirement_permit:personal_ties_to_switzerland": [
+      "retirement_permit/broad/legal_authority_retirement_residence_personal_ties_to_switzerland.md",
+      "retirement_permit/broad/legal_authority_retirement_residence_non_eu_efta_retirees.md"
+    ],
+    "retirement_permit:main_home_physical_presence_and_centre_of_life": [
+      "retirement_permit/broad/legal_authority_retirement_residence_main_home_physical_presence_and_centre_of_life.md"
+    ],
+    "retirement_permit:no_gainful_activity_and_retirement_from_economic_life": [
+      "retirement_permit/broad/legal_authority_retirement_residence_no_gainful_activity_and_retirement_from_economic_life.md"
+    ],
+    "retirement_permit:housing_insurance_and_practical_conditions": [
+      "retirement_permit/broad/legal_authority_retirement_residence_housing_insurance_and_practical_conditions.md"
+    ],
+    "retirement_permit:family_members_and_derivative_residence": [
+      "retirement_permit/broad/legal_authority_retirement_residence_family_members_and_derivative_residence.md"
+    ],
+    "retirement_permit:cantonal_discretion_and_local_practice": [
+      "retirement_permit/broad/legal_authority_retirement_residence_cantonal_discretion_and_local_practice.md",
+      "retirement_permit/broad/legal_authority_retirement_residence_non_eu_efta_retirees.md"
+    ],
+    "retirement_permit:procedure_sequencing_and_evidence": [
+      "retirement_permit/broad/legal_authority_retirement_residence_procedure_sequencing_and_evidence.md",
+      "retirement_permit/broad/legal_authority_retirement_residence_cantonal_discretion_and_local_practice.md"
+    ],
+    "retirement_permit:permit_type_duration_renewal_and_long_term_planning": [
+      "retirement_permit/broad/legal_authority_retirement_residence_permit_type_duration_renewal_and_long_term_planning.md"
+    ],
+    "retirement_permit:c_permit_and_naturalisation_planning": [
+      "retirement_permit/broad/legal_authority_retirement_residence_c_permit_and_naturalisation_planning.md",
+      "retirement_permit/broad/legal_authority_retirement_residence_permit_type_duration_renewal_and_long_term_planning.md"
+    ],
+    "retirement_permit:comparison_with_lump_sum_and_other_hnwi_routes": [
+      "retirement_permit/broad/legal_authority_retirement_residence_comparison_with_lump_sum_and_other_hnwi_routes.md"
     ]
   },
   "article_type_extras": {
@@ -287,6 +333,31 @@
         "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_immigration_discretion_and_residence_permit_basis.md",
         "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_canton_selection_availability_and_practice.md"
       ]
+    },
+    "retirement_permit": {
+      "risk_analysis": [
+        "retirement_permit/broad/legal_authority_retirement_residence_financial_self_sufficiency_and_public_funds_risk.md",
+        "retirement_permit/broad/legal_authority_retirement_residence_no_gainful_activity_and_retirement_from_economic_life.md"
+      ],
+      "comparison_piece": [
+        "retirement_permit/broad/legal_authority_retirement_residence_comparison_with_lump_sum_and_other_hnwi_routes.md"
+      ],
+      "procedural_strategy": [
+        "retirement_permit/broad/legal_authority_retirement_residence_procedure_sequencing_and_evidence.md",
+        "retirement_permit/broad/legal_authority_retirement_residence_cantonal_discretion_and_local_practice.md"
+      ],
+      "myth_correction": [
+        "retirement_permit/broad/legal_authority_retirement_residence_legal_framework_and_route_architecture.md",
+        "retirement_permit/broad/legal_authority_retirement_residence_non_eu_efta_retirees.md"
+      ],
+      "evidence_strategy": [
+        "retirement_permit/broad/legal_authority_retirement_residence_personal_ties_to_switzerland.md",
+        "retirement_permit/broad/legal_authority_retirement_residence_financial_self_sufficiency_and_public_funds_risk.md"
+      ],
+      "refusal_analysis": [
+        "retirement_permit/broad/legal_authority_retirement_residence_cantonal_discretion_and_local_practice.md",
+        "retirement_permit/broad/legal_authority_retirement_residence_procedure_sequencing_and_evidence.md"
+      ]
     }
   },
   "legal_complexity_extras": {
@@ -312,6 +383,17 @@
       ],
       "medium": [
         "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_tax_eligibility_and_conditions.md"
+      ],
+      "low": []
+    },
+    "retirement_permit": {
+      "high": [
+        "retirement_permit/core/legal_authority_core_swiss_retirement_residence_framework.md",
+        "retirement_permit/broad/legal_authority_retirement_residence_legal_framework_and_route_architecture.md",
+        "retirement_permit/broad/legal_authority_retirement_residence_cantonal_discretion_and_local_practice.md"
+      ],
+      "medium": [
+        "retirement_permit/broad/legal_authority_retirement_residence_financial_self_sufficiency_and_public_funds_risk.md"
       ],
       "low": []
     }
