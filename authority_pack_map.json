@@ -263,6 +263,60 @@
     ],
     "retirement_permit:comparison_with_lump_sum_and_other_hnwi_routes": [
       "retirement_permit/broad/legal_authority_retirement_residence_comparison_with_lump_sum_and_other_hnwi_routes.md"
+    ],
+    "schengen_visa:legal_framework_and_architecture": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_legal_framework_and_architecture.md"
+    ],
+    "schengen_visa:permitted_purposes_and_short_stay_limits": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_permitted_purposes_and_short_stay_limits.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_legal_framework_and_architecture.md"
+    ],
+    "schengen_visa:90_180_day_rule_and_overstay_risk": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_90_180_day_rule_and_overstay_risk.md"
+    ],
+    "schengen_visa:entry_conditions_and_border_checks": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_entry_conditions_and_border_checks.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_90_180_day_rule_and_overstay_risk.md"
+    ],
+    "schengen_visa:requirement_exemptions_and_competent_state": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_requirement_exemptions_and_competent_state.md"
+    ],
+    "schengen_visa:application_procedure_place_of_filing_and_jurisdiction": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_application_procedure_place_of_filing_and_jurisdiction.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_requirement_exemptions_and_competent_state.md"
+    ],
+    "schengen_visa:documents_and_evidential_credibility": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_documents_and_evidential_credibility.md"
+    ],
+    "schengen_visa:accommodation_invitation_and_host_evidence": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_accommodation_invitation_and_host_evidence.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_documents_and_evidential_credibility.md"
+    ],
+    "schengen_visa:financial_means_sponsorship_and_declaration": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_financial_means_sponsorship_and_declaration.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_accommodation_invitation_and_host_evidence.md"
+    ],
+    "schengen_visa:medical_insurance_and_biometrics": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_medical_insurance_and_biometrics.md"
+    ],
+    "schengen_visa:business_visits_work_boundary_and_professional_activity": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_business_visits_work_boundary_and_professional_activity.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_permitted_purposes_and_short_stay_limits.md"
+    ],
+    "schengen_visa:fees_exemptions_and_facilitation": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_fees_exemptions_and_facilitation.md"
+    ],
+    "schengen_visa:refusals_appeals_and_reapplications": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_refusals_appeals_and_reapplications.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_documents_and_evidential_credibility.md"
+    ],
+    "schengen_visa:ees_vis_and_digital_records": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_ees_vis_and_digital_records.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_90_180_day_rule_and_overstay_risk.md"
+    ],
+    "schengen_visa:comparison_with_type_d_and_residence_permits": [
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_comparison_with_type_d_and_residence_permits.md",
+      "schengen_visa/broad/legal_authority_swiss_schengen_visa_legal_framework_and_architecture.md"
     ]
   },
   "article_type_extras": {
@@ -358,6 +412,31 @@
         "retirement_permit/broad/legal_authority_retirement_residence_cantonal_discretion_and_local_practice.md",
         "retirement_permit/broad/legal_authority_retirement_residence_procedure_sequencing_and_evidence.md"
       ]
+    },
+    "schengen_visa": {
+      "risk_analysis": [
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_entry_conditions_and_border_checks.md",
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_90_180_day_rule_and_overstay_risk.md"
+      ],
+      "comparison_piece": [
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_comparison_with_type_d_and_residence_permits.md"
+      ],
+      "procedural_strategy": [
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_application_procedure_place_of_filing_and_jurisdiction.md",
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_requirement_exemptions_and_competent_state.md"
+      ],
+      "myth_correction": [
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_legal_framework_and_architecture.md",
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_entry_conditions_and_border_checks.md"
+      ],
+      "evidence_strategy": [
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_documents_and_evidential_credibility.md",
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_financial_means_sponsorship_and_declaration.md"
+      ],
+      "refusal_analysis": [
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_refusals_appeals_and_reapplications.md",
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_documents_and_evidential_credibility.md"
+      ]
     }
   },
   "legal_complexity_extras": {
@@ -394,6 +473,17 @@
       ],
       "medium": [
         "retirement_permit/broad/legal_authority_retirement_residence_financial_self_sufficiency_and_public_funds_risk.md"
+      ],
+      "low": []
+    },
+    "schengen_visa": {
+      "high": [
+        "schengen_visa/core/legal_authority_core_swiss_schengen_visa_type_c_framework.md",
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_legal_framework_and_architecture.md",
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_entry_conditions_and_border_checks.md"
+      ],
+      "medium": [
+        "schengen_visa/broad/legal_authority_swiss_schengen_visa_documents_and_evidential_credibility.md"
       ],
       "low": []
     }
