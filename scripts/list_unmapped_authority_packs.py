@@ -34,8 +34,8 @@ def main():
 
     all_pack_paths = []
     for path in LEGAL_AUTHORITIES_DIR.rglob("*.md"):
-    if path.name in {"README.md", "gitkeep.md", ".gitkeep"}:
-        continue
+        if path.name in {"README.md", "gitkeep.md", ".gitkeep"}:
+            continue
 
         relative_path = path.relative_to(LEGAL_AUTHORITIES_DIR).as_posix()
         all_pack_paths.append(relative_path)
