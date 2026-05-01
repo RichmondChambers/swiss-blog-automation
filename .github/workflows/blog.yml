@@ -2,7 +2,7 @@ name: Blog Draft Generator
 
 on:
   schedule:
-    - cron: "0 9 * * 1,5"
+    - cron: "0 7 * * 1,3,5"
   workflow_dispatch:
 
 jobs:
