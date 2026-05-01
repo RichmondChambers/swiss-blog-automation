@@ -2462,7 +2462,7 @@ def main() -> None:
             f"subtopic={topic_entry.get('subtopic')}"
         )
 
-        selected_legal_chunks = load_selected_legal_authority_chunks(selected_pack_paths)
+    selected_legal_chunks = load_selected_legal_authority_chunks(selected_pack_paths)
     internal_note_chunks = load_chunks_from_folder(INTERNAL_NOTES_DIR, "internal_legal_note")
     website_editorial_chunks = load_chunks_from_folder(WEBSITE_EDITORIAL_DIR, "website_editorial")
 
