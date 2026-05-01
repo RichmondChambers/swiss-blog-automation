@@ -1054,14 +1054,24 @@ def derive_topic_metadata(topic_entry: dict[str, Any]) -> dict[str, str]:
     topic = topic_entry.get("topic", "")
     angle = topic_entry.get("angle", "")
     audience = topic_entry.get("audience", "general_global")
+    topic_and_angle = (topic + " " + angle).lower()
 
     default_article_type = "risk_analysis"
 
-    if any(term in (topic + " " + angle).lower() for term in ["why", "differs", "compare", "between"]):
+    if any(
+        term in topic_and_angle
+        for term in ["refusal", "refused", "appeal", "reapplying", "reapply", "postponed"]
+    ):
+        default_article_type = "refusal_analysis"
+    elif any(
+        term in topic_and_angle
+        for term in ["why", "differs", "compare", "compares", "comparison", "between", "versus", " vs "]
+    ):
         default_article_type = "comparison_piece"
-    elif any(term in (topic + " " + angle).lower() for term in ["refusal", "appeal", "reapplying", "reapply"]):
-        default_article_type = "procedural_strategy"
-    elif any(term in (topic + " " + angle).lower() for term in ["what authorities notice", "what needs to be addressed", "go wrong"]):
+    elif any(
+        term in topic_and_angle
+        for term in ["what authorities notice", "what needs to be addressed", "go wrong", "misconception", "myth"]
+    ):
         default_article_type = "myth_correction"
 
     return {
@@ -1335,10 +1345,18 @@ def send_email_via_sendgrid(subject: str, body: str, *, is_html: bool = False) -
     headers = {"Authorization": f"Bearer {SENDGRID_API_KEY}", "Content-Type": "application/json"}
 
     try:
-        status, _ = post_json("https://api.sendgrid.com/v3/mail/send", payload=payload, headers=headers)
-        return status == 202
-    except RuntimeError:
-        return False
+        status, response_body = post_json(
+            "https://api.sendgrid.com/v3/mail/send",
+            payload=payload,
+            headers=headers,
+        )
+    except RuntimeError as exc:
+        raise RuntimeError(f"SendGrid delivery failed: {exc}") from exc
+
+    if status != 202:
+        raise RuntimeError(f"SendGrid delivery failed with status {status}: {response_body}")
+
+    return True
 
 
 # ============================================================
@@ -2091,9 +2109,10 @@ def ensure_reader_usefulness_content(blog_content: str) -> str:
 
     fallback_heading = "**Planning the Filing Strategy**"
     fallback_paragraph = (
-        "Before filing, applicants should identify the route being relied on, reconstruct the permit chronology "
-        "and test whether any period creates a timing or evidence risk. The key issue is not only how long the "
-        "applicant has lived in Switzerland, but which periods count for the particular C-permit route."
+        "Before taking the next procedural step, applicants should identify the exact route being relied on, "
+        "the legal or evidential issue that may affect the case, and whether timing, documents, residence history "
+        "or authority discretion create a practical risk. The right strategy depends on the applicant’s facts, "
+        "the applicable legal basis and the stage the case has reached."
     )
     blocks = insert_before_cta_or_disclaimer(blocks, [fallback_heading, fallback_paragraph])
     if disclaimer_block and not (blocks and is_disclaimer_block(blocks[-1])):
@@ -2447,12 +2466,14 @@ def main() -> None:
     internal_note_chunks = load_chunks_from_folder(INTERNAL_NOTES_DIR, "internal_legal_note")
     website_editorial_chunks = load_chunks_from_folder(WEBSITE_EDITORIAL_DIR, "website_editorial")
 
-    legal_chunks = simple_retrieve(
-        selected_legal_chunks + internal_note_chunks,
+       retrieved_internal_note_chunks = simple_retrieve(
+        internal_note_chunks,
         retrieval_queries,
-        limit=10,
-        allowed_source_kinds={"legal_authority", "internal_legal_note"},
+        limit=4,
+        allowed_source_kinds={"internal_legal_note"},
     )
+
+    legal_chunks = selected_legal_chunks + retrieved_internal_note_chunks
 
     website_context_chunks = simple_retrieve(
         website_editorial_chunks,
