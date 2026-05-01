@@ -317,6 +317,41 @@
     "schengen_visa:comparison_with_type_d_and_residence_permits": [
       "schengen_visa/broad/legal_authority_swiss_schengen_visa_comparison_with_type_d_and_residence_permits.md",
       "schengen_visa/broad/legal_authority_swiss_schengen_visa_legal_framework_and_architecture.md"
+    ],
+    "swiss_citizenship:ordinary_swiss_naturalisation_eligibility": [
+      "swiss_citizenship/broad/legal_authority_ordinary_swiss_naturalisation_eligibility.md",
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_c_permit_requirement.md"
+    ],
+    "swiss_citizenship:facilitated_swiss_naturalisation_by_marriage": [
+      "swiss_citizenship/broad/legal_authority_facilitated_swiss_naturalisation_by_marriage.md"
+    ],
+    "swiss_citizenship:c_permit_requirement": [
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_c_permit_requirement.md",
+      "settlement_and_c_permit/broad/legal_authority_c_permit_naturalisation_planning_pack.md"
+    ],
+    "swiss_citizenship:residence_counting_and_continuity": [
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_residence_counting_and_continuity.md"
+    ],
+    "swiss_citizenship:naturalisation_after_absence_or_interrupted_residence": [
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_after_absence_or_interrupted_residence.md",
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_residence_counting_and_continuity.md"
+    ],
+    "swiss_citizenship:integration_requirements": [
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_integration_requirements.md"
+    ],
+    "swiss_citizenship:language_requirements_and_evidence": [
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_language_requirements_and_evidence.md",
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_integration_requirements.md"
+    ],
+    "swiss_citizenship:cantonal_communal_procedure": [
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_cantonal_communal_procedure.md"
+    ],
+    "swiss_citizenship:refusal_postponement_and_appeal": [
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_refusal_postponement_and_appeal.md",
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_cantonal_communal_procedure.md"
+    ],
+    "swiss_citizenship:drafting_cautions_and_proposition_bank": [
+      "swiss_citizenship/broad/legal_authority_swiss_naturalisation_drafting_cautions_and_proposition_bank.md"
     ]
   },
   "article_type_extras": {
@@ -437,6 +472,32 @@
         "schengen_visa/broad/legal_authority_swiss_schengen_visa_refusals_appeals_and_reapplications.md",
         "schengen_visa/broad/legal_authority_swiss_schengen_visa_documents_and_evidential_credibility.md"
       ]
+    },
+    "swiss_citizenship": {
+      "risk_analysis": [
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_refusal_postponement_and_appeal.md",
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_integration_requirements.md"
+      ],
+      "comparison_piece": [
+        "swiss_citizenship/broad/legal_authority_ordinary_swiss_naturalisation_eligibility.md",
+        "swiss_citizenship/broad/legal_authority_facilitated_swiss_naturalisation_by_marriage.md"
+      ],
+      "procedural_strategy": [
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_cantonal_communal_procedure.md",
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_residence_counting_and_continuity.md"
+      ],
+      "myth_correction": [
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_drafting_cautions_and_proposition_bank.md",
+        "swiss_citizenship/broad/legal_authority_ordinary_swiss_naturalisation_eligibility.md"
+      ],
+      "evidence_strategy": [
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_language_requirements_and_evidence.md",
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_integration_requirements.md"
+      ],
+      "refusal_analysis": [
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_refusal_postponement_and_appeal.md",
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_cantonal_communal_procedure.md"
+      ]
     }
   },
   "legal_complexity_extras": {
@@ -484,6 +545,17 @@
       ],
       "medium": [
         "schengen_visa/broad/legal_authority_swiss_schengen_visa_documents_and_evidential_credibility.md"
+      ],
+      "low": []
+    },
+    "swiss_citizenship": {
+      "high": [
+        "swiss_citizenship/core/legal_authority_core_swiss_citizenship_by_naturalisation_framework.md",
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_cantonal_communal_procedure.md",
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_refusal_postponement_and_appeal.md"
+      ],
+      "medium": [
+        "swiss_citizenship/broad/legal_authority_swiss_naturalisation_integration_requirements.md"
       ],
       "low": []
     }
