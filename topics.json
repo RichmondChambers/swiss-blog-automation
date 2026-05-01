@@ -1,69 +1,163 @@
 [
   {
-    "topic": "Swiss Family Reunification for Unmarried Partners: What Evidence Shows a Durable Relationship?",
-    "angle": "Explains how unmarried partner cases differ from spouse cases and what practical evidence helps show a durable, marriage-like relationship.",
+    "topic": "Swiss Lump Sum Taxation: Why a Tax Agreement Does Not Automatically Give You Residence",
+    "angle": "Explains the distinction between tax eligibility, cantonal tax agreement, immigration discretion and residence permit approval.",
     "audience": "global_individuals",
-    "article_type": "evidence_strategy",
+    "article_type": "myth_correction",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "immigration_discretion_and_residence_permit_basis",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_taxation_route_architecture",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not describe lump sum taxation as a residence-by-investment programme.",
+      "Separate tax ruling or tax agreement from immigration authorisation.",
+      "Explain cantonal discretion and federal approval where relevant."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Fiancé Visa or Family Reunification After Marriage? Choosing the Right Route to Marry in Switzerland",
+    "angle": "Clarifies when the intended-marriage route is the right starting point and how it differs from applying after an existing marriage.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
     "pillar": "family_reunification",
-    "subtopic": "unmarried_partner",
+    "subtopic": "fiance_and_intended_marriage",
     "route_type": "route_specific",
     "legal_complexity": "high",
     "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "comparison_led",
+    "search_intent": "comparative_research",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not present the fiancé route as a standalone long-term status.",
+      "Keep civil-status procedure separate from immigration permission.",
+      "Avoid oversimplifying tourist-visa marriage scenarios."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Hiring a Non-EU Employee in Switzerland: What the Employer Must Prove",
+    "angle": "Explains employer sponsorship, labour-market testing, seniority or specialist criteria, salary, qualifications and quota constraints.",
+    "audience": "employers_and_hr",
+    "article_type": "evidence_strategy",
+    "pillar": "work_permits",
+    "subtopic": "non_eu_work_permits_admission_criteria_and_employer_burden",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "work_permits_non_eu_hiring",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not describe employer sponsorship as automatic approval.",
+      "Explain labour-market testing and employer evidential burden.",
+      "Flag quota and canton/federal procedure."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence for Non-EU Nationals: Why Personal Ties to Switzerland Matter",
+    "angle": "Explains why non-EU retiree cases often turn on personal ties, financial independence, no gainful activity and cantonal discretion.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "retirement_permit",
+    "subtopic": "non_eu_efta_retirees",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_permit_non_eu",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "discretionary_route",
+    "notes_for_drafting": [
+      "Do not imply wealth alone is sufficient.",
+      "Explain personal ties separately from financial self-sufficiency.",
+      "Avoid applying EU/EFTA residence logic to non-EU applicants."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa Refused: What the Refusal Form May Not Tell You",
+    "angle": "Explains how to read a Swiss Schengen visa refusal and identify evidential or credibility weaknesses behind the stated reason.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "schengen_visa",
+    "subtopic": "refusals_appeals_and_reapplications",
+    "route_type": "post_refusal",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_visa_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not assume the tick-box reason is the whole analysis.",
+      "Explain appeal and reapplication as separate options.",
+      "Focus on credibility, purpose of stay and intention to leave."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Ordinary Swiss Naturalisation: Why Meeting the Residence Period Is Not Enough",
+    "angle": "Explains ordinary naturalisation as a multi-factor process involving C permit status, residence, integration, language and local procedure.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "myth_correction",
+    "pillar": "swiss_citizenship",
+    "subtopic": "ordinary_swiss_naturalisation_eligibility",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "swiss_citizenship_ordinary",
     "style_profile": "risk_focused",
     "search_intent": "informational_problem_solving",
     "scope_warning": "none",
     "notes_for_drafting": [
-      "Do not imply unmarried partner cases are equivalent to spouse routes.",
-      "Explain that cohabitation helps but is not the only evidential factor.",
-      "Avoid sounding as if one document type guarantees approval."
+      "Do not imply naturalisation is automatic after a set number of years.",
+      "Explain C permit, integration and local procedure.",
+      "Avoid flattening cantonal and communal differences."
     ],
-    "status": "used",
-    "used_title": "Can an Unmarried Partner Join You in Switzerland?",
-    "used_at_utc": "2026-04-28T14:03:55Z"
+    "status": "unused"
   },
   {
-    "topic": "Swiss Child Reunification After Long Separation: How to Handle Custody, Consent, and Timing Problems",
-    "angle": "Covers late or difficult child reunification cases where separation, custody arrangements, or consent issues create higher scrutiny.",
+    "topic": "Fast-Track Swiss C Permit: What Counts as Successful Integration?",
+    "angle": "Explains accelerated C permit eligibility, integration evidence, language, compliance and canton-sensitive practice.",
     "audience": "inside_switzerland_individuals",
-    "article_type": "procedural_strategy",
-    "pillar": "family_reunification",
-    "subtopic": "child_reunification",
-    "route_type": "route_specific",
+    "article_type": "evidence_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "fast_track_integration_and_evidence",
+    "route_type": "broad",
     "legal_complexity": "high",
-    "overlap_group": "family_reunification_child_timing",
-    "style_profile": "procedural",
-    "search_intent": "urgent_problem_solving",
+    "overlap_group": "c_permit_fast_track",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
     "scope_warning": "none",
     "notes_for_drafting": [
-      "Do not reduce the case to age limits alone.",
-      "Separate custody evidence from relocation-consent evidence.",
-      "Acknowledge that sponsor category can change the timing analysis."
+      "Do not imply fast-track C permits are available to all applicants.",
+      "Explain integration and language evidence.",
+      "Avoid flattening cantonal practice."
     ],
-    "status": "used",
-    "used_title": "Can You Bring a Child to Switzerland After Years Apart?",
-    "used_at_utc": "2026-04-28T14:20:14Z"
+    "status": "unused"
   },
   {
-    "topic": "Swiss Family Reunification Refused for Housing or Finances: What the Decision May Really Mean",
-    "angle": "Analyses refusals that appear formal on the surface but may reflect deeper concerns about affordability, household formation, or sponsor stability.",
-    "audience": "refused_applicants",
-    "article_type": "refusal_analysis",
-    "pillar": "family_reunification",
-    "subtopic": "refusals_and_reapplications",
-    "route_type": "post_refusal",
+    "topic": "How Much Does Swiss Lump Sum Taxation Cost? Understanding Expenditure Minimums and Control Calculations",
+    "angle": "Explains expenditure-based taxation, minimum tax bases, control calculations and why headline figures can be misleading.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "expenditure_minimums_and_control_calculation",
+    "route_type": "broad",
     "legal_complexity": "high",
-    "overlap_group": "family_reunification_refusal_strategy",
-    "style_profile": "case_led",
-    "search_intent": "post_refusal_problem_solving",
-    "scope_warning": "social_assistance_adjacent",
+    "overlap_group": "lump_sum_taxation_tax_base",
+    "style_profile": "explainer",
+    "search_intent": "comparative_research",
+    "scope_warning": "tax_calculation_sensitive",
     "notes_for_drafting": [
-      "Do not assume the stated refusal reason is the only real issue.",
-      "Avoid suggesting that reapplication is always better than appeal.",
-      "Show how housing and finances are assessed differently across routes."
+      "Avoid giving fixed tax estimates without canton-specific qualification.",
+      "Explain that expenditure, housing and control calculations interact.",
+      "Do not imply that minimums are identical across all cantons."
     ],
-    "status": "used",
-    "used_title": "Housing or Finance Refusal in Swiss Family Reunification",
-    "used_at_utc": "2026-04-28T15:22:54Z"
+    "status": "unused"
   },
   {
     "topic": "Bringing an Elderly Parent to Switzerland: Why Adult Dependent Relative Cases Are So Hard",
@@ -83,17 +177,275 @@
       "Distinguish dependency evidence from ordinary family affection.",
       "Explain the difference between EU/EFTA ascendant logic and hardship-style cases."
     ],
-    "status": "used",
-    "used_title": "Can You Bring an Elderly Parent to Live in Switzerland?",
-    "used_at_utc": "2026-04-28T15:52:38Z"
+    "status": "unused"
   },
   {
-    "topic": "Swiss Fiancé Visa or Family Reunification After Marriage? Choosing the Right Route to Marry in Switzerland",
-    "angle": "Clarifies when the intended-marriage route is the right starting point and how it differs from applying after an existing marriage.",
+    "topic": "Swiss Work Permit Refused: Should the Employer Appeal, Refile or Restructure the Application?",
+    "angle": "Analyses refusal reasons, evidential weaknesses, refiling strategy and appeal considerations in Swiss work permit cases.",
+    "audience": "employers_and_hr",
+    "article_type": "refusal_analysis",
+    "pillar": "work_permits",
+    "subtopic": "refusals_refilings_and_appeals",
+    "route_type": "post_refusal",
+    "legal_complexity": "high",
+    "overlap_group": "work_permits_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply refiling is always better than appeal.",
+      "Identify whether the weakness is role, salary, recruitment, quota or evidence.",
+      "Explain procedural timing risks."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "EU/EFTA Retirees Moving to Switzerland: Financial Self-Sufficiency, Insurance and Residence Risks",
+    "angle": "Explains the Swiss residence position for EU/EFTA retirees who are not pursuing gainful activity.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "retirement_permit",
+    "subtopic": "eu_efta_retirees",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "retirement_permit_eu_efta",
+    "style_profile": "explainer",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not treat EU/EFTA residence as unconditional.",
+      "Cover financial self-sufficiency and comprehensive health insurance.",
+      "Distinguish EU/EFTA retirees from non-EU retirees."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa 90/180-Day Rule: How Overstays Happen Even When Travellers Count Days",
+    "angle": "Explains the rolling 90/180-day calculation, repeat travel risk and why multiple-entry visas do not remove the short-stay limit.",
+    "audience": "global_individuals",
+    "article_type": "myth_correction",
+    "pillar": "schengen_visa",
+    "subtopic": "90_180_day_rule_and_overstay_risk",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_visa_overstay",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "overstay_risk",
+    "notes_for_drafting": [
+      "Do not describe the rule as a simple calendar-year limit.",
+      "Explain rolling calculation clearly.",
+      "Warn that multiple-entry visas do not authorise unlimited stays."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Facilitated Swiss Naturalisation by Marriage: What Still Has to Be Proved?",
+    "angle": "Explains facilitated naturalisation by marriage, including marital union, integration, close ties and evidential risks.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "facilitated_swiss_naturalisation_by_marriage",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "swiss_citizenship_facilitated",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply marriage alone is sufficient.",
+      "Explain continuing marital union and integration.",
+      "Distinguish facilitated from ordinary naturalisation."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "C Permit After Long Absence from Switzerland: Can Settlement Status Be Preserved?",
+    "angle": "Explains absence, lapse, preservation requests and return-planning issues for Swiss C permit holders.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "absence_lapse_and_preservation",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_absence_preservation",
+    "style_profile": "procedural",
+    "search_intent": "urgent_problem_solving",
+    "scope_warning": "loss_of_status_risk",
+    "notes_for_drafting": [
+      "Do not describe C permit status as impossible to lose.",
+      "Explain lapse and preservation separately.",
+      "Flag timing and factual residence issues."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Can You Run a Business While Living in Switzerland Under Lump Sum Taxation?",
+    "angle": "Analyses no-gainful-activity restrictions, foreign business interests, board roles and remote management risks.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "no_gainful_activity_foreign_business_and_board_roles",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_taxation_business_activity",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "work_activity_boundary",
+    "notes_for_drafting": [
+      "Distinguish passive ownership from operational activity.",
+      "Avoid saying foreign business activity is always safe.",
+      "Explain why Swiss activity can affect both tax and immigration positioning."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification for Unmarried Partners: What Evidence Shows a Durable Relationship?",
+    "angle": "Explains how unmarried partner cases differ from spouse cases and what practical evidence helps show a durable, marriage-like relationship.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "unmarried_partner",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply unmarried partner cases are equivalent to spouse routes.",
+      "Explain that cohabitation helps but is not the only evidential factor.",
+      "Avoid sounding as if one document type guarantees approval."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Intra-Company Transfer Work Permits: When Does a Group Assignment Work?",
+    "angle": "Explains ICT structures, group-company relationship, assignment purpose, salary conditions and permit duration.",
+    "audience": "employers_and_hr",
+    "article_type": "procedural_strategy",
+    "pillar": "work_permits",
+    "subtopic": "intra_company_transfer",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "work_permits_assignments",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not treat ICTs as ordinary local hires.",
+      "Explain group relationship and assignment structure.",
+      "Cover salary and local conditions."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence Refused: Was the Problem Finances, Personal Ties or Cantonal Discretion?",
+    "angle": "Analyses common refusal themes in retirement residence applications and how to identify the real weakness.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "retirement_permit",
+    "subtopic": "cantonal_discretion_and_local_practice",
+    "route_type": "post_refusal",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_permit_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "discretionary_route",
+    "notes_for_drafting": [
+      "Do not imply refusal always turns on one factor.",
+      "Separate finances, personal ties, residence substance and procedure.",
+      "Avoid suggesting reapplication is always preferable to appeal."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Invitation Letters for Swiss Schengen Visas: What Host Evidence Actually Proves",
+    "angle": "Explains the evidential role of Swiss host invitations, accommodation evidence and sponsorship documents.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "schengen_visa",
+    "subtopic": "accommodation_invitation_and_host_evidence",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_visa_host_evidence",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply an invitation guarantees a visa.",
+      "Distinguish accommodation evidence from financial sponsorship.",
+      "Explain host credibility and applicant intention to leave."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation After Absence or Interrupted Residence: How Timing Problems Arise",
+    "angle": "Explains residence continuity, absences, interrupted residence and timing risks in Swiss naturalisation applications.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "naturalisation_after_absence_or_interrupted_residence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "swiss_citizenship_residence_counting",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "residence_continuity_sensitive",
+    "notes_for_drafting": [
+      "Do not treat all residence periods as counting equally.",
+      "Explain interruption and continuity issues.",
+      "Avoid giving a universal answer without route and canton qualification."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Can a Swiss C Permit Be Downgraded or Revoked?",
+    "angle": "Explains why C permit status is stable but not unconditional, including downgrade, revocation, integration and compliance risks.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "downgrade_revocation_and_recovery",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_status_risk",
+    "style_profile": "risk_focused",
+    "search_intent": "urgent_problem_solving",
+    "scope_warning": "loss_of_status_risk",
+    "notes_for_drafting": [
+      "Do not describe a C permit as permanent in an absolute sense.",
+      "Separate downgrade, revocation and lapse.",
+      "Explain integration, public order and financial compliance risks."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Choosing a Canton for Swiss Lump Sum Taxation: What Matters Beyond the Tax Figure?",
+    "angle": "Explains canton availability, tax practice, immigration coordination, evidential expectations and practical residence planning.",
     "audience": "global_individuals",
     "article_type": "comparison_piece",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "canton_selection_availability_and_practice",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_taxation_canton_selection",
+    "style_profile": "comparison_led",
+    "search_intent": "comparative_research",
+    "scope_warning": "canton_practice_sensitive",
+    "notes_for_drafting": [
+      "Do not imply all cantons offer lump sum taxation.",
+      "Keep tax attractiveness separate from immigration viability.",
+      "Explain that cantonal practice can change."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Spouse Reunification: What Changes When the Sponsor Is Swiss, EU/EFTA or Non-EU?",
+    "angle": "Compares spouse reunification by sponsor status, focusing on entitlement, conditions, evidence and procedural risks.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "comparison_piece",
     "pillar": "family_reunification",
-    "subtopic": "fiance_intended_marriage",
+    "subtopic": "spouse_and_registered_partner",
     "route_type": "route_specific",
     "legal_complexity": "high",
     "overlap_group": "family_reunification_partner_routes",
@@ -101,12 +453,530 @@
     "search_intent": "comparative_research",
     "scope_warning": "none",
     "notes_for_drafting": [
-      "Do not present the fiancé route as a standalone long-term status.",
-      "Keep civil-status procedure separate from immigration permission.",
-      "Avoid oversimplifying tourist-visa marriage scenarios."
+      "Do not treat all spouse cases as legally identical.",
+      "Separate Swiss, EU/EFTA and non-EU sponsor frameworks.",
+      "Explain entitlement, discretion, housing, finances and evidence without flattening the route."
     ],
-    "status": "used",
-    "used_title": "Marry in Switzerland or Apply After Marriage? Choosing the Right Route",
-    "used_at_utc": "2026-04-28T22:31:37Z"
+    "status": "unused"
+  },
+  {
+    "topic": "Can a Founder Move to Switzerland to Run a Swiss Company?",
+    "angle": "Explains the difference between company formation and work authorisation for founders and entrepreneurs.",
+    "audience": "business_founders",
+    "article_type": "myth_correction",
+    "pillar": "work_permits",
+    "subtopic": "entrepreneur_company_formation_vs_work_authorisation",
+    "route_type": "issue_specific",
+    "legal_complexity": "high",
+    "overlap_group": "work_permits_founders",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "company_formation_boundary",
+    "notes_for_drafting": [
+      "Do not imply incorporation creates a right to work.",
+      "Distinguish ownership, directorship and operational management.",
+      "Explain economic interest and cantonal discretion."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence and Continued Business Activity: When Is Someone Really Retired?",
+    "angle": "Explains the boundary between retirement residence, passive investment, continued business activity and prohibited gainful activity.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "retirement_permit",
+    "subtopic": "no_gainful_activity_and_retirement_from_economic_life",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_permit_no_activity",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "work_activity_boundary",
+    "notes_for_drafting": [
+      "Do not imply all foreign business ownership is safe.",
+      "Distinguish passive investment from operational activity.",
+      "Explain how continued work can undermine the retirement residence narrative."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Business Visitor Visa or Work Permit? Where the Schengen Visa Boundary Sits",
+    "angle": "Explains the difference between permitted business visits and activity that may require Swiss work authorisation.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "schengen_visa",
+    "subtopic": "business_visits_work_boundary_and_professional_activity",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "schengen_visa_work_boundary",
+    "style_profile": "comparison_led",
+    "search_intent": "comparative_research",
+    "scope_warning": "work_authorisation_boundary",
+    "notes_for_drafting": [
+      "Do not imply all business travel is permitted under a Type C visa.",
+      "Compare meetings and negotiations with productive work.",
+      "Cross-reference work permit risk without turning the article into a work permit guide."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation Language Evidence: What Applicants Should Prepare Before Filing",
+    "angle": "Explains language requirements, recognised evidence and common problems with incomplete or weak language proof.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "language_requirements_and_evidence",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "swiss_citizenship_language",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply language is the only integration issue.",
+      "Explain oral and written evidence separately where useful.",
+      "Avoid giving canton-specific advice as national law."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "L Permit, B Permit or C Permit in Switzerland: What Changes for Long-Term Planning?",
+    "angle": "Compares Swiss L, B and C permits for stability, renewal, family planning, labour-market access and naturalisation strategy.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "l_b_c_permit_comparison",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "permit_status_comparison",
+    "style_profile": "comparison_led",
+    "search_intent": "comparative_research",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not oversimplify permit categories as a linear ladder in every case.",
+      "Explain renewal and stability differences.",
+      "Flag that nationality and route can affect progression."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Lump Sum Taxation and Physical Presence: How Much Residence Substance Is Enough?",
+    "angle": "Explains physical presence, tax domicile, centre of life and the risks of a thin Swiss residence pattern.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "physical_presence_tax_domicile_and_centre_of_life",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_taxation_residence_substance",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_residence_sensitive",
+    "notes_for_drafting": [
+      "Avoid giving a universal minimum day count.",
+      "Explain centre of life and residence substance carefully.",
+      "Flag interaction with other countries' tax residence claims."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Unmarried Partner Refused Swiss Family Reunification: Was the Problem Evidence, Discretion or Route Choice?",
+    "angle": "Analyses refusals in unmarried partner cases and explains how to identify whether the weakness was relationship evidence, hardship reasoning or route selection.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "unmarried_partner",
+    "route_type": "post_refusal",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply refusal means the relationship is not genuine.",
+      "Separate durability evidence from legal route weakness.",
+      "Avoid suggesting appeal or reapplication without analysing the decision."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Founder Work Authorisation: What Makes a Business Plan Persuasive?",
+    "angle": "Explains business plan evidence, economic interest, funding, job creation and business substance in founder work authorisation cases.",
+    "audience": "business_founders",
+    "article_type": "evidence_strategy",
+    "pillar": "work_permits",
+    "subtopic": "entrepreneur_business_plan_and_evidence",
+    "route_type": "issue_specific",
+    "legal_complexity": "high",
+    "overlap_group": "work_permits_founders",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not treat investment alone as sufficient.",
+      "Explain commercial viability and Swiss economic interest.",
+      "Cover funding, customers, premises and job creation carefully."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Housing and Health Insurance for Swiss Retirement Residence: Practical Conditions That Can Decide the Case",
+    "angle": "Explains why accommodation, household formation and health insurance matter in retirement residence applications.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "retirement_permit",
+    "subtopic": "housing_insurance_and_practical_conditions",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "retirement_permit_practical_conditions",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not reduce the route to financial resources alone.",
+      "Explain accommodation and insurance evidence.",
+      "Flag differences between EU/EFTA and non-EU/EFTA applicants where relevant."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa Financial Means: Applicant Funds, Sponsorship and the Declaration of Sponsorship",
+    "angle": "Explains financial means in Swiss Schengen visa applications, including applicant funds, host sponsorship and declaration procedure.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "schengen_visa",
+    "subtopic": "financial_means_sponsorship_and_declaration",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_visa_financial_evidence",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply sponsorship automatically cures weak applicant evidence.",
+      "Distinguish applicant funds from host support.",
+      "Explain credibility and intention-to-leave issues."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation Interviews and Local Procedure: Why the Commune Can Matter",
+    "angle": "Explains cantonal and communal procedure, interviews, local knowledge and practice-sensitive naturalisation risks.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "cantonal_communal_procedure",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "swiss_citizenship_local_procedure",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "canton_commune_practice_sensitive",
+    "notes_for_drafting": [
+      "Do not imply all communes follow the same process.",
+      "Explain interviews, local knowledge and procedural variation.",
+      "Separate federal requirements from cantonal and communal practice."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "C Permit and Naturalisation Planning: Why Settlement Status Is Not the End of the Journey",
+    "angle": "Explains how C permit status interacts with naturalisation planning, integration, residence continuity and compliance.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "c_permit_and_naturalisation",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "c_permit_naturalisation",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply a C permit automatically leads to citizenship.",
+      "Explain continuing integration and residence requirements.",
+      "Flag naturalisation as a separate legal process."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Lump Sum Taxation Renewal Risk: What Can Change After the First Residence Permit Is Granted?",
+    "angle": "Explains compliance, renewal, business activity, physical presence and loss-of-status risks after initial approval.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "compliance_renewal_and_loss_of_status",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_taxation_renewal",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "loss_of_status_risk",
+    "notes_for_drafting": [
+      "Do not imply initial approval guarantees renewal.",
+      "Explain continuing tax and immigration compliance.",
+      "Cover changes in business activity, family circumstances and residence pattern."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Fiancé Route: What Has to Happen Before the Wedding and After the Marriage?",
+    "angle": "Explains the two-step structure of entry to marry, civil-status preparation, temporary stay and later spouse reunification.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "fiance_and_intended_marriage",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "civil_status_procedure",
+    "notes_for_drafting": [
+      "Do not treat the fiancé route as permanent residence.",
+      "Explain civil registry and migration authority roles separately.",
+      "Clarify that the post-marriage stage requires transition into spouse status."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Work Permit Salary and Local Conditions: Why the Contract Matters",
+    "angle": "Explains salary, local employment conditions, allowances, working terms and labour-market compliance evidence.",
+    "audience": "employers_and_hr",
+    "article_type": "evidence_strategy",
+    "pillar": "work_permits",
+    "subtopic": "salary_local_conditions_and_labour_market_compliance",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "work_permits_salary_conditions",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not focus only on gross salary.",
+      "Explain local employment conditions and contract evidence.",
+      "Flag secondment and allowance issues where relevant."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence Main Home Requirement: What Shows a Real Move to Switzerland?",
+    "angle": "Explains main home, physical presence, centre of life and residence substance for Swiss retirement residence applicants.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "retirement_permit",
+    "subtopic": "main_home_physical_presence_and_centre_of_life",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "retirement_permit_residence_substance",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "residence_substance",
+    "notes_for_drafting": [
+      "Do not give a universal day-count rule.",
+      "Explain home, presence and centre of life as separate but connected issues.",
+      "Flag evidential expectations and renewal risk."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa or Type D Visa: Choosing the Right Entry Route",
+    "angle": "Compares Schengen Type C visas with Swiss Type D visas and residence permit procedures for applicants planning different lengths or purposes of stay.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "schengen_visa",
+    "subtopic": "comparison_with_type_d_and_residence_permits",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_visa_type_d_comparison",
+    "style_profile": "comparison_led",
+    "search_intent": "comparative_research",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply a Type C visa can be used for long-term residence.",
+      "Explain short stay versus long stay clearly.",
+      "Flag work and residence authorisation boundaries."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation Refused or Postponed: What Can You Do Next?",
+    "angle": "Analyses refusals, postponements, appeal options and reapplication strategy in Swiss citizenship cases.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "swiss_citizenship",
+    "subtopic": "refusal_postponement_and_appeal",
+    "route_type": "post_refusal",
+    "legal_complexity": "high",
+    "overlap_group": "swiss_citizenship_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Distinguish refusal from postponement.",
+      "Do not imply appeal is always the best route.",
+      "Explain how new evidence or changed circumstances may affect strategy."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Ordinary Swiss C Permit Eligibility: What Applicants Should Check Before Applying",
+    "angle": "Explains ordinary C permit eligibility, residence duration, continuity, integration, finances and compliance.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "ordinary_c_permit_eligibility",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "c_permit_ordinary",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply residence duration alone is enough.",
+      "Explain integration, language and compliance evidence.",
+      "Flag nationality and canton-sensitive issues where relevant."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Family Members in Swiss Lump Sum Taxation Cases: Residence, Work and Long-Term Planning",
+    "angle": "Explains how spouses, children and dependants fit into lump sum taxation residence cases and where independent risks can arise.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "family_members_and_derivative_residence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_taxation_family",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "family_status_sensitive",
+    "notes_for_drafting": [
+      "Do not assume all family members have identical rights.",
+      "Flag work restrictions and independent activity risks.",
+      "Explain long-term planning for children, spouses and settlement."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Adult Dependent Relative Reunification: What Evidence Shows Real Dependency on a Family Member in Switzerland?",
+    "angle": "Explains the evidence needed to show dependency, care needs, lack of realistic care abroad and long-term financial responsibility.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "adult_dependent_relative",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_dependency_routes",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "dependency_evidence",
+    "notes_for_drafting": [
+      "Do not equate dependency with emotional closeness or preference.",
+      "Explain care, financial, medical and practical dependency evidence.",
+      "Distinguish EU/EFTA ascendant cases from hardship-style cases."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Remote Work from Switzerland for a Foreign Employer: When Does Immigration Risk Arise?",
+    "angle": "Explains remote work and foreign-employer fact patterns, including place of work, work authorisation and residence risks.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "work_permits",
+    "subtopic": "remote_work_and_foreign_employer_fact_patterns",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "work_permits_remote_work",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "work_authorisation_boundary",
+    "notes_for_drafting": [
+      "Do not imply foreign payroll avoids Swiss immigration issues.",
+      "Explain place-of-work analysis.",
+      "Flag tax and social security only as adjacent issues unless covered carefully."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence and Family Members: Who Can Come With the Main Applicant?",
+    "angle": "Explains how spouses, partners, children and dependant family members fit into Swiss retirement residence planning.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "retirement_permit",
+    "subtopic": "family_members_and_derivative_residence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_permit_family",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "family_status_sensitive",
+    "notes_for_drafting": [
+      "Do not assume all dependants are treated the same.",
+      "Distinguish EU/EFTA and non-EU family accompaniment issues.",
+      "Explain finance, housing and insurance implications for the whole household."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa Documents: Why a Complete Checklist Can Still Fail",
+    "angle": "Explains why Swiss Schengen visa applications can fail despite apparent document completeness if the evidence is inconsistent or lacks credibility.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "schengen_visa",
+    "subtopic": "documents_and_evidential_credibility",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_visa_document_credibility",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not present document checklists as sufficient by themselves.",
+      "Explain consistency across itinerary, funds, accommodation and purpose.",
+      "Mention credibility and intention-to-leave analysis."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Citizenship and the C Permit Requirement: Necessary but Not Sufficient",
+    "angle": "Explains the role of the C permit in ordinary naturalisation and why settlement status does not automatically mean citizenship readiness.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "myth_correction",
+    "pillar": "swiss_citizenship",
+    "subtopic": "c_permit_requirement",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "swiss_citizenship_c_permit",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not imply the C permit alone is enough.",
+      "Explain ordinary naturalisation requirements beyond settlement status.",
+      "Cross-reference C permit planning without merging the routes."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Refused: Why the Canton May Extend the B Permit Instead",
+    "angle": "Analyses cases where a C permit application fails and the applicant remains on temporary residence instead.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "refusal_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "rights_stability_and_limits",
+    "route_type": "post_refusal",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_refusal_strategy",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not treat every failed C permit application as a removal risk.",
+      "Explain the difference between refusal of settlement and continuation of temporary residence.",
+      "Identify likely issues such as integration, language, finances, residence counting or conduct."
+    ],
+    "status": "unused"
   }
 ]
