@@ -1,27 +1,27 @@
 {
   "pillar_defaults": {
-  "settlement_and_c_permit": [
-    "settlement_and_c_permit/core/legal_authority_core_swiss_c_permit_framework_pack.md"
-  ],
-  "family_reunification": [
-    "family_reunification/core/legal_authority_core_swiss_family_reunification_framework_pack.md"
-  ],
-  "lump_sum_taxation": [
-    "lump_sum_taxation/core/legal_authority_core_swiss_lump_sum_taxation_residence_framework.md"
-  ],
-  "retirement_permit": [
-    "retirement_permit/core/legal_authority_core_swiss_retirement_residence_framework.md"
-  ],
-  "schengen_visa": [
-    "schengen_visa/core/legal_authority_core_swiss_schengen_visa_type_c_framework.md"
-  ],
-  "swiss_citizenship": [
-    "swiss_citizenship/core/legal_authority_core_swiss_citizenship_by_naturalisation_framework.md"
-  ],
-  "work_permits": [
-    "work_permits/core/legal_authority_core_swiss_work_permits_and_employer_sponsorship_framework.md"
-  ]
-},
+    "settlement_and_c_permit": [
+      "settlement_and_c_permit/core/legal_authority_core_swiss_c_permit_framework_pack.md"
+    ],
+    "family_reunification": [
+      "family_reunification/core/legal_authority_core_swiss_family_reunification_framework_pack.md"
+    ],
+    "lump_sum_taxation": [
+      "lump_sum_taxation/core/legal_authority_core_swiss_lump_sum_taxation_residence_framework.md"
+    ],
+    "retirement_permit": [
+      "retirement_permit/core/legal_authority_core_swiss_retirement_residence_framework.md"
+    ],
+    "schengen_visa": [
+      "schengen_visa/core/legal_authority_core_swiss_schengen_visa_type_c_framework.md"
+    ],
+    "swiss_citizenship": [
+      "swiss_citizenship/core/legal_authority_core_swiss_citizenship_by_naturalisation_framework.md"
+    ],
+    "work_permits": [
+      "work_permits/core/legal_authority_core_swiss_work_permits_and_employer_sponsorship_framework.md"
+    ]
+  },
   "subtopic_overrides": {
     "settlement_and_c_permit:ordinary_c_permit_eligibility": [
       "settlement_and_c_permit/broad/legal_authority_ordinary_c_permit_eligibility_pack.md"
@@ -171,6 +171,52 @@
     "family_reunification:inadequate_housing": [
       "family_reunification/broad/legal_authority_family_reunification_housing_and_household_formation_pack.md",
       "family_reunification/broad/legal_authority_family_reunification_refusals_appeals_and_reapplication_pack.md"
+    ],
+    "lump_sum_taxation:legal_framework_and_route_architecture": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_legal_framework_and_route_architecture.md"
+    ],
+    "lump_sum_taxation:tax_eligibility_and_conditions": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_tax_eligibility_and_conditions.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_legal_framework_and_route_architecture.md"
+    ],
+    "lump_sum_taxation:expenditure_minimums_and_control_calculation": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_expenditure_minimums_and_control_calculation.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_tax_eligibility_and_conditions.md"
+    ],
+    "lump_sum_taxation:immigration_discretion_and_residence_permit_basis": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_immigration_discretion_and_residence_permit_basis.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_legal_framework_and_route_architecture.md"
+    ],
+    "lump_sum_taxation:no_gainful_activity_foreign_business_and_board_roles": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_no_gainful_activity_foreign_business_and_board_roles.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_tax_eligibility_and_conditions.md"
+    ],
+    "lump_sum_taxation:physical_presence_tax_domicile_and_centre_of_life": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_physical_presence_tax_domicile_and_centre_of_life.md"
+    ],
+    "lump_sum_taxation:family_members_and_derivative_residence": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_family_members_and_derivative_residence.md"
+    ],
+    "lump_sum_taxation:canton_selection_availability_and_practice": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_canton_selection_availability_and_practice.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_immigration_discretion_and_residence_permit_basis.md"
+    ],
+    "lump_sum_taxation:procedure_sequencing_and_evidence": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_procedure_sequencing_and_evidence.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_immigration_discretion_and_residence_permit_basis.md"
+    ],
+    "lump_sum_taxation:compliance_renewal_and_loss_of_status": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_compliance_renewal_and_loss_of_status.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_no_gainful_activity_foreign_business_and_board_roles.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_physical_presence_tax_domicile_and_centre_of_life.md"
+    ],
+    "lump_sum_taxation:c_permit_naturalisation_and_long_term_planning": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_c_permit_naturalisation_and_long_term_planning.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_compliance_renewal_and_loss_of_status.md"
+    ],
+    "lump_sum_taxation:comparison_with_other_hnwi_residence_routes": [
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_comparison_with_other_hnwi_residence_routes.md",
+      "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_legal_framework_and_route_architecture.md"
     ]
   },
   "article_type_extras": {
@@ -216,6 +262,31 @@
       "refusal_analysis": [
         "family_reunification/broad/legal_authority_family_reunification_refusals_appeals_and_reapplication_pack.md"
       ]
+    },
+    "lump_sum_taxation": {
+      "risk_analysis": [
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_compliance_renewal_and_loss_of_status.md",
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_no_gainful_activity_foreign_business_and_board_roles.md"
+      ],
+      "comparison_piece": [
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_comparison_with_other_hnwi_residence_routes.md"
+      ],
+      "procedural_strategy": [
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_procedure_sequencing_and_evidence.md",
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_canton_selection_availability_and_practice.md"
+      ],
+      "myth_correction": [
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_legal_framework_and_route_architecture.md",
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_immigration_discretion_and_residence_permit_basis.md"
+      ],
+      "evidence_strategy": [
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_procedure_sequencing_and_evidence.md",
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_physical_presence_tax_domicile_and_centre_of_life.md"
+      ],
+      "refusal_analysis": [
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_immigration_discretion_and_residence_permit_basis.md",
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_canton_selection_availability_and_practice.md"
+      ]
     }
   },
   "legal_complexity_extras": {
@@ -231,6 +302,17 @@
         "family_reunification/core/legal_authority_core_swiss_family_reunification_framework_pack.md"
       ],
       "medium": [],
+      "low": []
+    },
+    "lump_sum_taxation": {
+      "high": [
+        "lump_sum_taxation/core/legal_authority_core_swiss_lump_sum_taxation_residence_framework.md",
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_legal_framework_and_route_architecture.md",
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_immigration_discretion_and_residence_permit_basis.md"
+      ],
+      "medium": [
+        "lump_sum_taxation/broad/legal_authority_lump_sum_taxation_tax_eligibility_and_conditions.md"
+      ],
       "low": []
     }
   }
