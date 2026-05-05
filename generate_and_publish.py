@@ -575,8 +575,6 @@ SEO:
 - Avoid duplicating existing firm content where website editorial context indicates an overlapping article.
 - Do not let SEO phrasing dominate the article.
 
-Under DYNAMIC PAGE LINK, return an empty string only.
-
 Output strict JSON only.
 """.strip()
 
@@ -881,10 +879,9 @@ DRAFT_SCHEMA = {
         "additionalProperties": False,
         "properties": {
             "blog_title": {"type": "string"},
-            "dynamic_page_link": {"type": "string"},
             "blog_content": {"type": "string"},
         },
-        "required": ["blog_title", "dynamic_page_link", "blog_content"],
+        "required": ["blog_title", "blog_content"],
     },
 }
 
@@ -1362,7 +1359,6 @@ def build_draft_input(
                 "cta_heading": CTA_HEADING,
                 "cta_name": CTA_NAME,
                 "cta_phone": CTA_PHONE,
-                "dynamic_page_link_must_be_blank": True,
                 "hard_word_limit": MAX_BLOG_WORDS,
                 "target_word_range": TARGET_BLOG_WORDS,
                 "citation_style": "Use short in-text legal references only, using LEI / AIG and OASA / VZAE.",
@@ -2054,7 +2050,6 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
 
     blog_title = (draft.get("blog_title") or "").strip()
     blog_content = (draft.get("blog_content") or "").strip()
-    dynamic_page_link = draft.get("dynamic_page_link")
 
     if not blog_title:
         errors.append("blog_title must not be empty.")
@@ -2062,8 +2057,6 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
         errors.extend(validate_title_style(blog_title))
     if not blog_content:
         errors.append("blog_content must not be empty.")
-    if dynamic_page_link != "":
-        errors.append("dynamic_page_link must be exactly an empty string.")
 
     word_count = count_words(blog_content)
     if word_count > MAX_BLOG_WORDS:
@@ -2637,7 +2630,6 @@ def normalise_draft_output(
     classifier: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     cleaned = dict(draft)
-    cleaned["dynamic_page_link"] = ""
 
     blog_content = cleaned.get("blog_content", "").strip()
     blog_content = replace_legal_abbreviation_style(blog_content)
@@ -2787,8 +2779,6 @@ def render_success_email(
     <p><strong>ANGLE:</strong><br>{escape_html(topic_entry.get('angle', ''))}</p>
 
     <p><strong>BLOG TITLE:</strong><br>{escape_html(draft['blog_title'])}</p>
-
-    <p><strong>DYNAMIC PAGE LINK:</strong><br>&nbsp;</p>
 
     <p><strong>SEO META TITLE:</strong><br>{escape_html(seo['seo_meta_title'])}</p>
 
