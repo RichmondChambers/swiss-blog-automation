@@ -1656,13 +1656,13 @@ def replace_legal_abbreviation_style(text: str) -> str:
 
 def replace_informal_c_permit_terms(text: str) -> str:
     text = re.sub(
-        r"\bThe an ordinary C-permit-Permit Route\b",
+        r"\bThe an ordinary C[\-–—]permit[\-–—]Permit Route\b",
         "The Ordinary C-Permit Route",
         text,
         flags=re.IGNORECASE,
     )
-    text = re.sub(r"\ban ordinary C-permit-Permit\b", "an ordinary C-permit", text, flags=re.IGNORECASE)
-    text = re.sub(r"\bC-permit-Permit\b", "C-permit", text, flags=re.IGNORECASE)
+    text = re.sub(r"\ban ordinary C[\-–—]permit[\-–—]Permit\b", "an ordinary C-permit", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bC[\-–—]permit[\-–—]Permit\b", "C-permit", text, flags=re.IGNORECASE)
     text = re.sub(
         r"\bordinary C\b(?!\s*(?:permit|route|application|case|rules|clock|timing)\b)",
         "an ordinary C-permit",
@@ -2066,8 +2066,8 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
 
     malformed_patterns = [
         r"\bThe an\b",
-        r"\ban ordinary C-permit-Permit\b",
-        r"\bC-permit-Permit\b",
+        r"\ban ordinary C[\-–—]permit[\-–—]Permit\b",
+        r"\bC[\-–—]permit[\-–—]Permit\b",
         r"\bLEI\s*/\s*LEI\s*/\s*AIG\b",
         r"\b(?:LEI\s*/\s*AIG|AIG\s*/\s*LEI)\s*/\s*(?:LEI|AIG)\b",
         r"\b(?:LEI|AIG)\s*/\s*(?:LEI\s*/\s*AIG|AIG\s*/\s*LEI)\b",
