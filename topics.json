@@ -171,7 +171,9 @@
       "Explain that expenditure, housing and control calculations interact.",
       "Do not imply that minimums are identical across all cantons."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "How Much Does Swiss Lump-Sum Taxation Really Cost?",
+    "used_at_utc": "2026-05-13T09:52:56Z"
   },
   {
     "topic": "Bringing an Elderly Parent to Switzerland: Why Adult Dependent Relative Cases Are So Hard",
