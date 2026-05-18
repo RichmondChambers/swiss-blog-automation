@@ -215,7 +215,9 @@
       "Identify whether the weakness is role, salary, recruitment, quota or evidence.",
       "Explain procedural timing risks."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Work Permit Refused: Appeal, Refile or Restructure?",
+    "used_at_utc": "2026-05-18T11:16:23Z"
   },
   {
     "topic": "EU/EFTA Retirees Moving to Switzerland: Financial Self-Sufficiency, Insurance and Residence Risks",
