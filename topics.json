@@ -237,7 +237,9 @@
       "Cover financial self-sufficiency and comprehensive health insurance.",
       "Distinguish EU/EFTA retirees from non-EU retirees."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can EU/EFTA Retirees Live in Switzerland Without Working?",
+    "used_at_utc": "2026-05-20T10:31:53Z"
   },
   {
     "topic": "Swiss Schengen Visa 90/180-Day Rule: How Overstays Happen Even When Travellers Count Days",
