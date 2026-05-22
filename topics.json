@@ -259,7 +259,9 @@
       "Explain rolling calculation clearly.",
       "Warn that multiple-entry visas do not authorise unlimited stays."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Counting Schengen Days? How Swiss 90/180 Overstays Still Happen",
+    "used_at_utc": "2026-05-22T10:31:09Z"
   },
   {
     "topic": "Facilitated Swiss Naturalisation by Marriage: What Still Has to Be Proved?",
