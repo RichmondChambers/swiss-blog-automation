@@ -61,37 +61,20 @@ jobs:
             echo "Push attempt $ATTEMPTS of $MAX_ATTEMPTS"
 
             echo "Syncing local commit onto latest origin/$BRANCH before push..."
-            set +e
             git fetch origin "$BRANCH"
-            FETCH_STATUS=$?
-            set -e
-            if [ "$FETCH_STATUS" -ne 0 ]; then
-              echo "Fetch failed while syncing with origin/$BRANCH; skipping topics.json push."
-              exit 0
-            fi
-
-            set +e
-            git rebase "origin/$BRANCH"
-            REBASE_STATUS=$?
-            set -e
-            if [ "$REBASE_STATUS" -ne 0 ]; then
+            if ! git rebase "origin/$BRANCH"; then
               echo "Rebase conflict while syncing against origin/$BRANCH."
               git rebase --abort || true
               echo "Skipping topics.json push to keep successful publish run green."
               exit 0
             fi
 
-            set +e
-            PUSH_OUTPUT="$(git push origin "HEAD:$BRANCH" 2>&1)"
-            PUSH_STATUS=$?
-            set -e
-            if [ "$PUSH_STATUS" -eq 0 ]; then
+            if git push origin "HEAD:$BRANCH"; then
               echo "Pushed topics.json update on attempt $ATTEMPTS"
               exit 0
             fi
 
-            echo "Push rejected on attempt $ATTEMPTS; retrying after resync."
-            echo "$PUSH_OUTPUT"
+            echo "Push rejected on attempt $ATTEMPTS; retrying..."
           done
 
           echo "Unable to push topics.json after $MAX_ATTEMPTS attempts. Skipping failure because publish already completed."
