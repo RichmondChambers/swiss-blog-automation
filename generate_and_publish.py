@@ -932,11 +932,40 @@ class KnowledgeChunk:
 
 def post_json(url: str, payload: dict, headers: dict[str, str]) -> tuple[int, dict[str, Any]]:
     data = json.dumps(payload).encode("utf-8")
-    max_attempts = int(os.getenv("OPENAI_HTTP_MAX_ATTEMPTS", "6"))
-    timeout_seconds = float(os.getenv("OPENAI_HTTP_TIMEOUT_SECONDS", "300"))
+    max_attempts = int(os.getenv("OPENAI_HTTP_MAX_ATTEMPTS", "3"))
+    timeout_seconds = float(os.getenv("OPENAI_HTTP_TIMEOUT_SECONDS", "600"))
 
     for attempt in range(1, max_attempts + 1):
         req = request.Request(url, data=data, headers=headers, method="POST")
+        try:
+            with request.urlopen(req, timeout=timeout_seconds) as response:
+                raw = response.read()
+                body = raw.decode("utf-8", errors="replace").strip()
+                if not body:
+                    return response.status, {}
+                return response.status, json.loads(body)
+        except error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            if exc.code in {408, 409, 425, 429, 500, 502, 503, 504} and attempt < max_attempts:
+                time.sleep(min(2 ** (attempt - 1), 30))
+                continue
+            raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
+        except (error.URLError, TimeoutError, http.client.RemoteDisconnected) as exc:
+            if attempt < max_attempts:
+                time.sleep(min(2 ** (attempt - 1), 30))
+                continue
+            reason = getattr(exc, "reason", str(exc))
+            raise RuntimeError(f"Network error calling {url}: {reason}") from exc
+
+    raise RuntimeError(f"Failed to call {url} after {max_attempts} attempts")
+
+
+def get_json(url: str, headers: dict[str, str]) -> tuple[int, dict[str, Any]]:
+    max_attempts = int(os.getenv("OPENAI_HTTP_MAX_ATTEMPTS", "3"))
+    timeout_seconds = float(os.getenv("OPENAI_HTTP_TIMEOUT_SECONDS", "600"))
+
+    for attempt in range(1, max_attempts + 1):
+        req = request.Request(url, headers=headers, method="GET")
         try:
             with request.urlopen(req, timeout=timeout_seconds) as response:
                 raw = response.read()
@@ -967,6 +996,7 @@ def call_responses_api(
     input_text: str,
     schema: dict[str, Any],
     model: str,
+    background: bool = False,
 ) -> dict[str, Any]:
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
@@ -983,8 +1013,19 @@ def call_responses_api(
             }
         },
     }
+    if background:
+        payload["background"] = True
 
     _, response = post_json("https://api.openai.com/v1/responses", payload=payload, headers=headers)
+    if background:
+        response_id = response.get("id")
+        if not isinstance(response_id, str) or not response_id:
+            raise RuntimeError(f"Background response missing id: {response}")
+        while response.get("status") in {"queued", "in_progress"}:
+            time.sleep(2)
+            _, response = get_json(f"https://api.openai.com/v1/responses/{response_id}", headers=headers)
+        if response.get("status") == "failed":
+            raise RuntimeError(f"Background response failed: {response}")
 
     output_text = response.get("output_text")
     if isinstance(output_text, str) and output_text.strip():
@@ -2303,6 +2344,7 @@ def flow_repair_draft_if_needed(
         ),
         schema=DRAFT_SCHEMA,
         model=OPENAI_MODEL,
+        background=True,
     )
 
     return normalise_draft_output(repaired, topic_entry, classifier)
@@ -2334,6 +2376,7 @@ def repair_draft_if_needed(
             ),
             schema=DRAFT_SCHEMA,
             model=OPENAI_MODEL,
+            background=True,
         )
         current = normalise_draft_output(repaired, topic_entry, classifier)
         errors = validate_public_draft(current)
@@ -2922,6 +2965,7 @@ def main() -> None:
             input_text=build_legal_input(topic_entry, classifier, legal_sources_text, website_context_text),
             schema=LEGAL_MEMO_SCHEMA,
             model=OPENAI_MODEL,
+            background=True,
         )
         memo_validation_errors = validate_legal_memo(memo)
         if not memo_validation_errors:
@@ -2943,6 +2987,7 @@ def main() -> None:
         ),
         schema=READER_JOURNEY_SCHEMA,
         model=OPENAI_MODEL,
+        background=True,
     )
 
     write_run_artifact(
@@ -2971,6 +3016,7 @@ def main() -> None:
         ),
         schema=DRAFT_SCHEMA,
         model=OPENAI_MODEL,
+        background=True,
     )
     draft = normalise_draft_output(draft, topic_entry, classifier)
     draft = flow_repair_draft_if_needed(
