@@ -5,10 +5,12 @@ import importlib.util
 import json
 import os
 import re
+import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
+import http.client
 from urllib import error, request
 
 HAS_PYPDF2 = importlib.util.find_spec("PyPDF2") is not None
@@ -930,20 +932,31 @@ class KnowledgeChunk:
 
 def post_json(url: str, payload: dict, headers: dict[str, str]) -> tuple[int, dict[str, Any]]:
     data = json.dumps(payload).encode("utf-8")
-    req = request.Request(url, data=data, headers=headers, method="POST")
+    max_attempts = 4
 
-    try:
-        with request.urlopen(req) as response:
-            raw = response.read()
-            body = raw.decode("utf-8", errors="replace").strip()
-            if not body:
-                return response.status, {}
-            return response.status, json.loads(body)
-    except error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
-    except error.URLError as exc:
-        raise RuntimeError(f"Network error calling {url}: {exc.reason}") from exc
+    for attempt in range(1, max_attempts + 1):
+        req = request.Request(url, data=data, headers=headers, method="POST")
+        try:
+            with request.urlopen(req, timeout=120) as response:
+                raw = response.read()
+                body = raw.decode("utf-8", errors="replace").strip()
+                if not body:
+                    return response.status, {}
+                return response.status, json.loads(body)
+        except error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            if exc.code in {408, 409, 425, 429, 500, 502, 503, 504} and attempt < max_attempts:
+                time.sleep(2 ** (attempt - 1))
+                continue
+            raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
+        except (error.URLError, TimeoutError, http.client.RemoteDisconnected) as exc:
+            if attempt < max_attempts:
+                time.sleep(2 ** (attempt - 1))
+                continue
+            reason = getattr(exc, "reason", str(exc))
+            raise RuntimeError(f"Network error calling {url}: {reason}") from exc
+
+    raise RuntimeError(f"Failed to call {url} after {max_attempts} attempts")
 
 
 def call_responses_api(
