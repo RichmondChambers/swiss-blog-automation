@@ -325,7 +325,9 @@
       "Avoid saying foreign business activity is always safe.",
       "Explain why Swiss activity can affect both tax and immigration positioning."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can You Run a Business Under Swiss Lump-Sum Taxation?",
+    "used_at_utc": "2026-05-27T17:49:56Z"
   },
   {
     "topic": "Swiss Family Reunification for Unmarried Partners: What Evidence Shows a Durable Relationship?",
