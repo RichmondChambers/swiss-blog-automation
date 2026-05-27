@@ -34,6 +34,9 @@ jobs:
         run: python generate_and_publish.py
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
+          OPENAI_HTTP_MAX_ATTEMPTS: ${{ vars.OPENAI_HTTP_MAX_ATTEMPTS || '6' }}
+          OPENAI_HTTP_TIMEOUT_SECONDS: ${{ vars.OPENAI_HTTP_TIMEOUT_SECONDS || '300' }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
