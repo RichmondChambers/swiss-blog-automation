@@ -39,6 +39,7 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
 
       - name: Commit updated topics.json
+        continue-on-error: true
         run: |
           git config user.name "blog-bot"
           git config user.email "bot@richmondchambers.com"
