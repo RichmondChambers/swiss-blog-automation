@@ -68,17 +68,12 @@ jobs:
             ATTEMPTS=$((ATTEMPTS + 1))
             echo "Push attempt $ATTEMPTS of $MAX_ATTEMPTS"
 
-            set +e
-            git push origin "HEAD:$BRANCH"
-            PUSH_EXIT=$?
-            set -e
-
-            if [ "$PUSH_EXIT" -eq 0 ]; then
+            if git push origin "HEAD:$BRANCH"; then
               echo "Pushed topics.json update on attempt $ATTEMPTS"
               exit 0
             fi
 
-            echo "Push rejected on attempt $ATTEMPTS (exit $PUSH_EXIT); rebasing and retrying..."
+            echo "Push rejected on attempt $ATTEMPTS; rebasing and retrying..."
             git fetch origin "$BRANCH"
             if ! git rebase "origin/$BRANCH"; then
               echo "Rebase conflict while retrying against origin/$BRANCH."
