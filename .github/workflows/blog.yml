@@ -50,8 +50,27 @@ jobs:
 
           git commit -m "Mark topic as used"
 
-          # Handle concurrent workflow runs by rebasing onto the latest remote
-          # state before pushing.
+          # Handle concurrent workflow runs. If the push fails due to a race,
+          # rebase and retry a few times. Do not fail the whole workflow if the
+          # blog was already generated and sent successfully.
           BRANCH="${GITHUB_REF_NAME:-main}"
-          git pull --rebase origin "$BRANCH"
-          git push origin "HEAD:$BRANCH"
+          ATTEMPTS=0
+          MAX_ATTEMPTS=3
+          while [ "$ATTEMPTS" -lt "$MAX_ATTEMPTS" ]; do
+            ATTEMPTS=$((ATTEMPTS + 1))
+            if git push origin "HEAD:$BRANCH"; then
+              echo "Pushed topics.json update on attempt $ATTEMPTS"
+              exit 0
+            fi
+
+            echo "Push rejected on attempt $ATTEMPTS; rebasing and retrying..."
+            git fetch origin "$BRANCH"
+            if ! git rebase "origin/$BRANCH"; then
+              echo "Rebase conflict while updating topics.json. Skipping push to avoid failing a successful publish."
+              git rebase --abort || true
+              exit 0
+            fi
+          done
+
+          echo "Unable to push topics.json after $MAX_ATTEMPTS attempts. Skipping failure because publish already completed."
+          exit 0
