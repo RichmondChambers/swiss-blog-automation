@@ -932,12 +932,13 @@ class KnowledgeChunk:
 
 def post_json(url: str, payload: dict, headers: dict[str, str]) -> tuple[int, dict[str, Any]]:
     data = json.dumps(payload).encode("utf-8")
-    max_attempts = 4
+    max_attempts = int(os.getenv("OPENAI_HTTP_MAX_ATTEMPTS", "6"))
+    timeout_seconds = float(os.getenv("OPENAI_HTTP_TIMEOUT_SECONDS", "300"))
 
     for attempt in range(1, max_attempts + 1):
         req = request.Request(url, data=data, headers=headers, method="POST")
         try:
-            with request.urlopen(req, timeout=120) as response:
+            with request.urlopen(req, timeout=timeout_seconds) as response:
                 raw = response.read()
                 body = raw.decode("utf-8", errors="replace").strip()
                 if not body:
@@ -946,12 +947,12 @@ def post_json(url: str, payload: dict, headers: dict[str, str]) -> tuple[int, di
         except error.HTTPError as exc:
             body = exc.read().decode("utf-8", errors="replace")
             if exc.code in {408, 409, 425, 429, 500, 502, 503, 504} and attempt < max_attempts:
-                time.sleep(2 ** (attempt - 1))
+                time.sleep(min(2 ** (attempt - 1), 30))
                 continue
             raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
         except (error.URLError, TimeoutError, http.client.RemoteDisconnected) as exc:
             if attempt < max_attempts:
-                time.sleep(2 ** (attempt - 1))
+                time.sleep(min(2 ** (attempt - 1), 30))
                 continue
             reason = getattr(exc, "reason", str(exc))
             raise RuntimeError(f"Network error calling {url}: {reason}") from exc
