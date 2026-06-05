@@ -20,6 +20,42 @@
     ],
     "work_permits": [
       "work_permits/core/legal_authority_core_swiss_work_permits_and_employer_sponsorship_framework.md"
+    ],
+    "student_permit": [
+      "student_permit/core/legal_authority_core_swiss_student_and_education_permit_framework.md"
+    ],
+    "entrepreneur_and_business_founder": [
+      "entrepreneur_and_business_founder/core/legal_authority_entrepreneur_and_business_founder_framework.md"
+    ],
+    "eu_efta_hiring_into_switzerland": [
+      "eu_efta_hiring_into_switzerland/core/legal_authority_eu_efta_hiring_into_switzerland.md"
+    ],
+    "frontier_worker_g_permit": [
+      "frontier_worker_g_permit/core/legal_authority_frontier_worker_g_permit.md"
+    ],
+    "graduate_switch_study_to_work": [
+      "graduate_switch_study_to_work/core/legal_authority_graduate_switch_non_eu_vs_eu_efta_distinctions.md"
+    ],
+    "intra_company_transfer": [
+      "intra_company_transfer/core/legal_authority_ict_manager_specialist_or_key_personnel_profile.md"
+    ],
+    "non_eu_local_hire": [
+      "non_eu_local_hire/core/legal_authority_non_eu_local_hire_candidate_suitability_and_qualifications.md"
+    ],
+    "posted_worker_notification": [
+      "posted_worker_notification/core/legal_authority_posted_worker_notification_vs_work_permit.md"
+    ],
+    "route_selection_mixed_fact_pattern": [
+      "route_selection_mixed_fact_pattern/core/legal_authority_route_selection_business_visit_vs_work.md"
+    ],
+    "senior_specialist_hire": [
+      "senior_specialist_hire/core/legal_authority_senior_specialist_hire_defining_senior_manager_or_specialist.md"
+    ],
+    "short_term_assignment_project_based_work": [
+      "short_term_assignment_project_based_work/core/legal_authority_short_term_assignment_permit_vs_notification_threshold.md"
+    ],
+    "trainee_stagiaire_route": [
+      "trainee_stagiaire_route/core/legal_authority_trainee_and_stagiaire.md"
     ]
   },
   "subtopic_overrides": {
@@ -421,46 +457,301 @@
     ],
     "work_permits:founder_and_entrepreneur_work_authorisation": [
       "work_permits/route_specific/legal_authority_founder_and_entrepreneur_work_authorisation.md",
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_and_business_founder_framework.md"
+      "entrepreneur_and_business_founder/core/legal_authority_entrepreneur_and_business_founder_framework.md"
     ],
     "work_permits:entrepreneur_and_business_founder_framework": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_and_business_founder_framework.md",
+      "entrepreneur_and_business_founder/core/legal_authority_entrepreneur_and_business_founder_framework.md",
       "work_permits/route_specific/legal_authority_founder_and_entrepreneur_work_authorisation.md"
     ],
     "work_permits:entrepreneur_business_plan_and_evidence": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_business_plan_and_evidence.md",
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_economic_interest_and_business_substance.md"
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_business_plan_and_evidence.md",
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_economic_interest_and_business_substance.md"
     ],
     "work_permits:entrepreneur_cantonal_procedure_and_discretion": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_cantonal_procedure_and_discretion.md",
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_cantonal_procedure_and_discretion.md",
       "work_permits/broad/legal_authority_work_permit_cantonal_practice_and_procedure.md"
     ],
     "work_permits:entrepreneur_company_formation_vs_work_authorisation": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_company_formation_vs_work_authorisation.md"
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_company_formation_vs_work_authorisation.md"
     ],
     "work_permits:entrepreneur_economic_interest_and_business_substance": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_economic_interest_and_business_substance.md"
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_economic_interest_and_business_substance.md"
     ],
     "work_permits:entrepreneur_family_residence_and_settlement_planning": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_family_residence_and_settlement_planning.md"
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_family_residence_and_settlement_planning.md"
     ],
     "work_permits:entrepreneur_founder_role_salary_and_employment_structure": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_founder_role_salary_and_employment_structure.md",
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_founder_role_salary_and_employment_structure.md",
       "work_permits/broad/legal_authority_salary_local_conditions_and_labour_market_compliance.md"
     ],
     "work_permits:entrepreneur_investment_funding_and_financial_viability": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_investment_funding_and_financial_viability.md"
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_investment_funding_and_financial_viability.md"
     ],
     "work_permits:entrepreneur_job_creation_and_labour_market_benefit": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_job_creation_and_labour_market_benefit.md"
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_job_creation_and_labour_market_benefit.md"
     ],
     "work_permits:entrepreneur_refusals_and_refiling_strategy": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_refusals_and_refiling_strategy.md",
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_refusals_and_refiling_strategy.md",
       "work_permits/broad/legal_authority_work_permit_refusals_refilings_and_appeals.md"
     ],
     "work_permits:entrepreneur_renewals_business_performance_and_continuity": [
-      "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_renewals_business_performance_and_continuity.md",
+      "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_renewals_business_performance_and_continuity.md",
       "work_permits/broad/legal_authority_employment_changes_renewals_and_permit_continuity.md"
+    ],
+    "eu_efta_hiring_into_switzerland:employee_registration_and_residence_procedure": [
+      "eu_efta_hiring_into_switzerland/broad/legal_authority_eu_efta_employee_registration_and_residence_procedure.md"
+    ],
+    "eu_efta_hiring_into_switzerland:employment_changes_unemployment_and_retention_of_status": [
+      "eu_efta_hiring_into_switzerland/broad/legal_authority_eu_efta_employment_changes_unemployment_and_retention_of_status.md"
+    ],
+    "eu_efta_hiring_into_switzerland:family_members_and_derived_residence_rights": [
+      "eu_efta_hiring_into_switzerland/broad/legal_authority_eu_efta_family_members_and_derived_residence_rights.md"
+    ],
+    "eu_efta_hiring_into_switzerland:jobseekers_and_residence_while_looking_for_work": [
+      "eu_efta_hiring_into_switzerland/broad/legal_authority_eu_efta_jobseekers_and_residence_while_looking_for_work.md"
+    ],
+    "eu_efta_hiring_into_switzerland:self_employment_and_genuine_activity": [
+      "eu_efta_hiring_into_switzerland/broad/legal_authority_eu_efta_self_employment_and_genuine_activity.md"
+    ],
+    "eu_efta_hiring_into_switzerland:short_term_work_and_notification": [
+      "eu_efta_hiring_into_switzerland/broad/legal_authority_eu_efta_short_term_work_and_notification.md"
+    ],
+    "eu_efta_hiring_into_switzerland:transitional_safeguard_and_country_specific_rules": [
+      "eu_efta_hiring_into_switzerland/broad/legal_authority_eu_efta_transitional_safeguard_and_country_specific_rules.md"
+    ],
+    "frontier_worker_g_permit:eu_efta_vs_non_eu_distinctions": [
+      "frontier_worker_g_permit/broad/legal_authority_frontier_worker_eu_efta_vs_non_eu_distinctions.md"
+    ],
+    "frontier_worker_g_permit:renewals_employer_changes_and_continuity": [
+      "frontier_worker_g_permit/broad/legal_authority_frontier_worker_g_permit_renewals_employer_changes_and_continuity.md"
+    ],
+    "frontier_worker_g_permit:moving_to_switzerland_and_status_change": [
+      "frontier_worker_g_permit/broad/legal_authority_frontier_worker_moving_to_switzerland_and_status_change.md"
+    ],
+    "frontier_worker_g_permit:refusals_and_compliance_risks": [
+      "frontier_worker_g_permit/broad/legal_authority_frontier_worker_refusals_and_compliance_risks.md"
+    ],
+    "frontier_worker_g_permit:remote_hybrid_work_and_status_risk": [
+      "frontier_worker_g_permit/broad/legal_authority_frontier_worker_remote_hybrid_work_and_status_risk.md"
+    ],
+    "frontier_worker_g_permit:residence_abroad_and_weekly_return": [
+      "frontier_worker_g_permit/broad/legal_authority_frontier_worker_residence_abroad_and_weekly_return.md"
+    ],
+    "frontier_worker_g_permit:swiss_employment_and_foreign_residence_evidence": [
+      "frontier_worker_g_permit/broad/legal_authority_frontier_worker_swiss_employment_and_foreign_residence_evidence.md"
+    ],
+    "graduate_switch_study_to_work:employer_sponsorship_and_role_fit": [
+      "graduate_switch_study_to_work/broad/legal_authority_graduate_switch_employer_sponsorship_and_role_fit.md"
+    ],
+    "graduate_switch_study_to_work:high_scientific_or_economic_interest": [
+      "graduate_switch_study_to_work/broad/legal_authority_graduate_switch_high_scientific_or_economic_interest.md"
+    ],
+    "graduate_switch_study_to_work:long_term_residence_and_c_permit_planning": [
+      "graduate_switch_study_to_work/broad/legal_authority_graduate_switch_long_term_residence_and_c_permit_planning.md"
+    ],
+    "graduate_switch_study_to_work:post_study_job_search_and_timing": [
+      "graduate_switch_study_to_work/broad/legal_authority_graduate_switch_post_study_job_search_and_timing.md"
+    ],
+    "graduate_switch_study_to_work:refusals_timing_errors_and_reapplications": [
+      "graduate_switch_study_to_work/broad/legal_authority_graduate_switch_refusals_timing_errors_and_reapplications.md"
+    ],
+    "intra_company_transfer:assignment_purpose_and_role_necessity": [
+      "intra_company_transfer/broad/legal_authority_ict_assignment_purpose_and_role_necessity.md"
+    ],
+    "intra_company_transfer:corporate_link_and_group_structure": [
+      "intra_company_transfer/broad/legal_authority_ict_corporate_link_and_group_structure.md"
+    ],
+    "intra_company_transfer:duration_renewal_and_return_or_localisation": [
+      "intra_company_transfer/broad/legal_authority_ict_duration_renewal_and_return_or_localisation.md"
+    ],
+    "intra_company_transfer:refusals_and_disguised_local_hire_risks": [
+      "intra_company_transfer/broad/legal_authority_ict_refusals_and_disguised_local_hire_risks.md"
+    ],
+    "intra_company_transfer:salary_local_conditions_and_employment_structure": [
+      "intra_company_transfer/broad/legal_authority_ict_salary_local_conditions_and_employment_structure.md"
+    ],
+    "non_eu_local_hire:changes_renewals_and_continuity": [
+      "non_eu_local_hire/broad/legal_authority_non_eu_local_hire_changes_renewals_and_continuity.md"
+    ],
+    "non_eu_local_hire:employer_justification_and_business_need": [
+      "non_eu_local_hire/broad/legal_authority_non_eu_local_hire_employer_justification_and_business_need.md"
+    ],
+    "non_eu_local_hire:family_and_long_term_residence_planning": [
+      "non_eu_local_hire/broad/legal_authority_non_eu_local_hire_family_and_long_term_residence_planning.md"
+    ],
+    "non_eu_local_hire:labour_market_test": [
+      "non_eu_local_hire/broad/legal_authority_non_eu_local_hire_labour_market_test.md"
+    ],
+    "non_eu_local_hire:quota_timing_and_filing_strategy": [
+      "non_eu_local_hire/broad/legal_authority_non_eu_local_hire_quota_timing_and_filing_strategy.md"
+    ],
+    "non_eu_local_hire:refusals_and_rebuilding_the_file": [
+      "non_eu_local_hire/broad/legal_authority_non_eu_local_hire_refusals_and_rebuilding_the_file.md"
+    ],
+    "non_eu_local_hire:salary_and_local_conditions": [
+      "non_eu_local_hire/broad/legal_authority_non_eu_local_hire_salary_and_local_conditions.md"
+    ],
+    "posted_worker_notification:common_miscalculations_and_enforcement_risks": [
+      "posted_worker_notification/broad/legal_authority_posted_worker_common_miscalculations_and_enforcement_risks.md"
+    ],
+    "posted_worker_notification:day_counting_and_duration_limits": [
+      "posted_worker_notification/broad/legal_authority_posted_worker_day_counting_and_duration_limits.md"
+    ],
+    "posted_worker_notification:regulated_sectors_and_special_controls": [
+      "posted_worker_notification/broad/legal_authority_posted_worker_regulated_sectors_and_special_controls.md"
+    ],
+    "posted_worker_notification:salary_working_conditions_and_compliance": [
+      "posted_worker_notification/broad/legal_authority_posted_worker_salary_working_conditions_and_compliance.md"
+    ],
+    "posted_worker_notification:service_provider_and_client_structure": [
+      "posted_worker_notification/broad/legal_authority_posted_worker_service_provider_and_client_structure.md"
+    ],
+    "route_selection_mixed_fact_pattern:directors_board_members_and_shareholders": [
+      "route_selection_mixed_fact_pattern/broad/legal_authority_route_selection_directors_board_members_and_shareholders.md"
+    ],
+    "route_selection_mixed_fact_pattern:local_hire_ict_posted_work_notification": [
+      "route_selection_mixed_fact_pattern/broad/legal_authority_route_selection_local_hire_ict_posted_work_notification.md"
+    ],
+    "route_selection_mixed_fact_pattern:short_duration_high_risk_work": [
+      "route_selection_mixed_fact_pattern/broad/legal_authority_route_selection_short_duration_high_risk_work.md"
+    ],
+    "route_selection_mixed_fact_pattern:swiss_client_site_work": [
+      "route_selection_mixed_fact_pattern/broad/legal_authority_route_selection_swiss_client_site_work.md"
+    ],
+    "route_selection_mixed_fact_pattern:unpaid_work_trial_work_shadowing_and_training": [
+      "route_selection_mixed_fact_pattern/broad/legal_authority_route_selection_unpaid_work_trial_work_shadowing_and_training.md"
+    ],
+    "route_selection_mixed_fact_pattern:drafting_cautions_and_proposition_bank": [
+      "route_selection_mixed_fact_pattern/broad/legal_authority_work_permits_drafting_cautions_and_proposition_bank.md"
+    ],
+    "senior_specialist_hire:commercial_necessity_and_role_design": [
+      "senior_specialist_hire/broad/legal_authority_senior_specialist_hire_commercial_necessity_and_role_design.md"
+    ],
+    "senior_specialist_hire:labour_market_test_and_recruitment_evidence": [
+      "senior_specialist_hire/broad/legal_authority_senior_specialist_hire_labour_market_test_and_recruitment_evidence.md"
+    ],
+    "senior_specialist_hire:refusals_and_weak_points": [
+      "senior_specialist_hire/broad/legal_authority_senior_specialist_hire_refusals_and_weak_points.md"
+    ],
+    "senior_specialist_hire:salary_seniority_and_market_alignment": [
+      "senior_specialist_hire/broad/legal_authority_senior_specialist_hire_salary_seniority_and_market_alignment.md"
+    ],
+    "senior_specialist_hire:unique_skills_and_candidate_profile": [
+      "senior_specialist_hire/broad/legal_authority_senior_specialist_hire_unique_skills_and_candidate_profile.md"
+    ],
+    "short_term_assignment_project_based_work:assignment_and_project_based_work": [
+      "short_term_assignment_project_based_work/broad/legal_authority_short_term_assignment_and_project_based_work.md"
+    ],
+    "short_term_assignment_project_based_work:business_visit_vs_project_work": [
+      "short_term_assignment_project_based_work/broad/legal_authority_short_term_assignment_business_visit_vs_project_work.md"
+    ],
+    "short_term_assignment_project_based_work:client_site_supervision_and_recipient_role": [
+      "short_term_assignment_project_based_work/broad/legal_authority_short_term_assignment_client_site_supervision_and_recipient_role.md"
+    ],
+    "short_term_assignment_project_based_work:project_urgency_and_timing_strategy": [
+      "short_term_assignment_project_based_work/broad/legal_authority_short_term_assignment_project_urgency_and_timing_strategy.md"
+    ],
+    "short_term_assignment_project_based_work:refusals_and_compliance_failures": [
+      "short_term_assignment_project_based_work/broad/legal_authority_short_term_assignment_refusals_and_compliance_failures.md"
+    ],
+    "short_term_assignment_project_based_work:repeat_assignments_and_cumulative_presence": [
+      "short_term_assignment_project_based_work/broad/legal_authority_short_term_assignment_repeat_assignments_and_cumulative_presence.md"
+    ],
+    "student_permit:accommodation_insurance_and_practical_conditions": [
+      "student_permit/broad/legal_authority_student_permits_accommodation_insurance_and_practical_conditions.md"
+    ],
+    "student_permit:c_permit_naturalisation_long_term_planning": [
+      "student_permit/broad/legal_authority_student_permits_c_permit_naturalisation_long_term_planning.md"
+    ],
+    "student_permit:cantonal_practice_private_schools_local_procedure": [
+      "student_permit/broad/legal_authority_student_permits_cantonal_practice_private_schools_local_procedure.md"
+    ],
+    "student_permit:course_change_second_education_extensions": [
+      "student_permit/broad/legal_authority_student_permits_course_change_second_education_extensions.md"
+    ],
+    "student_permit:eu_efta_students": [
+      "student_permit/broad/legal_authority_student_permits_eu_efta_students.md"
+    ],
+    "student_permit:family_members_and_derivative_residence": [
+      "student_permit/broad/legal_authority_student_permits_family_members_and_derivative_residence.md"
+    ],
+    "student_permit:financial_means_and_sponsor_evidence": [
+      "student_permit/broad/legal_authority_student_permits_financial_means_and_sponsor_evidence.md"
+    ],
+    "student_permit:higher_education_students": [
+      "student_permit/broad/legal_authority_student_permits_higher_education_students.md"
+    ],
+    "student_permit:language_schools_preparatory_courses": [
+      "student_permit/broad/legal_authority_student_permits_language_schools_preparatory_courses.md"
+    ],
+    "student_permit:legal_framework_and_route_architecture": [
+      "student_permit/broad/legal_authority_student_permits_legal_framework_and_route_architecture.md"
+    ],
+    "student_permit:minors_boarding_schools_supervision": [
+      "student_permit/broad/legal_authority_student_permits_minors_boarding_schools_supervision.md"
+    ],
+    "student_permit:non_eu_efta_students": [
+      "student_permit/broad/legal_authority_student_permits_non_eu_efta_students.md"
+    ],
+    "student_permit:personal_educational_suitability_study_plan": [
+      "student_permit/broad/legal_authority_student_permits_personal_educational_suitability_study_plan.md"
+    ],
+    "student_permit:post_study_job_search_and_work_transition": [
+      "student_permit/broad/legal_authority_student_permits_post_study_job_search_and_work_transition.md"
+    ],
+    "student_permit:procedure_visa_consular_canton_sem": [
+      "student_permit/broad/legal_authority_student_permits_procedure_visa_consular_canton_sem.md"
+    ],
+    "student_permit:refusals_appeals_reapplication": [
+      "student_permit/broad/legal_authority_student_permits_refusals_appeals_reapplication.md"
+    ],
+    "student_permit:school_and_programme_requirements": [
+      "student_permit/broad/legal_authority_student_permits_school_and_programme_requirements.md"
+    ],
+    "student_permit:student_work_and_internships": [
+      "student_permit/broad/legal_authority_student_permits_student_work_and_internships.md"
+    ],
+    "student_permit:type_duration_renewal_progress": [
+      "student_permit/broad/legal_authority_student_permits_type_duration_renewal_progress.md"
+    ],
+    "student_permit:vocational_hotel_school_professional_education": [
+      "student_permit/broad/legal_authority_student_permits_vocational_hotel_school_professional_education.md"
+    ],
+    "trainee_stagiaire_route:candidate_eligibility_and_career_stage": [
+      "trainee_stagiaire_route/broad/legal_authority_trainee_stagiaire_candidate_eligibility_and_career_stage.md"
+    ],
+    "trainee_stagiaire_route:duration_renewal_and_post_training_transition": [
+      "trainee_stagiaire_route/broad/legal_authority_trainee_stagiaire_duration_renewal_and_post_training_transition.md"
+    ],
+    "trainee_stagiaire_route:refusals_and_disguised_employment_risks": [
+      "trainee_stagiaire_route/broad/legal_authority_trainee_stagiaire_refusals_and_disguised_employment_risks.md"
+    ],
+    "trainee_stagiaire_route:salary_allowance_and_working_conditions": [
+      "trainee_stagiaire_route/broad/legal_authority_trainee_stagiaire_salary_allowance_and_working_conditions.md"
+    ],
+    "trainee_stagiaire_route:training_plan_supervision_and_skills_development": [
+      "trainee_stagiaire_route/broad/legal_authority_trainee_stagiaire_training_plan_supervision_and_skills_development.md"
+    ],
+    "trainee_stagiaire_route:training_purpose_and_genuine_route": [
+      "trainee_stagiaire_route/broad/legal_authority_trainee_stagiaire_training_purpose_and_genuine_route.md"
+    ],
+    "special_employment_categories:academic_research_and_teaching_roles": [
+      "special_employment_categories/broad/legal_authority_special_employment_academic_research_and_teaching_roles.md"
+    ],
+    "special_employment_categories:artists_performers_and_cultural_workers": [
+      "special_employment_categories/broad/legal_authority_special_employment_artists_performers_and_cultural_workers.md"
+    ],
+    "special_employment_categories:athletes_coaches_and_sports_professionals": [
+      "special_employment_categories/broad/legal_authority_special_employment_athletes_coaches_and_sports_professionals.md"
+    ],
+    "special_employment_categories:domestic_workers_and_private_household_staff": [
+      "special_employment_categories/broad/legal_authority_special_employment_domestic_workers_and_private_household_staff_pack.md"
+    ],
+    "special_employment_categories:religious_workers_and_mission_roles": [
+      "special_employment_categories/broad/legal_authority_special_employment_religious_workers_and_mission_roles.md"
+    ],
+    "special_employment_categories:volunteers_unpaid_work_and_internships": [
+      "special_employment_categories/broad/legal_authority_special_employment_volunteers_unpaid_work_and_internships.md"
     ]
   },
   "article_type_extras": {
@@ -623,7 +914,7 @@
       ],
       "myth_correction": [
         "work_permits/broad/legal_authority_work_permits_legal_framework_and_employer_sponsorship.md",
-        "work_permits/issue_specific/entrepreneur_and_business_founder/legal_authority_entrepreneur_company_formation_vs_work_authorisation.md"
+        "entrepreneur_and_business_founder/broad/legal_authority_entrepreneur_company_formation_vs_work_authorisation.md"
       ],
       "evidence_strategy": [
         "work_permits/broad/legal_authority_non_eu_work_permits_admission_criteria_and_employer_burden.md",
