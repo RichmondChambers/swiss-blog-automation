@@ -418,6 +418,86 @@
     "used_at_utc": "2026-06-05T10:56:41Z"
   },
   {
+    "topic": "Does Time on an L Permit Count Toward a Swiss C Permit?",
+    "angle": "Explains when L-permit periods may matter in later settlement planning and why mixed residence histories need careful analysis.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "residence_counting_and_qualifying_years",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_eligibility_and_counting",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not answer with a blanket rule.",
+      "Explain durable and non-durable L histories carefully.",
+      "Keep the route history concrete."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Main Destination Rule for Swiss Schengen Visas: When Should You Apply to Switzerland?",
+    "angle": "Explains consular competence, first-entry fallback and common mistakes in multi-country Schengen itineraries.",
+    "audience": "general_global",
+    "article_type": "procedural_strategy",
+    "pillar": "schengen_visa",
+    "subtopic": "application_procedure_place_of_filing_and_jurisdiction",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_filing_and_competence",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit Motivation Letter: What Makes a Study Plan Credible?",
+    "angle": "Explains how applicants can show a coherent educational purpose and avoid credibility problems in student permit files.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "student_permit",
+    "subtopic": "personal_educational_suitability_study_plan",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_purpose_and_credibility",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Non-EU Work Permit Quotas: Why Start-Date Planning Matters",
+    "angle": "Shows employers how quota pressure affects hiring timelines and why filing strategy should begin before contract signing.",
+    "audience": "global_businesses",
+    "article_type": "procedural_strategy",
+    "pillar": "non_eu_local_hire",
+    "subtopic": "quota_timing_and_filing_strategy",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "non_eu_quota_strategy",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Naturalisation After Absence or Interrupted Residence: How Timing Problems Arise",
     "angle": "Explains residence continuity, absences, interrupted residence and timing risks in Swiss naturalisation applications.",
     "audience": "inside_switzerland_individuals",
@@ -434,6 +514,106 @@
       "Do not treat all residence periods as counting equally.",
       "Explain interruption and continuity issues.",
       "Avoid giving a universal answer without route and canton qualification."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Why Swiss Lump Sum Taxation Is Not a Golden Visa",
+    "angle": "Corrects common international marketing claims by explaining the real Swiss residence-and-tax framework.",
+    "audience": "global_individuals",
+    "article_type": "myth_correction",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "legal_framework_and_route_architecture",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_route_architecture",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Frontier Worker G Permit: How Do You Prove Main Residence Abroad?",
+    "angle": "Explains the documentary and factual patterns that support genuine frontier-worker status.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "frontier_worker_g_permit",
+    "subtopic": "residence_abroad_and_weekly_return",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "frontier_worker_status",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss ICT Applications: Why a Group Chart Alone Is Not Enough",
+    "angle": "Shows employers how to evidence group structure, assignment logic and Swiss host role in ICT filings.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "intra_company_transfer",
+    "subtopic": "corporate_link_and_group_structure",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "ict_structuring_and_evidence",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa Refused: Appeal or Reapply?",
+    "angle": "Helps applicants distinguish weak evidence cases from stronger legal challenge cases after Schengen refusal.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "schengen_visa",
+    "subtopic": "refusals_appeals_and_reapplications",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_refusal_strategy",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Founder Permit Refusals: When the Real Problem Is Weak Economic Interest",
+    "angle": "Helps founders diagnose refusal reasons where the underlying commercial narrative is weaker than the paperwork.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "entrepreneur_and_business_founder",
+    "subtopic": "refusals_and_refiling_strategy",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "entrepreneur_refusal_strategy",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -458,6 +638,106 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Retirement Residence: How Much Financial Evidence Is Enough?",
+    "angle": "Explains financial self-sufficiency and long-term sustainability in retirement permit cases without inventing a universal threshold.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "retirement_permit",
+    "subtopic": "financial_self_sufficiency_and_public_funds_risk",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_finances_and_sustainability",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "social_assistance_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Posted Worker Notification: Why Short Swiss Assignments Can Still Be Risky",
+    "angle": "Explains day counting, duration limits and cumulative presence risks in posted worker notification cases.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "posted_worker_notification",
+    "subtopic": "day_counting_and_duration_limits",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "posted_worker_day_counting",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Can a Swiss Student Start Full-Time Work Immediately After Graduation?",
+    "angle": "Clarifies the gap between finishing studies and holding the right status for full-time Swiss employment.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "myth_correction",
+    "pillar": "graduate_switch_study_to_work",
+    "subtopic": "post_study_job_search_and_timing",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "graduate_switch_timing",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Language Requirements: A2, B1 or Something Else?",
+    "angle": "Compares language levels and evidence issues across ordinary and faster settlement pathways.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "language_requirements_and_evidence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_language_and_compliance",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "EU/EFTA Employee Registration in Switzerland: What Employers Should Plan",
+    "angle": "Explains practical registration and residence procedure points for EU/EFTA hires.",
+    "audience": "global_businesses",
+    "article_type": "procedural_strategy",
+    "pillar": "eu_efta_hiring_into_switzerland",
+    "subtopic": "employee_registration_and_residence_procedure",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "eu_efta_employee_registration",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Choosing a Canton for Swiss Lump Sum Taxation: What Matters Beyond the Tax Figure?",
     "angle": "Explains canton availability, tax practice, immigration coordination, evidential expectations and practical residence planning.",
     "audience": "global_individuals",
@@ -474,6 +754,106 @@
       "Do not imply all cantons offer lump sum taxation.",
       "Keep tax attractiveness separate from immigration viability.",
       "Explain that cantonal practice can change."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Fiancé Route: What Has to Happen Before the Wedding and After Marriage?",
+    "angle": "Explains the two-step fiancé route, marriage preparation and later transition into spouse status.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "fiance_and_intended_marriage",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Senior or Specialist Hire in Switzerland: ICT or Local Hire?",
+    "angle": "Compares two routes for high-level international personnel where both group transfer and direct hire may be possible.",
+    "audience": "global_businesses",
+    "article_type": "comparison_piece",
+    "pillar": "route_selection_mixed_fact_pattern",
+    "subtopic": "local_hire_ict_posted_work_notification",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "ict_vs_other_work_routes",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Student Permit Proof of Funds: How Much Evidence Is Enough?",
+    "angle": "Explains financial proof, accommodation and insurance issues in Swiss student permit applications and renewals.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "student_permit",
+    "subtopic": "financial_means_and_sponsor_evidence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_finances_housing_and_insurance",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "social_assistance_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Third-Generation Citizenship: Who Qualifies and What Evidence Matters?",
+    "angle": "Explains the facilitated route for eligible third-generation applicants and the documents that support it.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "facilitated_swiss_naturalisation_by_marriage",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "facilitated_naturalisation",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Business Visit or Work Permit? How to Classify a Mixed Fact Pattern",
+    "angle": "Explains how to distinguish business visits, local work, posted work, ICT and notification routes where facts overlap.",
+    "audience": "global_businesses",
+    "article_type": "comparison_piece",
+    "pillar": "route_selection_mixed_fact_pattern",
+    "subtopic": "business_visit_vs_work",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "work_route_selection",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -498,6 +878,106 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Student Permit for EU/EFTA Nationals: What Still Has to Be Done?",
+    "angle": "Explains registration, accommodation and permit formalities for EU/EFTA students staying in Switzerland beyond short visits.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "student_permit",
+    "subtopic": "eu_efta_students",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "student_route_eu_vs_non_eu",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Can a Lump Sum Taxation B Permit Lead to a Swiss C Permit?",
+    "angle": "Explains long-term settlement planning after entry under expenditure-based taxation.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "c_permit_naturalisation_and_long_term_planning",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_long_term_settlement",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Non-EU Work Permit: Why a Job Offer Alone Is Often Not Enough",
+    "angle": "Corrects a common misunderstanding about Swiss work-based immigration for non-EU hires.",
+    "audience": "global_businesses",
+    "article_type": "myth_correction",
+    "pillar": "non_eu_local_hire",
+    "subtopic": "employer_justification_and_business_need",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "non_eu_local_hire_admission",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Adult Dependent Relative Reunification: Why Emotional Closeness Is Not Enough",
+    "angle": "Explains the high threshold for adult dependent relative cases and the difference between affection and legal dependency.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "adult_dependent_relative",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_dependency_routes",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss G Permit vs B Permit: When Should a Cross-Border Worker Relocate?",
+    "angle": "Compares commuter status with Swiss residence status where the worker's life pattern is moving into Switzerland.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "frontier_worker_g_permit",
+    "subtopic": "moving_to_switzerland_and_status_change",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "g_permit_to_b_permit_transition",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Can a Founder Move to Switzerland to Run a Swiss Company?",
     "angle": "Explains the difference between company formation and work authorisation for founders and entrepreneurs.",
     "audience": "business_founders",
@@ -514,6 +994,126 @@
       "Do not imply incorporation creates a right to work.",
       "Distinguish ownership, directorship and operational management.",
       "Explain economic interest and cantonal discretion."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Posted Worker Salary Rules: What Employers Get Wrong Most Often",
+    "angle": "Explains salary, allowances and local-condition risks for employers posting staff into Switzerland.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "posted_worker_notification",
+    "subtopic": "salary_working_conditions_and_compliance",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "posted_worker_compliance_and_enforcement",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "employment_law_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Ordinary Swiss Naturalisation: What the 10-Year Rule Really Means",
+    "angle": "Explains lawful residence, recent-years presence and the C permit requirement in ordinary naturalisation.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "ordinary_swiss_naturalisation_eligibility",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "ordinary_vs_facilitated_naturalisation",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Company Formation Is Not Founder Work Authorisation",
+    "angle": "Explains why setting up a Swiss company does not automatically authorise a founder to live and work in Switzerland.",
+    "audience": "global_businesses",
+    "article_type": "myth_correction",
+    "pillar": "entrepreneur_and_business_founder",
+    "subtopic": "company_formation_vs_work_authorisation",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "entrepreneur_work_authorisation",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "ICT Refusals: When an Assignment Looks Like Disguised Local Hiring",
+    "angle": "Explains refusal risks where an intra-company transfer appears to be ordinary local recruitment.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "intra_company_transfer",
+    "subtopic": "refusals_and_disguised_local_hire_risks",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "ict_refusal_strategy",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa 90/180 Rule: Why It Is Not 90 Days Per Trip",
+    "angle": "Explains rolling-count logic and common planning mistakes for repeat Schengen travellers.",
+    "audience": "general_global",
+    "article_type": "procedural_strategy",
+    "pillar": "schengen_visa",
+    "subtopic": "90_180_day_rule_and_overstay_risk",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_90_180_and_overstay",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Unmarried Partner Reunification: What Counts as a Durable Relationship?",
+    "angle": "Explains evidence and hardship-sensitive reasoning in discretionary unmarried partner cases.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "unmarried_partner",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -538,6 +1138,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Student Permit Renewal: What If Your Course Direction Changes?",
+    "angle": "Explains renewal, academic progress, course changes and second-education risks in student residence cases.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "student_permit",
+    "subtopic": "course_change_second_education_extensions",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_permit_renewal",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "EU/EFTA Self-Employment in Switzerland: What Shows Genuine Activity?",
+    "angle": "Explains how EU/EFTA self-employed applicants can evidence genuine economic activity and residence basis.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "eu_efta_hiring_into_switzerland",
+    "subtopic": "self_employment_and_genuine_activity",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "eu_efta_self_employment",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Project Assignment or Posted Work: Why the Client-Site Role Matters",
+    "angle": "Explains how client-site supervision and recipient role affect route selection for short assignments.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "short_term_assignment_project_based_work",
+    "subtopic": "client_site_supervision_and_recipient_role",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "client_site_work",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Children Approaching Age Limits in Swiss Family Reunification",
+    "angle": "Explains timing, age-threshold and evidence risks for child reunification applications.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "children_approaching_age_limits",
+    "route_type": "issue_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_child_timing",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Founder Business Plans in Switzerland: What Makes the File Persuasive?",
+    "angle": "Explains how founders can evidence commercial substance, economic interest and implementation credibility.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "entrepreneur_and_business_founder",
+    "subtopic": "business_plan_and_evidence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "entrepreneur_evidence_strategy",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence Main Home Requirement: What Shows a Real Move?",
+    "angle": "Explains factual residence, main home and centre-of-life evidence in retirement residence cases.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "retirement_permit",
+    "subtopic": "main_home_physical_presence_and_centre_of_life",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_presence_centre_of_life",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Business Visitor Visa or Work Permit? Where the Schengen Visa Boundary Sits",
     "angle": "Explains the difference between permitted business visits and activity that may require Swiss work authorisation.",
     "audience": "global_individuals",
@@ -554,6 +1274,126 @@
       "Do not imply all business travel is permitted under a Type C visa.",
       "Compare meetings and negotiations with productive work.",
       "Cross-reference work permit risk without turning the article into a work permit guide."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Work Trial or Shadowing: When Unpaid Activity Still Needs Authorisation",
+    "angle": "Explains why unpaid trials, work shadowing and training can still raise Swiss work-authorisation issues.",
+    "audience": "global_businesses",
+    "article_type": "myth_correction",
+    "pillar": "route_selection_mixed_fact_pattern",
+    "subtopic": "unpaid_work_trial_work_shadowing_and_training",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "unpaid_work_sensitive",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "employment_law_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "G Permit Renewal and Employer Change: What Should Frontier Workers Check First?",
+    "angle": "Explains renewal, employer change and continuity issues for Swiss frontier worker permits.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "frontier_worker_g_permit",
+    "subtopic": "renewals_employer_changes_and_continuity",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "frontier_worker_renewal",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit for Minors: What Supervision Arrangements Need to Show",
+    "angle": "Explains minor student cases, boarding school arrangements, supervision and practical evidence.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "student_permit",
+    "subtopic": "minors_boarding_schools_supervision",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_permit_minors",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Senior Specialist Hire: What Makes Expertise Look Truly Scarce?",
+    "angle": "Shows employers how to evidence specialist know-how in a way that fits Swiss non-EU sponsorship logic.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "senior_specialist_hire",
+    "subtopic": "unique_skills_and_candidate_profile",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "senior_specialist_profile",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Family Members in Swiss Lump Sum Taxation Cases: Residence, Work and Timing",
+    "angle": "Explains dependant inclusion, spouse work questions and practical family planning under lump-sum residence.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "family_members_and_derivative_residence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_family_and_dependants",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit for Language School: When Is the Course Plan Persuasive?",
+    "angle": "Explains language school and preparatory course cases, including educational purpose, progression and credibility.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "student_permit",
+    "subtopic": "language_schools_preparatory_courses",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_course_type",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -578,6 +1418,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Commune Registration Problems After Hiring an EU Employee",
+    "angle": "Focuses on practical document and timing issues that delay smooth onboarding for EU/EFTA hires after job offer.",
+    "audience": "inside_switzerland_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "eu_efta_hiring_into_switzerland",
+    "subtopic": "employee_registration_and_residence_procedure",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "eu_efta_employee_registration",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Can You Marry in Switzerland on a Tourist Visa and Then Stay?",
+    "angle": "Corrects a common misconception by explaining why marriage formalities and residence permission are separate.",
+    "audience": "global_individuals",
+    "article_type": "myth_correction",
+    "pillar": "family_reunification",
+    "subtopic": "fiance_and_intended_marriage",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Non-EU Local Hire Refused: How Employers Can Rebuild the File",
+    "angle": "Explains refusal analysis, evidence gaps and re-filing strategy after a failed non-EU work permit application.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "non_eu_local_hire",
+    "subtopic": "refusals_and_rebuilding_the_file",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "non_eu_work_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Choosing a Canton for Swiss Lump Sum Taxation Residence",
+    "angle": "Explains why canton choice affects tax-ruling negotiation, scrutiny level and route suitability.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "canton_selection_availability_and_practice",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_canton_selection",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Trainee Stagiaire Route: When Training Is a Real Immigration Category",
+    "angle": "Explains the training-based logic of the stagiaire route and how it differs from ordinary employment.",
+    "audience": "global_businesses",
+    "article_type": "myth_correction",
+    "pillar": "trainee_stagiaire_route",
+    "subtopic": "training_purpose_and_genuine_route",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "trainee_stagiaire_route",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation Interviews: Why Local Procedure Can Matter",
+    "angle": "Explains commune and cantonal interviews, local integration evidence and procedure-sensitive risks.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "cantonal_communal_procedure",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "naturalisation_local_procedure",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "L Permit, B Permit or C Permit in Switzerland: What Changes for Long-Term Planning?",
     "angle": "Compares Swiss L, B and C permits for stability, renewal, family planning, labour-market access and naturalisation strategy.",
     "audience": "inside_switzerland_individuals",
@@ -594,6 +1554,126 @@
       "Do not oversimplify permit categories as a linear ladder in every case.",
       "Explain renewal and stability differences.",
       "Flag that nationality and route can affect progression."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Graduate Work Permit Refused: Was the Role, Timing or Employer Evidence the Problem?",
+    "angle": "Explains refusal risks for graduates switching from study to work in Switzerland.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "graduate_switch_study_to_work",
+    "subtopic": "refusals_timing_errors_and_reapplications",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "graduate_switch_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Downgrade or Revocation: What Risks Should Applicants Understand?",
+    "angle": "Explains post-grant settlement risks including downgrade, revocation and conduct-sensitive issues.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "downgrade_revocation_and_recovery",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_post_grant_stability",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Short-Term Assignment: When Urgency Helps the Story but Not the Legal Test",
+    "angle": "Explains project urgency, timing and evidential risks in short-term Swiss work assignments.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "short_term_assignment_project_based_work",
+    "subtopic": "project_urgency_and_timing_strategy",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "short_term_assignment_strategy",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Child Reunification After Long Separation: How to Handle Custody and Consent",
+    "angle": "Covers difficult child reunification cases where separation, custody or consent issues create scrutiny.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "child_reunification",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_child_timing",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Artists and Performers Working in Switzerland: When Is a Special Route Relevant?",
+    "angle": "Explains immigration issues for artists, performers and cultural workers, including engagements and evidence.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "special_employment_categories",
+    "subtopic": "artists_performers_and_cultural_workers",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "special_employment_categories",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Staying Abroad Too Long on a Swiss C Permit: When Settlement Can Lapse",
+    "angle": "Explains lapse risk, long absences and why repeated short returns may not preserve status.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "absence_lapse_and_preservation",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_absence_and_preservation",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -618,6 +1698,126 @@
     "status": "unused"
   },
   {
+    "topic": "EU/EFTA Employment Changes in Switzerland: When Does Status Need Rechecking?",
+    "angle": "Explains employment changes, unemployment and retention-of-status issues for EU/EFTA nationals.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "eu_efta_hiring_into_switzerland",
+    "subtopic": "employment_changes_unemployment_and_retention_of_status",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "eu_efta_status_retention",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Academic and Research Roles in Switzerland: When Special Employment Rules May Help",
+    "angle": "Explains immigration issues for academic, research and teaching roles in Switzerland.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "special_employment_categories",
+    "subtopic": "academic_research_and_teaching_roles",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "special_employment_categories",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Lump Sum Taxation Renewal Risk: What Can Change After the First Permit?",
+    "angle": "Explains compliance, renewal and loss-of-status risks after initial lump-sum residence approval.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "compliance_renewal_and_loss_of_status",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_renewal_compliance",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "C Permit and Naturalisation Planning: Why Settlement Is Not the End",
+    "angle": "Explains how C permit status affects later citizenship planning but does not replace naturalisation requirements.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "c_permit_and_naturalisation",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_and_citizenship",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Business Visitor Visa or Work Permit? Where the Boundary Sits",
+    "angle": "Explains professional activity, business visits and work-permit risk in Swiss short-stay contexts.",
+    "audience": "general_global",
+    "article_type": "comparison_piece",
+    "pillar": "schengen_visa",
+    "subtopic": "business_visits_work_boundary_and_professional_activity",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_business_work_boundary",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "employment_law_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Senior Specialist Hire Refused: Weak Points Employers Should Review",
+    "angle": "Explains refusal risks in senior specialist work permit cases and how to identify weak evidence.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "senior_specialist_hire",
+    "subtopic": "refusals_and_weak_points",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "senior_specialist_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Unmarried Partner Refused Swiss Family Reunification: Was the Problem Evidence, Discretion or Route Choice?",
     "angle": "Analyses refusals in unmarried partner cases and explains how to identify whether the weakness was relationship evidence, hardship reasoning or route selection.",
     "audience": "refused_applicants",
@@ -634,6 +1834,126 @@
       "Do not imply refusal means the relationship is not genuine.",
       "Separate durability evidence from legal route weakness.",
       "Avoid suggesting appeal or reapplication without analysing the decision."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence for EU/EFTA Retirees: What Is Different?",
+    "angle": "Explains retirement residence issues for EU/EFTA nationals, including resources, insurance and residence logic.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "retirement_permit",
+    "subtopic": "eu_efta_retirees",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_eu_vs_non_eu",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification Refused for Housing or Finances",
+    "angle": "Analyses refusals based on affordability, household formation or sponsor stability.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "inadequate_housing",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_refusal_strategy",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Can a Founder Work for Their Own Swiss Company?",
+    "angle": "Explains founder role, salary, employment structure and the immigration boundary between ownership and work.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "entrepreneur_and_business_founder",
+    "subtopic": "founder_role_salary_and_employment_structure",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "entrepreneur_work_authorisation",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Work Rules: When Can Study and Employment Fit Together?",
+    "angle": "Explains student work, internships and the risks of treating student residence as a work route.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "student_permit",
+    "subtopic": "student_work_and_internships",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_work_internships",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Remote Work From Switzerland for a Foreign Employer: When Does Risk Arise?",
+    "angle": "Explains remote-work fact patterns and when residence or work authorisation analysis may be needed.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "work_permits",
+    "subtopic": "remote_work_and_foreign_employer_fact_patterns",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "remote_work_risk",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "employment_law_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Trainee Route Refused: When Swiss Authorities See Disguised Employment",
+    "angle": "Explains refusal risks in trainee and stagiaire cases where the role looks like ordinary employment.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "trainee_stagiaire_route",
+    "subtopic": "refusals_and_disguised_employment_risks",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "trainee_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -658,6 +1978,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Schengen Visa Financial Means: Funds, Sponsorship and Declarations",
+    "angle": "Explains financial means, sponsorship and declaration evidence in Swiss Schengen visa applications.",
+    "audience": "general_global",
+    "article_type": "evidence_strategy",
+    "pillar": "schengen_visa",
+    "subtopic": "financial_means_sponsorship_and_declaration",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_financial_means",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation After Absence or Interrupted Residence",
+    "angle": "Explains residence continuity, absences and timing risks in Swiss naturalisation applications.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "naturalisation_after_absence_or_interrupted_residence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "swiss_citizenship_residence_counting",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Entrepreneur Investment Evidence: What Shows Financial Viability?",
+    "angle": "Explains how investment, funding and financial viability evidence supports founder permit strategy.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "entrepreneur_and_business_founder",
+    "subtopic": "investment_funding_and_financial_viability",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "entrepreneur_financial_viability",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit Procedure: Consulate, Canton and SEM Sequencing",
+    "angle": "Explains the procedural sequence for student permit applications from abroad.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "student_permit",
+    "subtopic": "procedure_visa_consular_canton_sem",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_procedure",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "EU/EFTA Family Members in Switzerland: Who Has Derived Residence Rights?",
+    "angle": "Explains family-member and derived residence issues for EU/EFTA workers and residents.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "eu_efta_hiring_into_switzerland",
+    "subtopic": "family_members_and_derived_residence_rights",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "eu_efta_family_members",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Preservation Before an Overseas Assignment or Study Period",
+    "angle": "Explains timing and procedural steps for requesting preservation before a longer absence abroad.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "preservation_procedure_and_timing",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_absence_and_preservation",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Housing and Health Insurance for Swiss Retirement Residence: Practical Conditions That Can Decide the Case",
     "angle": "Explains why accommodation, household formation and health insurance matter in retirement residence applications.",
     "audience": "global_individuals",
@@ -674,6 +2114,126 @@
       "Do not reduce the route to financial resources alone.",
       "Explain accommodation and insurance evidence.",
       "Flag differences between EU/EFTA and non-EU/EFTA applicants where relevant."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification for Stepchildren: Evidence and Consent Issues",
+    "angle": "Explains blended-family and stepchild cases, including custody, consent and relationship evidence.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "stepchild_and_blended_family",
+    "route_type": "issue_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_child_timing",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence for Non-EU Retirees: Why Discretion Matters",
+    "angle": "Explains the more discretionary nature of non-EU retirement residence and the importance of evidence.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "retirement_permit",
+    "subtopic": "non_eu_efta_retirees",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_eu_vs_non_eu",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Short-Term Assignment: Business Visit or Project Work?",
+    "angle": "Compares business visits and project-based work for short Swiss assignments.",
+    "audience": "global_businesses",
+    "article_type": "comparison_piece",
+    "pillar": "short_term_assignment_project_based_work",
+    "subtopic": "business_visit_vs_project_work",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "short_term_assignment_route_selection",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Athletes and Coaches Working in Switzerland: Immigration Issues to Check",
+    "angle": "Explains immigration issues for athletes, coaches and sports professionals.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "special_employment_categories",
+    "subtopic": "athletes_coaches_and_sports_professionals",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "special_employment_categories",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Lump Sum Taxation and Physical Presence: How Much Substance Is Enough?",
+    "angle": "Explains residence substance, tax domicile and centre-of-life issues in lump-sum taxation cases.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "physical_presence_tax_domicile_and_centre_of_life",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_presence_centre_of_life",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Graduate Switch: What Counts as High Scientific or Economic Interest?",
+    "angle": "Explains the special role-fit analysis for graduates seeking to move from study into work.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "graduate_switch_study_to_work",
+    "subtopic": "high_scientific_or_economic_interest",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "graduate_switch_role_fit",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -698,6 +2258,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Child Reunification for Older Teenagers: Why Timing Is Critical",
+    "angle": "Explains age, timing and integration risks in older-child reunification cases.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "late_child_reunification",
+    "route_type": "issue_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_child_timing",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation Residence Counting: Which Periods Count and Which Do Not?",
+    "angle": "Explains residence-counting issues in ordinary naturalisation, including mixed histories and interruptions.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "swiss_citizenship",
+    "subtopic": "residence_counting_and_continuity",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "swiss_citizenship_residence_counting",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Posted Worker Regulated Sectors: Why Some Assignments Need Extra Checks",
+    "angle": "Explains regulated-sector risks and special controls for posted workers in Switzerland.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "posted_worker_notification",
+    "subtopic": "regulated_sectors_and_special_controls",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "posted_worker_regulated_sectors",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "employment_law_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Frontier Worker Remote Work: Can Hybrid Working Put a G Permit at Risk?",
+    "angle": "Explains how remote and hybrid work patterns may affect frontier worker status.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "frontier_worker_g_permit",
+    "subtopic": "remote_hybrid_work_and_status_risk",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "frontier_worker_remote_work",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit for Higher Education: What Schools and Programmes Must Show",
+    "angle": "Explains higher-education student permit cases, programme credibility and school evidence.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "student_permit",
+    "subtopic": "higher_education_students",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_programme_requirements",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Religious Workers and Mission Roles: Immigration Issues to Check Early",
+    "angle": "Explains route selection, evidence and activity classification for religious workers and mission roles.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "special_employment_categories",
+    "subtopic": "religious_workers_and_mission_roles",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "special_employment_categories",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Naturalisation Interviews and Local Procedure: Why the Commune Can Matter",
     "angle": "Explains cantonal and communal procedure, interviews, local knowledge and practice-sensitive naturalisation risks.",
     "audience": "inside_switzerland_individuals",
@@ -714,6 +2394,126 @@
       "Do not imply all communes follow the same process.",
       "Explain interviews, local knowledge and procedural variation.",
       "Separate federal requirements from cantonal and communal practice."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Lump Sum Taxation vs Other HNWI Residence Routes",
+    "angle": "Compares lump-sum taxation with other residence strategies for high-net-worth individuals.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "comparison_with_other_hnwi_residence_routes",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_route_comparison",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation Integration Evidence: What Goes Beyond Language?",
+    "angle": "Explains broader integration evidence, local readiness and conduct-sensitive issues in naturalisation.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "integration_requirements",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "swiss_citizenship_language_integration",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Founder Job Creation: How Much Labour-Market Benefit Must the Plan Show?",
+    "angle": "Explains job creation and labour-market benefit evidence in entrepreneur work authorisation cases.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "entrepreneur_and_business_founder",
+    "subtopic": "job_creation_and_labour_market_benefit",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "entrepreneur_economic_interest",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification With Weak Civil Status or DNA Evidence",
+    "angle": "Explains identity, relationship and evidential credibility issues in complex family reunification files.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "weak_civil_status_identity_or_dna_evidence",
+    "route_type": "issue_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_evidence",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa Accommodation and Invitation Evidence",
+    "angle": "Explains host letters, accommodation evidence and credibility risks in Swiss Schengen visa files.",
+    "audience": "general_global",
+    "article_type": "evidence_strategy",
+    "pillar": "schengen_visa",
+    "subtopic": "accommodation_invitation_and_host_evidence",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_host_evidence",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Non-EU Local Hire Family Planning: What Happens After the Work Permit?",
+    "angle": "Explains family and long-term residence planning for non-EU employees moving to Switzerland.",
+    "audience": "global_businesses",
+    "article_type": "procedural_strategy",
+    "pillar": "non_eu_local_hire",
+    "subtopic": "family_and_long_term_residence_planning",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "non_eu_family_long_term",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -738,6 +2538,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Student Permit Refused: Was It Study Plan, Finance or Credibility?",
+    "angle": "Explains how to diagnose student permit refusals and consider appeal or reapplication strategy.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "student_permit",
+    "subtopic": "refusals_appeals_reapplication",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_permit_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Fast Track: Why Five Years Does Not Always Mean Automatic Settlement",
+    "angle": "Explains the different five-year settlement pathways and their evidence and integration limits.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "myth_correction",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "fast_track_c_permit",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_fast_track_and_integration",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Work Permit Route Selection for Directors, Board Members and Shareholders",
+    "angle": "Explains when governance, ownership and operational activity can become immigration-relevant work.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "route_selection_mixed_fact_pattern",
+    "subtopic": "directors_board_members_and_shareholders",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "company_role_work_boundary",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Permit Renewals: What Can Change After Arrival?",
+    "angle": "Explains renewal and long-term planning issues in Swiss retirement residence cases.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "retirement_permit",
+    "subtopic": "permit_type_duration_renewal_and_long_term_planning",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_renewal_planning",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "ICT Duration and Localisation: When a Temporary Assignment Stops Looking Temporary",
+    "angle": "Explains duration, renewal, return and localisation risks in intra-company transfer cases.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "intra_company_transfer",
+    "subtopic": "duration_renewal_and_return_or_localisation",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "ict_duration_localisation",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Medical Insurance and Biometrics: Where Simple Files Go Wrong",
+    "angle": "Explains insurance, biometrics and evidential issues in Swiss Schengen applications.",
+    "audience": "general_global",
+    "article_type": "procedural_strategy",
+    "pillar": "schengen_visa",
+    "subtopic": "medical_insurance_and_biometrics",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_documents_procedure",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Lump Sum Taxation Renewal Risk: What Can Change After the First Residence Permit Is Granted?",
     "angle": "Explains compliance, renewal, business activity, physical presence and loss-of-status risks after initial approval.",
     "audience": "global_individuals",
@@ -754,6 +2674,126 @@
       "Do not imply initial approval guarantees renewal.",
       "Explain continuing tax and immigration compliance.",
       "Cover changes in business activity, family circumstances and residence pattern."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Citizenship After Moving Canton: Why Local Residence Timing Matters",
+    "angle": "Explains cantonal and communal residence rules and timing risks before applying for naturalisation.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "swiss_citizenship",
+    "subtopic": "cantonal_communal_procedure",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "naturalisation_local_procedure",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Unmarried Partner Refused Swiss Family Reunification: Evidence or Route Choice?",
+    "angle": "Explains refusal diagnosis in discretionary unmarried partner reunification cases.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "unmarried_partner",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Accommodation and Insurance: Practical Conditions That Can Decide the File",
+    "angle": "Explains housing, insurance and practical-condition evidence in student permit applications.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "student_permit",
+    "subtopic": "accommodation_insurance_and_practical_conditions",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_finances_housing_and_insurance",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "EU/EFTA Transitional Safeguards: Why Country-Specific Rules Still Need Checking",
+    "angle": "Explains transitional safeguards and country-specific EU/EFTA work and residence issues.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "eu_efta_hiring_into_switzerland",
+    "subtopic": "transitional_safeguard_and_country_specific_rules",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "eu_efta_country_specific_rules",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Lump Sum Taxation No-Gainful-Activity Rule: Foreign Business and Board Roles",
+    "angle": "Explains the no-gainful-activity boundary for lump-sum taxation residents with foreign business interests.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "no_gainful_activity_foreign_business_and_board_roles",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_activity_boundary",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Volunteering and Unpaid Work in Switzerland: Why Immigration Risk Can Still Arise",
+    "angle": "Explains when volunteering, unpaid work and internships may still need immigration analysis.",
+    "audience": "global_individuals",
+    "article_type": "myth_correction",
+    "pillar": "special_employment_categories",
+    "subtopic": "volunteers_unpaid_work_and_internships",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "special_employment_categories",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -778,6 +2818,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss C Permit Financial Self-Sufficiency: When Debts or Assistance Become Risky",
+    "angle": "Explains financial self-sufficiency, debt and public-funds risks in settlement applications.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "financial_self_sufficiency_and_debt_risk",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_language_and_compliance",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "social_assistance_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit for Vocational or Hotel School Programmes",
+    "angle": "Explains vocational, hotel-school and professional education student permit issues.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "student_permit",
+    "subtopic": "vocational_hotel_school_professional_education",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_programme_requirements",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Frontier Worker Refusal: What Compliance Problems Do Authorities Notice?",
+    "angle": "Explains refusal and compliance risks in G permit cases, including residence, employment and evidence problems.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "frontier_worker_g_permit",
+    "subtopic": "refusals_and_compliance_risks",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "frontier_worker_refusals",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation Drafting Cautions: What Should Not Be Overstated?",
+    "angle": "Explains how applicants should avoid overclaiming integration, residence or entitlement in naturalisation submissions.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "drafting_cautions_and_proposition_bank",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "naturalisation_evidence_strategy",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa EES, VIS and Digital Records: Why Travel History Matters",
+    "angle": "Explains digital records, prior travel, overstay concerns and credibility in Swiss Schengen files.",
+    "audience": "general_global",
+    "article_type": "risk_analysis",
+    "pillar": "schengen_visa",
+    "subtopic": "ees_vis_and_digital_records",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_travel_history",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Entrepreneur Renewals: What If the Business Underperforms?",
+    "angle": "Explains renewal, business performance and continuity risks for founder permit holders.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "entrepreneur_and_business_founder",
+    "subtopic": "renewals_business_performance_and_continuity",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "entrepreneur_renewal_strategy",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Work Permit Salary and Local Conditions: Why the Contract Matters",
     "angle": "Explains salary, local employment conditions, allowances, working terms and labour-market compliance evidence.",
     "audience": "employers_and_hr",
@@ -794,6 +2954,126 @@
       "Do not focus only on gross salary.",
       "Explain local employment conditions and contract evidence.",
       "Flag secondment and allowance issues where relevant."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence and Personal Ties: How Much Connection Helps?",
+    "angle": "Explains personal ties to Switzerland and how they may support a retirement residence strategy.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "retirement_permit",
+    "subtopic": "personal_ties_to_switzerland",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_personal_ties",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Trainee Training Plan: What Supervision and Skills Development Need to Show",
+    "angle": "Explains training plans, supervision and skill-development evidence in stagiaire applications.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "trainee_stagiaire_route",
+    "subtopic": "training_plan_supervision_and_skills_development",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "trainee_stagiaire_evidence",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa Entry Conditions: What Border Officers May Still Check",
+    "angle": "Explains visa grant versus border entry conditions and evidence to carry when entering Switzerland.",
+    "audience": "general_global",
+    "article_type": "risk_analysis",
+    "pillar": "schengen_visa",
+    "subtopic": "entry_conditions_and_border_checks",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_entry_conditions",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Family Reunification After Separation or Divorce: Can Residence Continue?",
+    "angle": "Explains post-breakdown residence issues after family reunification in Switzerland.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "separation_divorce_and_family_breakdown",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_post_breakdown",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Senior Specialist Salary: How Seniority and Market Alignment Fit Together",
+    "angle": "Explains salary, seniority and market-alignment evidence in senior specialist work permit files.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "senior_specialist_hire",
+    "subtopic": "salary_seniority_and_market_alignment",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "senior_specialist_salary",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Lump Sum Taxation Procedure: Tax Ruling, Canton and Immigration Sequencing",
+    "angle": "Explains procedural sequencing and evidence in lump-sum taxation residence cases.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "procedure_sequencing_and_evidence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_procedure",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -818,6 +3098,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss C Permit Family Planning: Why Settlement Status Can Change Strategy",
+    "angle": "Explains how C permit status may affect family settlement planning and later applications.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "family_settlement_planning",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_family_planning",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit for Non-EU Students: Why Scrutiny Is Often Higher",
+    "angle": "Explains non-EU student permit issues, including study purpose, finances and return-credibility concerns.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "student_permit",
+    "subtopic": "non_eu_efta_students",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_route_eu_vs_non_eu",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Fees, Exemptions and Facilitation: Who Benefits?",
+    "angle": "Explains fee exemptions and facilitation issues in Swiss Schengen visa applications.",
+    "audience": "general_global",
+    "article_type": "comparison_piece",
+    "pillar": "schengen_visa",
+    "subtopic": "fees_exemptions_and_facilitation",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_fees_facilitation",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Domestic Workers and Private Household Staff: Immigration Issues to Check",
+    "angle": "Explains immigration issues for domestic workers and private household staff.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "special_employment_categories",
+    "subtopic": "domestic_workers_and_private_household_staff",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "special_employment_categories",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence Procedure: Consulate, Canton and Evidence Sequencing",
+    "angle": "Explains procedural sequencing and evidence in retirement residence applications.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "retirement_permit",
+    "subtopic": "procedure_sequencing_and_evidence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_procedure",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification From Abroad: Why D Visa Sequencing Matters",
+    "angle": "Explains application-from-abroad procedure, D visa timing and canton/SEM sequencing.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "procedure_from_abroad_and_d_visa_sequencing",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_procedure",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Swiss Schengen Visa or Type D Visa: Choosing the Right Entry Route",
     "angle": "Compares Schengen Type C visas with Swiss Type D visas and residence permit procedures for applicants planning different lengths or purposes of stay.",
     "audience": "global_individuals",
@@ -834,6 +3234,126 @@
       "Do not imply a Type C visa can be used for long-term residence.",
       "Explain short stay versus long stay clearly.",
       "Flag work and residence authorisation boundaries."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Work Permit Changes and Renewals: How to Avoid Continuity Problems",
+    "angle": "Explains employment changes, renewals and continuity issues in Swiss work permit planning.",
+    "audience": "inside_switzerland_businesses",
+    "article_type": "procedural_strategy",
+    "pillar": "work_permits",
+    "subtopic": "employment_changes_renewals_and_permit_continuity",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "work_permit_continuity",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit Duration and Renewal: What Progress Evidence Matters?",
+    "angle": "Explains permit duration, renewal and progress evidence in student residence cases.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "student_permit",
+    "subtopic": "type_duration_renewal_progress",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_permit_renewal",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Posted Worker Service Provider and Client Structure: Why the Contracting Model Matters",
+    "angle": "Explains service-provider structure, client role and compliance risks in posted-worker cases.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "posted_worker_notification",
+    "subtopic": "service_provider_and_client_structure",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "posted_worker_structure",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Citizenship Through Marriage: Why Facilitated Naturalisation Is Not Automatic",
+    "angle": "Explains facilitated naturalisation by marriage and evidence that may matter.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "myth_correction",
+    "pillar": "swiss_citizenship",
+    "subtopic": "facilitated_swiss_naturalisation_by_marriage",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "facilitated_naturalisation",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa Requirement Exemptions: Who Needs a Visa and Who Does Not?",
+    "angle": "Explains visa requirement exemptions and competent-state issues for Swiss Schengen travel.",
+    "audience": "general_global",
+    "article_type": "comparison_piece",
+    "pillar": "schengen_visa",
+    "subtopic": "requirement_exemptions_and_competent_state",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_requirement_exemptions",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Founder Economic Interest: What Makes a Business Matter to the Canton?",
+    "angle": "Explains economic interest, business substance and cantonal discretion in founder cases.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "entrepreneur_and_business_founder",
+    "subtopic": "economic_interest_and_business_substance",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "entrepreneur_economic_interest",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -858,6 +3378,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss C Permit Centre of Life: Why Day Counting Is Not the Whole Answer",
+    "angle": "Explains factual residence, centre of life and evidence issues in C-permit stability.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "centre_of_life_and_factual_residence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_absence_and_preservation",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit and Family Members: Who Can Come With the Student?",
+    "angle": "Explains derivative residence and family-member planning in student permit cases.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "student_permit",
+    "subtopic": "family_members_and_derivative_residence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_family_members",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence vs Lump Sum Taxation: Which Route Fits Better?",
+    "angle": "Compares retirement residence with lump-sum taxation and other HNWI routes.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "retirement_permit",
+    "subtopic": "comparison_with_lump_sum_and_other_hnwi_routes",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_lump_sum_comparison",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification Social Assistance Risk: What Sponsors Should Check",
+    "angle": "Explains social assistance, supplementary benefits and income risks in family reunification.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "social_assistance_supplementary_benefits_or_income_risk",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_financial_and_housing_requirements",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "social_assistance_adjacent",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Senior Specialist Role Design: Why Commercial Necessity Matters",
+    "angle": "Explains commercial necessity and role-design evidence in senior specialist work permit files.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "senior_specialist_hire",
+    "subtopic": "commercial_necessity_and_role_design",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "senior_specialist_role_design",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Visa Permitted Purposes: Where Short Stay Limits Sit",
+    "angle": "Explains permitted purposes, short-stay limits and route mismatch in Schengen visa planning.",
+    "audience": "general_global",
+    "article_type": "risk_analysis",
+    "pillar": "schengen_visa",
+    "subtopic": "permitted_purposes_and_short_stay_limits",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_purpose_and_activity",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Ordinary Swiss C Permit Eligibility: What Applicants Should Check Before Applying",
     "angle": "Explains ordinary C permit eligibility, residence duration, continuity, integration, finances and compliance.",
     "audience": "inside_switzerland_individuals",
@@ -874,6 +3514,126 @@
       "Do not imply residence duration alone is enough.",
       "Explain integration, language and compliance evidence.",
       "Flag nationality and canton-sensitive issues where relevant."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation C Permit Requirement: What Should Be Checked First?",
+    "angle": "Explains the C permit prerequisite and why citizenship readiness needs more than settlement status.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "swiss_citizenship",
+    "subtopic": "c_permit_requirement",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_and_citizenship",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Intra-Company Transfer Salary and Local Conditions",
+    "angle": "Explains salary, employment structure and local-condition risks in ICT applications.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "intra_company_transfer",
+    "subtopic": "salary_local_conditions_and_employment_structure",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "ict_salary_structure",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Lump Sum Taxation Expenditure Minimums: Why the Control Calculation Matters",
+    "angle": "Explains expenditure minimums and control-calculation issues in lump-sum taxation planning.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "expenditure_minimums_and_control_calculation",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_expenditure_calculation",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Graduate Switch Long-Term Planning: How Study and Work Affect Later C Permit Strategy",
+    "angle": "Explains long-term residence and C-permit planning after a graduate switch from study to work.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "graduate_switch_study_to_work",
+    "subtopic": "long_term_residence_and_c_permit_planning",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "graduate_switch_long_term",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Post-Grant Risk Management: What Still Remains Conditional?",
+    "angle": "Explains why settlement status is more stable than a B permit but still not unconditional.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "myth_correction",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "post_grant_c_permit_risk_management",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_post_grant_stability",
+    "style_profile": "myth_busting",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification Sponsor Status: Swiss, EU/EFTA or Non-EU?",
+    "angle": "Compares sponsor-status differences in family reunification cases.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "family_reunification",
+    "subtopic": "sponsor_status_and_nationality_comparison",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_sponsor_category_comparisons",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
@@ -898,6 +3658,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Student Permit Cantonal Practice: Why Private School Cases Need Local Care",
+    "angle": "Explains cantonal practice, private school and local-procedure issues in student permit cases.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "student_permit",
+    "subtopic": "cantonal_practice_private_schools_local_procedure",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_cantonal_practice",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Schengen Overstay Risk: What Happens After a 90/180 Mistake?",
+    "angle": "Explains overstay risk, future credibility and practical next steps after Schengen day-count errors.",
+    "audience": "refused_applicants",
+    "article_type": "risk_analysis",
+    "pillar": "schengen_visa",
+    "subtopic": "90_180_day_rule_and_overstay_risk",
+    "route_type": "broad",
+    "legal_complexity": "medium",
+    "overlap_group": "schengen_90_180_and_overstay",
+    "style_profile": "risk_focused",
+    "search_intent": "urgent_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Retirement Residence Housing and Insurance: Practical Conditions That Matter",
+    "angle": "Explains housing, health insurance and practical-condition evidence in retirement residence cases.",
+    "audience": "global_individuals",
+    "article_type": "evidence_strategy",
+    "pillar": "retirement_permit",
+    "subtopic": "housing_insurance_and_practical_conditions",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "retirement_practical_conditions",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification Sham Marriage or Abuse Risk: What Authorities May Examine",
+    "angle": "Explains public-order, abuse and genuineness risks in spouse reunification cases.",
+    "audience": "global_individuals",
+    "article_type": "risk_analysis",
+    "pillar": "family_reunification",
+    "subtopic": "sham_marriage_abuse_or_public_order_risk",
+    "route_type": "issue_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Short-Term Assignment Repeat Visits: When Cumulative Presence Becomes a Problem",
+    "angle": "Explains repeat assignments and cumulative presence in short-term Swiss work planning.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "short_term_assignment_project_based_work",
+    "subtopic": "repeat_assignments_and_cumulative_presence",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "short_term_assignment_presence",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Naturalisation Refusal: When Evidence Repair Beats a New Filing",
+    "angle": "Explains refusal, postponement and evidence-repair strategy in citizenship applications.",
+    "audience": "refused_applicants",
+    "article_type": "refusal_analysis",
+    "pillar": "swiss_citizenship",
+    "subtopic": "refusal_postponement_and_appeal",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "naturalisation_refusal_strategy",
+    "style_profile": "case_led",
+    "search_intent": "post_refusal_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Adult Dependent Relative Reunification: What Evidence Shows Real Dependency on a Family Member in Switzerland?",
     "angle": "Explains the evidence needed to show dependency, care needs, lack of realistic care abroad and long-term financial responsibility.",
     "audience": "global_individuals",
@@ -918,6 +3798,126 @@
     "status": "unused"
   },
   {
+    "topic": "Swiss Lump Sum Taxation Tax Eligibility: Who Fits the Route?",
+    "angle": "Explains tax eligibility, conditions and immigration fit for lump-sum taxation residence.",
+    "audience": "global_individuals",
+    "article_type": "comparison_piece",
+    "pillar": "lump_sum_taxation",
+    "subtopic": "tax_eligibility_and_conditions",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "lump_sum_eligibility",
+    "style_profile": "comparison_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "tax_and_immigration_boundary",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification After Marriage Abroad: What Should Be Prepared Before Filing?",
+    "angle": "Explains spouse reunification preparation after an existing foreign marriage.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "spouse_and_registered_partner",
+    "route_type": "route_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Non-EU Local Hire Labour Market Test: What Recruitment Evidence Helps?",
+    "angle": "Explains recruitment evidence and employer burden in non-EU local hire applications.",
+    "audience": "global_businesses",
+    "article_type": "evidence_strategy",
+    "pillar": "non_eu_local_hire",
+    "subtopic": "labour_market_test",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "non_eu_local_hire_admission",
+    "style_profile": "evidence_led",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Student Permit to Work Transition: What Should Be Planned Before Graduation?",
+    "angle": "Explains post-study work transition and timing issues for students in Switzerland.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "student_permit",
+    "subtopic": "post_study_job_search_and_work_transition",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "student_to_work_transition",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss C Permit Ordinary Eligibility: What Should Applicants Check Before Applying?",
+    "angle": "Explains ordinary C-permit eligibility and common timing mistakes before settlement applications.",
+    "audience": "inside_switzerland_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "settlement_and_c_permit",
+    "subtopic": "ordinary_c_permit_eligibility",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "c_permit_eligibility_and_counting",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Posted Worker Enforcement: Why Compliance Starts Before Notification",
+    "angle": "Explains enforcement and compliance risks for employers using the posted-worker notification route.",
+    "audience": "global_businesses",
+    "article_type": "risk_analysis",
+    "pillar": "posted_worker_notification",
+    "subtopic": "common_miscalculations_and_enforcement_risks",
+    "route_type": "broad",
+    "legal_complexity": "high",
+    "overlap_group": "posted_worker_compliance",
+    "style_profile": "risk_focused",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
+    ],
+    "status": "unused"
+  },
+  {
     "topic": "Remote Work from Switzerland for a Foreign Employer: When Does Immigration Risk Arise?",
     "angle": "Explains remote work and foreign-employer fact patterns, including place of work, work authorisation and residence risks.",
     "audience": "global_individuals",
@@ -934,6 +3934,26 @@
       "Do not imply foreign payroll avoids Swiss immigration issues.",
       "Explain place-of-work analysis.",
       "Flag tax and social security only as adjacent issues unless covered carefully."
+    ],
+    "status": "unused"
+  },
+  {
+    "topic": "Swiss Family Reunification for Same-Sex Couples: What Should Be Checked?",
+    "angle": "Explains same-sex couple issues in Swiss family reunification, including recognition and route choice.",
+    "audience": "global_individuals",
+    "article_type": "procedural_strategy",
+    "pillar": "family_reunification",
+    "subtopic": "same_sex_couple",
+    "route_type": "issue_specific",
+    "legal_complexity": "high",
+    "overlap_group": "family_reunification_partner_routes",
+    "style_profile": "procedural",
+    "search_intent": "informational_problem_solving",
+    "scope_warning": "none",
+    "notes_for_drafting": [
+      "Do not overstate availability of the route.",
+      "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
+      "Avoid generic checklist content where a route-specific explanation is needed."
     ],
     "status": "unused"
   },
