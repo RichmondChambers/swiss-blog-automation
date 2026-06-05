@@ -435,7 +435,9 @@
       "Explain durable and non-durable L histories carefully.",
       "Keep the route history concrete."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Does Time on an L Permit Count Toward a Swiss C Permit?",
+    "used_at_utc": "2026-06-05T20:37:44Z"
   },
   {
     "topic": "Main Destination Rule for Swiss Schengen Visas: When Should You Apply to Switzerland?",
