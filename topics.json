@@ -457,7 +457,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Should You Apply to Switzerland for a Multi-Country Schengen Visa?",
+    "used_at_utc": "2026-06-08T13:38:34Z"
   },
   {
     "topic": "Swiss Student Permit Motivation Letter: What Makes a Study Plan Credible?",
