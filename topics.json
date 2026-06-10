@@ -479,7 +479,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Will Your Swiss Student Permit Study Plan Look Credible?",
+    "used_at_utc": "2026-06-10T11:04:39Z"
   },
   {
     "topic": "Non-EU Work Permit Quotas: Why Start-Date Planning Matters",
