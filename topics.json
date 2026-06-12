@@ -501,7 +501,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Non-EU Work Permits: Can Quotas Delay Start Dates?",
+    "used_at_utc": "2026-06-12T11:09:49Z"
   },
   {
     "topic": "Swiss Naturalisation After Absence or Interrupted Residence: How Timing Problems Arise",
