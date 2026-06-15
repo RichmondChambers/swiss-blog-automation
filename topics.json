@@ -523,7 +523,9 @@
       "Explain interruption and continuity issues.",
       "Avoid giving a universal answer without route and canton qualification."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can Absences or Permit Gaps Delay Swiss Naturalisation?",
+    "used_at_utc": "2026-06-15T13:25:07Z"
   },
   {
     "topic": "Why Swiss Lump Sum Taxation Is Not a Golden Visa",
