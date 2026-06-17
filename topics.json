@@ -545,7 +545,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Is Swiss Lump-Sum Taxation a Golden Visa?",
+    "used_at_utc": "2026-06-17T11:58:24Z"
   },
   {
     "topic": "Swiss Frontier Worker G Permit: How Do You Prove Main Residence Abroad?",
