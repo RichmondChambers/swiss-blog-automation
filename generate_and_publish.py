@@ -130,10 +130,12 @@ TITLE_LABEL_LIKE_PATTERNS = [
 
 TITLE_SIGNAL_PATTERNS = [
     r"\?",
-    r"\b(whether|should|can|must|qualify|eligible|eligibility|refusal|risk|risky|consequence|impact)\b",
+    r"\b(whether|why|how|what|when|where|which|choosing|choose|choice)\b",
+    r"\b(should|can|must|qualify|eligible|eligibility|prove|show|check|avoid|handle|plan|planning)\b",
+    r"\b(refusal|refused|risk|risks|risky|consequence|impact|problem|problems|wrong|hard|enough|not|sufficient)\b",
     r"\b(vs\.?|versus|rather than|or)\b",
     r"\b(misconception|myth|mistake|trap|pitfall|timing|deadline|delay|too early|too late)\b",
-    r"\b(problem|issue|challenge|difference|compare|comparison|matters?)\b",
+    r"\b(issue|issues|challenge|difference|compare|comparison|matters?|depends|need|needs|evidence|selection|sequencing|conditions?|approaching|means|sponsorship|declarations?|no-gainful-activity)\b",
 ]
 
 ARTICLE_STRUCTURE_VARIANTS = [
