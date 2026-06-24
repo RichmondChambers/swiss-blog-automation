@@ -611,7 +611,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Schengen Visa Refused: Appeal or Reapply?",
+    "used_at_utc": "2026-06-24T10:28:58Z"
   },
   {
     "topic": "Founder Permit Refusals: When the Real Problem Is Weak Economic Interest",
