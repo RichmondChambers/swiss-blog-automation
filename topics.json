@@ -633,7 +633,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Founder Permit Refused Despite a Complete File?",
+    "used_at_utc": "2026-06-26T10:32:00Z"
   },
   {
     "topic": "Can a Swiss C Permit Be Downgraded or Revoked?",
