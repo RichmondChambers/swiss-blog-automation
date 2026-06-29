@@ -655,7 +655,9 @@
       "Separate downgrade, revocation and lapse.",
       "Explain integration, public order and financial compliance risks."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can Your Swiss C Permit Be Downgraded or Revoked?",
+    "used_at_utc": "2026-06-29T12:27:14Z"
   },
   {
     "topic": "Swiss Retirement Residence: How Much Financial Evidence Is Enough?",
