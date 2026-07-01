@@ -677,7 +677,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Retirement Residence: How Much Financial Evidence Is Enough?",
+    "used_at_utc": "2026-07-01T10:48:43Z"
   },
   {
     "topic": "Posted Worker Notification: Why Short Swiss Assignments Can Still Be Risky",
