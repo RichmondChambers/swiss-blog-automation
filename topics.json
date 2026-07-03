@@ -699,7 +699,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Posted Worker Notification: Are Short Swiss Assignments Safe?",
+    "used_at_utc": "2026-07-03T10:12:03Z"
   },
   {
     "topic": "Can a Swiss Student Start Full-Time Work Immediately After Graduation?",
