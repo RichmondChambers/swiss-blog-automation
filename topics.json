@@ -743,7 +743,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Does Your Swiss C Permit Need A2 or B1 Language Proof?",
+    "used_at_utc": "2026-07-08T09:32:35Z"
   },
   {
     "topic": "EU/EFTA Employee Registration in Switzerland: What Employers Should Plan",
