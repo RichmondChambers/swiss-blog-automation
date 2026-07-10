@@ -765,7 +765,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "EU/EFTA Hires in Switzerland: Which Filing Route Applies?",
+    "used_at_utc": "2026-07-10T10:30:24Z"
   },
   {
     "topic": "Choosing a Canton for Swiss Lump Sum Taxation: What Matters Beyond the Tax Figure?",
