@@ -787,7 +787,9 @@
       "Keep tax attractiveness separate from immigration viability.",
       "Explain that cantonal practice can change."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Choosing a Swiss Canton for Lump-Sum Taxation: Beyond the Tax Figure",
+    "used_at_utc": "2026-07-13T10:35:55Z"
   },
   {
     "topic": "Swiss Fiancé Route: What Has to Happen Before the Wedding and After Marriage?",
