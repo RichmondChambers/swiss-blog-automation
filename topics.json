@@ -809,7 +809,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Fiancé Route: Can You Marry and Stay Afterwards?",
+    "used_at_utc": "2026-07-15T09:20:05Z"
   },
   {
     "topic": "Senior or Specialist Hire in Switzerland: ICT or Local Hire?",
