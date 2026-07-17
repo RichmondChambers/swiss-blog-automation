@@ -831,7 +831,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Senior Hires in Switzerland: ICT-Style Transfer or Local Hire?",
+    "used_at_utc": "2026-07-17T09:16:40Z"
   },
   {
     "topic": "Student Permit Proof of Funds: How Much Evidence Is Enough?",
