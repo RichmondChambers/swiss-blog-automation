@@ -853,7 +853,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Student Permit Funds: How Much Evidence Is Enough?",
+    "used_at_utc": "2026-07-20T10:21:46Z"
   },
   {
     "topic": "Swiss Third-Generation Citizenship: Who Qualifies and What Evidence Matters?",
