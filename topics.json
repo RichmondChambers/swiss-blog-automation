@@ -875,7 +875,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can Third-Generation Residents Apply for Swiss Citizenship?",
+    "used_at_utc": "2026-07-22T09:33:23Z"
   },
   {
     "topic": "Swiss Business Visit or Work Permit? How to Classify a Mixed Fact Pattern",
