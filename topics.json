@@ -897,7 +897,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Business Visit or Work Permit? Classifying Mixed Trips",
+    "used_at_utc": "2026-07-24T09:27:07Z"
   },
   {
     "topic": "Swiss Spouse Reunification: What Changes When the Sponsor Is Swiss, EU/EFTA or Non-EU?",
