@@ -941,7 +941,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "EU/EFTA Students in Switzerland: What Formalities Remain?",
+    "used_at_utc": "2026-07-29T09:45:11Z"
   },
   {
     "topic": "Can a Lump Sum Taxation B Permit Lead to a Swiss C Permit?",
