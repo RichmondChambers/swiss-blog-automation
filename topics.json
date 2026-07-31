@@ -963,7 +963,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can a Lump-Sum B Permit Lead to a Swiss C Permit?",
+    "used_at_utc": "2026-07-31T10:50:06Z"
   },
   {
     "topic": "Swiss Non-EU Work Permit: Why a Job Offer Alone Is Often Not Enough",
