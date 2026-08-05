@@ -1007,7 +1007,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can You Bring an Adult Dependent Relative to Switzerland?",
+    "used_at_utc": "2026-08-05T09:43:58Z"
   },
   {
     "topic": "Swiss G Permit vs B Permit: When Should a Cross-Border Worker Relocate?",
