@@ -1029,7 +1029,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss G Permit or B Permit: When Cross-Border Work Becomes Residence",
+    "used_at_utc": "2026-08-07T08:21:33Z"
   },
   {
     "topic": "Can a Founder Move to Switzerland to Run a Swiss Company?",
