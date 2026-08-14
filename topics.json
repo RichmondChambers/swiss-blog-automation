@@ -1095,7 +1095,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can You Naturalise After 10 Years in Switzerland?",
+    "used_at_utc": "2026-08-14T08:22:19Z"
   },
   {
     "topic": "Swiss Company Formation Is Not Founder Work Authorisation",
