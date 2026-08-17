@@ -1117,7 +1117,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Does Swiss Company Formation Let a Founder Work in Switzerland?",
+    "used_at_utc": "2026-08-17T10:53:49Z"
   },
   {
     "topic": "ICT Refusals: When an Assignment Looks Like Disguised Local Hiring",
