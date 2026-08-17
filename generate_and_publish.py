@@ -1018,16 +1018,37 @@ def call_responses_api(
     if background:
         payload["background"] = True
 
-    _, response = post_json("https://api.openai.com/v1/responses", payload=payload, headers=headers)
-    if background:
+    response_attempts = int(os.getenv("OPENAI_RESPONSE_MAX_ATTEMPTS", "3")) if background else 1
+    response: dict[str, Any] = {}
+    for attempt in range(1, response_attempts + 1):
+        _, response = post_json("https://api.openai.com/v1/responses", payload=payload, headers=headers)
+        if not background:
+            break
+
         response_id = response.get("id")
         if not isinstance(response_id, str) or not response_id:
             raise RuntimeError(f"Background response missing id: {response}")
+
         while response.get("status") in {"queued", "in_progress"}:
             time.sleep(2)
             _, response = get_json(f"https://api.openai.com/v1/responses/{response_id}", headers=headers)
-        if response.get("status") == "failed":
-            raise RuntimeError(f"Background response failed: {response}")
+
+        # A background request can reach a terminal API state without producing
+        # output.  Previously those transient failures immediately killed the
+        # scheduled workflow (and "incomplete"/"cancelled" produced only an
+        # opaque payload error).  Start a fresh response, just as the HTTP layer
+        # already does for transient transport failures.
+        if response.get("status") != "completed":
+            if attempt < response_attempts:
+                time.sleep(min(2 ** (attempt - 1), 30))
+                continue
+            status = response.get("status", "unknown")
+            detail = response.get("error") or response.get("incomplete_details") or response
+            raise RuntimeError(
+                f"Background response ended with status={status} after "
+                f"{response_attempts} attempts: {detail}"
+            )
+        break
 
     output_text = response.get("output_text")
     if isinstance(output_text, str) and output_text.strip():
