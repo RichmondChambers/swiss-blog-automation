@@ -1139,7 +1139,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss ICT Refusals: When a Transfer Looks Like Local Hiring",
+    "used_at_utc": "2026-08-19T07:45:19Z"
   },
   {
     "topic": "Swiss Schengen Visa 90/180 Rule: Why It Is Not 90 Days Per Trip",
