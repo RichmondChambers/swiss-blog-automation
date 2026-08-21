@@ -1161,7 +1161,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Do You Get 90 Schengen Days on Each Switzerland Trip?",
+    "used_at_utc": "2026-08-21T07:49:38Z"
   },
   {
     "topic": "Unmarried Partner Reunification: What Counts as a Durable Relationship?",
