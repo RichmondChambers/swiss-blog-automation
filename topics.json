@@ -1183,7 +1183,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can An Unmarried Partner Join You In Switzerland?",
+    "used_at_utc": "2026-08-24T08:08:14Z"
   },
   {
     "topic": "Swiss Retirement Residence and Continued Business Activity: When Is Someone Really Retired?",
