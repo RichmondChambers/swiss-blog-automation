@@ -1227,7 +1227,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can You Renew a Swiss Student Permit After Changing Course?",
+    "used_at_utc": "2026-08-28T19:22:58Z"
   },
   {
     "topic": "EU/EFTA Self-Employment in Switzerland: What Shows Genuine Activity?",
