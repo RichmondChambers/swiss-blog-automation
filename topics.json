@@ -1249,7 +1249,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Moving to Switzerland as EU/EFTA Self-Employed: What Evidence Counts?",
+    "used_at_utc": "2026-08-31T14:59:12Z"
   },
   {
     "topic": "Swiss Project Assignment or Posted Work: Why the Client-Site Role Matters",
