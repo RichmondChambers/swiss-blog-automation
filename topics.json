@@ -1293,7 +1293,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Is Your Child Close to Ageing Out of Swiss Reunification?",
+    "used_at_utc": "2026-09-07T13:26:48Z"
   },
   {
     "topic": "Founder Business Plans in Switzerland: What Makes the File Persuasive?",
