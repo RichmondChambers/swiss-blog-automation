@@ -1381,7 +1381,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Work Trials and Shadowing: When Unpaid Visits Need Authorisation",
+    "used_at_utc": "2026-09-16T12:35:30Z"
   },
   {
     "topic": "G Permit Renewal and Employer Change: What Should Frontier Workers Check First?",
