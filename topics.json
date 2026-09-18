@@ -1403,7 +1403,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Renewing or Changing Jobs on a Swiss G Permit: What to Check First",
+    "used_at_utc": "2026-09-18T12:11:24Z"
   },
   {
     "topic": "Swiss Student Permit for Minors: What Supervision Arrangements Need to Show",
