@@ -1425,7 +1425,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Student Permits for Minors: What Supervision Must Show",
+    "used_at_utc": "2026-09-21T13:48:26Z"
   },
   {
     "topic": "Swiss Senior Specialist Hire: What Makes Expertise Look Truly Scarce?",
