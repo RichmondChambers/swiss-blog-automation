@@ -1469,7 +1469,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can Family Members Move Under Swiss Lump-Sum Taxation?",
+    "used_at_utc": "2026-09-25T12:41:57Z"
   },
   {
     "topic": "Swiss Student Permit for Language School: When Is the Course Plan Persuasive?",
