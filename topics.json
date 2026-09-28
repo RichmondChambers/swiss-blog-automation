@@ -1491,7 +1491,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "When Is a Swiss Language-School Permit Application Persuasive?",
+    "used_at_utc": "2026-09-28T15:08:26Z"
   },
   {
     "topic": "Swiss Naturalisation Language Evidence: What Applicants Should Prepare Before Filing",
