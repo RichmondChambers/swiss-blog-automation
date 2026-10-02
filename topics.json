@@ -1535,7 +1535,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Why EU/EFTA Registration Can Delay Swiss Employee Onboarding",
+    "used_at_utc": "2026-10-02T13:47:03Z"
   },
   {
     "topic": "Can You Marry in Switzerland on a Tourist Visa and Then Stay?",
