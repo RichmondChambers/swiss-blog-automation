@@ -1601,7 +1601,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Which Swiss Canton Should You Choose for Lump-Sum Taxation?",
+    "used_at_utc": "2026-10-09T14:16:55Z"
   },
   {
     "topic": "Swiss Trainee Stagiaire Route: When Training Is a Real Immigration Category",
