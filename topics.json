@@ -1623,7 +1623,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Stagiaire Permits: Training Route or Ordinary Employment?",
+    "used_at_utc": "2026-10-12T16:38:56Z"
   },
   {
     "topic": "Swiss Naturalisation Interviews: Why Local Procedure Can Matter",
