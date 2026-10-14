@@ -1645,7 +1645,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Naturalisation Interviews: Why the Local Stage Matters",
+    "used_at_utc": "2026-10-14T12:46:43Z"
   },
   {
     "topic": "L Permit, B Permit or C Permit in Switzerland: What Changes for Long-Term Planning?",
