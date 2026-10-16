@@ -1742,7 +1742,7 @@ def replace_informal_c_permit_terms(text: str) -> str:
     text = re.sub(r"\ban ordinary C[\-–—]permit[\-–—]Permit\b", "an ordinary C-permit", text, flags=re.IGNORECASE)
     text = re.sub(r"\bC[\-–—]permit[\-–—]Permit\b", "C-permit", text, flags=re.IGNORECASE)
     text = re.sub(
-        r"\bordinary C\b(?!\s*(?:permit|route|application|case|rules|clock|timing)\b)",
+        r"\bordinary C\b(?!\s*(?:[\-–—]\s*)?(?:permit|route|application|case|rules|clock|timing)\b)",
         "an ordinary C-permit",
         text,
         flags=re.IGNORECASE,
