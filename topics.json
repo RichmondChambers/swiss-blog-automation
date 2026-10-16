@@ -1667,7 +1667,9 @@
       "Explain renewal and stability differences.",
       "Flag that nationality and route can affect progression."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "L, B or C Permit in Switzerland: Which Status Supports Your Plans?",
+    "used_at_utc": "2026-10-16T18:09:49Z"
   },
   {
     "topic": "Graduate Work Permit Refused: Was the Role, Timing or Employer Evidence the Problem?",
