@@ -1689,7 +1689,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Graduate Work Permit Refused: Role, Timing or Evidence?",
+    "used_at_utc": "2026-10-19T14:31:28Z"
   },
   {
     "topic": "Swiss C Permit Downgrade or Revocation: What Risks Should Applicants Understand?",
