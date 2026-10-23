@@ -1733,7 +1733,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can Project Urgency Speed Up a Swiss Short-Term Assignment?",
+    "used_at_utc": "2026-10-23T12:32:56Z"
   },
   {
     "topic": "Swiss Child Reunification After Long Separation: How to Handle Custody and Consent",
