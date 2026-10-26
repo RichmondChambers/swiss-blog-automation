@@ -1755,7 +1755,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Child Reunification After Years Apart: Custody And Consent Risks",
+    "used_at_utc": "2026-10-26T14:05:27Z"
   },
   {
     "topic": "Artists and Performers Working in Switzerland: When Is a Special Route Relevant?",
