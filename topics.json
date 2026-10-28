@@ -1777,7 +1777,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Work Permission for Artists: Is a Special Route Relevant?",
+    "used_at_utc": "2026-10-28T13:57:22Z"
   },
   {
     "topic": "Staying Abroad Too Long on a Swiss C Permit: When Settlement Can Lapse",
