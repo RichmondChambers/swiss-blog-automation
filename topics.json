@@ -1799,7 +1799,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can a Swiss C Permit Lapse After Time Abroad?",
+    "used_at_utc": "2026-10-30T13:57:43Z"
   },
   {
     "topic": "Swiss Lump Sum Taxation and Physical Presence: How Much Residence Substance Is Enough?",
