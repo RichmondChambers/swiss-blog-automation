@@ -1821,7 +1821,9 @@
       "Explain centre of life and residence substance carefully.",
       "Flag interaction with other countries' tax residence claims."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Lump-Sum Taxation: How Much Presence Is Enough?",
+    "used_at_utc": "2026-11-02T16:58:16Z"
   },
   {
     "topic": "EU/EFTA Employment Changes in Switzerland: When Does Status Need Rechecking?",
