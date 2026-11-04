@@ -1843,7 +1843,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "EU/EFTA Job Changes in Switzerland: When to Recheck Your Status",
+    "used_at_utc": "2026-11-04T15:18:11Z"
   },
   {
     "topic": "Academic and Research Roles in Switzerland: When Special Employment Rules May Help",
