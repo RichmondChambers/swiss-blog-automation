@@ -1865,7 +1865,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can an Academic or Research Role Ease a Swiss Work Permit?",
+    "used_at_utc": "2026-11-06T14:57:46Z"
   },
   {
     "topic": "Swiss Lump Sum Taxation Renewal Risk: What Can Change After the First Permit?",
