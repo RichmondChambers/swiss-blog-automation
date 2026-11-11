@@ -1909,7 +1909,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Does a Swiss C Permit Put You on the Path to Citizenship?",
+    "used_at_utc": "2026-11-11T15:02:50Z"
   },
   {
     "topic": "Swiss Business Visitor Visa or Work Permit? Where the Boundary Sits",
