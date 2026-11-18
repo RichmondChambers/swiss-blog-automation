@@ -1975,7 +1975,9 @@
       "Separate durability evidence from legal route weakness.",
       "Avoid suggesting appeal or reapplication without analysing the decision."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Swiss Unmarried Partner Refused: Evidence, Discretion or Wrong Route?",
+    "used_at_utc": "2026-11-18T16:21:06Z"
   },
   {
     "topic": "Swiss Retirement Residence for EU/EFTA Retirees: What Is Different?",
