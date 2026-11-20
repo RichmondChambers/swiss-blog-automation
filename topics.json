@@ -1997,7 +1997,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can EU/EFTA Nationals Simply Retire in Switzerland?",
+    "used_at_utc": "2026-11-20T16:02:50Z"
   },
   {
     "topic": "Swiss Family Reunification Refused for Housing or Finances",
