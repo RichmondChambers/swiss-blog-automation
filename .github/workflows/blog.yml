@@ -51,7 +51,6 @@ jobs:
         env:
           REQUESTED_TOPIC_INDEX: ${{ inputs.topic_index }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
           OPENAI_HTTP_MAX_ATTEMPTS: ${{ vars.OPENAI_HTTP_MAX_ATTEMPTS || '6' }}
           OPENAI_HTTP_TIMEOUT_SECONDS: ${{ vars.OPENAI_HTTP_TIMEOUT_SECONDS || '300' }}
           OPENAI_RESPONSE_MAX_ATTEMPTS: ${{ vars.OPENAI_RESPONSE_MAX_ATTEMPTS || '3' }}

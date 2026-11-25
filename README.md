@@ -49,6 +49,8 @@ PYTHONPATH="$PWD" python -B generate_and_publish.py --dry-run
 
 The tests mock OpenAI and SendGrid. The dry run shows the next eligible topic and mapped authorities without using credentials or changing the topic queue.
 
+The scheduled workflow uses the model default in `generate_and_publish.py`. Local runs can override it with the `OPENAI_MODEL` environment variable.
+
 GitHub Actions uploads a `legal-memo-<run-id>-<attempt>` artifact for 14 days when legal diagnostics exist. It contains the topic index, source paths, complete memoranda and per-attempt validation results. Use the supplied excerpts and mapped packs to verify the law. The automated excerpt check verifies that a quotation exists in the supplied source. It cannot determine whether the source supports the model's legal interpretation or remains current.
 
 - **`needs_legal_review`** — A source mapping or legal validation failure held the topic. Review the artifact and the administrator email, resolve the issue, then use the workflow's `topic_index` input on `main`. Check the current zero-based index before dispatching. Scheduled runs continue with the first unused topic.

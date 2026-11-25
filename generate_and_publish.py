@@ -66,7 +66,7 @@ def require_env(name: str) -> str:
 
 
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.5")
+OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-6.2-astra")
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 EMAIL_FROM = os.environ.get("EMAIL_FROM", "info@richmondchambers.com")
 EMAIL_TO = os.environ.get("EMAIL_TO", "paul.richmond@richmondchambers.com")
