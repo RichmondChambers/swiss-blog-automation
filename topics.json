@@ -2041,7 +2041,9 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "used",
+    "used_title": "Can a Founder Work for Their Own Swiss Company?",
+    "used_at_utc": "2026-11-25T18:38:58Z"
   },
   {
     "topic": "Swiss Student Work Rules: When Can Study and Employment Fit Together?",
