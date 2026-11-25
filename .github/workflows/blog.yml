@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 7 * * 1,3,5"
   workflow_dispatch:
+    inputs:
+      topic_index:
+        description: "Optional zero-based index of an unused topic or a topic held for legal review"
+        required: false
+        type: string
 
 concurrency:
   group: blog-draft-generator
@@ -11,75 +16,55 @@ concurrency:
 
 jobs:
   generate:
+    # Only main can distribute drafts and update the production queue.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     permissions:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout current main
+        uses: actions/checkout@v7.0.1
         with:
+          # A rerun must read the current queue, including any delivery reservation.
+          ref: main
           persist-credentials: true
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install openai requests PyPDF2
+        run: python -m pip install PyPDF2==3.0.1
 
       - name: Run blog generator
-        run: python generate_and_publish.py
+        shell: bash
+        run: |
+          generator_args=(--persist-topic-state)
+          if [[ -n "$REQUESTED_TOPIC_INDEX" ]]; then
+            generator_args+=(--topic-index "$REQUESTED_TOPIC_INDEX")
+          fi
+          PYTHONPATH="$PWD" python generate_and_publish.py "${generator_args[@]}"
         env:
+          REQUESTED_TOPIC_INDEX: ${{ inputs.topic_index }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
           OPENAI_HTTP_MAX_ATTEMPTS: ${{ vars.OPENAI_HTTP_MAX_ATTEMPTS || '6' }}
           OPENAI_HTTP_TIMEOUT_SECONDS: ${{ vars.OPENAI_HTTP_TIMEOUT_SECONDS || '300' }}
           OPENAI_RESPONSE_MAX_ATTEMPTS: ${{ vars.OPENAI_RESPONSE_MAX_ATTEMPTS || '3' }}
+          OPENAI_POLL_TIMEOUT_SECONDS: ${{ vars.OPENAI_POLL_TIMEOUT_SECONDS || '600' }}
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
 
-      - name: Commit updated topics.json
-        continue-on-error: true
-        run: |
-          git config user.name "blog-bot"
-          git config user.email "bot@richmondchambers.com"
-
-          BRANCH="${GITHUB_REF_NAME:-main}"
-          MAX_ATTEMPTS=3
-          ATTEMPTS=0
-
-          git add topics.json
-          if git diff --cached --quiet; then
-            echo "No topics.json changes to commit after sync."
-            exit 0
-          fi
-
-          git commit -m "Mark topic as used"
-
-          while [ "$ATTEMPTS" -lt "$MAX_ATTEMPTS" ]; do
-            ATTEMPTS=$((ATTEMPTS + 1))
-            echo "Push attempt $ATTEMPTS of $MAX_ATTEMPTS"
-
-            echo "Syncing local commit onto latest origin/$BRANCH before push..."
-            git fetch origin "$BRANCH"
-            if ! git rebase "origin/$BRANCH"; then
-              echo "Rebase conflict while syncing against origin/$BRANCH."
-              git rebase --abort || true
-              echo "Skipping topics.json push to keep successful publish run green."
-              exit 0
-            fi
-
-            if git push origin "HEAD:$BRANCH"; then
-              echo "Pushed topics.json update on attempt $ATTEMPTS"
-              exit 0
-            fi
-
-            echo "Push rejected on attempt $ATTEMPTS; retrying..."
-          done
-
-          echo "Unable to push topics.json after $MAX_ATTEMPTS attempts. Skipping failure because publish already completed."
-          exit 0
+      - name: Upload legal memorandum diagnostics
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: legal-memo-${{ github.run_id }}-${{ github.run_attempt }}
+          path: generated_blog_runs/${{ github.run_id }}_${{ github.run_attempt }}_*_legal_memo.json
+          retention-days: 14
+          if-no-files-found: ignore

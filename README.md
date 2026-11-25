@@ -31,10 +31,31 @@ The usual workflow is:
 
 1. Add or update reusable knowledge sources in `knowledge/`.
 2. Add or update topic data in `topics.json`.
-3. Map relevant legal authorities using `knowledge/authority_pack_map.json`.
+3. Map relevant legal authorities using `authority_pack_map.json`.
 4. Run the blog generation process.
 5. Review generated drafts for legal accuracy, tone, structure, and website suitability.
 6. Publish approved content or move it into the relevant output location.
+
+## Running checks and recovering failed topics
+
+From the repository root with Python 3.11, run:
+
+```bash
+python -m pip install PyPDF2==3.0.1
+PYTHONPATH="$PWD" python -B -m unittest discover -s tests -v
+python -B scripts/validate_authority_pack_map.py
+PYTHONPATH="$PWD" python -B generate_and_publish.py --dry-run
+```
+
+The tests mock OpenAI and SendGrid. The dry run shows the next eligible topic and mapped authorities without using credentials or changing the topic queue.
+
+GitHub Actions uploads a `legal-memo-<run-id>-<attempt>` artifact for 14 days when legal diagnostics exist. It contains the topic index, source paths, complete memoranda and per-attempt validation results. Use the supplied excerpts and mapped packs to verify the law. The automated excerpt check verifies that a quotation exists in the supplied source. It cannot determine whether the source supports the model's legal interpretation or remains current.
+
+- **`needs_legal_review`** — A source mapping or legal validation failure held the topic. Review the artifact and the administrator email, resolve the issue, then use the workflow's `topic_index` input on `main`. Check the current zero-based index before dispatching. Scheduled runs continue with the first unused topic.
+- **`delivery_pending`** — The workflow saved a reservation before attempting SendGrid delivery. Check the linked workflow and SendGrid activity before editing the queue. If acceptance is confirmed, record the title and date and mark the topic `used`. If no message was accepted, remove the reservation and restore the topic to its previous state. Leave ambiguous deliveries pending while investigating.
+- **`used`** — SendGrid accepted the email and the workflow saved the completed topic state. Acceptance confirms submission to SendGrid. Check SendGrid activity for final delivery status when needed.
+
+The production workflow requires permission to push `topics.json` updates to `main`. If the reservation cannot be saved remotely, the generator stops before sending the draft. Terminal legal failures attempt one administrator notification via the existing SendGrid recipient configuration.
 
 ## Knowledge principles
 

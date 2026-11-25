@@ -5,6 +5,9 @@ import importlib.util
 import json
 import os
 import re
+import subprocess
+import sys
+import tempfile
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -31,20 +34,22 @@ parser.add_argument(
     "--topic-index",
     type=int,
     default=None,
-    help="Use a specific topics.json index instead of the first unused topic.",
+    help="Select an unused topic or retry a topic held for legal review by index.",
+)
+parser.add_argument(
+    "--persist-topic-state",
+    action="store_true",
+    help="Commit and push topic state during the GitHub Actions production workflow.",
 )
 parser.add_argument(
     "--allow-editorial-fallback",
     action="store_true",
-    help=(
-        "If no legal authorities or internal legal notes are found, continue using website editorial "
-        "for editorial context only. Website editorial is never treated as legal authority."
-    ),
+    help=argparse.SUPPRESS,  # Legacy option. Editorial material cannot satisfy the legal gate.
 )
 parser.add_argument(
     "--allow-low-confidence-legal-memo",
     action="store_true",
-    help="Allow drafting even if the legal memo contains low-confidence issues. Not recommended for production.",
+    help="Allow low-confidence non-essential issues during local runs only.",
 )
 args = parser.parse_args()
 
@@ -100,6 +105,8 @@ SUPPORTED_KNOWLEDGE_EXTENSIONS = {".md", ".txt", ".json", ".pdf"}
 MAX_BLOG_WORDS = 1500
 TARGET_BLOG_WORDS = "1,050 to 1,300"
 MAX_REPAIR_ATTEMPTS = 2
+SOURCE_EXCERPT_LIMIT = 6000
+REPAIR_SOURCE_EXCERPT_LIMIT = 12000
 
 FORBIDDEN_PUBLIC_PHRASES = [
     "the memo",
@@ -333,6 +340,9 @@ Rules:
 - Use internal_legal_note only as a supporting interpretive source.
 - Do not treat website_editorial as legal authority.
 - If a source is missing for a point, say so explicitly.
+- Mark an issue essential if omitting it could leave the central question, a material exception, or a reader-category distinction unanswered or misleading. Include all essential issues even when unresolved.
+- Explain each confidence rating. Keep unsupported essential issues at low confidence and record missing authorities in open_questions.
+- For each issue, cite at least one legal_authority. For support items, copy SOURCE_KIND and SOURCE_NAME exactly and quote a continuous verbatim excerpt. Keep citations traceable to the supplied material and omit personal or confidential details.
 - Distinguish between settled legal framework, entitlement, eligibility, facilitated access, discretion, guidance, policy, procedure, evidential issues and cantonal practice.
 - Do not describe guidance as law.
 - Do not describe discretionary routes as rights.
@@ -355,6 +365,14 @@ Rules:
 
 Return strict JSON only.
 """.strip()
+
+LEGAL_MEMO_REPAIR_INSTRUCTIONS = LEGAL_MEMO_INSTRUCTIONS + """
+
+Repair the previous memorandum against the supplied validation errors and legal sources.
+- Reassess the flagged rules and citations. Correct errors and qualify conclusions where the authorities justify narrower wording. Distinguish established law, discretionary outcomes and genuine uncertainty.
+- Keep issue names unchanged and preserve all essential issues and sound analysis. Omit an unsupported non-essential issue only if the article remains materially complete and accurate.
+- Never raise a confidence rating just to clear the gate. A higher rating requires a corrected or qualified proposition supported by the authorities, or stronger verified support. Retain low confidence and explain the gap if an essential issue cannot be resolved.
+"""
 
 READER_JOURNEY_INSTRUCTIONS = """
 You are planning the reader flow for a client-facing Swiss immigration law blog post.
@@ -793,6 +811,7 @@ LEGAL_MEMO_SCHEMA = {
                     "additionalProperties": False,
                     "properties": {
                         "issue": {"type": "string"},
+                        "essential": {"type": "boolean"},
                         "rule": {"type": "string"},
                         "legal_basis": {"type": "string"},
                         "authority_type": {
@@ -845,9 +864,11 @@ LEGAL_MEMO_SCHEMA = {
                             },
                         },
                         "confidence": {"type": "string", "enum": ["low", "medium", "high"]},
+                        "confidence_reason": {"type": "string"},
                     },
                     "required": [
                         "issue",
+                        "essential",
                         "rule",
                         "legal_basis",
                         "authority_type",
@@ -867,6 +888,7 @@ LEGAL_MEMO_SCHEMA = {
                         "translation_or_source_caution",
                         "support",
                         "confidence",
+                        "confidence_reason",
                     ],
                 },
             },
@@ -932,63 +954,55 @@ class KnowledgeChunk:
 # HTTP and OpenAI helpers
 # ============================================================
 
-def post_json(url: str, payload: dict, headers: dict[str, str]) -> tuple[int, dict[str, Any]]:
+def request_json(
+    req: request.Request,
+    *,
+    max_attempts: int | None = None,
+    timeout_seconds: float | None = None,
+    deadline: float | None = None,
+) -> tuple[int, dict[str, Any]]:
+    if max_attempts is None:
+        max_attempts = int(os.getenv("OPENAI_HTTP_MAX_ATTEMPTS", "3"))
+    if timeout_seconds is None:
+        timeout_seconds = float(os.getenv("OPENAI_HTTP_TIMEOUT_SECONDS", "600"))
+    host = req.host
+
+    for attempt in range(1, max_attempts + 1):
+        timeout = timeout_seconds if deadline is None else min(timeout_seconds, deadline - time.monotonic())
+        if timeout <= 0:
+            raise TimeoutError(f"Request deadline exceeded for {host}.")
+        try:
+            with request.urlopen(req, timeout=timeout) as response:
+                body = response.read()
+                return response.status, json.loads(body) if body.strip() else {}
+        except error.HTTPError as exc:
+            exc.close()
+            if exc.code not in {408, 409, 425, 429, 500, 502, 503, 504} or attempt == max_attempts:
+                raise RuntimeError(f"HTTP {exc.code} from {host}.") from None
+        except (error.URLError, TimeoutError, http.client.RemoteDisconnected) as exc:
+            if attempt == max_attempts:
+                raise RuntimeError(f"Network error calling {host} ({type(exc).__name__}).") from None
+
+        delay = min(2 ** (attempt - 1), 30)
+        if deadline is not None:
+            delay = max(0, min(delay, deadline - time.monotonic()))
+        time.sleep(delay)
+
+    raise RuntimeError(f"No HTTP attempts configured for {host}.")
+
+
+def post_json(
+    url: str, payload: dict, headers: dict[str, str], **request_options: Any
+) -> tuple[int, dict[str, Any]]:
     data = json.dumps(payload).encode("utf-8")
-    max_attempts = int(os.getenv("OPENAI_HTTP_MAX_ATTEMPTS", "3"))
-    timeout_seconds = float(os.getenv("OPENAI_HTTP_TIMEOUT_SECONDS", "600"))
-
-    for attempt in range(1, max_attempts + 1):
-        req = request.Request(url, data=data, headers=headers, method="POST")
-        try:
-            with request.urlopen(req, timeout=timeout_seconds) as response:
-                raw = response.read()
-                body = raw.decode("utf-8", errors="replace").strip()
-                if not body:
-                    return response.status, {}
-                return response.status, json.loads(body)
-        except error.HTTPError as exc:
-            body = exc.read().decode("utf-8", errors="replace")
-            if exc.code in {408, 409, 425, 429, 500, 502, 503, 504} and attempt < max_attempts:
-                time.sleep(min(2 ** (attempt - 1), 30))
-                continue
-            raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
-        except (error.URLError, TimeoutError, http.client.RemoteDisconnected) as exc:
-            if attempt < max_attempts:
-                time.sleep(min(2 ** (attempt - 1), 30))
-                continue
-            reason = getattr(exc, "reason", str(exc))
-            raise RuntimeError(f"Network error calling {url}: {reason}") from exc
-
-    raise RuntimeError(f"Failed to call {url} after {max_attempts} attempts")
+    req = request.Request(url, data=data, headers=headers, method="POST")
+    return request_json(req, **request_options)
 
 
-def get_json(url: str, headers: dict[str, str]) -> tuple[int, dict[str, Any]]:
-    max_attempts = int(os.getenv("OPENAI_HTTP_MAX_ATTEMPTS", "3"))
-    timeout_seconds = float(os.getenv("OPENAI_HTTP_TIMEOUT_SECONDS", "600"))
-
-    for attempt in range(1, max_attempts + 1):
-        req = request.Request(url, headers=headers, method="GET")
-        try:
-            with request.urlopen(req, timeout=timeout_seconds) as response:
-                raw = response.read()
-                body = raw.decode("utf-8", errors="replace").strip()
-                if not body:
-                    return response.status, {}
-                return response.status, json.loads(body)
-        except error.HTTPError as exc:
-            body = exc.read().decode("utf-8", errors="replace")
-            if exc.code in {408, 409, 425, 429, 500, 502, 503, 504} and attempt < max_attempts:
-                time.sleep(min(2 ** (attempt - 1), 30))
-                continue
-            raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
-        except (error.URLError, TimeoutError, http.client.RemoteDisconnected) as exc:
-            if attempt < max_attempts:
-                time.sleep(min(2 ** (attempt - 1), 30))
-                continue
-            reason = getattr(exc, "reason", str(exc))
-            raise RuntimeError(f"Network error calling {url}: {reason}") from exc
-
-    raise RuntimeError(f"Failed to call {url} after {max_attempts} attempts")
+def get_json(
+    url: str, headers: dict[str, str], *, deadline: float
+) -> tuple[int, dict[str, Any]]:
+    return request_json(request.Request(url, headers=headers, method="GET"), deadline=deadline)
 
 
 def call_responses_api(
@@ -1027,11 +1041,20 @@ def call_responses_api(
 
         response_id = response.get("id")
         if not isinstance(response_id, str) or not response_id:
-            raise RuntimeError(f"Background response missing id: {response}")
+            raise RuntimeError("Background response missing an ID.")
 
+        poll_deadline = time.monotonic() + float(os.getenv("OPENAI_POLL_TIMEOUT_SECONDS", "600"))
         while response.get("status") in {"queued", "in_progress"}:
-            time.sleep(2)
-            _, response = get_json(f"https://api.openai.com/v1/responses/{response_id}", headers=headers)
+            remaining = poll_deadline - time.monotonic()
+            if remaining <= 0:
+                raise RuntimeError("OpenAI background response exceeded its polling deadline.")
+            time.sleep(min(2, remaining))
+            try:
+                _, response = get_json(
+                    f"https://api.openai.com/v1/responses/{response_id}", headers=headers, deadline=poll_deadline
+                )
+            except TimeoutError:
+                raise RuntimeError("OpenAI background response exceeded its polling deadline.") from None
 
         # A background request can reach a terminal API state without producing
         # output.  Previously those transient failures immediately killed the
@@ -1042,11 +1065,12 @@ def call_responses_api(
             if attempt < response_attempts:
                 time.sleep(min(2 ** (attempt - 1), 30))
                 continue
-            status = response.get("status", "unknown")
-            detail = response.get("error") or response.get("incomplete_details") or response
+            status = response.get("status")
+            if status not in {"failed", "cancelled", "incomplete"}:
+                status = "unknown"
             raise RuntimeError(
                 f"Background response ended with status={status} after "
-                f"{response_attempts} attempts: {detail}"
+                f"{response_attempts} attempts."
             )
         break
 
@@ -1060,7 +1084,7 @@ def call_responses_api(
             if isinstance(text, str) and text.strip():
                 return json.loads(text)
 
-    raise RuntimeError(f"Unexpected Responses API payload: {response}")
+    raise RuntimeError("Responses API payload contained no structured output.")
 
 
 # ============================================================
@@ -1236,7 +1260,9 @@ def simple_retrieve(
     return [chunk for _, chunk in scored[:limit]]
 
 
-def format_sources_for_prompt(chunks: list[KnowledgeChunk], max_chars_per_source: int = 6000) -> str:
+def format_sources_for_prompt(
+    chunks: list[KnowledgeChunk], max_chars_per_source: int = SOURCE_EXCERPT_LIMIT
+) -> str:
     parts: list[str] = []
     for chunk in chunks:
         parts.append(
@@ -1258,21 +1284,47 @@ def load_topics(path: Path) -> list[dict[str, Any]]:
 
 def pick_topic(topics: list[dict[str, Any]], topic_index: int | None) -> tuple[int, dict[str, Any], int]:
     unused_indexes = [i for i, topic in enumerate(topics) if topic.get("status") == "unused"]
-    if not unused_indexes:
-        raise RuntimeError("No unused topics remain.")
 
     if topic_index is not None:
         if topic_index < 0 or topic_index >= len(topics):
             raise RuntimeError(f"topic-index {topic_index} out of range")
 
         selected = topics[topic_index]
-        if selected.get("status") != "unused":
-            raise RuntimeError(f"topic-index {topic_index} is not unused")
+        if selected.get("status") not in {"unused", "needs_legal_review"}:
+            raise RuntimeError(f"topic-index {topic_index} cannot be selected in its current state")
 
         return topic_index, selected, len(unused_indexes)
 
+    if not unused_indexes:
+        raise RuntimeError("No unused topics remain. Review held topics before reprocessing.")
+
     idx = unused_indexes[0]
     return idx, topics[idx], len(unused_indexes)
+
+
+def write_json_atomically(path: Path, payload: Any) -> None:
+    # Write alongside the destination so replacement stays on the same filesystem.
+    with tempfile.NamedTemporaryFile(
+        dir=path.parent, encoding="utf-8", mode="w", delete=False
+    ) as temporary:
+        temporary_path = Path(temporary.name)
+        try:
+            json.dump(payload, temporary, indent=2, ensure_ascii=False)
+            temporary.write("\n")
+            temporary.flush()
+            os.replace(temporary_path, path)
+        finally:
+            temporary_path.unlink(missing_ok=True)
+
+
+def save_topic_state(topics: list[dict[str, Any]], message: str) -> None:
+    write_json_atomically(TOPICS_PATH, topics)
+    if args.persist_topic_state:
+        subprocess.run(
+            ["bash", str(SCRIPT_DIR / "scripts/persist_topic_state.sh"), message],
+            cwd=SCRIPT_DIR,
+            check=True,
+        )
 
 
 def audience_brief(audience: str) -> str:
@@ -1617,9 +1669,16 @@ def ensure_output_dir() -> None:
 def write_run_artifact(filename: str, payload: dict[str, Any]) -> Path:
     ensure_output_dir()
     path = OUTPUT_DIR / filename
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, ensure_ascii=False)
+    write_json_atomically(path, payload)
     return path
+
+
+def redact_secrets(text: str) -> str:
+    for name in ("OPENAI_API_KEY", "SENDGRID_API_KEY", "GH_TOKEN", "GITHUB_TOKEN"):
+        value = os.environ.get(name)
+        if value:
+            text = text.replace(value, "[redacted]")
+    return text
 
 
 def escape_html(text: str) -> str:
@@ -1645,16 +1704,18 @@ def send_email_via_sendgrid(subject: str, body: str, *, is_html: bool = False) -
     headers = {"Authorization": f"Bearer {SENDGRID_API_KEY}", "Content-Type": "application/json"}
 
     try:
-        status, response_body = post_json(
+        status, _ = post_json(
             "https://api.sendgrid.com/v3/mail/send",
             payload=payload,
             headers=headers,
+            max_attempts=1,
+            timeout_seconds=30,
         )
     except RuntimeError as exc:
         raise RuntimeError(f"SendGrid delivery failed: {exc}") from exc
 
     if status != 202:
-        raise RuntimeError(f"SendGrid delivery failed with status {status}: {response_body}")
+        raise RuntimeError(f"SendGrid delivery failed with status {status}.")
 
     return True
 
@@ -2245,29 +2306,65 @@ def validate_public_draft(draft: dict[str, Any]) -> list[str]:
     return errors
 
 
-def validate_legal_memo(memo: dict[str, Any]) -> list[str]:
+def validate_legal_memo(
+    memo: dict[str, Any],
+    sources: dict[tuple[str, str], str],
+    retained_issues: dict[str, bool],
+    low_confidence_evidence: dict[str, set[tuple]],
+) -> list[str]:
     errors: list[str] = []
     issues = memo.get("issues")
 
     if not isinstance(issues, list) or not issues:
-        errors.append("Legal memo must contain at least one issue.")
-        return errors
+        return ["Legal memo must contain at least one issue."]
 
+    issue_names = set()
     for index, issue in enumerate(issues, start=1):
+        name = issue["issue"].strip()
+        if not name or name in issue_names:
+            errors.append(f"Issue {index} has a blank or duplicate issue name.")
+        issue_names.add(name)
         confidence = issue.get("confidence")
-        if confidence == "low" and not args.allow_low_confidence_legal_memo:
-            errors.append(
-                f"Issue {index} has low confidence; rerun with --allow-low-confidence-legal-memo only if intentional."
-            )
+        if confidence == "low" and (issue["essential"] or not args.allow_low_confidence_legal_memo):
+            errors.append(f"Issue {index} has low confidence.")
+        if not issue["confidence_reason"].strip():
+            errors.append(f"Issue {index} has no confidence reasoning.")
+        if not issue["rule"].strip() or not issue["legal_basis"].strip():
+            errors.append(f"Issue {index} must state its rule and legal basis.")
+        if retained_issues.get(name) and not issue["essential"]:
+            errors.append(f"Issue {index} was essential and must remain essential.")
 
         support = issue.get("support")
         if not isinstance(support, list) or not support:
             errors.append(f"Issue {index} has empty support; each issue must include at least one support item.")
+        else:
+            for citation in support:
+                key = (citation["source_type"], citation["source_name"])
+                excerpt = " ".join(citation["excerpt"].split())
+                if not excerpt or excerpt not in sources.get(key, ""):
+                    errors.append(f"Issue {index} cites an unverified source or excerpt.")
+                    break
+            if not any(citation["source_type"] == "legal_authority" for citation in support):
+                errors.append(f"Issue {index} lacks support from a legal authority.")
 
-        if issue.get("authority_type") == "unclear":
-            errors.append(f"Issue {index} has authority_type='unclear', which is not allowed.")
+        if issue.get("authority_type") in {"unclear", "editorial_context", "internal_note"}:
+            errors.append(f"Issue {index} lacks an appropriate legal authority classification.")
+        if confidence != "low" and issue_evidence(issue) in low_confidence_evidence.get(name, set()):
+            errors.append(f"Issue {index} raises confidence without changing the rule, legal basis or supporting evidence.")
 
+    if not any(issue["essential"] for issue in issues):
+        errors.append("Legal memo must identify at least one essential issue.")
+    for name in sorted(retained_issues.keys() - issue_names):
+        errors.append(f"Required issue omitted: {name}")
     return errors
+
+
+def issue_evidence(issue: dict[str, Any]) -> tuple:
+    citations = frozenset(
+        (item["source_type"], item["source_name"], " ".join(item["excerpt"].split()))
+        for item in issue["support"]
+    )
+    return (" ".join(issue["rule"].casefold().split()), " ".join(issue["legal_basis"].casefold().split()), citations)
 
 
 def validate_reader_flow(draft: dict[str, Any], reader_journey: dict[str, Any]) -> list[str]:
@@ -2884,7 +2981,174 @@ def render_success_email(
 # Main workflow
 # ============================================================
 
+class LegalMemoValidationError(RuntimeError):
+    pass
+
+
+def workflow_run_info() -> dict[str, str]:
+    server = os.environ.get("GITHUB_SERVER_URL")
+    repository = os.environ.get("GITHUB_REPOSITORY")
+    run_id = os.environ.get("GITHUB_RUN_ID", "")
+    attempt = os.environ.get("GITHUB_RUN_ATTEMPT", "")
+    return {
+        "repository": repository or "",
+        "run_id": run_id,
+        "attempt": attempt,
+        "url": f"{server}/{repository}/actions/runs/{run_id}" if server and repository and run_id else "",
+    }
+
+
+def write_legal_diagnostics(filename: str, report: dict[str, Any]) -> None:
+    def redact(value: Any) -> Any:
+        if isinstance(value, str):
+            return redact_secrets(value)
+        if isinstance(value, list):
+            return [redact(item) for item in value]
+        if isinstance(value, dict):
+            return {key: redact(item) for key, item in value.items()}
+        return value
+
+    write_run_artifact(filename, redact(report))
+
+
+def build_validated_memo(
+    openai_api_key: str,
+    legal_input: str,
+    legal_chunks: list[KnowledgeChunk],
+    diagnostic_filename: str,
+    report: dict[str, Any],
+) -> dict[str, Any]:
+    retained_issues: dict[str, bool] = {}
+    low_confidence_evidence: dict[str, set[tuple]] = {}
+    memo: dict[str, Any] = {}
+    errors: list[str] = []
+
+    for number in range(1, MAX_REPAIR_ATTEMPTS + 2):
+        excerpt_limit = SOURCE_EXCERPT_LIMIT if number == 1 else REPAIR_SOURCE_EXCERPT_LIMIT
+        sources = {
+            (chunk.source_kind, chunk.source_name): " ".join(chunk.text[:excerpt_limit].split())
+            for chunk in legal_chunks
+        }
+        attempt = {"number": number, "kind": "initial" if number == 1 else "repair"}
+        report["attempts"].append(attempt)
+        try:
+            memo = call_responses_api(
+                openai_api_key,
+                instructions=LEGAL_MEMO_INSTRUCTIONS if number == 1 else LEGAL_MEMO_REPAIR_INSTRUCTIONS,
+                input_text=legal_input if number == 1 else json.dumps(
+                    {
+                        "original_request": {
+                            **json.loads(legal_input),
+                            "legal_sources": format_sources_for_prompt(legal_chunks, excerpt_limit),
+                        },
+                        "previous_memo": memo,
+                        "validation_errors": errors,
+                        "required_issues": retained_issues,
+                    },
+                    ensure_ascii=False,
+                ),
+                schema=LEGAL_MEMO_SCHEMA,
+                model=OPENAI_MODEL,
+                background=True,
+            )
+        except (RuntimeError, ValueError) as exc:
+            attempt.update(
+                outcome="request_failed",
+                error=redact_secrets(str(exc)) if isinstance(exc, RuntimeError) else type(exc).__name__,
+            )
+            report["outcome"] = "request_failed"
+            try:
+                write_legal_diagnostics(diagnostic_filename, report)
+            except (OSError, ValueError):
+                print("Could not save legal memorandum diagnostics.", file=sys.stderr)
+            raise
+
+        issues = memo.get("issues") or []
+        errors = validate_legal_memo(memo, sources, retained_issues, low_confidence_evidence)
+        attempt.update(
+            outcome="rejected" if errors else "accepted",
+            memo=memo,
+            validation_errors=errors,
+            failed_propositions={
+                str(index): issue for index, issue in enumerate(issues, start=1)
+                if any(error.startswith(f"Issue {index} ") for error in errors)
+            },
+            potential_authority_gaps=memo.get("open_questions", []),
+        )
+        for index, issue in enumerate(issues, start=1):
+            name = issue["issue"].strip()
+            if issue["essential"] or not any(error.startswith(f"Issue {index} ") for error in errors):
+                retained_issues[name] = retained_issues.get(name, False) or issue["essential"]
+            if issue["confidence"] == "low":
+                low_confidence_evidence.setdefault(name, set()).add(issue_evidence(issue))
+
+        report["outcome"] = (
+            ("rejected" if number == MAX_REPAIR_ATTEMPTS + 1 else "repair_needed") if errors else "accepted"
+        )
+        write_legal_diagnostics(diagnostic_filename, report)
+        if not errors:
+            return memo
+
+    raise LegalMemoValidationError(redact_secrets("Legal memo validation failed:\n- " + "\n- ".join(errors)))
+
+
+def handle_legal_failure(
+    report: dict[str, Any],
+    diagnostic_filename: str,
+    topics: list[dict[str, Any]],
+    topic: dict[str, Any],
+    failure: LegalMemoValidationError,
+) -> None:
+    topic.update(
+        status="needs_legal_review",
+        legal_review={
+            "attempt_count": len(report["attempts"]),
+            "workflow": report["workflow"],
+            "diagnostic_file": diagnostic_filename,
+        },
+    )
+    try:
+        save_topic_state(topics, "Hold blog topic for legal review")
+        state = "Topic held for legal review."
+    except (OSError, subprocess.SubprocessError):
+        state = "Topic hold could not be confirmed. Check topic state before rerunning."
+        print(state, file=sys.stderr)
+
+    summary = [
+        f"Topic: {report['topic']}",
+        f"Pillar / subtopic: {report['pillar']} / {report['subtopic']}",
+        f"Workflow: {report['workflow']['url'] or 'local run'}",
+        state,
+        str(failure),
+    ]
+    for attempt in report["attempts"]:
+        summary.append(f"Attempt {attempt['number']} ({attempt['kind']}): {attempt['outcome']}")
+        for issue in attempt["failed_propositions"].values():
+            summary.append(f"- {issue['issue']}: {issue['rule']} ({issue['confidence']} confidence)")
+            summary.append(f"  {issue['confidence_reason']}")
+        summary.extend(f"- Possible source gap: {gap}" for gap in attempt["potential_authority_gaps"])
+    summary.extend(f"- Possible source gap: {gap}" for gap in report["potential_authority_gaps"])
+    summary.extend([
+        f"Diagnostics: {diagnostic_filename}",
+        "Review the cited passages and update the mapped authorities if needed. "
+        "Once resolved, retry explicitly by topic index.",
+    ])
+    try:
+        if not send_email_via_sendgrid(
+            "Blog generator: legal review required", redact_secrets("\n".join(summary))
+        ):
+            print("Could not send the legal failure notification.", file=sys.stderr)
+    except Exception:
+        print("Could not send the legal failure notification.", file=sys.stderr)
+
+
 def main() -> None:
+    if args.persist_topic_state and args.allow_low_confidence_legal_memo:
+        raise RuntimeError("The production workflow cannot enable low-confidence legal analysis.")
+    if args.persist_topic_state and (
+        os.environ.get("GITHUB_ACTIONS") != "true" or os.environ.get("GITHUB_REF") != "refs/heads/main"
+    ):
+        raise RuntimeError("Remote topic-state updates require the main GitHub Actions workflow.")
     topics = load_topics(TOPICS_PATH)
     topic_index, topic_entry, remaining_count = pick_topic(topics, args.topic_index)
 
@@ -2922,9 +3186,31 @@ def main() -> None:
     openai_api_key = require_env("OPENAI_API_KEY")
     require_env("SENDGRID_API_KEY")
 
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     slug = re.sub(r"[^a-z0-9]+", "-", topic_entry.get("topic", "untitled").lower()).strip("-")[:80]
-    run_base = f"{timestamp}_{slug}"
+    workflow = workflow_run_info()
+    run_prefix = f"{workflow['run_id']}_{workflow['attempt']}_" if workflow["run_id"] else ""
+    run_base = f"{run_prefix}{timestamp}_{slug}"
+    diagnostic_filename = f"{run_base}_legal_memo.json"
+    pack_names = [str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths]
+    report = {
+        "topic_index": topic_index,
+        "topic": topic_entry["topic"],
+        "pillar": topic_entry.get("pillar"),
+        "subtopic": topic_entry.get("subtopic"),
+        "workflow": workflow,
+        "selected_legal_authority_packs": pack_names,
+        "attempts": [],
+        "potential_authority_gaps": [],
+    }
+    missing_packs = [name for name, path in zip(pack_names, selected_pack_paths) if not path.is_file()]
+    if not pack_names or missing_packs:
+        gap = f"Mapped packs missing: {', '.join(missing_packs)}" if missing_packs else "No legal authority packs are mapped."
+        report.update(outcome="rejected", potential_authority_gaps=[gap], validation_errors=[gap])
+        write_legal_diagnostics(diagnostic_filename, report)
+        failure = LegalMemoValidationError(gap)
+        handle_legal_failure(report, diagnostic_filename, topics, topic_entry, failure)
+        raise failure
 
     classifier = call_responses_api(
         openai_api_key,
@@ -2938,12 +3224,6 @@ def main() -> None:
         topic_entry.get("topic", ""),
         topic_entry.get("angle", ""),
     ]
-
-    if not selected_pack_paths:
-        raise RuntimeError(
-            f"No legal authority packs mapped for pillar={topic_entry.get('pillar')} "
-            f"subtopic={topic_entry.get('subtopic')}"
-        )
 
     selected_legal_chunks = load_selected_legal_authority_chunks(selected_pack_paths)
     internal_note_chunks = load_chunks_from_folder(INTERNAL_NOTES_DIR, "internal_legal_note")
@@ -2965,39 +3245,40 @@ def main() -> None:
         allowed_source_kinds={"website_editorial"},
     )
 
-    if not legal_chunks:
-        if not args.allow_editorial_fallback:
-            raise RuntimeError("No usable legal authority or internal legal note was retrieved for this topic.")
-
-        legal_sources_text = (
-            "No legal authority or internal legal note was retrieved. "
-            "Website editorial context may be used only for tone and positioning, not as legal authority. "
-            "Draft cautiously and avoid unsupported legal detail."
-        )
-    else:
-        legal_sources_text = format_sources_for_prompt(legal_chunks)
+    legal_sources_text = format_sources_for_prompt(legal_chunks)
 
     website_context_text = format_sources_for_prompt(website_context_chunks)
 
-    memo: dict[str, Any] | None = None
-    memo_validation_errors: list[str] = []
-    for _ in range(MAX_REPAIR_ATTEMPTS + 1):
-        memo = call_responses_api(
+    report["sources_supplied"] = [
+        {
+            "type": chunk.source_kind,
+            "name": chunk.source_name,
+            "initial_excerpt_truncated": len(chunk.text) > SOURCE_EXCERPT_LIMIT,
+            "repair_excerpt_truncated": len(chunk.text) > REPAIR_SOURCE_EXCERPT_LIMIT,
+        }
+        for chunk in legal_chunks
+    ]
+    report["potential_authority_gaps"].extend(
+        f"Mapped pack has no extractable text: {name}"
+        for name in pack_names if name not in {chunk.source_name for chunk in selected_legal_chunks}
+    )
+    try:
+        if not selected_legal_chunks:
+            gap = "No mapped legal authority supplied extractable text."
+            report.update(outcome="rejected", validation_errors=[gap])
+            report["potential_authority_gaps"].append(gap)
+            write_legal_diagnostics(diagnostic_filename, report)
+            raise LegalMemoValidationError(gap)
+        memo = build_validated_memo(
             openai_api_key,
-            instructions=LEGAL_MEMO_INSTRUCTIONS,
-            input_text=build_legal_input(topic_entry, classifier, legal_sources_text, website_context_text),
-            schema=LEGAL_MEMO_SCHEMA,
-            model=OPENAI_MODEL,
-            background=True,
+            build_legal_input(topic_entry, classifier, legal_sources_text, website_context_text),
+            legal_chunks,
+            diagnostic_filename,
+            report,
         )
-        memo_validation_errors = validate_legal_memo(memo)
-        if not memo_validation_errors:
-            break
-
-    if memo is None:
-        raise RuntimeError("Legal memo generation failed: no memo returned.")
-    if memo_validation_errors:
-        raise RuntimeError("Legal memo validation failed:\n- " + "\n- ".join(memo_validation_errors))
+    except LegalMemoValidationError as failure:
+        handle_legal_failure(report, diagnostic_filename, topics, topic_entry, failure)
+        raise
 
     reader_journey = call_responses_api(
         openai_api_key,
@@ -3018,9 +3299,7 @@ def main() -> None:
         {
             "topic": topic_entry,
             "classifier": classifier,
-            "selected_legal_authority_packs": [
-                str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
-            ],
+            "selected_legal_authority_packs": pack_names,
             "selected_article_structure_variant": select_article_structure_variant(topic_entry, classifier),
             "memo": memo,
             "reader_journey": reader_journey,
@@ -3069,9 +3348,7 @@ def main() -> None:
     final_payload = {
         "topic": topic_entry,
         "classifier": classifier,
-        "selected_legal_authority_packs": [
-            str(path.relative_to(SCRIPT_DIR)) for path in selected_pack_paths
-        ],
+        "selected_legal_authority_packs": pack_names,
         "selected_article_structure_variant": select_article_structure_variant(topic_entry, classifier),
         "memo": memo,
         "reader_journey": reader_journey,
@@ -3085,9 +3362,19 @@ def main() -> None:
         topic_entry=topic_entry,
         draft=draft,
         seo=seo,
-        remaining_after_send=remaining_count - 1,
+        remaining_after_send=remaining_count - (topic_entry.get("status") == "unused"),
     )
 
+    # Record the reservation durably before the irreversible SendGrid request.
+    topic_entry.update(
+        status="delivery_pending",
+        delivery={
+            "title": draft["blog_title"],
+            "previous_status": topic_entry["status"],
+            "workflow": workflow,
+        },
+    )
+    save_topic_state(topics, "Reserve blog topic for delivery")
     sent = send_email_via_sendgrid(
         subject=f"Blog draft: {draft['blog_title']}",
         body=email_body,
@@ -3095,14 +3382,21 @@ def main() -> None:
     )
 
     if not sent:
-        raise RuntimeError("Draft generated but SendGrid delivery failed.")
+        raise RuntimeError("Draft delivery unconfirmed. Reconcile the pending topic before retrying.")
 
-    topics[topic_index]["status"] = "used"
-    topics[topic_index]["used_title"] = draft["blog_title"]
-    topics[topic_index]["used_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    topic_entry["status"] = "used"
+    topic_entry["used_title"] = draft["blog_title"]
+    topic_entry["used_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    topic_entry.pop("delivery")
+    topic_entry.pop("legal_review", None)
 
-    with TOPICS_PATH.open("w", encoding="utf-8") as f:
-        json.dump(topics, f, indent=2, ensure_ascii=False)
+    try:
+        save_topic_state(topics, "Mark blog topic as used")
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise RuntimeError(
+            "SendGrid accepted the draft, but the final topic state could not be confirmed. "
+            "Check the production queue and reconcile any delivery_pending entry before retrying."
+        ) from exc
 
     print(f"Draft email sent successfully and topic marked used: {draft['blog_title']}")
 
