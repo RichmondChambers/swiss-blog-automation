@@ -2063,7 +2063,17 @@
       "Keep the analysis tied to the applicant's facts, evidence and procedural posture.",
       "Avoid generic checklist content where a route-specific explanation is needed."
     ],
-    "status": "unused"
+    "status": "delivery_pending",
+    "delivery": {
+      "title": "When Can You Start a Job or Internship as a Student in Switzerland?",
+      "previous_status": "unused",
+      "workflow": {
+        "repository": "RichmondChambers/swiss-blog-automation",
+        "run_id": "46040625778",
+        "attempt": "1",
+        "url": "https://github.com/RichmondChambers/swiss-blog-automation/actions/runs/46040625778"
+      }
+    }
   },
   {
     "topic": "Remote Work From Switzerland for a Foreign Employer: When Does Risk Arise?",
